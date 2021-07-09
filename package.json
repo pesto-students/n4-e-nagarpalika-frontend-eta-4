@@ -2,6 +2,21 @@
   "name": "n4-e-nagarpalika-frontend-eta-4",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "prettier:check": "prettier --check 'src'",
+    "prettier:fix": "prettier --write \"{,!(node_modules)/**/}*.{js,jsx}\"",
+    "eslint:ci": "eslint src --quiet --ignore-pattern [jest.setup.js,jest.config.js,/data,node_modules/]",
+    "eslint": "eslint src --ignore-pattern [jest.setup.js,jest.config.js,/data,node_modules/]",
+    "eslint:fix": "eslint src --fix --ignore-pattern [node_modules/,/data]",
+    "prepare": "husky install",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "11.2.7",
@@ -11,17 +26,12 @@
     "react-scripts": "4.0.3",
     "web-vitals": "1.1.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "cypress": "7.7.0",
+    "eslint-config-prettier": "8.3.0",
+    "husky": "7.0.1",
+    "lint-staged": "11.0.0",
+    "prettier": "2.3.2"
   },
   "browserslist": {
     "production": [
@@ -34,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "src/**/*": "npm run lint:fix"
   }
 }
