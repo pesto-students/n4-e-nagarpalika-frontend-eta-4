@@ -1,0 +1,21 @@
+/**
+ * Global Styles
+ *
+ * @format
+ */
+
+/** {*/
+/*  border: 1px solid black;*/
+/*  margin: 1px;*/
+/*}*/
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+}
