@@ -25,6 +25,7 @@ exports[`renders a message 1`] = `
       </p>
       <button
         class="sc-gKAaRy eSYxAh"
+        data-cy="login-button"
         type="button"
       >
         Login/Sign up with Phone Number
