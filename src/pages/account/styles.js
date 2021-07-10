@@ -10,3 +10,7 @@ export const Container = styled.div`
 export const Card = styled.div`
   width: 70%;
 `;
+
+export const FormRow = styled.div`
+  padding: 6px;
+`;

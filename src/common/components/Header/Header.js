@@ -11,20 +11,7 @@ const Header = ({ isSignedIn }) => {
   const { pathname } = location;
 
   return (
-    // <Container>
-    //   <Title>e-NagarPalika</Title>
-    //   <div style={{ flexGrow: 1 }} />
-
-    //   {!isSignedIn && <Button>About</Button>}
-    //   {!isSignedIn && <Button>Contact</Button>}
-
-    //   {isSignedIn && (
-    //     <IconButton>
-    //       <AccountCircleLogo fill="grey" />
-    //     </IconButton>
-    //   )}
-    // </Container>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
       <div className="container-fluid">
         <Link to="" className="navbar-brand" href="/">
           <img

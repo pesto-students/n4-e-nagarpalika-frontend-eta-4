@@ -8,5 +8,5 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   height: calc(100% - 115px);
-  margin: 60px 0 55px 0;
+  margin: 66px 0 55px 0;
 `;

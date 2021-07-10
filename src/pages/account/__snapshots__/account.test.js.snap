@@ -12,13 +12,13 @@ exports[`renders a message 1`] = `
         class="card-body"
       >
         <h5
-          class="card-title"
+          class="card-title text-center p-2"
         >
-          Card title
+          Profile Update
         </h5>
         <form>
           <div
-            class="form-row row"
+            class="sc-dlnjwi cRaERg form-row row"
           >
             <div
               class="form-group col-md-6"
@@ -30,9 +30,11 @@ exports[`renders a message 1`] = `
               </label>
               <input
                 class="form-control"
+                data-cy="inputName"
                 id="inputName"
                 placeholder="Name"
                 type="text"
+                value=""
               />
             </div>
             <div
@@ -45,14 +47,16 @@ exports[`renders a message 1`] = `
               </label>
               <input
                 class="form-control"
+                data-cy="inputEmail"
                 id="inputEmail"
                 placeholder="Email"
                 type="email"
+                value=""
               />
             </div>
           </div>
           <div
-            class="form-row row"
+            class="sc-dlnjwi cRaERg form-row row"
           >
             <div
               class="form-group col-md-6"
@@ -64,9 +68,11 @@ exports[`renders a message 1`] = `
               </label>
               <input
                 class="form-control"
+                data-cy="inputMobileNumber"
                 id="inputMobileNumber"
                 placeholder="Mobile Number"
                 type="text"
+                value=""
               />
             </div>
             <div
@@ -79,46 +85,19 @@ exports[`renders a message 1`] = `
               </label>
               <input
                 class="form-control"
+                data-cy="inputAadharNumber"
                 id="inputAadharNumber"
                 placeholder="Aadhar Number"
                 type="text"
+                value=""
               />
             </div>
           </div>
           <div
-            class="form-group"
-          >
-            <label
-              for="inputAddress"
-            >
-              Address
-            </label>
-            <input
-              class="form-control"
-              id="inputAddress"
-              placeholder="1234 Main St"
-              type="text"
-            />
-          </div>
-          <div
-            class="form-row"
+            class="sc-dlnjwi cRaERg form-row row"
           >
             <div
               class="form-group col-md-6"
-            >
-              <label
-                for="inputCity"
-              >
-                City
-              </label>
-              <input
-                class="form-control"
-                id="inputCity"
-                type="text"
-              />
-            </div>
-            <div
-              class="form-group col-md-4"
             >
               <label
                 for="inputNagarPalika"
@@ -127,6 +106,7 @@ exports[`renders a message 1`] = `
               </label>
               <select
                 class="form-control"
+                data-cy="inputNagarPalika"
                 id="inputNagarPalika"
               >
                 <option>
@@ -150,7 +130,7 @@ exports[`renders a message 1`] = `
               </select>
             </div>
             <div
-              class="form-group col-md-4"
+              class="form-group col-md-6"
             >
               <label
                 for="inputProfession"
@@ -159,6 +139,7 @@ exports[`renders a message 1`] = `
               </label>
               <select
                 class="form-control"
+                data-cy="inputProfession"
                 id="inputProfession"
               >
                 <option>
@@ -181,8 +162,12 @@ exports[`renders a message 1`] = `
                 </option>
               </select>
             </div>
+          </div>
+          <div
+            class="sc-dlnjwi cRaERg form-row row"
+          >
             <div
-              class="form-group col-md-4"
+              class="form-group col-md-6"
             >
               <label
                 for="inputGender"
@@ -191,6 +176,7 @@ exports[`renders a message 1`] = `
               </label>
               <select
                 class="form-control"
+                data-cy="inputGender"
                 id="inputGender"
               >
                 <option>
@@ -213,27 +199,18 @@ exports[`renders a message 1`] = `
                 </option>
               </select>
             </div>
-            <div
-              class="form-group col-md-2"
-            >
-              <label
-                for="inputZip"
-              >
-                Zip
-              </label>
-              <input
-                class="form-control"
-                id="inputZip"
-                type="text"
-              />
-            </div>
           </div>
-          <button
-            class="btn btn-primary"
-            type="submit"
+          <div
+            class="sc-dlnjwi cRaERg d-flex justify-content-end"
           >
-            Update
-          </button>
+            <button
+              class="btn btn-primary"
+              data-cy="submit"
+              type="submit"
+            >
+              Update
+            </button>
+          </div>
         </form>
       </div>
     </div>
