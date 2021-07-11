@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a message 1`] = `
+<div>
+  <div
+    style="text-align: center;"
+  >
+    <div>
+      Dashboard
+    </div>
+    <button
+      style="height: 40px; width: 100px; align-items: flex;"
+    >
+      Sign Out
+    </button>
+  </div>
+</div>
+`;
