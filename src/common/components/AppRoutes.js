@@ -14,6 +14,7 @@ import Login from "../../pages/login/login";
 // import PrivateRoute from "./utils/PrivateRoute";
 import Register from "../../pages/register/register";
 import Settings from "../../pages/settings/settings";
+import AdminActions from "../../pages/admin-action/adminAction";
 
 function AppRoutes() {
   return (
@@ -29,6 +30,7 @@ function AppRoutes() {
       <Route path="/grievance" exact component={Grievance} />
       <Route path="/grievances" exact component={Grievances} />
       <Route path="/settings" exact component={Settings} />
+      <Route path="/admin-action" exact component={AdminActions} />
     </Switch>
   );
 }
