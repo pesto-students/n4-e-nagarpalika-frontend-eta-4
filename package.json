@@ -17,6 +17,10 @@
     "lint": "npm run prettier:check && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix"
   },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",
