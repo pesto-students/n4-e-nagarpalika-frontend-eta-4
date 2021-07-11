@@ -1,9 +1,7 @@
-# N4-E-Nagarpalika-Frontend
+#  N4-E-Nagarpalika-FrontEnd
 
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+`e-NagarPalika` app is created with the sole intention of helping people log, track and resolve their grievances effectively. For a detailed overview of our project please find the required artifacts in the [google drive](https://drive.google.com/drive/folders/1m65N-1Ti4YkbAydtNGISgpeh_c-oXefx).
 ## Available Scripts
 
 In the project directory, you can run:
@@ -41,32 +39,23 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Configure app
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create a `.env` file in the project root directory then  add the required params which you can get from `.env.sample`  file in the root diectory.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+###
+### Authentication
+For better Authentication we are using both server jwt tokens and Firebase JWT tokens effectively.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##Tech Stack
+We are using the below tech stack.
+- Mongo For Database
+- React Router for routing
+- Redux for State management
+- GitHub Actions for CI/CD
+- Firebase for frontend Deployment
+- Firebase Storage for file Storage
+- Firebase for user Identity authentication and Serverside JWT token for authorization.
+---
