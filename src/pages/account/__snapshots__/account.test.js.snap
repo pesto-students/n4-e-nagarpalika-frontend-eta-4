@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a message 1`] = `
+<div>
+  <div
+    class="sc-bdnxRM bdcSGL container d-flex flex-column justify-content-center align-items-center"
+  >
+    <div
+      class="sc-gtsrHT gIwrwT card shadow"
+    >
+      <div
+        class="card-body"
+      >
+        <h5
+          class="card-title text-center p-2"
+        >
+          Profile Update
+        </h5>
+        <form>
+          <div
+            class="sc-dlnjwi cRaERg form-row row"
+          >
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputName"
+              >
+                Name
+              </label>
+              <input
+                class="form-control"
+                data-cy="inputName"
+                id="inputName"
+                placeholder="Name"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputEmail"
+              >
+                Email
+              </label>
+              <input
+                class="form-control"
+                data-cy="inputEmail"
+                id="inputEmail"
+                placeholder="Email"
+                type="email"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            class="sc-dlnjwi cRaERg form-row row"
+          >
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputMobileNumber"
+              >
+                Mobile Number
+              </label>
+              <input
+                class="form-control"
+                data-cy="inputMobileNumber"
+                id="inputMobileNumber"
+                placeholder="Mobile Number"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputAadharNumber"
+              >
+                Aadhar Number
+              </label>
+              <input
+                class="form-control"
+                data-cy="inputAadharNumber"
+                id="inputAadharNumber"
+                placeholder="Aadhar Number"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            class="sc-dlnjwi cRaERg form-row row"
+          >
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputNagarPalika"
+              >
+                Nagar Palika
+              </label>
+              <select
+                class="form-control"
+                data-cy="inputNagarPalika"
+                id="inputNagarPalika"
+              >
+                <option>
+                  Choose...
+                </option>
+                <option
+                  value="bangaluru"
+                >
+                  Bangaluru
+                </option>
+                <option
+                  value="delhi"
+                >
+                  Delhi
+                </option>
+                <option
+                  value="mumbai"
+                >
+                  Mumbai
+                </option>
+              </select>
+            </div>
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputProfession"
+              >
+                Profession
+              </label>
+              <select
+                class="form-control"
+                data-cy="inputProfession"
+                id="inputProfession"
+              >
+                <option>
+                  Choose...
+                </option>
+                <option
+                  value="it-professional"
+                >
+                  IT Professional
+                </option>
+                <option
+                  value="government-servent"
+                >
+                  Government Servent
+                </option>
+                <option
+                  value="self-employed-businessman"
+                >
+                  Self Employed / Businessman
+                </option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="sc-dlnjwi cRaERg form-row row"
+          >
+            <div
+              class="form-group col-md-6"
+            >
+              <label
+                for="inputGender"
+              >
+                Gender
+              </label>
+              <select
+                class="form-control"
+                data-cy="inputGender"
+                id="inputGender"
+              >
+                <option>
+                  Choose...
+                </option>
+                <option
+                  value="male"
+                >
+                  Male
+                </option>
+                <option
+                  value="female"
+                >
+                  Female
+                </option>
+                <option
+                  value="other"
+                >
+                  Other
+                </option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="sc-dlnjwi cRaERg d-flex justify-content-end"
+          >
+            <button
+              class="btn btn-primary"
+              data-cy="submit"
+              type="submit"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
