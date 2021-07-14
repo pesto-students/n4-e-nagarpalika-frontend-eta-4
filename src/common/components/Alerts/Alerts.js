@@ -3,7 +3,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
 export const Alert = ({ content, type }) => {
   return (
     <div className={`alert alert-${type}`} role="alert">
