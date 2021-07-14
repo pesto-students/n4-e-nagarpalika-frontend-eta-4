@@ -1,17 +1,13 @@
-/**
- * /* eslint-disable no-unused-vars
- *
- * @format
- */
-
 /** @format */
 
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unreachable */
+
 import React, { useEffect, useState } from "react";
-import firebase from "firebase";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import useAuth from "../../modules/auth/authContext";
+// import useAuth from "../../modules/auth/authContext";
 
 const Container = styled.section`
   display: flex;
@@ -59,17 +55,17 @@ function Login() {
   const [otp, setOtp] = useState("");
   const history = useHistory();
 
-  useEffect(() => {
-    // const ac = new AbortController();
-    // // eslint-disable-next-line
-    // window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-    //   "recaptcha-container",
-    //   {
-    //     size: "invisible",
-    //   }
-    // );
-    // return () => ac.abort();
-  }, []);
+  // useEffect(() => {
+  // const ac = new AbortController();
+  // // eslint-disable-next-line
+  // window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+  //   "recaptcha-container",
+  //   {
+  //     size: "invisible",
+  //   }
+  // );
+  // return () => ac.abort();
+  // }, []);
 
   const getOtp = async (e) => {
     // e.preventDefault();
@@ -99,6 +95,7 @@ function Login() {
     // if (phoneNumberStr.length > 0 && phoneNumberStr.length <= 10) {
     //   setPhoneNumber(phoneNumberStr);
     // }
+    setPhoneNumber(e.target.value);
   };
 
   const onChangeOTP = (e) => {
@@ -106,6 +103,7 @@ function Login() {
     // if (otpStr.length > 0 && otpStr.length <= 6) {
     //   setOtp(otpStr);
     // }
+    setOtp(e.target.value);
   };
 
   return (
@@ -129,6 +127,8 @@ function Login() {
                     id="phoneNumber"
                     aria-describedby="phoneNumberHelp"
                     placeholder="Phone Number"
+                    value={phoneNumber}
+                    onChange={setPhoneNumber}
                   />
                   <div id="phoneNumberHelp" className="form-text">
                     We'll never share your phone number with anyone else.
@@ -155,6 +155,8 @@ function Login() {
                     type="text"
                     className="form-control"
                     id="otpVerification"
+                    value={otp}
+                    onChange={onChangeOTP}
                   />
                 </div>
 
