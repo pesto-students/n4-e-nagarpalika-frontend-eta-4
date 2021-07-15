@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+
 import { Form, FormFields, Div, P, PTag, SelectTag, Button } from "./styles";
 
 const CreateIssueTypes = () => {

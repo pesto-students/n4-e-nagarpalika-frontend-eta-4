@@ -1,14 +1,11 @@
-/**
- * /* eslint-disable no-unused-vars
- *
- * @format
- */
-
 /** @format */
+
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unreachable */
 
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import useAuth from "../../modules/auth/authContext";
@@ -108,69 +105,73 @@ function Login() {
     }
   };
 
-  // return (
-  //   <Container>
-  //     <div className="card">
-  //       {/* <img src="..." className="card-img-top" alt="..." /> */}
-  //       <div className="card-body ">
-  //         <h5 className="card-title">Log In</h5>
-  //         <form style={{ display: "flex", justifyContent: "center" }}>
-  //           <input id="recaptcha-container" type="hidden" />
-  //
-  //           {!isOtpSent && (
-  //             <>
-  //               <div className="mb-3 ">
-  //                 <label htmlFor="phoneNumber" className="form-label">
-  //                   Phone Number
-  //                 </label>
-  //                 <input
-  //                   type="text"
-  //                   className="form-control"
-  //                   id="phoneNumber"
-  //                   aria-describedby="phoneNumberHelp"
-  //                   placeholder="Phone Number"
-  //                 />
-  //                 <div id="phoneNumberHelp" className="form-text">
-  //                   We'll never share your phone number with anyone else.
-  //                 </div>
-  //               </div>
-  //
-  //               <button
-  //                 type="submit"
-  //                 className="btn btn-primary"
-  //                 style={{ alignSelf: "flex-end" }}
-  //               >
-  //                 Submit
-  //               </button>
-  //             </>
-  //           )}
-  //
-  //           {isOtpSent && (
-  //             <>
-  //               <div className="mb-3">
-  //                 <label htmlFor="otpVerification" className="form-label">
-  //                   Verify OTP
-  //                 </label>
-  //                 <input
-  //                   type="text"
-  //                   className="form-control"
-  //                   id="otpVerification"
-  //                 />
-  //               </div>
-  //
-  //               <button type="submit" className="btn btn-primary">
-  //                 Submit
-  //               </button>
-  //             </>
-  //           )}
-  //         </form>
-  //         {/* <Link href="#" className="btn btn-primary">
-  //           Go somewhere
-  //         </Link> */}
-  //       </div>
-  //     </div>
-  //   </Container>
-  // );
+  return (
+    <Container>
+      <div className="card">
+        {/* <img src="..." className="card-img-top" alt="..." /> */}
+        <div className="card-body ">
+          <h5 className="card-title">Log In</h5>
+          <form style={{ display: "flex", justifyContent: "center" }}>
+            <input id="recaptcha-container" type="hidden" />
+
+            {!isOtpSent && (
+              <>
+                <div className="mb-3 ">
+                  <label htmlFor="phoneNumber" className="form-label">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="phoneNumber"
+                    aria-describedby="phoneNumberHelp"
+                    placeholder="Phone Number"
+                    value={phoneNumber}
+                    onChange={setPhoneNumber}
+                  />
+                  <div id="phoneNumberHelp" className="form-text">
+                    We'll never share your phone number with anyone else.
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ alignSelf: "flex-end" }}
+                >
+                  Submit
+                </button>
+              </>
+            )}
+
+            {isOtpSent && (
+              <>
+                <div className="mb-3">
+                  <label htmlFor="otpVerification" className="form-label">
+                    Verify OTP
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="otpVerification"
+                    value={otp}
+                    onChange={onChangeOTP}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </>
+            )}
+          </form>
+          {/* <Link href="#" className="btn btn-primary">
+            Go somewhere
+          </Link> */}
+        </div>
+      </div>
+    </Container>
+  );
 
   return (
     <Container>

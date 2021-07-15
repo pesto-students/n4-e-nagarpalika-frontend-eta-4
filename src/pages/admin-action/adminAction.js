@@ -2,17 +2,20 @@
 /** @format */
 
 import React, { useState } from "react";
+
+import CreateIssueTypes from "./createIssueTypes";
+import CreateAdmin from "./createAdmin";
+
 import { Container, Admin, CreateIssue, ToggleHead } from "./styles";
 import "./toggleChange.css";
-import CreateIssueTypes from "./createTssueTypes";
-import CreateAdmin from "./createAdmin";
 
 const AdminActions = () => {
   const [actionMode, setActionMode] = useState(true);
+
   const onToggle = (e) => {
     e.preventDefault();
     setActionMode(!actionMode);
-    console.log(actionMode);
+    // console.log(actionMode);
   };
   return (
     <Container>

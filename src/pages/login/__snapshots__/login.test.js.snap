@@ -38,6 +38,7 @@ exports[`renders a message 1`] = `
               id="phoneNumber"
               placeholder="Phone Number"
               type="text"
+              value=""
             />
             <div
               class="form-text"
