@@ -34,8 +34,9 @@ function Register() {
   const [message, setMessage] = useState();
   const [textColor, setTextColor] = useState("#a51212");
   const registerUser = async () => {
-    const token = await firebaseUser.getIdToken();
+    // const token = await firebaseUser.getIdToken();
     try {
+      const token = await firebaseUser.getIdToken();
       const res = await axios.post(
         "/api/auth/register",
         {
@@ -139,7 +140,7 @@ function Register() {
               id="phone"
               type="text"
               onChange={onChangePhoneNumber}
-              value={firebaseUser.phone_number}
+              // value={firebaseUser.phone_number}
               placeholder="Enter the 10 digit Mobile Number"
               pattern="[0-9]{10}"
               // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -216,8 +217,8 @@ function Register() {
                 }}
               />
               <Terms>
-                By Clicking here I accept the Privacy Policy and Terms
-                Conditions of use.
+                {/* eslint-disable-next-line */}
+                By Clicking here I accept the <a href="">Privacy Policy</a> and <a href="">Terms & Conditions</a> of use.
               </Terms>
             </DivBody>
           </DivBodyColumn>
@@ -226,11 +227,9 @@ function Register() {
               Register
             </Button>
           </DivBodyColumn>
-          <DivBodyColumn>
-            <P style={{ color: textColor }}>{message}</P>
-          </DivBodyColumn>
         </DivHead>
       </Form>
+      <P style={{ color: textColor }}>{message}</P>
     </Container>
   );
 }

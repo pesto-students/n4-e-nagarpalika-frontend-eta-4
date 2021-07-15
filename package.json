@@ -21,6 +21,7 @@
     "node": ">=14.0.0",
     "npm": ">=7.0.0"
   },
+  "proxy": "http://localhost:7001",
   "dependencies": {
     "@reduxjs/toolkit": "1.6.0",
     "@testing-library/jest-dom": "5.14.1",

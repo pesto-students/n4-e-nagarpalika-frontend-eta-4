@@ -66,7 +66,7 @@ export const FormFields = styled.input`
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
-  width: 50%;
+  width: 65%;
 `;
 export const Button = styled.button`
   padding: 6px 10px;
@@ -81,39 +81,44 @@ export const Button = styled.button`
 `;
 
 export const P = styled.p`
+  width: 90%;
   text-align: center;
 `;
 export const PTag = styled.p`
-  width: 100px;
+  width: 30%;
+  //margin-right: 12%;
 `;
 export const Div = styled.div`
-  width: 300px;
+  width: 90%;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 export const Radio = styled.label`
-  align-self: flex-start;
+  align-self: center;
   margin: 10px;
+  margin-bottom: 7%;
+  margin-left: 7%;
 `;
 export const SelectTag = styled.select`
+  margin: 10px;
+  margin-left: 15%;
+  margin-bottom: 10%;
   padding: 10px;
-  margin: 5px;
-  margin-left: 18%;
-  margin-right: 4%;
   border-radius: 8px;
   border: 1px solid grey;
-  width: 60%;
+  width: 65%;
 `;
 export const RadioButton = styled.input`
   margin: 5px;
 `;
 export const Select = styled.select`
+  margin: 10px;
+  margin-left: 15%;
   padding: 10px;
-  margin: 5px;
-  margin-left: 7%;
-  margin-right: 6%;
   border-radius: 8px;
   border: 1px solid grey;
-  width: 60%;
+  width: 65%;
 `;

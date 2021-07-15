@@ -8,7 +8,7 @@
 
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import useAuth from "../../modules/auth/authContext";
@@ -52,7 +52,7 @@ const Button = styled.button`
 `;
 
 function Login() {
-  // const { submitPhone, submitOtp } = useAuth();
+  const { submitPhone, submitOtp } = useAuth();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -60,117 +60,117 @@ function Login() {
   const history = useHistory();
 
   useEffect(() => {
-    // const ac = new AbortController();
-    // // eslint-disable-next-line
-    // window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-    //   "recaptcha-container",
-    //   {
-    //     size: "invisible",
-    //   }
-    // );
-    // return () => ac.abort();
+    const ac = new AbortController();
+    // eslint-disable-next-line
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible",
+      }
+    );
+    return () => ac.abort();
   }, []);
 
   const getOtp = async (e) => {
-    // e.preventDefault();
-    // setLoading(true);
-    // // console.log(`+91${phoneNumber}`);
-    // const appVerifier = window.recaptchaVerifier;
-    // // eslint-disable-next-line
-    // await submitPhone(`+91${phoneNumber}`, appVerifier);
-    // setIsOtpSent(true);
-    // setLoading(false);
+    e.preventDefault();
+    setLoading(true);
+    // console.log(`+91${phoneNumber}`);
+    const appVerifier = window.recaptchaVerifier;
+    // eslint-disable-next-line
+    await submitPhone(`+91${phoneNumber}`, appVerifier);
+    setIsOtpSent(true);
+    setLoading(false);
   };
 
   async function sendOtp(e) {
-    // e.preventDefault();
-    // setLoading(true);
-    // try {
-    //   await submitOtp(otp);
-    //   history.push("/dashboard");
-    // } catch {
-    //   console.log("Unable to Login");
-    // }
-    // setLoading(false);
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await submitOtp(otp);
+      history.push("/dashboard");
+    } catch {
+      console.log("Unable to Login");
+    }
+    setLoading(false);
   }
 
   const onChangePhoneNumber = (e) => {
-    // const phoneNumberStr = (parseInt(e.target.value, 10) || 0).toString();
-    // if (phoneNumberStr.length > 0 && phoneNumberStr.length <= 10) {
-    //   setPhoneNumber(phoneNumberStr);
-    // }
+    const phoneNumberStr = (parseInt(e.target.value, 10) || 0).toString();
+    if (phoneNumberStr.length > 0 && phoneNumberStr.length <= 10) {
+      setPhoneNumber(phoneNumberStr);
+    }
   };
 
   const onChangeOTP = (e) => {
-    // const otpStr = parseInt(e.target.value || 0, 10).toString();
-    // if (otpStr.length > 0 && otpStr.length <= 6) {
-    //   setOtp(otpStr);
-    // }
+    const otpStr = parseInt(e.target.value || 0, 10).toString();
+    if (otpStr.length > 0 && otpStr.length <= 6) {
+      setOtp(otpStr);
+    }
   };
 
-  return (
-    <Container>
-      <div className="card">
-        {/* <img src="..." className="card-img-top" alt="..." /> */}
-        <div className="card-body ">
-          <h5 className="card-title">Log In</h5>
-          <form style={{ display: "flex", justifyContent: "center" }}>
-            <input id="recaptcha-container" type="hidden" />
-
-            {!isOtpSent && (
-              <>
-                <div className="mb-3 ">
-                  <label htmlFor="phoneNumber" className="form-label">
-                    Phone Number
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="phoneNumber"
-                    aria-describedby="phoneNumberHelp"
-                    placeholder="Phone Number"
-                  />
-                  <div id="phoneNumberHelp" className="form-text">
-                    We'll never share your phone number with anyone else.
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{ alignSelf: "flex-end" }}
-                >
-                  Submit
-                </button>
-              </>
-            )}
-
-            {isOtpSent && (
-              <>
-                <div className="mb-3">
-                  <label htmlFor="otpVerification" className="form-label">
-                    Verify OTP
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="otpVerification"
-                  />
-                </div>
-
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </>
-            )}
-          </form>
-          {/* <Link href="#" className="btn btn-primary">
-            Go somewhere
-          </Link> */}
-        </div>
-      </div>
-    </Container>
-  );
+  // return (
+  //   <Container>
+  //     <div className="card">
+  //       {/* <img src="..." className="card-img-top" alt="..." /> */}
+  //       <div className="card-body ">
+  //         <h5 className="card-title">Log In</h5>
+  //         <form style={{ display: "flex", justifyContent: "center" }}>
+  //           <input id="recaptcha-container" type="hidden" />
+  //
+  //           {!isOtpSent && (
+  //             <>
+  //               <div className="mb-3 ">
+  //                 <label htmlFor="phoneNumber" className="form-label">
+  //                   Phone Number
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="phoneNumber"
+  //                   aria-describedby="phoneNumberHelp"
+  //                   placeholder="Phone Number"
+  //                 />
+  //                 <div id="phoneNumberHelp" className="form-text">
+  //                   We'll never share your phone number with anyone else.
+  //                 </div>
+  //               </div>
+  //
+  //               <button
+  //                 type="submit"
+  //                 className="btn btn-primary"
+  //                 style={{ alignSelf: "flex-end" }}
+  //               >
+  //                 Submit
+  //               </button>
+  //             </>
+  //           )}
+  //
+  //           {isOtpSent && (
+  //             <>
+  //               <div className="mb-3">
+  //                 <label htmlFor="otpVerification" className="form-label">
+  //                   Verify OTP
+  //                 </label>
+  //                 <input
+  //                   type="text"
+  //                   className="form-control"
+  //                   id="otpVerification"
+  //                 />
+  //               </div>
+  //
+  //               <button type="submit" className="btn btn-primary">
+  //                 Submit
+  //               </button>
+  //             </>
+  //           )}
+  //         </form>
+  //         {/* <Link href="#" className="btn btn-primary">
+  //           Go somewhere
+  //         </Link> */}
+  //       </div>
+  //     </div>
+  //   </Container>
+  // );
 
   return (
     <Container>

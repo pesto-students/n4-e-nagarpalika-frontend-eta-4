@@ -3,6 +3,7 @@
 /** @format */
 
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Form,
   FormFields,
@@ -97,7 +98,7 @@ const CreateAdmin = () => {
   return (
     <Form>
       <Div>
-        <P>Mob No:</P>
+        <PTag>Mobile No:</PTag>
         <FormFields
           id="phone"
           type="tel"
