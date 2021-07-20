@@ -9,3 +9,10 @@ export const theme = {
   padding: "4px",
   margin: "4px",
 };
+
+export const FETCH_STATUS = {
+  none: "NONE",
+  loading: "LOADING",
+  error: "ERROR",
+  success: "SUCCESS",
+};
