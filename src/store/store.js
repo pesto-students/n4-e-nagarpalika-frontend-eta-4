@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import accountReducer from "./reducers/account";
-import grievancesReducer from "./reducers/grievances";
+import issuesReducer from "./reducers/issues";
 
 const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
@@ -15,8 +15,8 @@ const composeEnhancers = composeWithDevTools({
 });
 
 const rootReducer = combineReducers({
-  accountReducer,
-  grievancesReducer,
+  account: accountReducer,
+  issues: issuesReducer,
 });
 
 const store = createStore(

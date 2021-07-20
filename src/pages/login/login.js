@@ -1,93 +1,67 @@
 /** @format */
 
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unreachable */
-
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import { connect, useSelector } from "react-redux";
 
-// import useAuth from "../../modules/auth/authContext";
+import firebase from "../../common/firebase";
+import { logIn } from "../../store/actionCreators/auth";
+import { Container } from "./styles";
 
-const Container = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 115px);
-`;
+function Login({ logIn: actionLogin }) {
+  const history = useHistory();
 
-const Form = styled.form`
-  padding: 20px;
-  border: 1px solid grey;
-  width: 400px;
-  min-height: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 18px;
-  box-shadow: 0 0 10px rgb(0 0 0 / 80%);
-  box-sizing: border-box;
-`;
+  const account = useSelector((state) => state.account);
 
-const PhoneNumberInput = styled.input`
-  margin: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid grey;
-  width: 85%;
-`;
-
-const Button = styled.button`
-  padding: 6px 10px;
-  margin: 4px;
-  margin-right: 6%;
-  border-radius: 4px;
-  border: 1px solid grey;
-  align-self: flex-end;
-`;
-
-function Login() {
-  // const { submitPhone, submitOtp } = useAuth();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
-  const history = useHistory();
+  const [confirmResult, setConfirmResult] = useState(null);
 
-  // useEffect(() => {
-  // const ac = new AbortController();
-  // // eslint-disable-next-line
-  // window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-  //   "recaptcha-container",
-  //   {
-  //     size: "invisible",
-  //   }
-  // );
-  // return () => ac.abort();
-  // }, []);
+  useEffect(() => {
+    const { isLoggedIn } = account;
+
+    if (isLoggedIn) history.push("/dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
+
+  useEffect(() => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible",
+      }
+    );
+  }, []);
 
   const getOtp = async (e) => {
-    // e.preventDefault();
-    // setLoading(true);
-    // // console.log(`+91${phoneNumber}`);
-    // const appVerifier = window.recaptchaVerifier;
-    // // eslint-disable-next-line
-    // await submitPhone(`+91${phoneNumber}`, appVerifier);
-    // setIsOtpSent(true);
-    // setLoading(false);
+    e.preventDefault();
+    setLoading(true);
+
+    const appVerifier = window.recaptchaVerifier;
+
+    await firebase
+      .auth()
+      .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
+      .then((confirmResult) => {
+        setConfirmResult(confirmResult);
+      });
+
+    setIsOtpSent(true);
+    setLoading(false);
   };
 
   async function sendOtp(e) {
-    // e.preventDefault();
-    // setLoading(true);
-    // try {
-    //   await submitOtp(otp);
-    //   history.push("/dashboard");
-    // } catch {
-    //   console.log("Unable to Login");
-    // }
-    // setLoading(false);
+    setLoading(true);
+
+    const result = await confirmResult.confirm(otp);
+
+    const firebaseToken = await result.user.getIdToken();
+
+    await actionLogin({ firebaseToken });
+
+    setLoading(false);
   }
 
   const onChangePhoneNumber = (e) => {
@@ -109,15 +83,14 @@ function Login() {
   return (
     <Container>
       <div className="card">
-        {/* <img src="..." className="card-img-top" alt="..." /> */}
-        <div className="card-body ">
+        <div className="card-body">
           <h5 className="card-title">Log In</h5>
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
             {!isOtpSent && (
               <>
-                <div className="mb-3 ">
+                <div className="mb-3">
                   <label htmlFor="phoneNumber" className="form-label">
                     Phone Number
                   </label>
@@ -128,7 +101,8 @@ function Login() {
                     aria-describedby="phoneNumberHelp"
                     placeholder="Phone Number"
                     value={phoneNumber}
-                    onChange={setPhoneNumber}
+                    onChange={onChangePhoneNumber}
+                    disabled={loading}
                   />
                   <div id="phoneNumberHelp" className="form-text">
                     We'll never share your phone number with anyone else.
@@ -136,11 +110,13 @@ function Login() {
                 </div>
 
                 <button
-                  type="submit"
+                  type="button"
                   className="btn btn-primary"
                   style={{ alignSelf: "flex-end" }}
+                  onClick={getOtp}
+                  disabled={loading}
                 >
-                  Submit
+                  Get OTP
                 </button>
               </>
             )}
@@ -157,68 +133,29 @@ function Login() {
                     id="otpVerification"
                     value={otp}
                     onChange={onChangeOTP}
+                    disabled={loading}
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary">
-                  Submit
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={sendOtp}
+                  disabled={loading}
+                >
+                  Verify
                 </button>
               </>
             )}
           </form>
-          {/* <Link href="#" className="btn btn-primary">
-            Go somewhere
-          </Link> */}
         </div>
       </div>
     </Container>
   );
-
-  return (
-    <Container>
-      <Form>
-        <input id="recaptcha-container" type="hidden" />
-
-        {!isOtpSent ? (
-          <PhoneNumberInput
-            id="phone"
-            type="text"
-            placeholder="Enter your 10 digit Mobile Number"
-            pattern="[0-9]{10}"
-            // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-            value={phoneNumber}
-            onChange={onChangePhoneNumber}
-            disabled={loading}
-          />
-        ) : null}
-
-        {isOtpSent && (
-          <PhoneNumberInput
-            type="text"
-            placeholder="Enter the OTP sent to Mobile Number"
-            pattern="[0-9]{6}"
-            value={otp}
-            onChange={onChangeOTP}
-            disabled={loading}
-          />
-        )}
-
-        <div style={{ flexGrow: 1 }} />
-
-        {!isOtpSent && (
-          <Button onClick={getOtp} disabled={loading}>
-            Get OTP
-          </Button>
-        )}
-
-        {isOtpSent && (
-          <Button onClick={sendOtp} disabled={loading}>
-            Verify OTP
-          </Button>
-        )}
-      </Form>
-    </Container>
-  );
 }
 
-export default Login;
+const mapDispatchToProps = {
+  logIn,
+};
+
+export default connect(null, mapDispatchToProps)(Login);

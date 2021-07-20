@@ -1,25 +1,53 @@
 /** @format */
 
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
-
-import { ThemeProvider } from "styled-components";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 import AppLayout from "./common/components/AppLayout";
 import AppRoutes from "./common/components/AppRoutes";
 
-import { theme } from "./common/contants";
+import firebase from "./common/firebase";
 
-function App() {
+import { logIn } from "./store/actionCreators/auth";
+
+function App({ actionLogIn }) {
+  const [initializing, setInitializing] = useState(true);
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    if (user) {
+      user.getIdToken().then((token) => {
+        actionLogIn({ firebaseToken: token });
+      });
+    }
+
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+
+  useEffect(() => {
+    const unSubscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+
+    return unSubscriber; // unsubscribe on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <AppLayout>
-          <AppRoutes />
-        </AppLayout>
-      </ThemeProvider>
-    </BrowserRouter>
+    <AppLayout>
+      {initializing ? (
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      ) : (
+        <AppRoutes />
+      )}
+    </AppLayout>
   );
 }
 
-export default App;
+const mapDispatchToProps = {
+  actionLogIn: logIn,
+};
+
+export default connect(null, mapDispatchToProps)(App);
