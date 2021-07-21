@@ -16,3 +16,28 @@ export const FETCH_STATUS = {
   error: "ERROR",
   success: "SUCCESS",
 };
+
+export const GENDER = {
+  male: "MALE",
+  female: "FEMALE",
+  other: "OTHER",
+};
+
+export const CITIES = {
+  bangaluru: "BANGALURU",
+  delhi: "DELHI",
+  mumbai: "MUMBAI",
+};
+
+export const PROFESSIONS = {
+  doctor: "DOCTOR",
+  engineer: "ENGINEER",
+  farmer: "FARMER",
+  other: "OTHER",
+};
+
+export const ACCOUNT_TYPE = {
+  user: "USER",
+  manager: "MANAGER",
+  admin: "ADMIN",
+};

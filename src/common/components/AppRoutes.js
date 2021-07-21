@@ -1,8 +1,10 @@
 /** @format */
 
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import { ACCOUNT_TYPE } from "../contants";
 
 import About from "../../pages/about";
 // import Error from "../../pages/error";
@@ -29,30 +31,45 @@ const PublicRoutes = () => (
   </Switch>
 );
 
-const PrivateRoutes = () => (
-  <Switch>
-    <Route path="/" exact component={LandingPage} />
-    <Route path="/about" exact component={About} />
-    <Route path="/login" exact component={Login} />
-    <Route path="/contact-us" exact component={ContactUs} />
+const PrivateRoutes = ({ account }) => {
+  const history = useHistory();
 
-    <Route path="/dashboard" exact component={Dashboard} />
-    <Route path="/account" exact component={Account} />
-    <Route path="/contact-us" exact component={ContactUs} />
-    <Route path="/grievance" exact component={Grievance} />
-    <Route path="/grievances" exact component={Grievances} />
-    <Route path="/settings" exact component={Settings} />
+  useEffect(() => {
+    const { status, isLoggedIn, isFirstTime } = account;
 
-    <Route component={NotFound} />
-  </Switch>
-);
+    if (status === "SUCCESS" && isLoggedIn && isFirstTime) {
+      history.push("/register");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
+
+  return (
+    <Switch>
+      <Route path="/" exact component={LandingPage} />
+      <Route path="/about" exact component={About} />
+      <Route path="/contact-us" exact component={ContactUs} />
+
+      <Route path="/register" exact component={Register} />
+
+      <Route path="/dashboard" exact component={Dashboard} />
+      <Route path="/account" exact component={Account} />
+      <Route path="/contact-us" exact component={ContactUs} />
+      <Route path="/grievance" exact component={Grievance} />
+      <Route path="/grievances" exact component={Grievances} />
+      <Route path="/settings" exact component={Settings} />
+
+      <Redirect from="/login" to="/dashboard" />
+
+      <Route component={NotFound} />
+    </Switch>
+  );
+};
 
 const AdminRoutes = () => (
   <Switch>
     <Route path="/" exact component={LandingPage} />
     <Route path="/about" exact component={About} />
-    <Route path="/login" exact component={Login} />
-    <Route path="/register" exact component={Register} />
 
     <Route path="/dashboard" exact component={Dashboard} />
     <Route path="/account" exact component={Account} />
@@ -70,14 +87,18 @@ const AdminRoutes = () => (
 function AppRoutes() {
   const account = useSelector((state) => state.account);
 
-  const { isLoggedIn, accountType } = account;
+  const { isInit, isLoggedIn, accountType } = account;
+
+  if (!isInit) {
+    return <div>loading...</div>;
+  }
 
   if (!isLoggedIn) {
     return <PublicRoutes />;
   }
 
-  if (accountType === "USER") {
-    return <PrivateRoutes />;
+  if (accountType === ACCOUNT_TYPE.user) {
+    return <PrivateRoutes account={account} />;
   }
 
   return <AdminRoutes />;
