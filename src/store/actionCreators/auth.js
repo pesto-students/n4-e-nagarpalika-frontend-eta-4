@@ -1,6 +1,7 @@
 /** @format */
 
 import {
+  ACCOUNT_INIT,
   LOG_IN_START,
   LOG_IN_ERROR,
   LOG_IN_SUCCESS,
@@ -9,7 +10,14 @@ import {
   LOG_OUT_SUCCESS,
 } from "../constants/actionTypes";
 
-import { login as apiLogin } from "../../api/api";
+import { login as apiLogin, logout as apiLogout } from "../../common/api/api";
+
+// call this if user is not signed in,
+export function authInit() {
+  return (dispatch) => {
+    dispatch({ type: ACCOUNT_INIT });
+  };
+}
 
 export function logIn({ firebaseToken }) {
   return async (dispatch) => {
@@ -36,7 +44,7 @@ export function logOut() {
     dispatch({ type: LOG_OUT_START });
 
     try {
-      await apiLogin();
+      await apiLogout();
 
       dispatch({ type: LOG_OUT_SUCCESS });
     } catch (error) {

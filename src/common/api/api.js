@@ -4,10 +4,17 @@ import axios from "axios";
 
 const { REACT_APP_SERVER_API } = process.env;
 
+// Setting default value for axios
+// axios.defaults.withCredentials = true;
+
 export const login = async ({ firebaseToken }) => {
   const { data } = await axios.post(`${REACT_APP_SERVER_API}/api/login`, {
     firebaseToken,
   });
+
+  const { token } = data.data;
+
+  localStorage.setItem("token", token);
 
   return data;
 };
@@ -26,14 +33,25 @@ export const register = async ({
   city,
   gender,
 }) => {
-  const { data } = await axios.post(`${REACT_APP_SERVER_API}/api/login`, {
-    name,
-    email,
-    aadhar,
-    avatar,
-    city,
-    gender,
-  });
+  const { data } = await axios.put(
+    `${REACT_APP_SERVER_API}/api/register`,
+    {
+      name,
+      email,
+      aadhar,
+      avatar,
+      city,
+      gender,
+    },
+    {
+      // withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
 
   return data;
 };

@@ -1,30 +1,18 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 import firebase from "../../common/firebase";
 import { logIn } from "../../store/actionCreators/auth";
 import { Container } from "./styles";
 
 function Login({ logIn: actionLogin }) {
-  const history = useHistory();
-
-  const account = useSelector((state) => state.account);
-
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [confirmResult, setConfirmResult] = useState(null);
-
-  useEffect(() => {
-    const { isLoggedIn } = account;
-
-    if (isLoggedIn) history.push("/dashboard");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account]);
 
   useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -61,7 +49,7 @@ function Login({ logIn: actionLogin }) {
 
     await actionLogin({ firebaseToken });
 
-    setLoading(false);
+    // setLoading(false);
   }
 
   const onChangePhoneNumber = (e) => {

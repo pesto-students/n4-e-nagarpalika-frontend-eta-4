@@ -1,6 +1,7 @@
 /** @format */
 import { FETCH_STATUS } from "../../common/contants";
 import {
+  ACCOUNT_INIT,
   LOG_IN_ERROR,
   LOG_IN_START,
   LOG_IN_SUCCESS,
@@ -13,6 +14,7 @@ import {
 } from "../constants/actionTypes";
 
 const initialState = {
+  isInit: false,
   isLoggedIn: false,
   status: FETCH_STATUS.none, // "LOADING", "SUCCESS", "ERROR", "NONE"
   error: "",
@@ -20,9 +22,17 @@ const initialState = {
 
 function accountReducer(state = initialState, action) {
   switch (action.type) {
+    case ACCOUNT_INIT: {
+      return {
+        ...initialState,
+        isInit: true,
+      };
+    }
+
     case LOG_IN_START: {
       return {
         ...state,
+        isInit: true,
         status: FETCH_STATUS.loading,
       };
     }
@@ -56,12 +66,12 @@ function accountReducer(state = initialState, action) {
     }
 
     case LOG_OUT_ERROR: {
-      const { value } = action;
+      const { payload } = action;
 
       return {
         ...state,
         status: FETCH_STATUS.error,
-        error: value,
+        error: payload,
       };
     }
 
@@ -72,16 +82,25 @@ function accountReducer(state = initialState, action) {
     case REGISTER_START: {
       return {
         ...state,
+        status: FETCH_STATUS.loading,
       };
     }
     case REGISTER_ERROR: {
+      const { payload } = action;
+
       return {
         ...state,
+        status: FETCH_STATUS.error,
+        error: payload,
       };
     }
     case REGISTER_SUCCESS: {
+      const { payload } = action;
+
       return {
         ...state,
+        status: FETCH_STATUS.success,
+        ...payload,
       };
     }
 

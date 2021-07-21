@@ -8,17 +8,26 @@ import AppRoutes from "./common/components/AppRoutes";
 
 import firebase from "./common/firebase";
 
-import { logIn } from "./store/actionCreators/auth";
+import { logIn, authInit } from "./store/actionCreators/auth";
 
-function App({ actionLogIn }) {
+function App({ actionLogIn, actionAuthInit }) {
   const [initializing, setInitializing] = useState(true);
 
   // Handle user state changes
-  function onAuthStateChanged(user) {
+  async function onAuthStateChanged(user) {
+    // if user is not logged in, only initialize the account state.
+    if (!user) {
+      actionAuthInit();
+    }
+
     if (user) {
-      user.getIdToken().then((token) => {
+      try {
+        const token = await user.getIdToken();
+
         actionLogIn({ firebaseToken: token });
-      });
+      } catch (error) {
+        actionAuthInit();
+      }
     }
 
     if (initializing) {
@@ -48,6 +57,7 @@ function App({ actionLogIn }) {
 
 const mapDispatchToProps = {
   actionLogIn: logIn,
+  actionAuthInit: authInit,
 };
 
 export default connect(null, mapDispatchToProps)(App);
