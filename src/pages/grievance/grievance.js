@@ -46,6 +46,7 @@ const Grievance = ({ actionGetIssue }) => {
     );
   }
 
+  // eslint-disable-next-line no-unused-vars
   const { title, description, images, location, category } = issue;
 
   return (

@@ -18,6 +18,7 @@ function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {
   const [location, setLocation] = useState("mumbai");
   const [category, setCategory] = useState("traffic");
   const [description, setDescription] = useState("asdf adsf adsf adsf asd f");
+  // eslint-disable-next-line no-unused-vars
   const [images, setImages] = useState([
     "https://picsum.photos/id/1/400/400",
     "https://picsum.photos/id/2/400/400",

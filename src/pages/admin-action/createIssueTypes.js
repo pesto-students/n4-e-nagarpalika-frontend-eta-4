@@ -85,4 +85,5 @@ const CreateIssueTypes = () => {
     </Form>
   );
 };
+
 export default CreateIssueTypes;
