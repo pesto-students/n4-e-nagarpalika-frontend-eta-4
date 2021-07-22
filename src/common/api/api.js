@@ -4,9 +4,6 @@ import axios from "axios";
 
 const { REACT_APP_SERVER_API } = process.env;
 
-// Setting default value for axios
-// axios.defaults.withCredentials = true;
-
 export const login = async ({ firebaseToken }) => {
   const { data } = await axios.post(`${REACT_APP_SERVER_API}/api/login`, {
     firebaseToken,
@@ -44,7 +41,6 @@ export const register = async ({
       gender,
     },
     {
-      // withCredentials: true,
       headers: {
         "Content-Type": "application/json",
         accept: "application/json",
@@ -56,26 +52,92 @@ export const register = async ({
   return data;
 };
 
-export const getAllIssues = async ({ userId }) => {
-  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/login`, {});
+export const getAllAdminIssues = async () => {
+  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/admin/issues`, {
+    headers: {
+      "Content-Type": "application/json",
+      accept: "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   return data;
 };
 
-export const getIssue = async ({ userId }) => {
-  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/login`, {});
+export const getAllUserIssues = async ({ userId }) => {
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_API}/api/users/${userId}/issues`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
 
   return data;
 };
 
-export const createIssue = async ({ userId }) => {
-  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/login`, {});
+export const getIssue = async ({ id }) => {
+  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/issues/${id}`);
 
   return data;
 };
 
-export const updateIssue = async ({ userId }) => {
-  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/login`, {});
+export const createIssue = async ({
+  title,
+  description,
+  location,
+  category,
+  images,
+}) => {
+  const { data } = await axios.post(
+    `${REACT_APP_SERVER_API}/api/issues`,
+    {
+      title,
+      description,
+      location,
+      category,
+      images,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+export const updateIssue = async ({
+  userId,
+  title,
+  description,
+  location,
+  category,
+  images,
+}) => {
+  const { data } = await axios.put(
+    `${REACT_APP_SERVER_API}/api/users/${userId}/issues`,
+    {
+      title,
+      description,
+      location,
+      category,
+      images,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
 
   return data;
 };
