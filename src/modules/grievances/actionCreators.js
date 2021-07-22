@@ -11,7 +11,7 @@ import {
   ISSUES_GET_START,
   ISSUES_GET_SUCCESS,
   ISSUES_GET_ERROR,
-} from "../constants/actionTypes";
+} from "../../store/constants/actionTypes";
 
 import {
   createIssue as apiCreateIssue,
@@ -19,7 +19,7 @@ import {
   getAllUserIssues as apiGetAllUserIssues,
   getIssue as apiGetIssue,
   // updateIssue as apiUpdateIssue,
-} from "../../common/api/api";
+} from "./api";
 
 export function resetNewIssue() {
   return async (dispatch) => {

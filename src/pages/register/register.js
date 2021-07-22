@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
-import { register } from "../../store/actionCreators/account";
+import { register } from "../../modules/account/actionCreators";
 import { GENDER, CITIES, PROFESSIONS } from "../../common/contants";
 
 import {

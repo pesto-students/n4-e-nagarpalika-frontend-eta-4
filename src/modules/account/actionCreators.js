@@ -4,9 +4,9 @@ import {
   REGISTER_START,
   REGISTER_SUCCESS,
   REGISTER_ERROR,
-} from "../constants/actionTypes";
+} from "../../store/constants/actionTypes";
 
-import { register as apiRegister } from "../../common/api/api";
+import { register as apiRegister } from "./api";
 
 export function register({
   name,

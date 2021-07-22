@@ -11,7 +11,7 @@ import {
   ISSUES_GET_START,
   ISSUES_GET_SUCCESS,
   ISSUES_GET_ERROR,
-} from "../constants/actionTypes";
+} from "../../store/constants/actionTypes";
 
 import { FETCH_STATUS } from "../../common/contants";
 
@@ -121,7 +121,7 @@ function issuesReducer(state = initialState, action) {
       const { id: issueId, ...rest } = payload;
 
       const index = state.list.findIndex(({ id }) => issueId === id);
-      console.log(index);
+      // console.log(index);
 
       return {
         ...state,

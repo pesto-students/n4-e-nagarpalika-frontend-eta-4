@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { connect, useSelector } from "react-redux";
 
-import { getIssue } from "../../store/actionCreators/issues";
+import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
 
 const Grievance = ({ actionGetIssue }) => {

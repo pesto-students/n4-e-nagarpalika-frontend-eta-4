@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import firebase from "../../common/firebase";
-import { logIn } from "../../store/actionCreators/auth";
+import { logIn } from "../../modules/auth/actionCreators";
 import { Container } from "./styles";
 
 function Login({ logIn: actionLogin }) {

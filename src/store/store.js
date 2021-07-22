@@ -6,8 +6,8 @@ import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import accountReducer from "./reducers/account";
-import issuesReducer from "./reducers/issues";
+import accountReducer from "../modules/account/reducer";
+import issuesReducer from "../modules/grievances/reducer";
 
 const { NODE_ENV } = process.env;
 
