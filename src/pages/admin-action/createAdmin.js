@@ -99,7 +99,7 @@ const CreateAdmin = () => {
   return (
     <Form>
       <Div>
-        <P>Mob No:</P>
+        <PTag>Mobile No:</PTag>
         <FormFields
           id="phone"
           type="tel"

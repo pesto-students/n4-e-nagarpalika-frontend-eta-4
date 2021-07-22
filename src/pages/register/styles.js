@@ -42,6 +42,7 @@ export const DivBody = styled.div`
 export const DivBodyColumn = styled.div`
   width: 90%;
   height: 25%;
+  margin-left: 6%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,7 +52,7 @@ export const FormInput = styled.input`
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
-  width: 85%;
+  width: 95%;
 `;
 export const Checkbox = styled.input`
   margin: 5px;
@@ -67,7 +68,8 @@ export const P = styled.p`
   font-size: medium;
 `;
 export const Terms = styled.p`
-  margin: 10px 10px 10px 10px;
+  margin: 10px;
+  margin-bottom: 16%;
   font-size: small;
 `;
 
@@ -87,11 +89,10 @@ export const Select = styled.select`
 export const Button = styled.button`
   padding: 10px;
   margin: 5px;
-  width: 90%;
+  width: 95%;
   border-radius: 8px;
   border: 1px solid grey;
   background-color: #2a2a76;
   color: white;
-  justify-content: flex-end;
   align-self: center;
 `;
