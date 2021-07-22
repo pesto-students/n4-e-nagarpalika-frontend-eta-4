@@ -32,7 +32,6 @@ function accountReducer(state = initialState, action) {
     case LOG_IN_START: {
       return {
         ...state,
-        isInit: true,
         status: FETCH_STATUS.loading,
       };
     }
@@ -42,6 +41,7 @@ function accountReducer(state = initialState, action) {
 
       return {
         ...state,
+        isInit: true,
         status: FETCH_STATUS.error,
         error: payload,
       };
@@ -52,6 +52,7 @@ function accountReducer(state = initialState, action) {
 
       return {
         ...state,
+        isInit: true,
         status: FETCH_STATUS.success,
         isLoggedIn: true,
         ...payload,

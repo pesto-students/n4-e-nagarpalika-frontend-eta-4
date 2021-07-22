@@ -9,6 +9,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import accountReducer from "./reducers/account";
 import issuesReducer from "./reducers/issues";
 
+const { NODE_ENV } = process.env;
+
 const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
   name: "ENP-Web Dev Tool",
@@ -19,10 +21,14 @@ const rootReducer = combineReducers({
   issues: issuesReducer,
 });
 
+const middlewares = [thunk];
+
+if (NODE_ENV === "development") middlewares.push(logger);
+
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(thunk, logger)
+    applyMiddleware(...middlewares)
     // other store enhancers if any
   )
 );
