@@ -1,9 +1,11 @@
 /** @format */
 
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import useAuth from "../../modules/auth/authContext";
+import { connect, useSelector } from "react-redux";
+
+import { register } from "../../store/actionCreators/account";
+import { GENDER, CITIES, PROFESSIONS } from "../../common/contants";
 
 import {
   Container,
@@ -20,158 +22,127 @@ import {
   Terms,
 } from "./styles";
 
-function Register() {
-  const { firebaseUser, login } = useAuth();
-  const [loading, setLoading] = useState(true);
-  const [userName, setUserName] = useState();
-  const [userEmail, setUserEmail] = useState();
-  const [aadhar, setAadhar] = useState();
-  const [phoneNo, setPhoneNumber] = useState();
+function Register({ actionRegister }) {
   const history = useHistory();
-  const [userCity, setCity] = useState();
-  const [userGender, setGender] = useState();
-  const [userProfession, setProfession] = useState();
-  const [message, setMessage] = useState();
-  const [textColor, setTextColor] = useState("#a51212");
-  const registerUser = async () => {
-    // const token = await firebaseUser.getIdToken();
-    try {
-      const token = await firebaseUser.getIdToken();
-      const res = await axios.post(
-        "/api/auth/register",
-        {
-          name: userName,
-          phone_no: `+91${phoneNo}`,
-          gender: userGender,
-          profession: userProfession,
-          city: userCity,
-          email: userEmail,
-          aadhar_no: aadhar,
-          image_url: "",
-        },
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
-      if (res.status === 201) {
-        login(res);
-        history.push("/dashboard");
-      }
-    } catch (err) {
-      setMessage(err.message);
+  const account = useSelector((state) => state.account);
+
+  useEffect(() => {
+    const { status, isLoggedIn, isFirstTime } = account;
+
+    if (status === "SUCCESS" && isLoggedIn && !isFirstTime) {
+      history.push("/dashboard");
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
+
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  // const [avatar, setAvatar] = useState("");
+  const [email, setEmail] = useState("");
+  const [aadhar, setAadhar] = useState("");
+  const [phoneNumber] = useState(account.phoneNumber);
+  const [city, setCity] = useState("");
+  const [gender, setGender] = useState("");
+  const [profession, setProfession] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [message, setMessage] = useState("");
+  const [textColor, setTextColor] = useState("#a51212");
+  const [checkbox, setCheckbox] = useState(false);
 
   const selectCity = (e) => {
     setCity(e.target.value);
-    // setMessage(city);
     setTextColor("#2a2a76");
-    // console.log(city);
   };
   const selectGender = (e) => {
     setGender(e.target.value);
-    // setMessage(gender);
     setTextColor("#2a2a76");
-    // console.log(gender);
   };
   const selectProfession = (e) => {
     setProfession(e.target.value);
-    // setMessage(city);
     setTextColor("#a51212");
-    // console.log(profession);
   };
-  const onChangeUserName = (e) => {
-    setUserName(e.current.value);
-  };
-  const onChangePhoneNumber = (e) => {
-    setPhoneNumber(e.current.value);
-  };
-  const onChangeEmail = (e) => {
-    const identifier = e.current.value.includes("@");
-    if (identifier) {
-      if (e.current.value.split("@")[1].includes(".")) {
-        setUserEmail(e.current.value);
-        setMessage(" ");
-      } else {
-        setMessage("Please Add a valid Email Id");
-      }
-    } else {
-      setMessage("Please Add a valid Email Id");
-    }
-    console.log(message);
-  };
-  const onChangeAadhar = (e) => {
-    if (e.current.value.length !== 16) {
-      setMessage("Please Add a valid Aadhar Card Number");
-    } else {
-      setAadhar(e.current.value);
-      setMessage("");
-    }
+  const onChangeName = (e) => {
+    setName(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const onChangeAadhar = (e) => {
+    setAadhar(e.target.value);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    registerUser();
+    setLoading(true);
+
+    await actionRegister({
+      name,
+      email,
+      aadhar,
+      phoneNumber,
+      city,
+      gender,
+      profession,
+      // avatar,
+    });
+
+    setLoading(false);
   };
 
   return (
     <Container>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <DivHead>
           <DivBodyColumn>
             <P>Name*</P>
             <FormInput
-              id="phone"
+              id="name"
               type="text"
-              onchange={onChangeUserName}
+              onChange={onChangeName}
+              value={name}
               placeholder="Enter your name"
-              pattern="[0-9]{10}"
-              // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             />
           </DivBodyColumn>
           <DivBodyColumn>
             <P>Mobile Number*</P>
             <FormInput
-              id="phone"
+              id="phoneNumber"
               type="text"
-              onChange={onChangePhoneNumber}
-              // value={firebaseUser.phone_number}
+              value={phoneNumber}
               placeholder="Enter the 10 digit Mobile Number"
               pattern="[0-9]{10}"
-              // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+              disabled
             />
           </DivBodyColumn>
           <DivBodyColumn>
             <P>City*</P>
-            <Select onChange={selectCity}>
-              <option value="BLR">Bengaluru</option>
-              <option value="DEL">Delhi</option>
-              <option value="HYD">Hyderabad</option>
-              <option value="OTH">Other</option>
+            <Select onChange={selectCity} value={city}>
+              <option value="">Select</option>
+              <option value={CITIES.bangaluru}>Bengaluru</option>
+              <option value={CITIES.delhi}>Delhi</option>
+              <option value={CITIES.mumbai}>Mumbai</option>
             </Select>
           </DivBodyColumn>
           <DivBodyColumn>
             <DivBody>
               <DivHead>
                 <P>Profession</P>
-                <Select onChange={selectProfession}>
-                  <option value="Doctor">Doctor</option>
-                  <option value="Engineer">Engineer</option>
-                  <option value="Farmer">Farmer</option>
-                  <option value="OTH">Other</option>
+                <Select onChange={selectProfession} value={profession}>
+                  <option value="">Select</option>
+                  <option value={PROFESSIONS.doctor}>Doctor</option>
+                  <option value={PROFESSIONS.engineer}>Engineer</option>
+                  <option value={PROFESSIONS.farmer}>Farmer</option>
+                  <option value={PROFESSIONS.other}>Other</option>
                 </Select>
               </DivHead>
               <DivHead>
                 <P>Gender</P>
-                <Select onChange={selectGender}>
-                  <option value="MALE">Male</option>
-                  <option value="FEMALE">Female</option>
-                  <option value="OTH">Other</option>
+                <Select onChange={selectGender} value={gender}>
+                  <option value="">Select</option>
+                  <option value={GENDER.male}>Male</option>
+                  <option value={GENDER.female}>Female</option>
+                  <option value={GENDER.other}>Other</option>
                 </Select>
               </DivHead>
             </DivBody>
@@ -181,23 +152,22 @@ function Register() {
           <DivBodyColumn>
             <P>Email*</P>
             <FormInput
-              id="phone"
-              type="text"
+              id="email"
+              type="email"
               onChange={onChangeEmail}
-              placeholder="Enter your email ID"
-              pattern="[0-9]{10}"
-              // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+              value={email}
+              placeholder="Enter your Email"
             />
           </DivBodyColumn>
           <DivBodyColumn>
             <P>Aadhar Number*</P>
             <FormInput
-              id="phone"
-              type="tel"
+              id="aadharNumber"
+              type="text"
               onChange={onChangeAadhar}
+              value={aadhar}
               placeholder="Enter the 16 digit Aadhar Number"
               pattern="[0-9]{16}"
-              // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             />
           </DivBodyColumn>
           <DivBodyColumn>
@@ -210,28 +180,35 @@ function Register() {
             </DivBody>
             <DivBody>
               <Checkbox
-                id="phone"
                 type="checkbox"
+                value={checkbox}
+                disabled={loading}
                 onClick={() => {
-                  setLoading(!loading);
+                  setCheckbox(!checkbox);
                 }}
               />
               <Terms>
-                {/* eslint-disable-next-line */}
-                By Clicking here I accept the <a href="">Privacy Policy</a> and <a href="">Terms & Conditions</a> of use.
+                By Clicking here I accept the Privacy Policy and Terms
+                Conditions of use.
               </Terms>
             </DivBody>
           </DivBodyColumn>
           <DivBodyColumn>
-            <Button disabled={loading} onClick={handleSubmit}>
+            <Button disabled={loading} onClick={onSubmit}>
               Register
             </Button>
           </DivBodyColumn>
+          <DivBodyColumn>
+            <P style={{ color: textColor }}>{message}</P>
+          </DivBodyColumn>
         </DivHead>
       </Form>
-      <P style={{ color: textColor }}>{message}</P>
     </Container>
   );
 }
 
-export default Register;
+const mapDispatchToProps = {
+  actionRegister: register,
+};
+
+export default connect(null, mapDispatchToProps)(Register);

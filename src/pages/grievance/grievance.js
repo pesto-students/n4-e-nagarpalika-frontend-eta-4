@@ -1,70 +1,65 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router";
+import { connect, useSelector } from "react-redux";
 
-import ProgressBar from "./progressBar";
-import ImageSlider from "./imageSlider";
+import { getIssue } from "../../store/actionCreators/issues";
+import { FETCH_STATUS } from "../../common/contants";
 
-import {GrievanceContainer,
-    DivHead,
-    GrievanceBody,
-    GrievanceImage,
-    Header,PGrievance,
-    AGrievance,
-    Text,
-    TakeActionButton,
-    ButtonPost,
-    GrievanceTextInput} from './styles';
+const Grievance = ({ actionGetIssue }) => {
+  const { id } = useParams();
 
-const Grievances = () => {
-    const grievanceData = {
-        title: "Traffic Lights near HSR Layout 3rd cross not working",
-        details: "I would Like to Bring it to your notice that, Traffic Lights near HSR Layout 3rd cross not working despite multiple road acctdents.",
-        createdAt: "21st June 2021 07:23 PM",
-        latLong: [20.298358699999998, 85.8629813],
-        status: 2,
-        tag: "Road Safety and Traffic"
-    }
+  useEffect(() => {
+    actionGetIssue({ id });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
-    const updateStatus=(e)=>{
-        e.preventDefault()
-    }
-    const handleClick=(e)=>{
-        e.preventDefault()
-        const link =`https://maps.google.com/?q=${grievanceData.latLong[0]},${grievanceData.latLong[1]}`
-        const newWindow = window.open(link, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
-    }
+  const list = useSelector(({ issues }) => issues.list);
 
+  // console.log(list);
+  const index = list.findIndex((item) => id === item.id);
+
+  if (index < 0) {
+    return <div>not found</div>;
+  }
+
+  const issue = list[index];
+
+  const { status } = issue;
+
+  if (status === FETCH_STATUS.none) {
+    return <div>none</div>;
+  }
+
+  if (status === FETCH_STATUS.loading) {
+    return <div>loading...</div>;
+  }
+
+  if (status === FETCH_STATUS.error) {
+    const { error } = issue;
     return (
-        <GrievanceContainer>
-            <DivHead>
-                <GrievanceBody>
-                    <GrievanceImage>
-                        <ImageSlider/>
-                        <ProgressBar/>
-                        <PGrievance>{grievanceData.tag}</PGrievance>
-                    </GrievanceImage>
-                    <GrievanceImage>
-                        <Header>{grievanceData.title}</Header>
-                        {/* eslint-disable-next-line */}
-                        <AGrievance onClick={handleClick} href="#">Location</AGrievance>
-                        <Text>Created: {grievanceData.createdAt}</Text>
-                        <Text>{grievanceData.details}</Text>
-                        <TakeActionButton onClick={updateStatus}>Take Action</TakeActionButton>
-                    </GrievanceImage>
-                </GrievanceBody>
-                <GrievanceBody>
-                    <Text/>
-                    <Text>This is a comment</Text>
-                </GrievanceBody>
-                <GrievanceBody>
-                    <GrievanceTextInput/>
-                    <ButtonPost>Post</ButtonPost>
-                </GrievanceBody>
-            </DivHead>
-        </GrievanceContainer>
+      <div>
+        <h1>error</h1>
+        <div>{error}</div>
+      </div>
     );
+  }
+
+  const { title, description, images, location, category } = issue;
+
+  return (
+    <div>
+      <h1>{title}</h1>
+      <h1>{description}</h1>
+      <h1>{location}</h1>
+      <h1>{category}</h1>
+    </div>
+  );
 };
 
-export default Grievances;
+const mapDispatchToProps = {
+  actionGetIssue: getIssue,
+};
+
+export default connect(null, mapDispatchToProps)(Grievance);
