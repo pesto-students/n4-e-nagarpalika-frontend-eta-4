@@ -1,88 +1,83 @@
 /** @format */
 
 import React, { useState } from "react";
-import axios from "axios";
 
-import { Form, FormFields, Div, P, PTag, SelectTag, Button } from "./styles";
+import { LOCATIONS } from "../../common/contants";
+
+import { createIssueType } from "../../modules/grievances/api";
 
 const CreateIssueTypes = () => {
   const [loading, setLoading] = useState(false);
-  const [issueType, setIssueType] = useState();
-  const [userCity, setCity] = useState();
-  const [textColor, setColor] = useState("#f50808");
-  const [message, setMessage] = useState("");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  // const [textColor, setColor] = useState("#f50808");
+  // const [message, setMessage] = useState("");
 
-  const createIssueType = async () => {
-    try {
-      const res = await axios.post(
-        "/api/admin/action/create-issue-type",
-        {
-          name: issueType,
-          city: userCity,
-        },
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-      if (res) {
-        if (res.data.status) {
-          setColor("#4bc123");
-        } else {
-          setColor("#f50808");
-        }
-        setMessage(res.data.message);
-      }
-      console.log(res.status, res.data, res.request);
-    } catch (err) {
-      console.log(err.message);
-      setMessage(err.message);
-      setColor("#f50808");
-    }
-  };
-
-  const selectCity = (e) => {
-    setCity(e.target.value);
-    // console.log(city);
-  };
-  const onChange = (e) => {
-    e.preventDefault();
-    setIssueType(e.target.value);
-  };
-  const onSave = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await createIssueType();
+    const data = await createIssueType({ title, location });
+
+    console.log(data);
   };
+
   return (
-    <Form>
-      <Div>
-        <PTag>Issue Type:</PTag>
-        <FormFields
-          id="phone"
-          type="text"
-          onChnage={onChange}
-          placeholder="Name Of the issue type"
-          pattern="[0-9]{10}"
-          // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-        />
-      </Div>
-      <Div>
-        <PTag> City:</PTag>
-        <SelectTag disabled={loading} onChange={selectCity}>
-          <option value="BLR">Bengaluru</option>
-          <option value="DEL">Delhi</option>
-          <option value="HYD">Hyderabad</option>
-        </SelectTag>
-      </Div>
-      <P style={{ color: textColor }}>{message}</P>
-      <Button disabled={loading} onClick={onSave}>
-        Save
-      </Button>
-    </Form>
+    <div className="container-flex">
+      <form className="card">
+        <div className="card-body">
+          <div className="mb-3">
+            <label htmlFor="issueTypeInput" className="form-label">
+              Issue Type*
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="issueTypeInput"
+              aria-describedby="issueTypeHelp"
+              placeholder="Issue Type"
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <div id="issueTypeHelp" className="form-text">
+              This issue type will be used by public to create grievances.
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="locationInput" className="form-label">
+              City*
+            </label>
+            <select
+              className="form-select"
+              id="locationInput"
+              aria-label="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            >
+              <option value="">Select</option>
+              <option value={LOCATIONS.bangaluru}>Bangaluru</option>
+              <option value={LOCATIONS.delhi}>Delhi</option>
+              <option value={LOCATIONS.mumbai}>Mumbai</option>
+            </select>
+          </div>
+          <div id="formHelp" className="form-text">
+            Required fields are marked with (*)
+          </div>
+        </div>
+
+        <div className="card-footer">
+          <button
+            type="button"
+            className="btn btn-primary"
+            disabled={loading || title.length < 1 || location.length < 1}
+            onClick={onSubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

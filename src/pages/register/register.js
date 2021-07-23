@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
-import { register } from "../../store/actionCreators/account";
-import { GENDER, CITIES, PROFESSIONS } from "../../common/contants";
+import { register } from "../../modules/account/actionCreators";
+import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
 
 import {
   Container,
@@ -119,9 +119,9 @@ function Register({ actionRegister }) {
             <P>City*</P>
             <Select onChange={selectCity} value={city}>
               <option value="">Select</option>
-              <option value={CITIES.bangaluru}>Bengaluru</option>
-              <option value={CITIES.delhi}>Delhi</option>
-              <option value={CITIES.mumbai}>Mumbai</option>
+              <option value={LOCATIONS.bangaluru}>Bengaluru</option>
+              <option value={LOCATIONS.delhi}>Delhi</option>
+              <option value={LOCATIONS.mumbai}>Mumbai</option>
             </Select>
           </DivBodyColumn>
           <DivBodyColumn>
