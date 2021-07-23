@@ -9,8 +9,8 @@ export const ToggleHead = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-  //justify-content: center;
-  //align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
 `;
 export const Admin = styled.div`
   width: 200px;
@@ -20,8 +20,8 @@ export const Admin = styled.div`
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border: 1px solid gray;
-  //background: #1d0c79;
-  //color: white;
+  /* background: #1d0c79; */
+  /* color: white; */
   padding: 5px;
   box-shadow: 0 0 5px rgb(0 0 0 / 80%);
   box-sizing: border-box;
@@ -39,10 +39,10 @@ export const CreateIssue = styled.div`
   box-sizing: border-box;
 `;
 export const Container = styled.section`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   height: calc(100vh - 115px);
 `;
 
@@ -86,7 +86,7 @@ export const P = styled.p`
 `;
 export const PTag = styled.p`
   width: 30%;
-  //margin-right: 12%;
+  /* margin-right: 12%; */
 `;
 export const Div = styled.div`
   width: 90%;
