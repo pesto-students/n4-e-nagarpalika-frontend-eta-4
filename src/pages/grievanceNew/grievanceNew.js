@@ -5,7 +5,10 @@ import { connect, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { FETCH_STATUS } from "../../common/contants";
-import { createIssue, resetNewIssue } from "../../store/actionCreators/issues";
+import {
+  createIssue,
+  resetNewIssue,
+} from "../../modules/grievances/actionCreators";
 import { Container } from "./styles";
 
 function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {

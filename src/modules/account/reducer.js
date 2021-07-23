@@ -11,7 +11,7 @@ import {
   REGISTER_START,
   REGISTER_ERROR,
   REGISTER_SUCCESS,
-} from "../constants/actionTypes";
+} from "../../store/constants/actionTypes";
 
 const initialState = {
   isInit: false,

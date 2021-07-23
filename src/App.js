@@ -13,7 +13,7 @@ import firebase from "./common/firebase";
 import store from "./store/store";
 import { theme } from "./common/contants";
 
-import { logIn, authInit } from "./store/actionCreators/auth";
+import { logIn, authInit } from "./modules/auth/actionCreators";
 
 function AppInit({ actionLogIn, actionAuthInit }) {
   const [initializing, setInitializing] = useState(true);
