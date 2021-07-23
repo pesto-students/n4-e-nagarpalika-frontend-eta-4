@@ -23,7 +23,7 @@ export const GENDER = {
   other: "OTHER",
 };
 
-export const CITIES = {
+export const LOCATIONS = {
   bangaluru: "BANGALURU",
   delhi: "DELHI",
   mumbai: "MUMBAI",

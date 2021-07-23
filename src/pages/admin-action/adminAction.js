@@ -2,37 +2,46 @@
 
 import React, { useState } from "react";
 
+import { Link } from "react-router-dom";
+import classnames from "classnames";
+
 import CreateIssueTypes from "./createIssueTypes";
 import CreateAdmin from "./createAdmin";
 
-import { Container, Admin, CreateIssue, ToggleHead } from "./styles";
+import { Container } from "./styles";
 import "./toggleChange.css";
 
 const AdminActions = () => {
-  const [actionMode, setActionMode] = useState(true);
+  const [bool, setBool] = useState(false);
 
-  const onToggle = (e) => {
-    e.preventDefault();
-    setActionMode(!actionMode);
-    // console.log(actionMode);
-  };
   return (
     <Container>
-      <ToggleHead>
-        <Admin
-          className={actionMode ? "actionModeTrue" : "actionModeFalse"}
-          onClick={onToggle}
-        >
-          Create Admin
-        </Admin>
-        <CreateIssue
-          className={!actionMode ? "actionModeTrue" : "actionModeFalse"}
-          onClick={onToggle}
-        >
-          Create Issue Types
-        </CreateIssue>
-      </ToggleHead>
-      {actionMode ? <CreateAdmin /> : <CreateIssueTypes />}
+      <ul className="nav nav-tabs lg-10">
+        <li className="nav-item">
+          <Link
+            className={classnames("nav-link", {
+              active: bool,
+            })}
+            aria-current="page"
+            to="#"
+            onClick={() => setBool(true)}
+          >
+            Create Admin
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            className={classnames("nav-link", {
+              active: !bool,
+            })}
+            to="#"
+            onClick={() => setBool(false)}
+          >
+            Create Issue Types
+          </Link>
+        </li>
+      </ul>
+      {bool ? <CreateAdmin /> : <CreateIssueTypes />}
     </Container>
   );
 };

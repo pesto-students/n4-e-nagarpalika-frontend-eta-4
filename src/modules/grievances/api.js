@@ -93,3 +93,22 @@ export const updateIssue = async ({
 
   return data;
 };
+
+export const createIssueType = async ({ title, location }) => {
+  const { data } = await axios.post(
+    `${REACT_APP_SERVER_API}/api/admin/issues/issueTypes`,
+    {
+      title,
+      location,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return data;
+};
