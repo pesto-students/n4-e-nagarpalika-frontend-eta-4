@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 
-import { getAllUserIssue } from "../../store/actionCreators/issues";
+import { getAllUserIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
 
 const Grievances = ({ actionGetAllUserIssue }) => {

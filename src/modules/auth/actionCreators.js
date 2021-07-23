@@ -8,9 +8,9 @@ import {
   LOG_OUT_START,
   LOG_OUT_ERROR,
   LOG_OUT_SUCCESS,
-} from "../constants/actionTypes";
+} from "../../store/constants/actionTypes";
 
-import { login as apiLogin, logout as apiLogout } from "../../common/api/api";
+import { login as apiLogin, logout as apiLogout } from "./api";
 
 // call this if user is not signed in,
 export function authInit() {
