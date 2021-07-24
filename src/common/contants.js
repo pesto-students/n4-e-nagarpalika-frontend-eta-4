@@ -56,3 +56,15 @@ export const GRIEVANCE_STATUS = {
   action: "ACTION",
   resolved: "RESOLVED",
 };
+
+export const GRIEVANCE_CATEGORIES = [
+  "Road Safety & Traffic",
+  "Electricity",
+  "Ration Service",
+  "Housing and Development",
+  "Water Delivery",
+  "Sanitation",
+  "Vigilance & Anti-corruption",
+  "Public Safety",
+  "Healthcare",
+];
