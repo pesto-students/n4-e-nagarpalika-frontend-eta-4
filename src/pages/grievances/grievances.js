@@ -6,6 +6,8 @@ import { connect, useSelector } from "react-redux";
 import { getAllUserIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
 
+import CardBlock from "../../common/components/carousel/CardBlock";
+
 const Grievances = ({ actionGetAllUserIssue }) => {
   const account = useSelector(({ account }) => account);
   const { id: userId } = account;
@@ -36,14 +38,10 @@ const Grievances = ({ actionGetAllUserIssue }) => {
     );
   }
 
-  return list.map(({ id, title, description, images, location, category }) => (
-    <div key={id}>
-      <h1>{title}</h1>
-      <h1>{description}</h1>
-      <h1>{location}</h1>
-      <h1>{category}</h1>
-    </div>
-  ));
+  // return list.map(({ id, title, description, images, location, category }) => (
+  //   CardBlock
+  // ));
+    return <CardBlock issues={list} />
 };
 
 const mapDispatchToProps = {
