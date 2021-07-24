@@ -41,3 +41,30 @@ export const ACCOUNT_TYPE = {
   manager: "MANAGER",
   admin: "ADMIN",
 };
+
+/**
+ * NONE - when issue was created
+ * REVIEW - issue will be reviews by officers
+ * PROGRESS - discussion has started on this issue
+ * ACTION - action has been initiated by officers
+ * RESOLVED - issue has been resolved
+ */
+export const GRIEVANCE_STATUS = {
+  none: "NONE",
+  review: "REVIEW",
+  progress: "PROGRESS",
+  action: "ACTION",
+  resolved: "RESOLVED",
+};
+
+export const GRIEVANCE_CATEGORIES = [
+  "Road Safety & Traffic",
+  "Electricity",
+  "Ration Service",
+  "Housing and Development",
+  "Water Delivery",
+  "Sanitation",
+  "Vigilance & Anti-corruption",
+  "Public Safety",
+  "Healthcare",
+];
