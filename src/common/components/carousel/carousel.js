@@ -1,60 +1,102 @@
 /** @format */
 
 import React from "react";
+import Cards from "./cards/cards";
 
-const Carousel = () => {
+const Carousel = ({ issues, status, title }) => {
+  // const [createdIssues, setCreatedIssues] = useState([]);
+  // const [reviewedIssues, setReviewedIssues] = useState([]);
+  // const [fixedIssues, setFixedIssues] = useState([]);
+  // const [resolvedIssues, setResolvedIssues] = useState([]);
+  // useEffect((issues) => {
+  //   issues.map((issue) => {
+  //     return issue.status === "CREATED"
+  //       ? setCreatedIssues([issue, ...createdIssues])
+  //       : issue.status === "REVIEWED"
+  //       ? setReviewedIssues([issue, ...reviewedIssues])
+  //       : issue.status === "FIXED"
+  //       ? setFixedIssues([issue, ...fixedIssues])
+  //       : setResolvedIssues([issue, ...resolvedIssues]);
+  //   });
+  // });
   return (
     <div className="container">
-      {/* Carousel Wrapper */}
       <div
-        id="multi-card-issues"
+        id={`multi-card-issues-${status}`}
         className="carousel slide carousel-multi-item"
         data-ride="carousel"
       >
-        {/* Controls */}
-        <ul
-          className="controls "
-          id="sliderFirstControls"
-          aria-label="Carousel Navigation"
-          tabIndex="0"
-        >
-          <li
-            className="carousel-control-prev"
-            href="#multi-card-issues"
-            role="button"
-            data-slide="prev"
-          >
-            <i className="fe fe-chevron-left teal-color" />
-          </li>
-          <li
-            className="carousel-control-next"
-            href="#multi-card-issues"
-            role="button"
-            data-slide="next"
-          >
-            <i className="fe fe-chevron-right teal-color" />
-          </li>
-        </ul>
-
-        <div className="controls-top">
+        <div className="controls">
           <a
             className="carousel-control-prev"
-            href="#multi-card-issues"
+            href={`#multi-card-issues-${status}`}
             role="button"
             data-slide="prev"
           >
-            <i className="fas fa-chevron-left blue-color" />
+            <i className="fas fa-chevron-circle-left blue-color" />
           </a>
           <a
             className="carousel-control-next"
-            href="#multi-card-issues"
+            href={`#multi-card-issues-${status}`}
             role="button"
             data-slide="next"
           >
-            <i className="fas fa-chevron-right blue-color" />
+            <i className="fas fa-chevron-circle-right blue-color" />
           </a>
         </div>
-        {/*/.Controls*/}
+        <div className="carousel-inner position-relative" role="listbox">
+          <div className="row mb-4">
+            <div className="col">
+              <h2 className="mb-0">{title}</h2>
+            </div>
+          </div>
+
+          {window.screen.width > 775 ? (
+            <div>
+              <div className="carousel-item active">
+                <Cards
+                  content={issues[0].text}
+                  image_url={issues[0].imageURL}
+                  title={issues[0].title}
+                  url={issues[0].url}
+                />
+              </div>
+              <div className="carousel-item">
+                {issues.slice(1).map((issue) => (
+                  <Cards
+                    content={issue.text}
+                    image_url={issue.imageURL}
+                    title={issue.title}
+                    url={issue.url}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="carousel-item active">
+                {issues.slice(0, 4).map((issue) => (
+                  <Cards
+                      content={issue.text}
+                      image_url={issue.imageURL}
+                      title={issue.title}
+                      url={issue.url}
+                  />
+                ))}{" "}
+              </div>
+              <div className="carousel-item">
+                {issues.slice(4).map((issue) => (
+                  <Cards
+                      content={issue.text}
+                      image_url={issue.imageURL}
+                      title={issue.title}
+                      url={issue.url}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
