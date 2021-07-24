@@ -1,17 +1,17 @@
 /** @format */
 
 import React from "react";
-import {CardHead} from '../styles';
+import { CardHead, Image } from "../styles";
 
-const Cards = ({ image_url, title, content, url }) => {
+const Cards = ({ cover, title, content, id }) => {
   return (
     <CardHead className="col-md-3 float-left">
       <div className="card mb-2">
-        <img className="card-img-top" src={image_url} alt="" />
+        <Image className="card-img-top" src={cover} alt="" />
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
           <p className="card-text text-truncate">{content}</p>
-          <a className="btn btn-primary btn-block" href={url}>
+          <a className="btn btn-primary col-12" type="button" href={`/grievances/${id}`}>
             See More
           </a>
         </div>

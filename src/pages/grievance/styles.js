@@ -69,6 +69,8 @@ export const DivImage = styled.div`
   align-items: center;
   justify-content: center;
   max-width: 300px;
+  min-height: 200px;
+  max-height: 300px;
   opacity: 1;
   transition-duration: 1s;
   transform: ${(props) =>
@@ -216,10 +218,13 @@ export const TakeActionButton = styled.button`
   background-color: #2a2a76;
   color: white;
   align-self: center;
+  @media (max-width: 1200px) {
+    margin: 10px;
+  }
 `;
 export const ButtonPost = styled.button`
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   width: 30%;
   max-width: 150px;
   border-radius: 8px;
@@ -231,18 +236,26 @@ export const ButtonPost = styled.button`
 
 export const DivHead = styled.div`
   width: 60%;
+  margin: 10px;
   min-height: 350px;
+  min-width: 400px;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    width: 90%;
+  }
 `;
 
 export const GrievanceBody = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin: 20px;
   width: 100%;
   flex-direction: row;
   border-radius: 10px;
-  background-color: rgba(149, 182, 134, 0.32);
-  @media (max-width: 1250px) {
+  background: linear-gradient(to left, #26d0ce, #2b8766);
+  @media (max-width: 1200px) {
     flex-direction: column;
+    width: 90%;
+    text-align: center;
   }
 `;
 
@@ -253,19 +266,29 @@ export const GrievanceImage = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 10px;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    width: 90%;
+    margin: 5px;
+    padding: 5px;
+  }
 `;
-export const GrievanceTextInput = styled.input`
+export const GrievanceTextInput = styled.textarea`
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
   width: 85%;
+  @media (max-width: 1200px) {
+    width: 70%;
+  }
 `;
 
 export const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  //background: linear-gradient(to right, #b48830, #c14949);
   height: calc(100vh - 115px);
 `;
 
@@ -278,6 +301,7 @@ export const GrievanceForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  //background: linear-gradient(to right, #dbc691, #a2ac45);
   border-radius: 18px;
   box-shadow: 0 0 10px rgb(0 0 0 / 80%);
   box-sizing: border-box;
@@ -287,16 +311,22 @@ export const TextInput = styled.input`
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
+  background: transparent;
   border: 1px solid grey;
   width: 85%;
 `;
-export const TextInputData = styled.input`
+export const TextInputData = styled.textarea`
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
+  background: transparent;
   width: 85%;
   height: 100px;
+`;
+export const Error = styled.p`
+  color: red;
+  font-family: "Roboto", sans-serif;
 `;
 
 export const P = styled.p`
@@ -304,10 +334,11 @@ export const P = styled.p`
 `;
 export const Divhead = styled.div`
   width: 85%;
-  height: 25px;
+  height: 50px;
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
+  //background: linear-gradient(to right, #d8ffe9, #82fddf);
   border: 1px solid grey;
   display: flex;
   flex-direction: row;
@@ -320,6 +351,8 @@ export const Button = styled.button`
   margin: 4px;
   margin-right: 6%;
   border-radius: 4px;
+  background-color: var(--theme-button-primary-background-color);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 40%);
   border: 1px solid grey;
   align-self: flex-end;
 `;
@@ -334,12 +367,14 @@ export const Select = styled.select`
   color: black;
   border-radius: 8px;
   border: transparent;
+  background: transparent;
   width: 50%;
   height: 100%;
 `;
 export const SelectType = styled.select`
   border-radius: 8px;
   border: transparent;
+  background: transparent;
   width: 100%;
   height: 100%;
 `;

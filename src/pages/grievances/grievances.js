@@ -6,7 +6,8 @@ import { connect, useSelector } from "react-redux";
 import { getAllUserIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
 
-import CardBlock from "../../common/components/carousel/CardBlock";
+import Carousel from "../../common/components/carousel/carousel";
+// import CardBlock from "../../common/components/carousel/CardBlock";
 
 const Grievances = ({ actionGetAllUserIssue }) => {
   const account = useSelector(({ account }) => account);
@@ -20,7 +21,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
   const issues = useSelector(({ issues }) => issues);
 
   const list = issues.list.filter((item) => userId === item.userId);
-
+  console.log(list);
   const { status } = issues;
 
   if (status === FETCH_STATUS.loading || status === FETCH_STATUS.none) {
@@ -37,11 +38,11 @@ const Grievances = ({ actionGetAllUserIssue }) => {
       </div>
     );
   }
-
+  return <Carousel issues={list} title={"Pending"} />;
   // return list.map(({ id, title, description, images, location, category }) => (
   //   CardBlock
   // ));
-    return <CardBlock issues={list} />
+  //   return <CardBlock issues={list} />
 };
 
 const mapDispatchToProps = {

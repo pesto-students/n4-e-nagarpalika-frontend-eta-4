@@ -8,7 +8,7 @@ import firebase from "../../common/firebase";
 
 const storage = firebase.storage();
 
-export default function FileUpload() {
+export default function FileUpload(props) {
   const [loading, setLoading] = useState(false);
   const [urls, setURL] = useState([]);
 
@@ -30,6 +30,7 @@ export default function FileUpload() {
       uploadTask.on("state_changed", console.log, console.error, () => {
         ref.getDownloadURL().then((picUrl) => {
           setURL([...urls, picUrl]);
+          props.onUpload(picUrl);
         });
         console.log("uploaded");
         setLoading(false);

@@ -21,13 +21,13 @@ export default function ProgressBar() {
   return (
     <DivHeadBar>
       <DivBodyBar>
-        <StatusOne>1</StatusOne>
+        <StatusOne />
         <ProgressOne />
-        <StatusTwo>2</StatusTwo>
+        <StatusTwo />
         <ProgressTwo />
-        <StatusThree>3</StatusThree>
+        <StatusThree />
         <ProgressThree />
-        <StatusFour>4</StatusFour>
+        <StatusFour />
       </DivBodyBar>
       <DivBodyBar>
         <MessageOne>Created</MessageOne>
