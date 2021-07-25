@@ -12,13 +12,13 @@ const Carousel = ({ issues, title }) => {
         <div className="container  my-3">
           <h2 className="font-weight-light">{title} Issues</h2>
           <div className="row mx-auto my-auto justify-content-center">
-            <div id="recipeCarousel" className="carousel slide" data-bs-ride="carousel">
+            <div id="issueCarousel" className="carousel slide" data-bs-ride="carousel">
 
-              <ControlPrev className="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button"
+              <ControlPrev className="carousel-control-prev bg-transparent w-aut" href="#issueCarousel" role="button"
                            data-bs-slide="prev">
                 <I className="fas fa-chevron-circle-left"/>
               </ControlPrev>
-              <ControlNext className="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button"
+              <ControlNext className="carousel-control-next bg-transparent w-aut" href="#issueCarousel" role="button"
                            data-bs-slide="next">
                 <I className="fas fa-chevron-circle-right"/>
               </ControlNext>
@@ -37,10 +37,10 @@ const Carousel = ({ issues, title }) => {
             </div>
 
             <div className="carousel-item">
-              {issues.slice(3).map((issue) => (
+              {issues.slice(4).map((issue) => (
                   <Cards
                       key={issue.id}
-                      content={`test ttttttt${issue.description}`}
+                      content={issue.description}
                       cover={issue.images[0]}
                       title={issue.title}
                       id={issue.id}

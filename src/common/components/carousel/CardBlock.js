@@ -1,14 +1,14 @@
 /** @format */
 
 import React from "react";
-import classnames from "classnames";
 import Cards from "./cards/cards";
 
 const CardBlock = ({ issues }) => {
-  console.log(issues[0]);
   return (
-    <div className="container">
-      <div className={classnames("row row-cols-1 row-cols-md- g-4")}>
+      <div className="container">
+    <div className="card-group">
+        <h2 className="font-weight-light text-center">All Issues</h2>
+        <div className="row row-cols-1 row-cols-md-2 g-4 mx-auto my-auto ">
         {issues.map((issue) => (
           <Cards
             key={issue.id}
@@ -19,6 +19,7 @@ const CardBlock = ({ issues }) => {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 };

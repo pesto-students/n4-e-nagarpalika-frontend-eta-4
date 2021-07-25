@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { A, Img, CloseButton, Form, Label, Input, Div } from "./styles";
+import { A, Img, Form, Label, Input, Div } from "./styles";
 // import { storage } from "../../modules/auth/api/firebase";
 import firebase from "../../common/firebase";
 
@@ -12,14 +12,6 @@ export default function FileUpload(props) {
   const [loading, setLoading] = useState(false);
   const [urls, setURL] = useState([]);
 
-  function deleteUrl(e, urlIndex) {
-    e.preventDefault();
-    console.log("clicked");
-    console.log(urls);
-    if (urlIndex > -1) {
-      urls.splice(urlIndex, 1);
-    }
-  }
 
   async function handleUpload(e) {
     setLoading(true);
@@ -45,13 +37,6 @@ export default function FileUpload(props) {
       {urls.map((url, index) => (
         /* eslint-disable-next-line */
         <Div key={index}>
-          <CloseButton
-            onClick={(e) => {
-              deleteUrl(e, index);
-            }}
-          >
-            <span>&times;</span>
-          </CloseButton>
           <Img src={url} alt="" />
         </Div>
       ))}

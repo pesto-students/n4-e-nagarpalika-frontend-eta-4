@@ -14,9 +14,9 @@ const Section = ({ icon, count, title }) => (
 
 const IssueStatus = () => {
   const [stats, setStats] = useState({
-    total: 0,
-    resolved: 0,
-    progress: 0,
+    total: 16,
+    resolved: 3,
+    progress: 13,
   });
 
   useEffect(() => {
@@ -34,8 +34,8 @@ const IssueStatus = () => {
     <div className="card">
       <div className="card-body d-flex flex-row justify-content-around">
         <Section icon="" count={stats.total} title="Total" />
-        <Section icon="" count={stats.progress} title="Total" />
-        <Section icon="" count={stats.resolved} title="Total" />
+        <Section icon="" count={stats.progress} title="Pending" />
+        <Section icon="" count={stats.resolved} title="Resolved" />
       </div>
     </div>
   );

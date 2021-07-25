@@ -3,7 +3,17 @@
 import styled from "styled-components";
 
 export const Image = styled.img`
-  max-height: 200px;
+ height: 200px;
+  
+`;
+export const P = styled.p`
+  border: 1px solid crimson;
+  background-color: #cda46e;
+  font-size: x-small;
+  min-width: 50%;
+  height: 30px;
+  padding: 5px;
+  //margin: 5px;
 `;
 
 export const I = styled.i`
@@ -23,5 +33,6 @@ export const ControlPrev = styled.a`
 
 export const CardHead = styled.div`
   margin-top: 20px;
+  max-width: 315px;
   margin-left: 5px;
 `;

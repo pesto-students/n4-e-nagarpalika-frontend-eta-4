@@ -7,8 +7,7 @@ export const Input = styled.input`
 export const Form = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  float: right;
 `;
 export const Label = styled.label`
   display: flex;
@@ -25,17 +24,18 @@ export const A = styled.a`
 `;
 export const CloseButton = styled.button`
   position: relative;
-  border: 2px solid black;
+  border: 1px solid black;
   background-color: #f12d2d;
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
   left: 60%;
   bottom: 50%;
 `;
 
 export const Img = styled.img`
-  position: relative;
   width: 100%;
-  right: 50%;
+  height: 95%;
 `;
 
 export const Div = styled.div`
@@ -334,7 +334,7 @@ export const P = styled.p`
 `;
 export const Divhead = styled.div`
   width: 85%;
-  height: 50px;
+  height: 60px;
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
@@ -349,15 +349,16 @@ export const Divhead = styled.div`
 export const Button = styled.button`
   padding: 6px 10px;
   margin: 4px;
-  margin-right: 6%;
   border-radius: 4px;
-  background-color: var(--theme-button-primary-background-color);
+  min-width: 150px;
+  //background-color: var(--theme-button-primary-background-color);
   box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 40%);
   border: 1px solid grey;
   align-self: flex-end;
 `;
-export const GrievanceInputData = styled.input`
+export const GrievanceInputData = styled.a`
   width: 50%;
+  height: 100%;
   color: gray;
   background-color: transparent;
   border-color: transparent;
@@ -376,5 +377,5 @@ export const SelectType = styled.select`
   border: transparent;
   background: transparent;
   width: 100%;
-  height: 100%;
+  height: 120%;
 `;

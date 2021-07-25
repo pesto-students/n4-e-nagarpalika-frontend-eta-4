@@ -7,7 +7,7 @@ import { getAllUserIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
 
 import Carousel from "../../common/components/carousel/carousel";
-// import CardBlock from "../../common/components/carousel/CardBlock";
+import CardBlock from "../../common/components/carousel/CardBlock";
 
 const Grievances = ({ actionGetAllUserIssue }) => {
   const account = useSelector(({ account }) => account);
@@ -38,7 +38,11 @@ const Grievances = ({ actionGetAllUserIssue }) => {
       </div>
     );
   }
-  return <Carousel issues={list} title={"Pending"} />;
+  return (
+      <div>
+        <Carousel issues={list} title={"Pending"} />
+        <CardBlock issues={list} />
+      </div>);
   // return list.map(({ id, title, description, images, location, category }) => (
   //   CardBlock
   // ));

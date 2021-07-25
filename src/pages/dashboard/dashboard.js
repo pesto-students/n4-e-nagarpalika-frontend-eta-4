@@ -153,7 +153,7 @@ function Dashboard() {
               <ReactSpeedometer
                 minValue={0}
                 maxValue={100}
-                value={85}
+                value={23}
                 // segments={5}
                 maxSegmentLabels={5}
                 segments={1000}

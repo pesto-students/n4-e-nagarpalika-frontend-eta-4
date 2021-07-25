@@ -20,6 +20,21 @@ const ImageSlider = ({ SliderData }) => {
   if (!Array.isArray(SliderData) || SliderData.length <= 0) {
     return null;
   }
+  const onLoading = () => {
+    return(
+        <div>
+          <div className="spinner-grow text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="spinner-grow text-secondary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="spinner-grow text-success" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+    )
+  }
 
   return (
     <Slider>
@@ -28,6 +43,7 @@ const ImageSlider = ({ SliderData }) => {
       {SliderData.map((slide, index) => {
         return (
           <DivImage
+              onLoad={onLoading}
             sliderStyle={index === current ? "slideActive" : "slide"}
             key={slide}
           >
