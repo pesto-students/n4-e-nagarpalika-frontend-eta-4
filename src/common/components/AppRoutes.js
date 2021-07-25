@@ -23,10 +23,10 @@ import AdminActions from "../../pages/admin-action/adminAction";
 
 const PublicRoutes = () => (
   <Switch>
-    <Route path="/" exact component={LandingPage} />
-    <Route path="/about" exact component={About} />
-    <Route path="/login" exact component={Login} />
-    <Route path="/contact-us" exact component={ContactUs} />
+    <Route exact path="/" component={LandingPage} />
+    <Route exact path="/about" component={About} />
+    <Route exact path="/login" component={Login} />
+    <Route exact path="/contact-us" component={ContactUs} />
 
     <Route component={NotFound} />
   </Switch>
@@ -47,19 +47,19 @@ const PrivateRoutes = ({ account }) => {
 
   return (
     <Switch>
-      <Route path="/" exact component={LandingPage} />
-      <Route path="/about" exact component={About} />
-      <Route path="/contact-us" exact component={ContactUs} />
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/contact-us" component={ContactUs} />
 
-      <Route path="/register" exact component={Register} />
+      <Route exact path="/register" component={Register} />
 
-      <Route path="/dashboard" exact component={Dashboard} />
-      <Route path="/account" exact component={Account} />
-      <Route path="/contact-us" exact component={ContactUs} />
-      <Route path="/grievances/new" exact component={GrievanceNew} />
-      <Route path="/grievances/:id" exact component={Grievance} />
-      <Route path="/grievances" exact component={Grievances} />
-      <Route path="/settings" exact component={Settings} />
+      <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/account" component={Account} />
+      <Route exact path="/contact-us" component={ContactUs} />
+      <Route exact path="/grievances/new" component={GrievanceNew} />
+      <Route exact path="/grievances/:id" component={Grievance} />
+      <Route exact path="/grievances" component={Grievances} />
+      <Route exact path="/settings" component={Settings} />
 
       <Redirect from="/login" to="/dashboard" />
 
@@ -70,17 +70,22 @@ const PrivateRoutes = ({ account }) => {
 
 const AdminRoutes = () => (
   <Switch>
-    <Route path="/" exact component={LandingPage} />
-    <Route path="/about" exact component={About} />
+    <Route exact path="/" component={LandingPage} />
 
-    <Route path="/dashboard" exact component={Dashboard} />
-    <Route path="/account" exact component={Account} />
-    <Route path="/contact-us" exact component={ContactUs} />
-    <Route path="/grievances/:id" exact component={Grievance} />
-    <Route path="/grievances" exact component={Grievances} />
-    <Route path="/settings" exact component={Settings} />
+    <Redirect from="/login" to="/dashboard" />
+    <Redirect from="/register" to="/dashboard" />
 
-    <Route path="/admin-action" exact component={AdminActions} />
+    <Route exact path="/about" component={About} />
+
+    <Route exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/account" component={Account} />
+    <Route exact path="/contact-us" component={ContactUs} />
+    <Route exact path="/grievances/new" component={GrievanceNew} />
+    <Route exact path="/grievances/:id" component={Grievance} />
+    <Route exact path="/grievances" component={Grievances} />
+    <Route exact path="/settings" component={Settings} />
+
+    <Route exact path="/admin-action" component={AdminActions} />
 
     <Route component={NotFound} />
   </Switch>

@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { FETCH_STATUS } from "../../common/contants";
+import {
+  FETCH_STATUS,
+  LOCATIONS,
+  GRIEVANCE_CATEGORIES,
+} from "../../common/contants";
 import {
   createIssue,
   resetNewIssue,
@@ -12,15 +16,17 @@ import {
 import { Container } from "./styles";
 
 function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {
-  const issues = useSelector((state) => state.issues);
+  const reduxState = useSelector((state) => state);
+  const { account, issues } = reduxState;
+  const { location: userLocation } = account;
   const { new: newIssue } = issues;
 
   const history = useHistory();
 
-  const [title, setTitle] = useState("this is new issue");
-  const [location, setLocation] = useState("mumbai");
-  const [category, setCategory] = useState("traffic");
-  const [description, setDescription] = useState("asdf adsf adsf adsf asd f");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState(userLocation);
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [images, setImages] = useState([
     "https://picsum.photos/id/1/400/400",
@@ -58,43 +64,88 @@ function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {
         <div className="card-body">
           <h5 className="card-title">Create A Grievance</h5>
           <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              className="form-control"
-              id="title"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              disabled={newIssue.status === FETCH_STATUS.loading}
-            />
+            <div className="mb-3">
+              <label htmlFor="phoneNumberInput" className="form-label">
+                Issue Title*
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                disabled={newIssue.status === FETCH_STATUS.loading}
+              />
+              <div id="phoneNumberHelp" className="form-text">
+                {/* This issue type will be used by public to create grievances. */}
+              </div>
+            </div>
 
-            <input
-              type="text"
-              className="form-control"
-              id="category"
-              placeholder="Choose Category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              disabled={newIssue.status === FETCH_STATUS.loading}
-            />
+            <div className="mb-3">
+              <label htmlFor="locationInput" className="form-label">
+                Location *
+              </label>
+              {/* <input
+                type="text"
+                className="form-control"
+                id="locationInput"
+                placeholder="Choose Category"
+                value={location}
+                onChange={(e) => setCategory(e.target.value)}
+                disabled={newIssue.status === FETCH_STATUS.loading}
+              /> */}
+              <select
+                className="form-select"
+                id="locationInput"
+                aria-label="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                disabled
+              >
+                <option value="">Select</option>
+                <option value={LOCATIONS.bangaluru}>Bangaluru</option>
+                <option value={LOCATIONS.delhi}>Delhi</option>
+                <option value={LOCATIONS.mumbai}>Mumbai</option>
+              </select>
+            </div>
 
-            <input
-              type="text"
-              className="form-control"
-              id="location"
-              placeholder="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              disabled={newIssue.status === FETCH_STATUS.loading}
-            />
+            <div className="mb-3">
+              <label htmlFor="categoryInput" className="form-label">
+                Category *
+              </label>
+              <select
+                className="form-select"
+                id="categoryInput"
+                aria-label="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                disabled={newIssue.status === FETCH_STATUS.loading}
+              >
+                <option value="">Select</option>
+                {GRIEVANCE_CATEGORIES.map((category) => (
+                  <option value={category} key={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <textarea
-              id="description"
-              placeholder="Describe your issue"
-              rows="4"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            <div className="mb-3">
+              <label htmlFor="descriptionInput" className="form-label">
+                Description*
+              </label>
+              <textarea
+                id="descriptionInput"
+                placeholder="Describe your issue"
+                rows="4"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <div id="phoneNumberHelp" className="form-text">
+                {/* This issue type will be used by public to create grievances. */}
+              </div>
+            </div>
 
             {images.map((url) => (
               <img
