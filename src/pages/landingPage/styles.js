@@ -53,17 +53,19 @@ export const ActionButtonTitle = styled.p`
 `;
 
 export const ActionButton = styled.button`
-  width: 350px;
-  height: 60px;
+  margin-top: 20px;
+  width: 150px;
+  height: 50px;
   border-radius: 100px;
-  border: 2px solid #2c99ed;
+  border: 0;
   background-color: #fff;
+  box-shadow: 0 0 10px rgb(0 0 0 / 80%);
   padding: 6px;
   font-size: 18px;
-  color: #2c99ed;
+  color: #6c63ff;
 
   &:hover {
-    background-color: #2c99ed;
+    background-color: #6c63ff;
     color: #ffffff;
     box-shadow: 0 0 10px rgb(0 0 0 / 80%);
   }
@@ -72,4 +74,47 @@ export const ActionButton = styled.button`
 export const ChartBoxesContainer = styled.div`
   display: flex;
   padding: 1% 1%;
+`;
+
+export const SVGIMAGE = styled.svg`
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  background: white;
+`;
+
+export const Header = styled.div`
+  //background-color: #674baf;
+`;
+
+export const HeaderMin = styled.div`
+  margin-top: 20px;
+`;
+
+export const H1 = styled.div`
+  font-family: 'Poppins', sans-serif;
+  font-size: 5vw;
+  margin-top: 20px;
+  @media screen and (max-width: 700px) {
+    text-align: center;  
+    font-size: 1.875rem;
+  }
+
+  @media screen and (min-width: 1408px) {
+      font-size: 2.625rem;
+  }
+`;
+
+export const P = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2vw;
+  
+  @media screen and (max-width: 500px) {
+    font-size: 1.125rem;
+  }
+
+  @media screen and (min-width: 1408px) {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
 `;
