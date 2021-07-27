@@ -3,17 +3,24 @@
 import styled from "styled-components";
 
 export const Image = styled.img`
- height: 200px;
-  
+  align-self: center;
+  margin-top: 20px;
+  max-width: 260px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  border-image: linear-gradient(to right, blue, red, teal, #bb7f52, #6c153d) 5;
 `;
 export const P = styled.p`
-  border: 1px solid crimson;
-  background-color: #cda46e;
-  font-size: x-small;
-  min-width: 50%;
-  height: 30px;
-  padding: 5px;
-  //margin: 5px;
+  height: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const Div = styled.div`
+  height: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const I = styled.i`
@@ -32,7 +39,11 @@ export const ControlPrev = styled.a`
 `;
 
 export const CardHead = styled.div`
+  border-radius: 10px;
+  //background: linear-gradient(to right, #bb7f52, #6c153d);
+  //color: white;
   margin-top: 20px;
-  max-width: 315px;
+  //max-width: 400px;
+  //max-height: 400px;
   margin-left: 5px;
 `;

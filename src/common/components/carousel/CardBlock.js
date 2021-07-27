@@ -5,10 +5,8 @@ import Cards from "./cards/cards";
 
 const CardBlock = ({ issues }) => {
   return (
-      <div className="container">
-    <div className="card-group">
-        <h2 className="font-weight-light text-center">All Issues</h2>
-        <div className="row row-cols-1 row-cols-md-2 g-4 mx-auto my-auto ">
+    <div className="container-fluid">
+      <div className="row row-cols-1 row-cols-md-2 g-4">
         {issues.map((issue) => (
           <Cards
             key={issue.id}
@@ -19,7 +17,6 @@ const CardBlock = ({ issues }) => {
           />
         ))}
       </div>
-    </div>
     </div>
   );
 };

@@ -1,37 +1,28 @@
 /** @format */
 
 import React from "react";
-import { CardHead, Image } from "../styles";
+import { CardHead, Image, P } from "../styles";
 
 const Cards = ({ cover, title, content, id }) => {
-  const onLoading = () => {
-    return(
-        <div>
-          <div className="spinner-grow text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <div className="spinner-grow text-secondary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <div className="spinner-grow text-success" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-    )
-  }
   return (
-    <CardHead className="col-md-3 float-left">
-      <div className="card mb-2">
-        <Image className="card-img-top" src={cover} alt="" onLoad={onLoading} />
+    <div className="col-md-3  float-left">
+      <CardHead className="card mb-2 mb-3 h-100">
+        <div className="card-title card-header">{title}</div>
+        <Image className="card-img-top img-thumbnail" src={cover} alt="" />
         <div className="card-body">
-          <h4 className="card-title text-truncate">{title}</h4>
-          <p className="card-text text-truncate">{content}</p>
-          <a className="btn btn-primary col-12" type="button" href={`/grievances/${id}`}>
+          <P className="card-text">{content}</P>
+        </div>
+        <div className="card-footer">
+          <a
+            className="btn btn-primary col-12"
+            type="button"
+            href={`/grievances/${id}`}
+          >
             See More
           </a>
         </div>
-      </div>
-    </CardHead>
+      </CardHead>
+    </div>
   );
 };
 

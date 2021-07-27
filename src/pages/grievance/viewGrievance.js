@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import ProgressBar from "./progressBar";
 import ImageSlider from "./imageSlider";
@@ -20,8 +20,18 @@ import {
 } from "./styles";
 
 const ViewGrievance = ({ grievanceData }) => {
+  const textRef = useRef();
+  const [issueStatus, setIssueStatus] = useState();
+  const [comment, setComment] = useState("");
+  console.log(grievanceData);
   const updateStatus = (e) => {
     e.preventDefault();
+    console.log(textRef.current.value);
+    console.log(issueStatus);
+  };
+  const postComment = (e) => {
+    e.preventDefault();
+    console.log(comment);
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -58,8 +68,13 @@ const ViewGrievance = ({ grievanceData }) => {
             </AGrievance>
             <Text>Created: {grievanceData.createdAt}</Text>
             <Text>{grievanceData.description}</Text>
-            <TakeActionButton onClick={updateStatus}>
-              Take Action
+            <TakeActionButton
+              type="button"
+              className="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Update Status
             </TakeActionButton>
           </GrievanceImage>
         </GrievanceBody>
@@ -68,10 +83,75 @@ const ViewGrievance = ({ grievanceData }) => {
           <Text>This is a comment</Text>
         </GrievanceBody>
         <GrievanceBody>
-          <GrievanceTextInput />
-          <ButtonPost>Post</ButtonPost>
+          <GrievanceTextInput onChange={(e) => setComment(e.target.value)} />
+          <ButtonPost
+            type="button"
+            onClick={postComment}
+            className="btn btn-primary"
+          >
+            Post
+          </ButtonPost>
         </GrievanceBody>
       </DivHead>
+
+      <div
+        className="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Updating status of the issue {grievanceData.id}
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              />
+            </div>
+            <div className="modal-body row">
+              <div className="btn-group">
+                <select
+                  className="btn border-secondary"
+                  value={issueStatus}
+                  onChange={(e) => setIssueStatus(e.target.value)}
+                >
+                  Action
+                  <option value="review">Reviewed</option>
+                  <option value="action">Action Taken</option>
+                </select>
+              </div>
+              <GrievanceTextInput
+                ref={textRef}
+                placeholder="Please add a comment..."
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={updateStatus}
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </GrievanceContainer>
   );
 };

@@ -10,6 +10,7 @@ import About from "../../pages/about";
 // import Error from "../../pages/error";
 import NotFound from "../../pages/not-found";
 import Account from "../../pages/account/account";
+import Notifications from "../../pages/notifications/notifications.";
 import ContactUs from "../../pages/contact-us/contact-us";
 import Dashboard from "../../pages/dashboard/dashboard";
 import Grievance from "../../pages/grievance/grievance";
@@ -52,7 +53,7 @@ const PrivateRoutes = ({ account }) => {
       <Route exact path="/contact-us" component={ContactUs} />
 
       <Route exact path="/register" component={Register} />
-
+      <Route exact path="/notifications" component={Notifications} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/account" component={Account} />
       <Route exact path="/contact-us" component={ContactUs} />
@@ -76,7 +77,7 @@ const AdminRoutes = () => (
     <Redirect from="/register" to="/dashboard" />
 
     <Route exact path="/about" component={About} />
-
+    <Route exact path="/notifications" component={Notifications} />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route exact path="/account" component={Account} />
     <Route exact path="/contact-us" component={ContactUs} />

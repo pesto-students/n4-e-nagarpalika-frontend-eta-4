@@ -12,7 +12,6 @@ export default function FileUpload(props) {
   const [loading, setLoading] = useState(false);
   const [urls, setURL] = useState([]);
 
-
   async function handleUpload(e) {
     setLoading(true);
     try {

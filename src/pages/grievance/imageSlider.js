@@ -21,20 +21,20 @@ const ImageSlider = ({ SliderData }) => {
     return null;
   }
   const onLoading = () => {
-    return(
-        <div>
-          <div className="spinner-grow text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <div className="spinner-grow text-secondary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <div className="spinner-grow text-success" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+    return (
+      <div>
+        <div className="spinner-grow text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
-    )
-  }
+        <div className="spinner-grow text-secondary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div className="spinner-grow text-success" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Slider>
@@ -43,7 +43,7 @@ const ImageSlider = ({ SliderData }) => {
       {SliderData.map((slide, index) => {
         return (
           <DivImage
-              onLoad={onLoading}
+            onLoad={onLoading}
             sliderStyle={index === current ? "slideActive" : "slide"}
             key={slide}
           >

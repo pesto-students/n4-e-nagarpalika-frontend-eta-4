@@ -4,9 +4,7 @@ import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import {
-  FETCH_STATUS,
-} from "../../common/contants";
+import { FETCH_STATUS } from "../../common/contants";
 import {
   createIssue,
   resetNewIssue,
@@ -29,14 +27,11 @@ function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const [images, setImages] = useState([
-
-  ]);
-
+  const [images, setImages] = useState([]);
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-    console.log(title, location, category, description, images)
+    e.preventDefault();
+    console.log(title, location, category, description, images);
     await actionCreateIssue({
       title,
       location,
@@ -58,14 +53,14 @@ function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {
   }, [newIssue]);
 
   return (
-      <Grievance
-          handleSubmit={(e)=>onSubmit(e)}
-          title={(data)=>setTitle(data)}
-          location={(data)=>setLocation(data)}
-          category={(data)=>setCategory(data)}
-          description={(data)=>setDescription(data)}
-          image={(url)=>setImages([...images,url])}
-      />
+    <Grievance
+      handleSubmit={(e) => onSubmit(e)}
+      title={(data) => setTitle(data)}
+      location={(data) => setLocation(data)}
+      category={(data) => setCategory(data)}
+      description={(data) => setDescription(data)}
+      image={(url) => setImages([...images, url])}
+    />
     // <Container>
     //   <div className="card">
     //     <div className="card-body">
