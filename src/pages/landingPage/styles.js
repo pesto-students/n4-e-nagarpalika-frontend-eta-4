@@ -89,11 +89,7 @@ export const SVGIMAGE = styled.svg`
   padding: 5px;
   @media screen and (max-width: 700px) {
     text-align: center;
-    font-size: 1.875rem;
-  }
-
-  @media screen and (max-width: 1200px) {
-    font-size: 2.625rem;
+    //font-size: 1.875rem;
   }
 `;
 
