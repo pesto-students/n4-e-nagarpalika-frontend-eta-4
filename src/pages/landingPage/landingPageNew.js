@@ -263,7 +263,7 @@ const LandingPageNew = () => {
         </Header>
       </HeroSection>
       <div className="container">
-        <h1 class="text-center text-dark">Progress Tracker</h1>
+        <h1 className="text-center text-dark">Progress Tracker</h1>
         <IssueStatus />
         <hr />
         <H1 className="text-center ">Monthly Issue Distribution</H1>

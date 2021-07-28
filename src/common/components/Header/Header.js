@@ -109,7 +109,7 @@ const Header = ({ isSignedIn }) => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="" className="dropdown-item" onClick={() => {fire}}>
+                      <Link to="" className="dropdown-item" onClick={() => {}}>
                         Sign out
                       </Link>
                     </li>

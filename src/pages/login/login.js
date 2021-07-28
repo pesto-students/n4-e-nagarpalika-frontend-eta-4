@@ -52,9 +52,9 @@ function Login({ logIn: actionLogin }) {
 
       const firebaseToken = await result.user.getIdToken();
 
-      await actionLogin({firebaseToken});
-    }catch (e){
-      console.log(e)
+      await actionLogin({ firebaseToken });
+    } catch (e) {
+      console.log(e);
     }
 
     // setLoading(false);
@@ -136,15 +136,15 @@ function Login({ logIn: actionLogin }) {
                       disabled={loading}
                     />
                     <hr />
-                      <button
-                          type="button"
-                          style={{margin:"5px"}}
-                          className="btn btn-primary col"
-                          onClick={sendOtp}
-                          disabled={loading}
-                      >
-                        Verify
-                      </button>
+                    <button
+                      type="button"
+                      style={{ margin: "5px" }}
+                      className="btn btn-primary col"
+                      onClick={sendOtp}
+                      disabled={loading}
+                    >
+                      Verify
+                    </button>
                   </div>
                   <div id="phoneNumberHelp" className="form-text">
                     **Please insert the 6 digit otp sent to your mobile number.

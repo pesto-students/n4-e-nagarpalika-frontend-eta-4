@@ -77,7 +77,10 @@ function accountReducer(state = initialState, action) {
     }
 
     case LOG_OUT_SUCCESS: {
-      return initialState;
+      return {
+        ...initialState,
+        isInit: true,
+      };
     }
 
     case REGISTER_START: {
