@@ -1,78 +1,63 @@
 /** @format */
 
 import React from "react";
-import classnames from "classnames";
-
-import { I, ControlNext, ControlPrev} from './styles'
+import { I, ControlNext, ControlPrev } from "./styles";
 import Cards from "./cards/cards";
+import "./styles.css";
 
 const Carousel = ({ issues, title }) => {
-  // const [createdIssues, setCreatedIssues] = useState([]);
-  // const [reviewedIssues, setReviewedIssues] = useState([]);
-  // const [fixedIssues, setFixedIssues] = useState([]);
-  // const [resolvedIssues, setResolvedIssues] = useState([]);
-  // useEffect((issues) => {
-  //   issues.map((issue) => {
-  //     return issue.status === "CREATED"
-  //       ? setCreatedIssues([issue, ...createdIssues])
-  //       : issue.status === "REVIEWED"
-  //       ? setReviewedIssues([issue, ...reviewedIssues])
-  //       : issue.status === "FIXED"
-  //       ? setFixedIssues([issue, ...fixedIssues])
-  //       : setResolvedIssues([issue, ...resolvedIssues]);
-  //   });
-  // });
   return (
     <div className="container">
-      <div
-        id="multi-card-issues"
-        className={classnames("carousel slide carousel-multi-item")}
-        data-ride="carousel"
-      >
-        <div className="controls">
-          <ControlPrev
-            className={classnames("carousel-control-prev")}
-            href="#multi-card-issues"
-            role="button"
-            data-slide="prev"
+      <div className="container  my-3">
+        <h2 className="font-weight-light">{title} Issues</h2>
+        <div className="row mx-auto my-auto justify-content-center">
+          <div
+            id="issueCarousel"
+            className="carousel slide"
+            data-bs-ride="carousel"
           >
-            <I className={classnames("fas fa-chevron-circle-left")} />
-          </ControlPrev>
-          <ControlNext
-            className={classnames("carousel-control-next")}
-            href="#multi-card-issues"
-            role="button"
-            data-slide="next"
-          >
-            <I className={classnames("fas fa-chevron-circle-right")} />
-          </ControlNext>
-        </div>
-        <div className={classnames("carousel-inner position-relative")} role="listbox">
-          <div className={classnames("row mb-4")}>
-            <div className="col">
-              <h2 className="mb-0">{title}</h2>
-            </div>
-          </div>
-              <div className={classnames("carousel-item active")}>
+            <ControlPrev
+              className="carousel-control-prev bg-transparent w-aut"
+              href="#issueCarousel"
+              role="button"
+              data-bs-slide="prev"
+            >
+              <I className="fas fa-chevron-circle-left" />
+            </ControlPrev>
+            <ControlNext
+              className="carousel-control-next bg-transparent w-aut"
+              href="#issueCarousel"
+              role="button"
+              data-bs-slide="next"
+            >
+              <I className="fas fa-chevron-circle-right" />
+            </ControlNext>
+            <div className="carousel-inner" role="listbox">
+              <div className="carousel-item active">
                 {issues.slice(0, 4).map((issue) => (
-                  <Cards key={issue.id}
-                      content={issue.description}
-                      image_url={issue.images[0]}
-                      title={issue.title}
-                      url={issue.url}
+                  <Cards
+                    key={issue.id}
+                    content={issue.description}
+                    cover={issue.images[0]}
+                    title={issue.title}
+                    id={issue.id}
                   />
                 ))}
               </div>
+
               <div className="carousel-item">
                 {issues.slice(4).map((issue) => (
-                  <Cards key={issue.id}
-                      content={issue.description}
-                      image_url={issue.images[0]}
-                      title={issue.title}
-                      url={issue.url}
+                  <Cards
+                    key={issue.id}
+                    content={issue.description}
+                    cover={issue.images[0]}
+                    title={issue.title}
+                    id={issue.id}
                   />
                 ))}
               </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

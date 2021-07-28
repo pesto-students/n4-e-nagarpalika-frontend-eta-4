@@ -5,11 +5,12 @@ import styled from "styled-components";
 
 import { useLocation } from "react-router-dom";
 
-import Header from "./Header/Header";
+// import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import SidebarNav from "./SidebarNav/SidebarNav";
 
 import isVisibleByRoute from "../../utils/isVisibleByRoute";
+import HeaderNav from "./Header/HeaderNav";
 
 const AppLayoutContainer = styled.div`
   height: 100vh;
@@ -30,7 +31,7 @@ function AppLayout({ children }) {
 
   return (
     <AppLayoutContainer>
-      <Header />
+      <HeaderNav />
       {!isLeftNavEnabled && <SidebarNav />}
       <BodyContainer isLeftNavEnabled={!isLeftNavEnabled}>
         {children}

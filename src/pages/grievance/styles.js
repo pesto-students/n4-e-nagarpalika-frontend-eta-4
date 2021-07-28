@@ -7,8 +7,7 @@ export const Input = styled.input`
 export const Form = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  float: right;
 `;
 export const Label = styled.label`
   display: flex;
@@ -25,17 +24,18 @@ export const A = styled.a`
 `;
 export const CloseButton = styled.button`
   position: relative;
-  border: 2px solid black;
+  border: 1px solid black;
   background-color: #f12d2d;
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
   left: 60%;
   bottom: 50%;
 `;
 
 export const Img = styled.img`
-  position: relative;
   width: 100%;
-  right: 50%;
+  height: 95%;
 `;
 
 export const Div = styled.div`
@@ -69,6 +69,8 @@ export const DivImage = styled.div`
   align-items: center;
   justify-content: center;
   max-width: 300px;
+  min-height: 200px;
+  max-height: 300px;
   opacity: 1;
   transition-duration: 1s;
   transform: ${(props) =>
@@ -95,9 +97,9 @@ export const DivBodyBar = styled.div`
   width: 100%;
 `;
 export const ProgressStatus = styled.div`
-  height: 30px;
-  width: 30px;
-  background: #000;
+  height: 20px;
+  width: 20px;
+  background: #bbb;
   text-align: center;
   border-radius: 50%;
   top: 10px;
@@ -108,36 +110,32 @@ export const ProgressStatus = styled.div`
 
 export const StatusOne = styled(ProgressStatus)`
   left: 10%;
-  background: #0c84d9;
+  background: #2ead16;
 `;
 
 export const StatusTwo = styled(ProgressStatus)`
   left: 30%;
-  background: #0c84d9;
+  background: #2ead16;
 `;
 
 export const StatusThree = styled(ProgressStatus)`
   left: 50%;
-  background: #bbb;
-  color: #ffd800;
 `;
 
 export const StatusFour = styled(ProgressStatus)`
   left: 60%;
-  background: #bbb;
-  color: #ffd800;
 `;
 
 export const Progress = styled.div`
   height: 10px;
-  width: 30%;
+  width: 28%;
   top: 20px;
   left: 10%;
   background: #bbb;
 `;
 
 export const ProgressOne = styled(Progress)`
-  background: #0c84d9;
+  background: #2ead16;
 `;
 
 export const ProgressTwo = styled(Progress)`
@@ -151,7 +149,7 @@ export const ProgressThree = styled(Progress)`
 export const Message = styled.div`
   position: relative;
   height: 60px;
-  width: 170px;
+  width: 25%;
   padding: 10px;
   margin: 0;
   left: -8px;
@@ -160,6 +158,7 @@ export const Message = styled.div`
 `;
 
 export const MessageOne = styled(Message)`
+  left: -5%;
   color: #000;
 `;
 
@@ -176,6 +175,9 @@ export const MessageThree = styled(Message)`
 export const MessageFour = styled(Message)`
   left: 15%;
   color: #000;
+  @media (max-width: 1200px) {
+    left: 10%;
+  }
 `;
 
 export const GrievanceContainer = styled.section`
@@ -212,37 +214,43 @@ export const TakeActionButton = styled.button`
   width: 30%;
   max-width: 150px;
   border-radius: 8px;
-  border: 1px solid grey;
-  background-color: #2a2a76;
-  color: white;
   align-self: center;
+  @media (max-width: 1200px) {
+    margin: 10px;
+  }
 `;
 export const ButtonPost = styled.button`
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   width: 30%;
   max-width: 150px;
   border-radius: 8px;
-  border: 1px solid grey;
-  background-color: #2a2a76;
-  color: white;
   align-self: flex-end;
 `;
 
 export const DivHead = styled.div`
   width: 60%;
+  margin: 10px;
   min-height: 350px;
+  min-width: 400px;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    width: 90%;
+  }
 `;
 
 export const GrievanceBody = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin: 20px;
   width: 100%;
   flex-direction: row;
+  justify-content: flex-start;
   border-radius: 10px;
-  background-color: rgba(149, 182, 134, 0.32);
-  @media (max-width: 1250px) {
+  background: #c9e8d8;
+  @media (max-width: 1200px) {
     flex-direction: column;
+    width: 90%;
+    //text-align: center;
   }
 `;
 
@@ -253,61 +261,106 @@ export const GrievanceImage = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 10px;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    width: 90%;
+    margin: 5px;
+    padding: 5px;
+  }
 `;
-export const GrievanceTextInput = styled.input`
+export const GrievanceTextInput = styled.textarea`
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
   width: 85%;
+  min-width: 465px;
+  @media (max-width: 1200px) {
+    width: 70%;
+    min-width: 0;
+  }
 `;
 
 export const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  //background: linear-gradient(to right, #b48830, #c14949);
   height: calc(100vh - 115px);
+`;
+export const GrievanceInner = styled.div`
+  padding: 20px;
+  border: 1px solid grey;
+  width: auto;
+  min-height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  //background: linear-gradient(to right, #dbc691, #a2ac45);
+  border-radius: 18px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 80%);
+  box-sizing: border-box;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    width: 90%;
+    margin: 10px;
+  }
+`;
+
+export const SVGIMAGE = styled.svg`
+  width: 100%;
+  height: 50%;
 `;
 
 export const GrievanceForm = styled.form`
   padding: 20px;
-  border: 1px solid grey;
   width: 400px;
   min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 18px;
-  box-shadow: 0 0 10px rgb(0 0 0 / 80%);
+  //background: linear-gradient(to right, #dbc691, #a2ac45);
   box-sizing: border-box;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const TextInput = styled.input`
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
+  background: transparent;
   border: 1px solid grey;
   width: 85%;
 `;
-export const TextInputData = styled.input`
+export const TextInputData = styled.textarea`
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
+  background: transparent;
   width: 85%;
   height: 100px;
 `;
+export const Error = styled.p`
+  color: red;
+  font-family: "Roboto", sans-serif;
+`;
 
 export const P = styled.p`
+  color: #6c63ff;
   font-family: "Roboto", sans-serif;
 `;
 export const Divhead = styled.div`
   width: 85%;
-  height: 25px;
+  height: 60px;
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
+  //background: linear-gradient(to right, #d8ffe9, #82fddf);
   border: 1px solid grey;
   display: flex;
   flex-direction: row;
@@ -318,13 +371,16 @@ export const Divhead = styled.div`
 export const Button = styled.button`
   padding: 6px 10px;
   margin: 4px;
-  margin-right: 6%;
   border-radius: 4px;
+  min-width: 100px;
+  //background-color: var(--theme-button-primary-background-color);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 40%);
   border: 1px solid grey;
   align-self: flex-end;
 `;
-export const GrievanceInputData = styled.input`
+export const GrievanceInputData = styled.a`
   width: 50%;
+  height: 100%;
   color: gray;
   background-color: transparent;
   border-color: transparent;
@@ -334,12 +390,14 @@ export const Select = styled.select`
   color: black;
   border-radius: 8px;
   border: transparent;
+  background: transparent;
   width: 50%;
   height: 100%;
 `;
 export const SelectType = styled.select`
   border-radius: 8px;
   border: transparent;
+  background: transparent;
   width: 100%;
-  height: 100%;
+  height: 120%;
 `;
