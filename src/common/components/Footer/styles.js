@@ -9,7 +9,7 @@ export const Container = styled.div`
   display: flex;
   height: 55px;
   justify-content: space-between;
-  padding: 6px 1%;
+  //padding: 6px 1%;
   width: 100%;
 `;
 

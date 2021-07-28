@@ -29,6 +29,21 @@ export const LOCATIONS = {
   mumbai: "MUMBAI",
 };
 
+export const LOCATIONS_ARR = [
+  {
+    label: "BANGALURU",
+    value: "bangaluru",
+  },
+  {
+    label: "DELHI",
+    value: "delhi",
+  },
+  {
+    label: "MUMBAI",
+    value: "mumbai",
+  },
+];
+
 export const PROFESSIONS = {
   doctor: "DOCTOR",
   engineer: "ENGINEER",

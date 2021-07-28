@@ -1,22 +1,28 @@
 /** @format */
 
 import React from "react";
-import {CardHead} from '../styles';
+import { CardHead, Image, P } from "../styles";
 
-const Cards = ({ image_url, title, content, url }) => {
+const Cards = ({ cover, title, content, id }) => {
   return (
-    <CardHead className="col-md-3 float-left">
-      <div className="card mb-2">
-        <img className="card-img-top" src={image_url} alt="" />
+    <div className="col-md-3  float-left">
+      <CardHead className="card mb-2 mb-3 h-100">
+        <div className="card-title card-header">{title}</div>
+        <Image className="card-img-top img-thumbnail" src={cover} alt="" />
         <div className="card-body">
-          <h4 className="card-title">{title}</h4>
-          <p className="card-text text-truncate">{content}</p>
-          <a className="btn btn-primary btn-block" href={url}>
+          <P className="card-text">{content}</P>
+        </div>
+        <div className="card-footer">
+          <a
+            className="btn btn-primary col-12"
+            type="button"
+            href={`/grievances/${id}`}
+          >
             See More
           </a>
         </div>
-      </div>
-    </CardHead>
+      </CardHead>
+    </div>
   );
 };
 

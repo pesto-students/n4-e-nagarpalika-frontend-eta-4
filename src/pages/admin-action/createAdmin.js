@@ -8,7 +8,7 @@ import { createAdmin as apiCreateAdmin } from "../../modules/admin/api";
 const CreateAdmin = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [location, setLocation] = useState("");
-
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [accountType, setAccountType] = useState("");
@@ -40,7 +40,10 @@ const CreateAdmin = () => {
     }
 
     const res = await apiCreateAdmin(data);
-
+    if (res.status === "Error") {
+      setMessage("**User doesn't exist");
+      setLoading(false);
+    }
     console.log(res);
   };
 
@@ -106,6 +109,9 @@ const CreateAdmin = () => {
           ) : null}
           <div id="formHelp" className="form-text">
             Required fields are marked with (*)
+          </div>
+          <div id="formHelp" className="form-text text-danger">
+            {message}
           </div>
         </div>
 
