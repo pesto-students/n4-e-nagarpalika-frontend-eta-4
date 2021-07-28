@@ -12,6 +12,7 @@ function Login({ logIn: actionLogin }) {
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+  const [message, setMessage] = useState("");
   const [confirmResult, setConfirmResult] = useState(null);
 
   useEffect(() => {
@@ -25,29 +26,36 @@ function Login({ logIn: actionLogin }) {
 
   const getOtp = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (phoneNumber.length === 10) {
+      setLoading(true);
 
-    const appVerifier = window.recaptchaVerifier;
+      const appVerifier = window.recaptchaVerifier;
 
-    await firebase
-      .auth()
-      .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
-      .then((confirmResult) => {
-        setConfirmResult(confirmResult);
-      });
-
-    setIsOtpSent(true);
+      await firebase
+        .auth()
+        .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
+        .then((confirmResult) => {
+          setConfirmResult(confirmResult);
+        });
+      setMessage("");
+      setIsOtpSent(true);
+    } else {
+      setMessage("**Please insert your 10 digit phone number.");
+    }
     setLoading(false);
   };
 
   async function sendOtp(e) {
     setLoading(true);
+    try {
+      const result = await confirmResult.confirm(otp);
 
-    const result = await confirmResult.confirm(otp);
+      const firebaseToken = await result.user.getIdToken();
 
-    const firebaseToken = await result.user.getIdToken();
-
-    await actionLogin({ firebaseToken });
+      await actionLogin({firebaseToken});
+    }catch (e){
+      console.log(e)
+    }
 
     // setLoading(false);
   }
@@ -70,72 +78,82 @@ function Login({ logIn: actionLogin }) {
 
   return (
     <Container>
-      <div className="card">
+      <div className="card mb-4">
+        <h5 className="card-header text-center bg-info">Log In</h5>
         <div className="card-body">
-          <h5 className="card-title">Log In</h5>
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
             {!isOtpSent && (
               <>
-                <div className="mb-3">
-                  <label htmlFor="phoneNumber" className="form-label">
+                <div className="mb-4">
+                  <p htmlFor="phoneNumber" className="text-center card-text">
                     Phone Number
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="phoneNumber"
-                    aria-describedby="phoneNumberHelp"
-                    placeholder="Phone Number"
-                    value={phoneNumber}
-                    onChange={onChangePhoneNumber}
-                    disabled={loading}
-                  />
+                  </p>
+                  <div className="row">
+                    <input
+                      type="text"
+                      className="form-control col"
+                      id="phoneNumber"
+                      aria-describedby="phoneNumberHelp"
+                      placeholder="Phone Number"
+                      value={phoneNumber}
+                      onChange={onChangePhoneNumber}
+                      disabled={loading}
+                    />
+                    <hr />
+                    <button
+                      type="button"
+                      // style={{width:"50%"}}
+                      className="btn btn-primary col"
+                      style={{ alignSelf: "flex-end" }}
+                      onClick={getOtp}
+                      disabled={loading}
+                    >
+                      Get OTP
+                    </button>
+                  </div>
                   <div id="phoneNumberHelp" className="form-text">
-                    We'll never share your phone number with anyone else.
+                    **We'll never share your phone number with anyone else.
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  style={{ alignSelf: "flex-end" }}
-                  onClick={getOtp}
-                  disabled={loading}
-                >
-                  Get OTP
-                </button>
               </>
             )}
 
             {isOtpSent && (
               <>
-                <div className="mb-3">
-                  <label htmlFor="otpVerification" className="form-label">
+                <div className="mb-4">
+                  <p htmlFor="phoneNumber" className="text-center card-text">
                     Verify OTP
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="otpVerification"
-                    value={otp}
-                    onChange={onChangeOTP}
-                    disabled={loading}
-                  />
+                  </p>
+                  <div className="row">
+                    <input
+                      type="text"
+                      className="form-control col"
+                      id="otpVerification"
+                      value={otp}
+                      onChange={onChangeOTP}
+                      disabled={loading}
+                    />
+                    <hr />
+                      <button
+                          type="button"
+                          style={{margin:"5px"}}
+                          className="btn btn-primary col"
+                          onClick={sendOtp}
+                          disabled={loading}
+                      >
+                        Verify
+                      </button>
+                  </div>
+                  <div id="phoneNumberHelp" className="form-text">
+                    **Please insert the 6 digit otp sent to your mobile number.
+                  </div>
                 </div>
-
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={sendOtp}
-                  disabled={loading}
-                >
-                  Verify
-                </button>
               </>
             )}
           </form>
+          <p className="form-text text-danger">{message}</p>
         </div>
       </div>
     </Container>

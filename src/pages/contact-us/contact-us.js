@@ -51,7 +51,7 @@ const ContactUs = () => (
                     Describe your issue
                   </label>
                   <textarea
-                    role="text"
+                    type="text"
                     className="form-control"
                     id="exampleInputDescription"
                   />
