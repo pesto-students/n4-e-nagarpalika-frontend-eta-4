@@ -78,8 +78,9 @@ export const DivImage = styled.div`
 `;
 
 export const DivHeadBar = styled.div`
-  margin: 5px;
+  margin: 50px;
   display: flex;
+  contain: layout;
   flex-direction: column;
   align-self: center;
   justify-content: center;
@@ -155,6 +156,9 @@ export const Message = styled.div`
   left: -8px;
   top: 0;
   color: #000;
+  @media(max-width: 700px){
+    font-size: x-small;
+  }
 `;
 
 export const MessageOne = styled(Message)`

@@ -6,8 +6,8 @@ import { connect, useSelector } from "react-redux";
 
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
-import ViewGrievance from "./viewGrievance";
-
+// import ViewGrievance from "./viewGrievance";
+import ViewGrievance from "./viewGrievanceNew";
 const Grievance = ({ actionGetIssue }) => {
   const { id } = useParams();
 
@@ -29,9 +29,9 @@ const Grievance = ({ actionGetIssue }) => {
 
   const { status } = issue;
 
-  if (status === FETCH_STATUS.none) {
-    return <div>none</div>;
-  }
+  // if (status === FETCH_STATUS.none) {
+  //   return <div>none</div>;
+  // }
 
   if (status === FETCH_STATUS.loading) {
     return <div>loading...</div>;
@@ -47,12 +47,13 @@ const Grievance = ({ actionGetIssue }) => {
     );
   }
   console.log(list);
+  console.log(issue)
   // eslint-disable-next-line no-unused-vars
   // const { title, description, images, location, category } = issue;
 
   return (
     <div>
-      <ViewGrievance grievanceData={issue} />
+      <ViewGrievance data={issue} />
     </div>
   );
 };
