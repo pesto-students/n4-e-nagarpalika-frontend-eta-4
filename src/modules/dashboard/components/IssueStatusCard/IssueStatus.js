@@ -4,14 +4,6 @@ import React, { useEffect, useState } from "react";
 
 import { getIssueStats } from "../../api";
 
-// const Section = ({ icon, count, title }) => (
-//   <div>
-//     <div className="icon">icon</div>
-//     <div className="icon">{count}</div>
-//     <div className="icon">{title}</div>
-//   </div>
-// );
-
 const IssueStatus = () => {
   const [stats, setStats] = useState({
     total: 82,
@@ -20,6 +12,8 @@ const IssueStatus = () => {
   });
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     async function getStats() {
       const { status, data } = await getIssueStats();
 
@@ -29,7 +23,12 @@ const IssueStatus = () => {
     }
 
     getStats();
+
+    return () => {
+      abortController.abort();
+    };
   }, []);
+
   return (
     <div className="row">
       <div className="col-xl-3 col-md-6 mb-4">

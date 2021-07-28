@@ -27,8 +27,16 @@ function AppLayout({ children }) {
 
   const { pathname } = location;
 
-  const isLeftNavEnabled = isVisibleByRoute(pathname, ["/", "/login", "/register"]);
-  const isHeaderEnabled = isVisibleByRoute(pathname, ["/", "/login", "/register"])
+  const isLeftNavEnabled = isVisibleByRoute(pathname, [
+    "/",
+    "/login",
+    "/register",
+  ]);
+  const isHeaderEnabled = isVisibleByRoute(pathname, [
+    "/",
+    "/login",
+    "/register",
+  ]);
   // const isFooterVisible = isVisibleByRoute(pathname, ["/", "/contact-us"]);
 
   return (
@@ -36,7 +44,7 @@ function AppLayout({ children }) {
       {!isHeaderEnabled && <HeaderNav />}
       {!isLeftNavEnabled && <SidebarNav />}
       <BodyContainer isLeftNavEnabled={!isLeftNavEnabled}>
-      {children}
+        {children}
       </BodyContainer>
       {/*{isFooterVisible && <Footer />}*/}
     </AppLayoutContainer>

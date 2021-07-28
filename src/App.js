@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 
 import AppLayout from "./common/components/AppLayout";
 import AppRoutes from "./common/components/AppRoutes";
+import Loader from "./common/components/Loaders/loader";
 
 import firebase from "./common/firebase";
 import store from "./store/store";
@@ -47,17 +48,7 @@ function AppInit({ actionLogIn, actionAuthInit }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <AppLayout>
-      {initializing ? (
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      ) : (
-        <AppRoutes />
-      )}
-    </AppLayout>
-  );
+  return <AppLayout>{initializing ? <Loader /> : <AppRoutes />}</AppLayout>;
 }
 
 const mapDispatchToProps = {

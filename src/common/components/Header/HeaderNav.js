@@ -1,47 +1,49 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-import { Span, Nav, NotifTime } from "./styles";
-import firebase from "../../../common/firebase";
-import {useSelector} from "react-redux";
+import { connect, useSelector } from "react-redux";
+
+import NotificationCard from "../Notifications/Card";
+
 import { ACCOUNT_TYPE } from "../../contants";
+import isVisibleByRoute from "../../../utils/isVisibleByRoute";
 
+import { logOut } from "../../../modules/auth/actionCreators";
 
-const HeaderNav = ({ isSignedIn }) => {
+// eslint-disable-next-line no-unused-vars
+import { Span, Nav, NotifTime } from "./styles";
+
+const HeaderNav = ({ actionLogout }) => {
   const account = useSelector((state) => state.account);
   const { accountType } = account;
+
   const [hiddenNavs, setHiddenNavs] = useState(false);
   const location = useLocation();
-  console.log(location, isSignedIn);
   const { pathname } = location;
+
   useEffect(() => {
-    if (pathname === "/" || pathname === "/login" || pathname === "/resister") {
-      setHiddenNavs(true);
-    } else {
-      setHiddenNavs(false);
-    }
+    const routes = ["/", "/login", "register"];
+
+    setHiddenNavs(isVisibleByRoute(pathname, routes));
   }, [pathname]);
+
   return (
     <Nav
-      style={{
-        width: hiddenNavs ? "100%" : null,
-        margin: hiddenNavs ? "0px" : null,
-      }}
+      hiddenNavs
       className="navbar navbar-expand-lg navbar-light shadow bg-light"
     >
       <div className="container-fluid">
-        <a href="/">
-          <Link to="" className="navbar-brand" href="/">
-            <img
-              src="/e-nagar-palika.png"
-              alt=""
-              width="100%"
-              height="auto"
-              className="d-inline-block align-text-top"
-            />
-          </Link>
-        </a>
+        <Link to="/" className="navbar-brand">
+          <img
+            src="/e-nagar-palika.png"
+            alt=""
+            width="100%"
+            height="auto"
+            className="d-inline-block align-text-top"
+          />
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -96,7 +98,15 @@ const HeaderNav = ({ isSignedIn }) => {
                         />
                       </div>
                       <div className="modal-body">
-                        <div>
+                        <NotificationCard
+                          {...{
+                            id: "2",
+                            text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+                            createdAt: new Date(2021, 1).toUTCString(),
+                            issueId: "60fc7eef126fe5023c98ecfc",
+                          }}
+                        />
+                        {/* <div>
                           <a href="/grievances/60fc7eef126fe5023c98ecfc">
                             <div className="alert alert-secondary">
                               Status changed for your grievance ‘Traffic Light
@@ -115,7 +125,7 @@ const HeaderNav = ({ isSignedIn }) => {
                           >
                             See More
                           </a>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -135,34 +145,36 @@ const HeaderNav = ({ isSignedIn }) => {
                   className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="dropdownMenuButton2"
                 >
+                  {/* 
                   <li>
-                    <a
-                        className="dropdown-item"
-                        href="/account"
-                    >
+                    <Link className="dropdown-item" to="/account">
                       My Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                        className="dropdown-item"
-                        href="/account"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  {accountType===ACCOUNT_TYPE.admin? <li>
-                    <a
-                        className="dropdown-item"
-                        href="/admin-action"
-                    >
-                      Admin Actions
-                    </a>
-                  </li>:null}
-                  <li>
-                    <Link to="" className="dropdown-item" onClick={() => { firebase.auth().signOut()}}>
-                      Sign out
                     </Link>
+                  </li> 
+                  */}
+                  <li>
+                    <Link className="dropdown-item" to="/account">
+                      Settings
+                    </Link>
+                  </li>
+                  {accountType === ACCOUNT_TYPE.admin ? (
+                    <li>
+                      <Link className="dropdown-item" to="/admin-action">
+                        Admin Actions
+                      </Link>
+                    </li>
+                  ) : null}
+                  <li>
+                    <a
+                      href="/"
+                      className="dropdown-item"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        actionLogout();
+                      }}
+                    >
+                      Sign out
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -174,4 +186,12 @@ const HeaderNav = ({ isSignedIn }) => {
   );
 };
 
-export default HeaderNav;
+HeaderNav.propTypes = {
+  actionLogout: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = {
+  actionLogout: logOut,
+};
+
+export default connect(null, mapDispatchToProps)(HeaderNav);
