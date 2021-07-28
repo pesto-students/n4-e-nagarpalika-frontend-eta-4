@@ -31,34 +31,44 @@ const Header = ({ isSignedIn }) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <div className="me-auto" />
           <ul className="navbar-nav">
-            {pathname === "/" && (
-              <li className="nav-item">
-                <Link
-                  to=""
-                  className="nav-link "
-                  onClick={() => {
-                    window.scrollTo({
-                      behavior: "smooth",
-                      top: window.innerHeight,
-                    });
-                  }}
-                >
-                  Issue Tracker
-                </Link>
-              </li>
-            )}
-            {isSignedIn && (
-              <li className="nav-item">
-                <Link to="" className="nav-link" onClick={() => {}}>
-                  <i className="bi bi-bell"></i>
-                </Link>
-              </li>
-            )}
+            {pathname === "/" ||
+              pathname === "/register" ||
+              (pathname === "/login" && (
+                <li className="nav-item">
+                  <Link
+                    to=""
+                    className="nav-link "
+                    onClick={() => {
+                      window.scrollTo({
+                        behavior: "smooth",
+                        top: window.innerHeight,
+                      });
+                    }}
+                  >
+                    Issue Tracker
+                  </Link>
+                </li>
+              ))}
+            {pathname !== "/" ||
+              pathname !== "/register" ||
+              (pathname !== "/login" && (
+                <li className="nav-item">
+                  <Link
+                    to=""
+                    className="nav-link"
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <i className="bi bi-bell" />
+                  </Link>
+                </li>
+              ))}
             {isSignedIn && (
               <li className="nav-item">
                 <div className="dropdown">
@@ -70,7 +80,7 @@ const Header = ({ isSignedIn }) => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i className="bi bi-person-circle"></i>
+                    <i className="bi bi-person-circle" />
                   </Link>
                   <ul
                     className="dropdown-menu dropdown-menu-end"

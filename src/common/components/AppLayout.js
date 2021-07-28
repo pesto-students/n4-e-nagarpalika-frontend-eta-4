@@ -5,11 +5,12 @@ import styled from "styled-components";
 
 import { useLocation } from "react-router-dom";
 
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+// import Header from "./Header/Header";
+// import Footer from "./Footer/Footer";
 import SidebarNav from "./SidebarNav/SidebarNav";
 
 import isVisibleByRoute from "../../utils/isVisibleByRoute";
+import HeaderNav from "./Header/HeaderNav";
 
 const AppLayoutContainer = styled.div`
   height: 100vh;
@@ -25,17 +26,27 @@ function AppLayout({ children }) {
   const location = useLocation();
 
   const { pathname } = location;
-  const isLeftNavEnabled = isVisibleByRoute(pathname, ["/", "/login"]);
-  const isFooterVisible = isVisibleByRoute(pathname, ["/", "/contact-us"]);
+
+  const isLeftNavEnabled = isVisibleByRoute(pathname, [
+    "/",
+    "/login",
+    "/register",
+  ]);
+  const isHeaderEnabled = isVisibleByRoute(pathname, [
+    "/",
+    "/login",
+    "/register",
+  ]);
+  // const isFooterVisible = isVisibleByRoute(pathname, ["/", "/contact-us"]);
 
   return (
     <AppLayoutContainer>
-      <Header />
+      {!isHeaderEnabled && <HeaderNav />}
       {!isLeftNavEnabled && <SidebarNav />}
       <BodyContainer isLeftNavEnabled={!isLeftNavEnabled}>
         {children}
       </BodyContainer>
-      {isFooterVisible && <Footer />}
+      {/*{isFooterVisible && <Footer />}*/}
     </AppLayoutContainer>
   );
 }

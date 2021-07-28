@@ -6,6 +6,7 @@ import { connect, useSelector } from "react-redux";
 
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
+import ViewGrievance from "./viewGrievance";
 
 const Grievance = ({ actionGetIssue }) => {
   const { id } = useParams();
@@ -45,16 +46,13 @@ const Grievance = ({ actionGetIssue }) => {
       </div>
     );
   }
-
+  console.log(list);
   // eslint-disable-next-line no-unused-vars
-  const { title, description, images, location, category } = issue;
+  // const { title, description, images, location, category } = issue;
 
   return (
     <div>
-      <h1>{title}</h1>
-      <h1>{description}</h1>
-      <h1>{location}</h1>
-      <h1>{category}</h1>
+      <ViewGrievance grievanceData={issue} />
     </div>
   );
 };
