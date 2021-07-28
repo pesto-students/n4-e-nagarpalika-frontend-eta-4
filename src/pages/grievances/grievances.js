@@ -51,9 +51,6 @@ const Grievances = ({ actionGetAllUserIssue }) => {
         <Filter filterProps={(data) => filterData(data)} />
         {/*<Carousel issues={list} title={"Pending"} />*/}
         <CardBlock issues={list} />
-        <a className="scroll-to-top rounded">
-          <i className="fas fa-angle-up" />
-        </a>
       </div>
     </div>
   );

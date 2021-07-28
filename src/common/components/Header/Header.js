@@ -31,7 +31,7 @@ const Header = ({ isSignedIn }) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"/>
+          <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <div className="me-auto" />
@@ -109,7 +109,7 @@ const Header = ({ isSignedIn }) => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="" className="dropdown-item" onClick={() => {}}>
+                      <Link to="" className="dropdown-item" onClick={() => {fire}}>
                         Sign out
                       </Link>
                     </li>

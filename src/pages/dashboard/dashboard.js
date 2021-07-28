@@ -19,6 +19,7 @@ import {
   BarChart,
 } from "recharts";
 
+import { ACCOUNT_TYPE } from "../../common/contants";
 import { LOCATIONS } from "../../common/contants";
 
 import IssueStatus from "../../modules/dashboard/components/IssueStatusCard/IssueStatus";
@@ -28,6 +29,7 @@ import { Container } from "./styles";
 function Dashboard() {
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
+  const {accountType} = account;
 
   const [location, setLocation] = useState(LOCATIONS.bangaluru);
   const history = useHistory();
@@ -129,20 +131,20 @@ function Dashboard() {
     <Container className="container-fluid" style={{ marginTop: "20px" }}>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-        <div className="d-none d-sm-inline-block">
+        {accountType===ACCOUNT_TYPE.admin?<div className="d-none d-sm-inline-block">
           <select
-            className="form-select"
-            id="locationInput"
-            aria-label="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+              className="form-select"
+              id="locationInput"
+              aria-label="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
           >
             <option value="">Select Location</option>
             <option value={LOCATIONS.bangaluru}>Bangaluru</option>
             <option value={LOCATIONS.delhi}>Delhi</option>
             <option value={LOCATIONS.mumbai}>Mumbai</option>
           </select>
-        </div>
+        </div>:null}
       </div>
       <div className="row">
         <IssueStatus />

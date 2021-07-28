@@ -1,13 +1,18 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Span, Nav, NotifTime } from "./styles";
+import firebase from "../../../common/firebase";
+import {useSelector} from "react-redux";
+import { ACCOUNT_TYPE } from "../../contants";
+
 
 const HeaderNav = ({ isSignedIn }) => {
+  const account = useSelector((state) => state.account);
+  const { accountType } = account;
   const [hiddenNavs, setHiddenNavs] = useState(false);
   const location = useLocation();
-  const history = useHistory();
   console.log(location, isSignedIn);
   const { pathname } = location;
   useEffect(() => {
@@ -50,24 +55,6 @@ const HeaderNav = ({ isSignedIn }) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarHeader">
           <div className="navbar-nav me-auto mb-2 mb-lg-0" />
-          {pathname === "/" ? (
-            <div>
-              <div className="nav-item">
-                <Link
-                  to=""
-                  className="nav-link "
-                  onClick={() => {
-                    window.scrollTo({
-                      behavior: "smooth",
-                      top: window.innerHeight,
-                    });
-                  }}
-                >
-                  Issue Tracker
-                </Link>
-              </div>
-            </div>
-          ) : null}
           {!hiddenNavs ? (
             <div className="d-flex">
               <div className="nav-item dropdown">
@@ -136,44 +123,44 @@ const HeaderNav = ({ isSignedIn }) => {
               </div>
               <div className="navbar-nav me-auto mb-2 mb-lg-0" />
               <div className="dropdown">
-                <Link
-                  to=""
+                <div
                   className="nav-link dropdown-toggle"
-                  onClick={() => {}}
                   id="dropdownMenuButton2"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   <i className="bi bi-person-circle h4" />
-                </Link>
+                </div>
                 <ul
                   className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="dropdownMenuButton2"
                 >
                   <li>
-                    <Link
-                      to=""
-                      className="dropdown-item"
-                      onClick={() => {
-                        history.push("/account");
-                      }}
+                    <a
+                        className="dropdown-item"
+                        href="/account"
                     >
-                      Update Profile
-                    </Link>
+                      My Profile
+                    </a>
                   </li>
                   <li>
-                    <Link
-                      to=""
-                      className="dropdown-item"
-                      onClick={() => {
-                        history.push("/account");
-                      }}
+                    <a
+                        className="dropdown-item"
+                        href="/account"
                     >
                       Settings
-                    </Link>
+                    </a>
                   </li>
+                  {accountType===ACCOUNT_TYPE.admin? <li>
+                    <a
+                        className="dropdown-item"
+                        href="/admin-action"
+                    >
+                      Admin Actions
+                    </a>
+                  </li>:null}
                   <li>
-                    <Link to="" className="dropdown-item" onClick={() => {}}>
+                    <Link to="" className="dropdown-item" onClick={() => { firebase.auth().signOut()}}>
                       Sign out
                     </Link>
                   </li>
