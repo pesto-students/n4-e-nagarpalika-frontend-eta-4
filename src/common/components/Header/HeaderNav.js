@@ -5,11 +5,14 @@ import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
+import NotificationCard from "../Notifications/Card";
+
 import { ACCOUNT_TYPE } from "../../contants";
 import isVisibleByRoute from "../../../utils/isVisibleByRoute";
 
 import { logOut } from "../../../modules/auth/actionCreators";
 
+// eslint-disable-next-line no-unused-vars
 import { Span, Nav, NotifTime } from "./styles";
 
 const HeaderNav = ({ actionLogout }) => {
@@ -95,7 +98,15 @@ const HeaderNav = ({ actionLogout }) => {
                         />
                       </div>
                       <div className="modal-body">
-                        <div>
+                        <NotificationCard
+                          {...{
+                            id: "2",
+                            text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+                            createdAt: new Date(2021, 1).toUTCString(),
+                            issueId: "60fc7eef126fe5023c98ecfc",
+                          }}
+                        />
+                        {/* <div>
                           <a href="/grievances/60fc7eef126fe5023c98ecfc">
                             <div className="alert alert-secondary">
                               Status changed for your grievance ‘Traffic Light
@@ -114,7 +125,7 @@ const HeaderNav = ({ actionLogout }) => {
                           >
                             See More
                           </a>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
