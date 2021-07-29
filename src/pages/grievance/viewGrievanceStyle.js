@@ -22,10 +22,17 @@ export const Button = styled.button`
 
 export const Image = styled.img`
  height: 250px;
+  @media(max-width:1400px){
+    height: auto;
+  }
 `;
 export const CardCarousel =styled.div`
   width:80%;
-  max-height:250px
+  height:250px;
+  margin-bottom: 20px;
+  @media(max-width:1400px){
+   height: auto;
+  }
 `;
 
 export const ATag = styled.a`
@@ -35,7 +42,7 @@ export const ATag = styled.a`
 export const ActionCorner =styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
+  justify-content: center;
   align-items: center;
   @media(max-width: 700px){
     height: auto;
@@ -62,7 +69,7 @@ export const ButtonDiv=styled.div`
   align-items: center;
   margin-bottom: 30px;
   @media(min-width: 900px){
-    margin-top: 65px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -71,6 +78,7 @@ export const ProgressHead=styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin: 30px;
   //width: 80%;
   @media(min-width: 990px) and(max-width:1400px){
     width: 50%;

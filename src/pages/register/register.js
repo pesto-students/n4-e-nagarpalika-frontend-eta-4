@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
+import RegisterSVG from "../../common/components/svg/registerSVG";
 import { register } from "../../modules/account/actionCreators";
 import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
 
@@ -19,7 +20,7 @@ import {
   P,
   SVG,
   Select,
-  Terms,
+  Terms, Div,
 } from "./styles";
 
 function Register({ actionRegister }) {
@@ -93,8 +94,11 @@ function Register({ actionRegister }) {
   return (
     <Container>
       <Form onSubmit={onSubmit}>
-        <DivHead>
-          <DivBodyColumn>
+        <Div>
+          <RegisterSVG/>
+        </Div>
+        <Div className="row">
+          <DivBodyColumn className="col">
             <P>Name*</P>
             <FormInput
               id="name"
@@ -104,7 +108,19 @@ function Register({ actionRegister }) {
               placeholder="Enter your name"
             />
           </DivBodyColumn>
-          <DivBodyColumn>
+          <DivBodyColumn className="col">
+            <P>Email*</P>
+            <FormInput
+                id="email"
+                type="email"
+                onChange={onChangeEmail}
+                value={email}
+                placeholder="Enter your Email"
+            />
+          </DivBodyColumn>
+        </Div>
+        <Div className="row">
+          <DivBodyColumn className="col">
             <P>Mobile Number*</P>
             <FormInput
               id="phoneNumber"
@@ -115,7 +131,20 @@ function Register({ actionRegister }) {
               disabled
             />
           </DivBodyColumn>
-          <DivBodyColumn>
+          <DivBodyColumn className="col">
+            <P>Aadhar Number*</P>
+            <FormInput
+                id="aadharNumber"
+                type="number"
+                onChange={onChangeAadhar}
+                value={aadhar}
+                placeholder="Enter the 16 digit Aadhar Number"
+                pattern="[0-9]{16}"
+            />
+          </DivBodyColumn>
+        </Div>
+        <Div className="row">
+          <DivBodyColumn className="col">
             <P>City*</P>
             <Select onChange={selectCity} value={city}>
               <option value="">Select</option>
@@ -124,7 +153,7 @@ function Register({ actionRegister }) {
               <option value={LOCATIONS.mumbai}>Mumbai</option>
             </Select>
           </DivBodyColumn>
-          <DivBodyColumn>
+          <DivBodyColumn className="col">
             <DivBody>
               <DivHead>
                 <P>Profession</P>
@@ -147,54 +176,41 @@ function Register({ actionRegister }) {
               </DivHead>
             </DivBody>
           </DivBodyColumn>
-        </DivHead>
-        <DivHead>
-          <DivBodyColumn>
-            <P>Email*</P>
-            <FormInput
-              id="email"
-              type="email"
-              onChange={onChangeEmail}
-              value={email}
-              placeholder="Enter your Email"
-            />
+
+        </Div>
+        <Div className="row">
+          <DivBodyColumn  className="col">
+            <a href="#" style={{marginTop:"10px"}}>
+              <DivBody>
+                <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
+                </SVG>
+                <P>Upload Profile Picture</P>
+              </DivBody>
+            </a>
           </DivBodyColumn>
-          <DivBodyColumn>
-            <P>Aadhar Number*</P>
-            <FormInput
-              id="aadharNumber"
-              type="text"
-              onChange={onChangeAadhar}
-              value={aadhar}
-              placeholder="Enter the 16 digit Aadhar Number"
-              pattern="[0-9]{16}"
-            />
-          </DivBodyColumn>
-          <DivBodyColumn>
-            <DivBody>
-              <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0V0z" fill="none" />
-                <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
-              </SVG>
-              <P>Upload Profile Picture</P>
-            </DivBody>
-            <DivBody>
-              <Checkbox
+          <DivBodyColumn className="col">
+
+          <DivBody>
+            <Checkbox
                 type="checkbox"
                 value={checkbox}
                 disabled={loading}
                 onClick={() => {
                   setCheckbox(!checkbox);
                 }}
-              />
-              <Terms>
-                By Clicking here I accept the Privacy Policy and Terms
-                Conditions of use.
-              </Terms>
-            </DivBody>
+            />
+            <Terms>
+              By Clicking here I accept the Privacy Policy and Terms
+              Conditions of use.
+            </Terms>
+          </DivBody>
           </DivBodyColumn>
+        </Div>
+        <DivHead>
           <DivBodyColumn>
-            <Button disabled={loading} onClick={onSubmit}>
+            <Button className="btn btn-primary" disabled={loading} onClick={onSubmit}>
               Register
             </Button>
           </DivBodyColumn>

@@ -8,7 +8,10 @@ export const Container = styled.section`
   align-items: center;
   height: calc(100vh - 115px);
 `;
-
+export const InnerContainer = styled.div`
+ width: 80%;
+  align-self: center;
+`;
 export const Form = styled.form`
   padding: 20px;
   border: 1px solid grey;

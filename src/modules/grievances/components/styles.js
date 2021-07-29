@@ -152,9 +152,13 @@ export const Message = styled.div`
   width: 25%;
   padding: 10px;
   margin: 0;
+  font-size: small;
   left: -8px;
   top: 0;
   color: #000;
+  @media(max-width: 1200px)and(min-width: 995px){
+    font-size: smaller;
+  }
 `;
 
 export const MessageOne = styled(Message)`
@@ -173,10 +177,10 @@ export const MessageThree = styled(Message)`
 `;
 
 export const MessageFour = styled(Message)`
-  left: 15%;
+  left: 11%;
   color: #000;
-  @media (max-width: 1200px) {
-    left: 10%;
+  @media (max-width: 1200px) and (min-width: 995px){
+    left: 7%;
   }
 `;
 
@@ -287,6 +291,11 @@ export const Container = styled.section`
   align-items: center;
   //background: linear-gradient(to right, #b48830, #c14949);
   height: calc(100vh - 115px);
+  @media(max-width: 1200px){
+    width: calc(81vw);
+    height: calc(100vh - 5%);
+    margin-left: 3%;
+  }
 `;
 export const GrievanceInner = styled.div`
   padding: 20px;
@@ -381,27 +390,34 @@ export const Button = styled.button`
 export const GrievanceInputData = styled.a`
   width: 50%;
   height: 100%;
-  color: gray;
+  margin: 2px;
+  color: green;
   background-color: transparent;
   border-color: transparent;
   cursor: default;
+  &:disabled {
+    background: #bbbaba;
+  }
 `;
 export const Select = styled.select`
   color: black;
-  border-radius: 8px;
+  margin: 2px;
+  border-radius: 3px;
   border: transparent;
   background: transparent;
   width: 50%;
   height: 100%;
 
   &:disabled {
-    background: grey;
+    background: #bbbaba;
   }
 `;
 export const SelectType = styled.select`
-  border-radius: 8px;
   border: transparent;
   background: transparent;
   width: 100%;
-  height: 120%;
+  height: 100%;
+  &:disabled {
+    background: #bbbaba;
+  }
 `;

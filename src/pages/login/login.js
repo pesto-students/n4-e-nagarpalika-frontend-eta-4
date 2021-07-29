@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
+import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
-import { Container } from "./styles";
+import {Container, InnerContainer} from "./styles";
 
 function Login({ logIn: actionLogin }) {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -84,8 +85,9 @@ function Login({ logIn: actionLogin }) {
   return (
     <Container>
       <div className="card mb-4">
-        <h5 className="card-header text-center bg-info">Log In</h5>
-        <div className="card-body">
+        <LoginSVG/>
+        <h2 className="text-center">Log in</h2>
+        <InnerContainer className="card-body">
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
@@ -93,12 +95,12 @@ function Login({ logIn: actionLogin }) {
               <>
                 <div className="mb-4">
                   <p htmlFor="phoneNumber" className="text-center card-text">
-                    Phone Number
+                    Phone number
                   </p>
                   <div className="row">
                     <input
                       type="text"
-                      className="form-control col"
+                      className="form-control"
                       id="phoneNumber"
                       aria-describedby="phoneNumberHelp"
                       placeholder="Phone Number"
@@ -110,7 +112,7 @@ function Login({ logIn: actionLogin }) {
                     <button
                       type="button"
                       // style={{width:"50%"}}
-                      className="btn btn-primary col"
+                      className="btn btn-primary"
                       style={{ alignSelf: "flex-end" }}
                       onClick={getOtp}
                       disabled={loading}
@@ -159,7 +161,7 @@ function Login({ logIn: actionLogin }) {
             )}
           </form>
           <p className="form-text text-danger">{message}</p>
-        </div>
+        </InnerContainer>
       </div>
     </Container>
   );

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 
-import ProgressBar from "./progressBar";
+import ProgressBar from "./../../modules/grievances/components/progressBar";
 import {GrievanceTextInput, PGrievance} from "./styles";
 import {
     ActionCorner,

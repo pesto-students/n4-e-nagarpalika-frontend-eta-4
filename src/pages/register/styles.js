@@ -2,21 +2,34 @@
 
 import styled from "styled-components";
 
+export const Div = styled.div`
+ width: 100%;
+  @media(max-width: 750px){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 export const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin:20px;
   height: calc(100vh - 115px);
+  @media(max-width: 750px){
+    height: auto;
+  }
 `;
 
 export const Form = styled.form`
   padding: 20px;
   border: 1px solid grey;
-  width: 40%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 800px;
   min-height: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 18px;
@@ -42,7 +55,6 @@ export const DivBody = styled.div`
 export const DivBodyColumn = styled.div`
   width: 90%;
   height: 25%;
-  margin-left: 6%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,16 +67,21 @@ export const FormInput = styled.input`
   width: 95%;
 `;
 export const Checkbox = styled.input`
-  margin: 5px;
+  margin: 10px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid grey;
   height: 35px;
   width: 35px;
   justify-content: flex-start;
+  @media(max-width: 750px){
+    height: 20px;
+    width: 20px;
+  }
 `;
 export const P = styled.p`
   margin-left: 10px;
+  margin-top: 10px;
   font-size: medium;
 `;
 export const Terms = styled.p`
@@ -92,7 +109,7 @@ export const Button = styled.button`
   width: 95%;
   border-radius: 8px;
   border: 1px solid grey;
-  background-color: #2a2a76;
+  //background-color: #2a2a76;
   color: white;
   align-self: center;
 `;
