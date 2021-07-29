@@ -106,6 +106,7 @@ const HeaderNav = ({ actionLogout }) => {
                             issueId: "60fc7eef126fe5023c98ecfc",
                           }}
                         />
+                      </div>
                         {/* <div>
                           <a href="/grievances/60fc7eef126fe5023c98ecfc">
                             <div className="alert alert-secondary">
@@ -116,7 +117,7 @@ const HeaderNav = ({ actionLogout }) => {
                               </NotifTime>
                             </div>
                           </a>
-                        </div>
+                        </div>*/}
                         <div className="modal-footer">
                           <a
                             type="button"
@@ -125,9 +126,8 @@ const HeaderNav = ({ actionLogout }) => {
                           >
                             See More
                           </a>
-                        </div> */}
+                        </div>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -168,8 +168,8 @@ const HeaderNav = ({ actionLogout }) => {
                     <a
                       href="/"
                       className="dropdown-item"
-                      onClick={(e) => {
-                        e.preventDefault();
+                      onClick={() => {
+                        // e.preventDefault();
                         actionLogout();
                       }}
                     >

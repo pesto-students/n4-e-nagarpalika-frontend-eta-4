@@ -31,51 +31,51 @@ function Dashboard() {
   const { account } = reduxState;
   const { accountType } = account;
 
-  const [location, setLocation] = useState(LOCATIONS.bangaluru);
+  const [location, setLocation] = useState("");
   const history = useHistory();
 
   const dataByDate = [
     {
-      date: "Jun 2021",
-      total: 4000,
-      progress: 2400,
-      resolved: 1600,
+      date: "Jan 2021",
+      Total: 4000,
+      Progress: 2400,
+      Resolved: 1600,
+    },
+    {
+      date: "Feb 2021",
+      Total: 3000,
+      Progress: 1398,
+      Resolved: 1602,
+    },
+    {
+      date: "Mar 2021",
+      Total: 2000,
+      Progress: 1800,
+      Resolved: 200,
+    },
+    {
+      date: "Apr 2021",
+      Total: 2780,
+      Progress: 1908,
+      Resolved: 872,
+    },
+    {
+      date: "May 2021",
+      Total: 1890,
+      Progress: 400,
+      Resolved: 1490,
+    },
+    {
+      date: "June 2021",
+      Total: 2390,
+      Progress: 1800,
+      Resolved: 590,
     },
     {
       date: "Jul 2021",
-      total: 3000,
-      progress: 1398,
-      resolved: 1602,
-    },
-    {
-      date: "Aug 2021",
-      total: 2000,
-      progress: 1800,
-      resolved: 200,
-    },
-    {
-      date: "Sept 2021",
-      total: 2780,
-      progress: 1908,
-      resolved: 872,
-    },
-    {
-      date: "Oct 2021",
-      total: 1890,
-      progress: 400,
-      resolved: 1490,
-    },
-    {
-      date: "Nov 2021",
-      total: 2390,
-      progress: 1800,
-      resolved: 590,
-    },
-    {
-      date: "Dec 2021",
-      total: 3490,
-      progress: 300,
-      resolved: 3190,
+      Total: 3490,
+      Progress: 300,
+      Resolved: 3190,
     },
   ];
 
@@ -260,12 +260,12 @@ function Dashboard() {
                     <Legend />
                     <Line
                       type="monotone"
-                      dataKey="total"
+                      dataKey="Total"
                       stroke="#607d8b"
                       activeDot={{ r: 8 }}
                     />
-                    <Line type="monotone" dataKey="progress" stroke="#ff9800" />
-                    <Line type="monotone" dataKey="resolved" stroke="#4caf50" />
+                    <Line type="monotone" dataKey="Progress" stroke="#ff9800" />
+                    <Line type="monotone" dataKey="Resolved" stroke="#4caf50" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

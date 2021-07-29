@@ -2,7 +2,19 @@ import React, {useEffect, useRef, useState} from "react";
 
 import ProgressBar from "./progressBar";
 import {GrievanceTextInput, PGrievance} from "./styles";
-import {ActionCorner,Card, ATag, ButtonDiv,Text, CardFooter,Button, CardCarousel, Description, ProgressHead} from "./viewGrievanceStyle";
+import {
+    ActionCorner,
+    Card,
+    ATag,
+    ButtonDiv,
+    Text,
+    CardFooter,
+    Button,
+    CardCarousel,
+    Description,
+    ProgressHead,
+    Image
+} from "./viewGrievanceStyle";
 
 
 const ViewGrievance = ({data}) =>{
@@ -55,31 +67,35 @@ const ViewGrievance = ({data}) =>{
     };
     return(
         <div className="container-fluid row justify-content-md-center">
-            <Card className="card col-lg-7">
+            <Card className="container card col-lg-7">
                 <p className="h4 card-header">
                     Issue Id: {data.id}
                 </p>
                 <div className="card-body container-fluid row justify-content-md-center">
                     <ActionCorner className="col col-lg-6">
-                        <CardCarousel id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+                        <CardCarousel id="carouselExampleIndicators" className="container-fluid carousel slide" data-bs-ride="carousel">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
-                                    <img src={data.images[0]} className="d-block w-100" alt=""/>
+                                    <Image src={data.images[0]} className="d-block w-100" alt=""/>
                                 </div>
                                 {data.images.slice(1).map((image)=>
                                 <div className="carousel-item">
-                                    <img src={image} className="d-block w-100" alt=""/>
+                                    <Image src={image} className="d-block w-100" alt=""/>
                                 </div>
                                     )}
                             </div>
                             <button className="carousel-control-prev" type="button"
                                     data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"/>
+                                <span className="carousel-control-prev-icon" aria-hidden="true">
+                                <i className="fas fa-arrow-circle-left h2 text-primary"/>
+                                </span>
                                 <span className="visually-hidden">Previous</span>
                             </button>
                             <button className="carousel-control-next" type="button"
                                     data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"/>
+                                <span className="carousel-control-next-icon" aria-hidden="true">
+                                <i className="fas fa-arrow-circle-right h2 text-primary"/>
+                                </span>
                                 <span className="visually-hidden">Next</span>
                             </button>
                         </CardCarousel>
@@ -94,7 +110,7 @@ const ViewGrievance = ({data}) =>{
                         </h4>
                         <hr/>
                         <p className="h7">
-                            <b>Created at:</b> {data.createdAt}
+                            <b>Created at:</b> {`${data.createdAt.slice(0,10)} ${data.createdAt.slice(11,-5)}`}
                         </p>
                         <ATag className="card-text" onClick={handleClick} href="#">
                                 <svg

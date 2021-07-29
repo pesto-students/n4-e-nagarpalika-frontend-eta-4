@@ -46,17 +46,22 @@ function Login({ logIn: actionLogin }) {
   };
 
   async function sendOtp(e) {
-    setLoading(true);
-    try {
-      const result = await confirmResult.confirm(otp);
+    if(otp.length===6){
+      setMessage("")
+      setLoading(true);
+      try {
+        const result = await confirmResult.confirm(otp);
 
-      const firebaseToken = await result.user.getIdToken();
+        const firebaseToken = await result.user.getIdToken();
 
-      await actionLogin({ firebaseToken });
-    } catch (e) {
-      console.log(e);
+        await actionLogin({firebaseToken});
+      } catch (e) {
+        setMessage("**Unexpected error occurred. Please try once again")
+        console.log(e);
+      }
+    }else {
+     setMessage("**Please insert the 6 digit OTP sent to your mobile number")
     }
-
     // setLoading(false);
   }
 
@@ -138,7 +143,7 @@ function Login({ logIn: actionLogin }) {
                     <hr />
                     <button
                       type="button"
-                      style={{ margin: "5px" }}
+                      style={{ alignSelf: "flex-end" }}
                       className="btn btn-primary col"
                       onClick={sendOtp}
                       disabled={loading}
