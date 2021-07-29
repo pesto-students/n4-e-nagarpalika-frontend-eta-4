@@ -398,6 +398,9 @@ export const GrievanceInputData = styled.a`
   &:disabled {
     background: #bbbaba;
   }
+  @media(max-width: 535px){
+    font-size: smaller;
+  }
 `;
 export const Select = styled.select`
   color: black;

@@ -92,7 +92,7 @@ function Register({ actionRegister }) {
   };
 
   return (
-    <Container>
+    <Container className="card border-0">
       <Form onSubmit={onSubmit}>
         <Div>
           <RegisterSVG/>

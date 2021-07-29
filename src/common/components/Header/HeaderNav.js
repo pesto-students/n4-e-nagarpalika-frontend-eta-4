@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
 import NotificationCard from "../Notifications/Card";
@@ -18,7 +18,7 @@ import { Span, Nav, NotifTime } from "./styles";
 const HeaderNav = ({ actionLogout }) => {
   const account = useSelector((state) => state.account);
   const { accountType } = account;
-
+  const history=useHistory();
   const [hiddenNavs, setHiddenNavs] = useState(false);
   const location = useLocation();
   const { pathname } = location;
@@ -166,11 +166,12 @@ const HeaderNav = ({ actionLogout }) => {
                   ) : null}
                   <li>
                     <a
-                      href="/"
+                      href="/#"
                       className="dropdown-item"
                       onClick={() => {
                         // e.preventDefault();
                         actionLogout();
+                        history.push("/")
                       }}
                     >
                       Sign out

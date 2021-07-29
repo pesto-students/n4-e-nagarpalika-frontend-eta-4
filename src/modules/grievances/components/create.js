@@ -81,7 +81,7 @@ function CreateGrievance({ onSubmit }) {
   };
 
   return (
-    <Container className="card">
+    <Container className="card border-0">
       <GrievanceInner>
         <GrievanceForm>
           <LoginSVG />
@@ -126,7 +126,7 @@ function CreateGrievance({ onSubmit }) {
 
             <GrievanceInputData
               id="location"
-              className="btn"
+              className="btn overflow-auto"
               type="button"
               style={{background:coordsSelected? "#bbbaba":null}}
               disabled={coordsSelected}
