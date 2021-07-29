@@ -67,12 +67,12 @@ const ViewGrievance = ({data}) =>{
     };
     return(
         <div className="container-fluid row justify-content-md-center">
-            <Card className="container card col-lg-7">
+            <Card className="container card col-xl-7">
                 <p className="h4 card-header">
                     Issue Id: {data.id}
                 </p>
                 <div className="card-body container-fluid row justify-content-md-center">
-                    <ActionCorner className="col col-lg-6">
+                    <ActionCorner className="col col-xl-6">
                         <CardCarousel id="carouselExampleIndicators" className="container-fluid carousel slide" data-bs-ride="carousel">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
@@ -104,15 +104,15 @@ const ViewGrievance = ({data}) =>{
                         </ProgressHead>
                         <PGrievance>{data.category}</PGrievance>
                     </ActionCorner>
-                    <div className="card-text col col-lg-6">
+                    <div className="card-text col col-xl-6">
                         <h4 className="h3">
                             {data.title}
                         </h4>
                         <hr/>
-                        <p className="h7">
-                            <b>Created at:</b> {`${data.createdAt.slice(0,10)} ${data.createdAt.slice(11,-5)}`}
+                        <p className="h6">
+                            <b>Date of creation: </b> {`${data.createdAt.slice(0,10)} ${data.createdAt.slice(11,-5)}`}
                         </p>
-                        <ATag className="card-text" onClick={handleClick} href="#">
+                        <ATag className="card-text fst-italic" onClick={handleClick} href="#">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 20"
@@ -126,7 +126,7 @@ const ViewGrievance = ({data}) =>{
                                 Location
                         </ATag>
 
-                        <Description className="card-text overflow-auto" >
+                        <Description className="card-text overflow-auto h6" >
                             <Text>
                                 {data.description}
                             </Text>
@@ -142,7 +142,7 @@ const ViewGrievance = ({data}) =>{
                 </div>
 
             </Card>
-            <Card className="card col col-lg-4" >
+            <Card className="card col col-xl-4" >
                 <p className="h4 card-header text-center">
                     Comments
                 </p>

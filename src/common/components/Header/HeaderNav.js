@@ -87,9 +87,9 @@ const HeaderNav = ({ actionLogout }) => {
                       <div className="modal-header">
                         <h5
                           className="modal-title background-secondary"
-                          id="staticBackdropLabel"
+                          id="notification"
                         >
-                          Notifications Center
+                          Notifications center
                         </h5>
                         <button
                           type="button"
@@ -155,13 +155,13 @@ const HeaderNav = ({ actionLogout }) => {
                   */}
                   <li>
                     <Link className="dropdown-item" to="/account">
-                      Settings
+                      My profile
                     </Link>
                   </li>
                   {accountType === ACCOUNT_TYPE.admin ? (
                     <li>
                       <Link className="dropdown-item" to="/admin-action">
-                        Admin Actions
+                        Admin actions
                       </Link>
                     </li>
                   ) : null}

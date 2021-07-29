@@ -149,7 +149,7 @@ export const ProgressThree = styled(Progress)`
 export const Message = styled.div`
   position: relative;
   height: 60px;
-  width: 25%;
+  width: 35%;
   padding: 10px;
   margin: 0;
   font-size: small;
@@ -303,6 +303,7 @@ export const GrievanceInner = styled.div`
   width: auto;
   min-height: 150px;
   display: flex;
+  background-color: white;
   flex-direction: row;
   justify-content: center;
   align-items: center;

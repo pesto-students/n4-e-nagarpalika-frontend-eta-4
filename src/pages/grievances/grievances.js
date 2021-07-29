@@ -10,6 +10,7 @@ import { FETCH_STATUS } from "../../common/contants";
 import CardBlock from "../../common/components/carousel/CardBlock";
 import Filter from "./filter";
 import Loader from "../../common/components/Loaders/loader";
+// import {DivHead} from "./styles";
 
 const Grievances = ({ actionGetAllUserIssue }) => {
   const account = useSelector(({ account }) => account);
@@ -50,7 +51,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
   }
 
   return (
-    <div id="page-top">
+    <div id="page-top" >
       <div className="container-fluid">
         <Filter filterProps={(data) => filterData(data)} />
         {/*<Carousel issues={list} title={"Pending"} />*/}

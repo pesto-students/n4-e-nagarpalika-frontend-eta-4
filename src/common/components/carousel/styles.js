@@ -12,8 +12,8 @@ export const Image = styled.img`
 `;
 export const P = styled.p`
   height: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: auto;
+  font-style: italic;
 `;
 
 export const Div = styled.div`

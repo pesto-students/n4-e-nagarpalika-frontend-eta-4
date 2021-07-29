@@ -81,7 +81,7 @@ function CreateGrievance({ onSubmit }) {
   };
 
   return (
-    <Container className="card border-0">
+    <Container>
       <GrievanceInner>
         <GrievanceForm>
           <LoginSVG />
@@ -104,7 +104,7 @@ function CreateGrievance({ onSubmit }) {
               value={category}
               onChange={selectCategory}
             >
-              <option value="">Select</option>
+              <option value="">Select a category</option>
               {GRIEVANCE_CATEGORIES.map((category) => (
                 <option value={category} key={category}>
                   {category}

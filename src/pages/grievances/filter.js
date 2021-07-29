@@ -26,7 +26,7 @@ const Filter = (props) => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{marginTop:"40px"}}>
       <CardHead className="navbar navbar-expand-lg navbar-light shadow bg-light">
         <div className="container-fluid">
           <div className="navbar-brand">Filter By</div>
