@@ -6,6 +6,7 @@ import { connect, useSelector } from "react-redux";
 
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
+
 import ViewGrievance from "../../modules/grievances/components/viewGrievance";
 
 const Grievance = ({ actionGetIssue }) => {
@@ -49,7 +50,7 @@ const Grievance = ({ actionGetIssue }) => {
 
   return (
     <div>
-      <ViewGrievance grievanceData={issue} />
+      <ViewGrievance data={issue} />
     </div>
   );
 };

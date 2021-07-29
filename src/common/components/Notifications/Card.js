@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react";
-import { Link } from "react-router-dom";
 import { format } from "timeago.js";
 
 const NotificationCard = ({ id, text, createdAt, issueId }) => {
@@ -17,7 +16,7 @@ const NotificationCard = ({ id, text, createdAt, issueId }) => {
       </div>
       <div className="toast-body" style={{ color: "black" }}>
         {text}
-        <Link to={`/grievances/${issueId}`}>See More..</Link>
+        <a href={`/grievances/${issueId}`}>See More..</a>
       </div>
     </div>
   );
