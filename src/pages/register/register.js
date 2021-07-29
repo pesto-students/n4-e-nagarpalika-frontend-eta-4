@@ -17,7 +17,7 @@ import {
   DivBody,
   DivHead,
   DivBodyColumn,
-  P,
+  P,PTag,
   SVG,
   Select,
   Terms, Div,
@@ -179,19 +179,17 @@ function Register({ actionRegister }) {
 
         </Div>
         <Div className="row">
-          <DivBodyColumn  className="col">
-            <a href="#" style={{marginTop:"10px"}}>
+
+            <a href="#" className="col">
               <DivBody>
                 <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0h24v24H0V0z" fill="none" />
                   <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
                 </SVG>
-                <P>Upload Profile Picture</P>
+                <PTag>Upload Profile Picture</PTag>
               </DivBody>
             </a>
-          </DivBodyColumn>
-          <DivBodyColumn className="col">
-
+          <div className="col">
           <DivBody>
             <Checkbox
                 type="checkbox"
@@ -206,14 +204,12 @@ function Register({ actionRegister }) {
               Conditions of use.
             </Terms>
           </DivBody>
-          </DivBodyColumn>
+          </div>
         </Div>
         <DivHead>
-          <DivBodyColumn>
             <Button className="btn btn-primary" disabled={loading} onClick={onSubmit}>
               Register
             </Button>
-          </DivBodyColumn>
           <DivBodyColumn>
             <P style={{ color: textColor }}>{message}</P>
           </DivBodyColumn>

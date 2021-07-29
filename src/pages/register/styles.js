@@ -35,6 +35,7 @@ export const Form = styled.form`
   border-radius: 18px;
   box-shadow: 0 0 10px rgb(0 0 0 / 80%);
   box-sizing: border-box;
+  
 `;
 export const DivHead = styled.div`
   width: 50%;
@@ -54,7 +55,7 @@ export const DivBody = styled.div`
 `;
 export const DivBodyColumn = styled.div`
   width: 90%;
-  height: 25%;
+  height: 12%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,7 +82,13 @@ export const Checkbox = styled.input`
 `;
 export const P = styled.p`
   margin-left: 10px;
-  margin-top: 10px;
+  //margin-top: 10px;
+  font-size: medium;
+`;
+
+export const PTag = styled.p`
+  margin-left: 10px;
+  margin-bottom: 15px;
   font-size: medium;
 `;
 export const Terms = styled.p`
@@ -94,7 +101,6 @@ export const SVG = styled.svg`
   height: 24px;
   width: 24px;
   fill: #000000;
-  align-self: center;
 `;
 export const Select = styled.select`
   padding: 10px;
