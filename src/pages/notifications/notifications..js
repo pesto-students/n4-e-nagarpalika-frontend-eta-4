@@ -1,37 +1,43 @@
 /** @format */
 
 import React from "react";
-import { Link } from "react-router-dom";
-// import {NotifTime} from "../../common/components/Header/styles";
+
+import NotificationCard from "../../common/components/Notifications/Card";
 
 const Notifications = () => {
   const notifications = [
     {
-      time: "7 mins ago",
-      data: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+      id: "1",
+      createdAt: new Date(2021, 6).toUTCString(),
+      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
       issueId: "60fc7eef126fe5023c98ecfc",
     },
     {
-      time: "12 mins ago",
-      data: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+      id: "2",
+      createdAt: new Date(2021, 6).toUTCString(),
+      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
       issueId: "60fc7eef126fe5023c98ecfc",
     },
     {
-      time: "12 mins ago",
-      data: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+      id: "3",
+      createdAt: new Date(2021, 6).toUTCString(),
+      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
       issueId: "60fc7eef126fe5023c98ecfc",
     },
     {
-      time: "18 mins ago",
-      data: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+      id: "4",
+      createdAt: new Date(2021, 6).toUTCString(),
+      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
       issueId: "60fc7eef126fe5023c98ecfc",
     },
     {
-      time: "27 mins ago",
-      data: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
+      id: "5",
+      createdAt: new Date(2021, 6).toUTCString(),
+      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
       issueId: "60fc7eef126fe5023c98ecfc",
     },
   ];
+
   return (
     <div className="container">
       <div>
@@ -44,20 +50,12 @@ const Notifications = () => {
       </svg>
 
       <div className="row row-cols-1 row-cols-md-1 g-4">
-        {notifications.map((notif) => (
-          <div className="alert alert-secondary" role="alert">
-            <div className="toast-header">
-              <strong className="me-auto">Issue Id: {notif.issueId}</strong>
-              <small className="text-muted">{notif.time}</small>
-            </div>
-            <div className="toast-body" style={{ color: "black" }}>
-              {notif.data}
-              <Link to={`/grievances/${notif.issueId}`}>See More..</Link>
-            </div>
-          </div>
-        ))}
+        {notifications.map((notif) => {
+          return <NotificationCard key={notif.id} {...{ ...notif }} />;
+        })}
       </div>
     </div>
   );
 };
+
 export default Notifications;

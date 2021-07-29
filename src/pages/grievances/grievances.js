@@ -15,27 +15,29 @@ const Grievances = ({ actionGetAllUserIssue }) => {
   const { id: userId } = account;
 
   useEffect(() => {
-    const abortController = new AbortController();
     actionGetAllUserIssue({ userId });
-    return () => {
-      abortController.abort();
-    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const issues = useSelector(({ issues }) => issues);
 
   const list = issues.list.filter((item) => userId === item.userId);
-  console.log(list);
-  const { status } = issues;
 
-  if (status === FETCH_STATUS.loading || status === FETCH_STATUS.none) {
+  const { fetchStatus } = issues;
+
+  if (
+    fetchStatus === FETCH_STATUS.loading ||
+    fetchStatus === FETCH_STATUS.none
+  ) {
     return <div>loading...</div>;
   }
+
   const filterData = (filterProp) => {
     console.log(filterProp);
   };
-  if (status === FETCH_STATUS.error) {
+
+  if (fetchStatus === FETCH_STATUS.error) {
     const { error } = issues;
 
     return (
@@ -45,6 +47,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
       </div>
     );
   }
+
   return (
     <div id="page-top">
       <div className="container-fluid">
