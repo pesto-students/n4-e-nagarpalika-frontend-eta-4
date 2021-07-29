@@ -263,11 +263,11 @@ const LandingPageNew = () => {
         </Header>
       </HeroSection>
       <div className="container">
-        <h1 className="text-center text-dark">Progress Tracker</h1>
+        <H1 className="text-center text-dark">Progress Tracker</H1>
+        <div style={{margin:"1rem"}}/>
         <IssueStatus />
-        <hr />
         <H1 className="text-center ">Monthly Issue Distribution</H1>
-        <hr />
+        <hr/>
         <div className="card text-center shadow" style={{ height: "600px" }}>
           <div className="card-body text-center">
             <ResponsiveContainer width="100%" height="100%">
@@ -300,6 +300,7 @@ const LandingPageNew = () => {
           </div>
         </div>
       </div>
+      <div style={{margin:"1rem"}}/>
       <hr />
       <div className="card-footer bg-secondary">
         <Footer id="media">
