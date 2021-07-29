@@ -28,12 +28,10 @@ import LandingPageNew from "../../pages/landingPage/landingPageNew";
 const PublicRoutes = () => (
   <Switch>
     {/*<Route exact path="/" component={LandingPage} />*/}
-      <Route exact path="/register" component={Register} />
     <Route exact path="/about" component={About} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/contact-us" component={ContactUs} />
     <Route exact path="/" component={LandingPageNew} />
-
     <Route component={NotFound} />
   </Switch>
 );
