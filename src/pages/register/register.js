@@ -27,9 +27,9 @@ function Register({ actionRegister }) {
   const account = useSelector((state) => state.account);
 
   useEffect(() => {
-    const { status, isLoggedIn, isFirstTime } = account;
+    const { fetchtatus, isLoggedIn, isFirstTime } = account;
 
-    if (status === "SUCCESS" && isLoggedIn && !isFirstTime) {
+    if (fetchtatus === "SUCCESS" && isLoggedIn && !isFirstTime) {
       history.push("/dashboard");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
