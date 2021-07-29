@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
 import {Container, InnerContainer} from "./styles";
 
 function Login({ logIn: actionLogin }) {
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -31,15 +31,19 @@ function Login({ logIn: actionLogin }) {
       setLoading(true);
 
       const appVerifier = window.recaptchaVerifier;
-
+    try {
       await firebase
-        .auth()
-        .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
-        .then((confirmResult) => {
-          setConfirmResult(confirmResult);
-        });
+          .auth()
+          .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
+          .then((confirmResult) => {
+            setConfirmResult(confirmResult);
+          });
       setMessage("");
       setIsOtpSent(true);
+    }catch (e){
+     setMessage("**Unexpected error occurred. Please try later.")
+
+    }
     } else {
       setMessage("**Please insert your 10 digit phone number.");
     }
@@ -57,8 +61,8 @@ function Login({ logIn: actionLogin }) {
 
         await actionLogin({firebaseToken});
       } catch (e) {
-        setMessage("**Unexpected error occurred. Please try once again")
-        console.log(e);
+        setMessage("**Unexpected error occurred. Please try again later")
+        // console.log(e);
       }
     }else {
      setMessage("**Please insert the 6 digit OTP sent to your mobile number")
@@ -99,11 +103,13 @@ function Login({ logIn: actionLogin }) {
                   </p>
                   <div className="row">
                     <input
-                      type="text"
+                      type="tel"
+                      maxLength="10"
+                      required
                       className="form-control"
                       id="phoneNumber"
                       aria-describedby="phoneNumberHelp"
-                      placeholder="Phone Number"
+                      placeholder="Phone number"
                       value={phoneNumber}
                       onChange={onChangePhoneNumber}
                       disabled={loading}
@@ -116,6 +122,7 @@ function Login({ logIn: actionLogin }) {
                       style={{ alignSelf: "flex-end" }}
                       onClick={getOtp}
                       disabled={loading}
+
                     >
                       Get OTP
                     </button>
@@ -135,7 +142,9 @@ function Login({ logIn: actionLogin }) {
                   </p>
                   <div className="row">
                     <input
-                      type="text"
+                      type="tel"
+                      maxLength="6"
+                      required
                       className="form-control col"
                       id="otpVerification"
                       value={otp}
