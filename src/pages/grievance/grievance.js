@@ -6,7 +6,7 @@ import { connect, useSelector } from "react-redux";
 
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
-import ViewGrievance from "./viewGrievance";
+import ViewGrievance from "../../modules/grievances/components/viewGrievance";
 
 const Grievance = ({ actionGetIssue }) => {
   const { id } = useParams();
@@ -18,7 +18,6 @@ const Grievance = ({ actionGetIssue }) => {
 
   const list = useSelector(({ issues }) => issues.list);
 
-  // console.log(list);
   const index = list.findIndex((item) => id === item.id);
 
   if (index < 0) {
@@ -27,18 +26,19 @@ const Grievance = ({ actionGetIssue }) => {
 
   const issue = list[index];
 
-  const { status } = issue;
+  const { fetchStatus } = issue;
 
-  if (status === FETCH_STATUS.none) {
+  if (fetchStatus === FETCH_STATUS.none) {
     return <div>none</div>;
   }
 
-  if (status === FETCH_STATUS.loading) {
+  if (fetchStatus === FETCH_STATUS.loading) {
     return <div>loading...</div>;
   }
 
-  if (status === FETCH_STATUS.error) {
+  if (fetchStatus === FETCH_STATUS.error) {
     const { error } = issue;
+
     return (
       <div>
         <h1>error</h1>
@@ -46,9 +46,6 @@ const Grievance = ({ actionGetIssue }) => {
       </div>
     );
   }
-  console.log(list);
-  // eslint-disable-next-line no-unused-vars
-  // const { title, description, images, location, category } = issue;
 
   return (
     <div>

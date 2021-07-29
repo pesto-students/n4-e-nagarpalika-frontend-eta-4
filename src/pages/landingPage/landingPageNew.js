@@ -1,6 +1,20 @@
 /** @format */
 
 import React from "react";
+import { Link } from "react-router-dom";
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import IssueStatus from "../../modules/dashboard/components/IssueStatusCard/IssueStatus";
+
 import {
   Header,
   SVGIMAGE,
@@ -15,18 +29,6 @@ import {
   Footer,
   FooterText,
 } from "./styles";
-import {
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import IssueStatus from "../../modules/dashboard/components/IssueStatusCard/IssueStatus";
-import { Link } from "react-router-dom";
 
 const LandingPageNew = () => {
   const dataByDate = [
@@ -309,4 +311,5 @@ const LandingPageNew = () => {
     </DivHead>
   );
 };
+
 export default LandingPageNew;

@@ -29,20 +29,9 @@ export const LOCATIONS = {
   mumbai: "MUMBAI",
 };
 
-export const LOCATIONS_ARR = [
-  {
-    label: "BANGALURU",
-    value: "bangaluru",
-  },
-  {
-    label: "DELHI",
-    value: "delhi",
-  },
-  {
-    label: "MUMBAI",
-    value: "mumbai",
-  },
-];
+export const LOCATIONS_ARR = Object.entries(LOCATIONS).map(
+  ([value, label]) => ({ label: label, value: value })
+);
 
 export const PROFESSIONS = {
   doctor: "DOCTOR",
@@ -67,7 +56,7 @@ export const ACCOUNT_TYPE = {
 export const GRIEVANCE_STATUS = {
   none: "NONE",
   review: "REVIEW",
-  progress: "PROGRESS",
+  // progress: "PROGRESS",
   action: "ACTION",
   resolved: "RESOLVED",
 };
