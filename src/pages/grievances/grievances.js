@@ -9,6 +9,7 @@ import { FETCH_STATUS } from "../../common/contants";
 // import Carousel from "../../common/components/carousel/carousel";
 import CardBlock from "../../common/components/carousel/CardBlock";
 import Filter from "./filter";
+import Loader from "../../common/components/Loaders/loader";
 
 const Grievances = ({ actionGetAllUserIssue }) => {
   const account = useSelector(({ account }) => account);
@@ -30,7 +31,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
     fetchStatus === FETCH_STATUS.loading ||
     fetchStatus === FETCH_STATUS.none
   ) {
-    return <div>loading...</div>;
+    return <Loader/>;
   }
 
   const filterData = (filterProp) => {
