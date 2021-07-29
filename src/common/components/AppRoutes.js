@@ -40,9 +40,9 @@ const PrivateRoutes = ({ account }) => {
   const history = useHistory();
 
   useEffect(() => {
-    const { status, isLoggedIn, isFirstTime } = account;
+    const { fetchStatus, isLoggedIn, isFirstTime } = account;
 
-    if (status === "SUCCESS" && isLoggedIn && isFirstTime) {
+    if (fetchStatus === "SUCCESS" && isLoggedIn && isFirstTime) {
       history.push("/register");
     }
 

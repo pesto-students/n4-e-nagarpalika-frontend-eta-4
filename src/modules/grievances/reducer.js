@@ -1,4 +1,5 @@
 /** @format */
+import isBefore from "date-fns/isBefore";
 
 import {
   ISSUE_CREATE_RESET,
@@ -17,19 +18,19 @@ import { FETCH_STATUS } from "../../common/contants";
 
 // This is the initial state of an existing issue
 const initialStateOfIssue = {
-  status: FETCH_STATUS.none,
+  fetchStatus: FETCH_STATUS.none,
   error: "",
 };
 
 // This is the initial state of an issue which is going to be created
 const initialStateOfNewIssue = {
-  status: FETCH_STATUS.none,
+  fetchStatus: FETCH_STATUS.none,
   error: "",
 };
 
 // this is the initial state of whole issuesReducer
 const initialState = {
-  status: FETCH_STATUS.none,
+  fetchStatus: FETCH_STATUS.none,
   error: "",
   new: initialStateOfNewIssue,
   list: [],
@@ -42,7 +43,7 @@ function issuesReducer(state = initialState, action) {
         ...state,
         new: {
           ...initialStateOfNewIssue,
-          status: FETCH_STATUS.loading,
+          fetchStatus: FETCH_STATUS.loading,
         },
       };
     }
@@ -53,7 +54,7 @@ function issuesReducer(state = initialState, action) {
         ...state,
         new: {
           ...state.new,
-          status: FETCH_STATUS.error,
+          fetchStatus: FETCH_STATUS.error,
           error: payload,
         },
       };
@@ -65,7 +66,7 @@ function issuesReducer(state = initialState, action) {
         ...state,
         new: {
           ...state.new,
-          status: FETCH_STATUS.success,
+          fetchStatus: FETCH_STATUS.success,
           ...payload,
         },
       };
@@ -92,7 +93,7 @@ function issuesReducer(state = initialState, action) {
           {
             ...initialStateOfIssue,
             id,
-            status: FETCH_STATUS.loading,
+            fetchStatus: FETCH_STATUS.loading,
           },
         ],
       };
@@ -109,7 +110,7 @@ function issuesReducer(state = initialState, action) {
           ...state.list.slice(0, index),
           {
             ...state.list[index],
-            status: FETCH_STATUS.error,
+            fetchStatus: FETCH_STATUS.error,
             error,
           },
           ...state.list.slice(index + 1, state.list.length),
@@ -129,7 +130,7 @@ function issuesReducer(state = initialState, action) {
           ...state.list.slice(0, index),
           {
             ...state.list[index],
-            status: FETCH_STATUS.success,
+            fetchStatus: FETCH_STATUS.success,
             ...rest,
           },
           ...state.list.slice(index + 1, state.list.length),
@@ -139,7 +140,7 @@ function issuesReducer(state = initialState, action) {
     case ISSUES_GET_START: {
       return {
         ...state,
-        status: FETCH_STATUS.loading,
+        fetchStatus: FETCH_STATUS.loading,
       };
     }
     case ISSUES_GET_ERROR: {
@@ -148,17 +149,29 @@ function issuesReducer(state = initialState, action) {
 
       return {
         ...state,
-        status: FETCH_STATUS.error,
+        fetchStatus: FETCH_STATUS.error,
         error,
       };
     }
     case ISSUES_GET_SUCCESS: {
       const { issues } = action.payload;
 
+      // const list = [...state.list, ...issues];
+      const list = [
+        ...new Map(
+          [...state.list, ...issues].map((issue) => [issue["id"], issue])
+        ).values(),
+      ].sort((issue1, issue2) =>
+        isBefore(
+          new Date(issue1.createdAt).getTime(),
+          new Date(issue2.createdAt).getTime()
+        )
+      );
+
       return {
         ...state,
-        status: FETCH_STATUS.success,
-        list: [...state.list, ...issues],
+        fetchStatus: FETCH_STATUS.success,
+        list,
       };
     }
 

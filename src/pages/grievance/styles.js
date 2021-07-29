@@ -400,6 +400,10 @@ export const Select = styled.select`
   background: transparent;
   width: 50%;
   height: 100%;
+
+  &:disabled {
+    background: grey;
+  }
 `;
 export const SelectType = styled.select`
   border-radius: 8px;

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { A, Img, Form, Label, Input, Div } from "./styles";
 // import { storage } from "../../modules/auth/api/firebase";
-import firebase from "../../common/firebase";
+import firebase from "../../../common/firebase";
 
 const storage = firebase.storage();
 

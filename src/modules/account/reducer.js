@@ -16,7 +16,7 @@ import {
 const initialState = {
   isInit: false,
   isLoggedIn: false,
-  status: FETCH_STATUS.none, // "LOADING", "SUCCESS", "ERROR", "NONE"
+  fetchStatus: FETCH_STATUS.none, // "LOADING", "SUCCESS", "ERROR", "NONE"
   error: "",
 };
 
@@ -32,7 +32,7 @@ function accountReducer(state = initialState, action) {
     case LOG_IN_START: {
       return {
         ...state,
-        status: FETCH_STATUS.loading,
+        fetchStatus: FETCH_STATUS.loading,
       };
     }
 
@@ -42,7 +42,7 @@ function accountReducer(state = initialState, action) {
       return {
         ...state,
         isInit: true,
-        status: FETCH_STATUS.error,
+        fetchStatus: FETCH_STATUS.error,
         error: payload,
       };
     }
@@ -53,7 +53,7 @@ function accountReducer(state = initialState, action) {
       return {
         ...state,
         isInit: true,
-        status: FETCH_STATUS.success,
+        fetchStatus: FETCH_STATUS.success,
         isLoggedIn: true,
         ...payload,
       };
@@ -62,7 +62,7 @@ function accountReducer(state = initialState, action) {
     case LOG_OUT_START: {
       return {
         ...state,
-        status: FETCH_STATUS.loading,
+        fetchStatus: FETCH_STATUS.loading,
       };
     }
 
@@ -71,7 +71,7 @@ function accountReducer(state = initialState, action) {
 
       return {
         ...state,
-        status: FETCH_STATUS.error,
+        fetchStatus: FETCH_STATUS.error,
         error: payload,
       };
     }
@@ -86,7 +86,7 @@ function accountReducer(state = initialState, action) {
     case REGISTER_START: {
       return {
         ...state,
-        status: FETCH_STATUS.loading,
+        fetchStatus: FETCH_STATUS.loading,
       };
     }
     case REGISTER_ERROR: {
@@ -94,7 +94,7 @@ function accountReducer(state = initialState, action) {
 
       return {
         ...state,
-        status: FETCH_STATUS.error,
+        fetchStatus: FETCH_STATUS.error,
         error: payload,
       };
     }
@@ -103,7 +103,7 @@ function accountReducer(state = initialState, action) {
 
       return {
         ...state,
-        status: FETCH_STATUS.success,
+        fetchStatus: FETCH_STATUS.success,
         ...payload,
       };
     }

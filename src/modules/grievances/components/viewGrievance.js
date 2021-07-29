@@ -23,16 +23,18 @@ const ViewGrievance = ({ grievanceData }) => {
   const textRef = useRef();
   const [issueStatus, setIssueStatus] = useState();
   const [comment, setComment] = useState("");
-  console.log(grievanceData);
+
   const updateStatus = (e) => {
     e.preventDefault();
     console.log(textRef.current.value);
     console.log(issueStatus);
   };
+
   const postComment = (e) => {
     e.preventDefault();
     console.log(comment);
   };
+
   const handleClick = (e) => {
     e.preventDefault();
 
