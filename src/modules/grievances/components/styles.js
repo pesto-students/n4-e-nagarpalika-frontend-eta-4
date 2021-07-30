@@ -115,14 +115,16 @@ export const StatusOne = styled(ProgressStatus)`
 
 export const StatusTwo = styled(ProgressStatus)`
   left: 30%;
-  background: #2ead16;
+  background: ${({ statusTwo }) => (statusTwo ? "#2ead16" : "#bbb")};
 `;
 
 export const StatusThree = styled(ProgressStatus)`
+  background: ${({ statusThree }) => (statusThree ? "#2ead16" : "#bbb")};
   left: 50%;
 `;
 
 export const StatusFour = styled(ProgressStatus)`
+  background: ${({ statusFour }) => (statusFour ? "#2ead16" : "#bbb")};
   left: 60%;
 `;
 
@@ -135,14 +137,16 @@ export const Progress = styled.div`
 `;
 
 export const ProgressOne = styled(Progress)`
-  background: #2ead16;
+  background: ${({ statusTwo }) => (statusTwo ? "#2ead16" : "#bbb")};
 `;
 
 export const ProgressTwo = styled(Progress)`
+  background: ${({ statusThree }) => (statusThree ? "#2ead16" : "#bbb")};
   left: 37%;
 `;
 
 export const ProgressThree = styled(Progress)`
+  background: ${({ statusFour }) => (statusFour ? "#2ead16" : "#bbb")};
   left: 64%;
 `;
 
