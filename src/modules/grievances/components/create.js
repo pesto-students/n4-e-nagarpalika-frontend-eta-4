@@ -28,7 +28,7 @@ import { GRIEVANCE_CATEGORIES, LOCATIONS } from "../../../common/contants";
 function CreateGrievance({ onSubmit }) {
   const reduxState = useSelector((state) => state);
   const { account, issues } = reduxState;
-  const { location: userLocation } = account;
+  const { city: userLocation } = account;
 
   // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState("");
@@ -38,6 +38,7 @@ function CreateGrievance({ onSubmit }) {
   const [coords, setCoords] = useState([0, 0]);
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState("");
+  const [coordsSelected, setCoordsSelected] = useState(false);
 
   const getCoords = (e) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ function CreateGrievance({ onSubmit }) {
       const { latitude, longitude } = position.coords;
 
       setCoords([longitude, latitude]);
+      setCoordsSelected(true);
     });
   };
 
@@ -102,7 +104,7 @@ function CreateGrievance({ onSubmit }) {
               value={category}
               onChange={selectCategory}
             >
-              <option value="">Select</option>
+              <option value="">Select a category</option>
               {GRIEVANCE_CATEGORIES.map((category) => (
                 <option value={category} key={category}>
                   {category}
@@ -124,11 +126,13 @@ function CreateGrievance({ onSubmit }) {
 
             <GrievanceInputData
               id="location"
-              className="btn btn-primary"
+              className="btn overflow-auto"
               type="button"
+              style={{ background: coordsSelected ? "#bbbaba" : null }}
+              disabled={coordsSelected}
               onClick={getCoords}
             >
-              Get location
+              {!coordsSelected ? "Get location" : "Location set"}
             </GrievanceInputData>
           </Divhead>
           <TextInputData

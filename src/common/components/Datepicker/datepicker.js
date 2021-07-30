@@ -1,19 +1,24 @@
 /** @format */
 
 import React from "react";
+import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 
-const DatepickerRange = () => {
-  // const [dateRange, setDateRange] = useState([null, null]);
-  // const [startDate, endDate] = dateRange;
+const DatepickerRange = ({ date, setDate }) => {
+  const onChange = (e) => {
+    setDate(e.target.value);
+  };
+
   return (
     <div className="container">
-      <Form.Control
-        type="date"
-        name="date"
-        onChange={(e) => console.log(e.target.value)}
-      />
+      <Form.Control type="date" name="date" value={date} onChange={onChange} />
     </div>
   );
 };
+
+DatepickerRange.propTypes = {
+  date: PropTypes.string.isRequired,
+  setDate: PropTypes.func.isRequired,
+};
+
 export default DatepickerRange;

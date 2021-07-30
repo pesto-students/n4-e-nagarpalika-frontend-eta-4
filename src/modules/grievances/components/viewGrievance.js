@@ -1,5 +1,7 @@
 /** @format */
 
+/* eslint-disable no-unused-vars */
+
 import React, { useRef, useState } from "react";
 
 import ProgressBar from "./progressBar";
@@ -24,21 +26,24 @@ const ViewGrievance = ({ grievanceData }) => {
   const [issueStatus, setIssueStatus] = useState();
   const [comment, setComment] = useState("");
 
+  const { geoLocation } = grievanceData;
+  const [lng, lat] = geoLocation.coordinates;
+
   const updateStatus = (e) => {
     e.preventDefault();
-    console.log(textRef.current.value);
-    console.log(issueStatus);
+    // console.log(textRef.current.value);
+    // console.log(issueStatus);
   };
 
   const postComment = (e) => {
     e.preventDefault();
-    console.log(comment);
+    // console.log(comment);
   };
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    const link = `https://maps.google.com/?q=${grievanceData.location}`;
+    const link = `http://www.google.com/maps/place/${lat},${lng}`;
     const newWindow = window.open(link, "_blank", "noopener,noreferrer");
     if (newWindow) newWindow.opener = null;
   };
