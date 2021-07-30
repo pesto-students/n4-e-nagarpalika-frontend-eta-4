@@ -1,30 +1,29 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import {
   GRIEVANCE_CATEGORIES,
   GRIEVANCE_STATUS,
-  LOCATIONS_ARR,
+  LOCATIONS,
 } from "../../common/contants";
 import { Typeahead } from "react-bootstrap-typeahead";
 import DatepickerRange from "../../common/components/Datepicker/datepicker";
 import { Select, CardHead } from "./styles";
 
-const Filter = (props) => {
-  const [selected, setSelected] = useState([]);
-  const [filterData, setFilterData] = useState();
-
-  if (selected) {
-    props.filterProps(selected);
-  }
-  const selectFilterData = (e) => {
-    props.filterProps(e.target.value);
-    setFilterData(e.target.value);
-  };
-  const dictToArr = (dict) => {
-    return Object.values(dict);
-  };
-
+const Filter = ({
+  dateRangeStart,
+  setDateRangeStart,
+  dateRangeEnd,
+  setDateRangeEnd,
+  sortBy,
+  setSortBy,
+  location,
+  setLocation,
+  category,
+  setCategory,
+  status,
+  setStatus,
+}) => {
   return (
     <div className="container-fluid" style={{ marginTop: "40px" }}>
       <CardHead className="navbar navbar-expand-lg navbar-light shadow bg-light">
@@ -55,37 +54,33 @@ const Filter = (props) => {
               </li>
               <li className="nav-item">
                 <Select
-                  className=" nav-link form-select"
+                  className="nav-link form-select"
                   aria-label=".form-select-lg"
-                  onChange={selectFilterData}
-                  value={filterData}
+                  onChange={(e) => setStatus(e.target.value)}
+                  value={status}
                 >
                   <option value="">Issue Status</option>
-                  {dictToArr(GRIEVANCE_STATUS).map((issueStat, index) => (
-                    <option
-                      className="text-center"
-                      key={index}
-                      value={issueStat}
-                    >
-                      {issueStat === GRIEVANCE_STATUS.none
-                        ? "Created"
-                        : issueStat === GRIEVANCE_STATUS.review
-                        ? "Reviewed"
-                        : issueStat === GRIEVANCE_STATUS.action
+                  {Object.values(GRIEVANCE_STATUS).map((gStatus, index) => (
+                    <option className="text-center" key={index} value={gStatus}>
+                      {gStatus === GRIEVANCE_STATUS.none ? "Created" : null}
+                      {gStatus === GRIEVANCE_STATUS.review ? "Reviewed" : null}
+                      {gStatus === GRIEVANCE_STATUS.action
                         ? "Action Taken"
-                        : "Resolved"}
+                        : null}
+                      {gStatus === GRIEVANCE_STATUS.resolved
+                        ? "Resolved"
+                        : null}
                     </option>
                   ))}
                 </Select>
               </li>
               <li className="nav-item">
                 <Select
-                  className=" nav-link form-select"
+                  className="nav-link form-select"
                   aria-label=".form-select-lg"
-                  onChange={selectFilterData}
-                  value={filterData}
+                  onChange={(e) => setCategory(e.target.value)}
+                  value={category}
                 >
-                  {" "}
                   <option value="">Issue Type</option>
                   {GRIEVANCE_CATEGORIES.map((category, index) => (
                     <option
@@ -100,36 +95,35 @@ const Filter = (props) => {
               </li>
               <li className="nav-item dropdown">
                 <Select
-                  className=" nav-link form-select"
+                  className="nav-link form-select"
                   aria-label=".form-select-lg"
-                  onChange={selectFilterData}
-                  value={filterData}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  value={sortBy}
                 >
                   <option className="text-center" value="">
                     Sort By
                   </option>
-                  <option className="text-center" value="latestFirst">
+                  <option className="text-center" value="createdAt">
                     Latest First
                   </option>
-                  <option className="text-center" value="oldestFirst">
+                  <option className="text-center" value="createdAt_desc">
                     Oldest First
                   </option>
                 </Select>
               </li>
             </ul>
-            {/*<form className="d-flex">*/}
-            {/*  <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>*/}
-            {/*    <button className="btn btn-primary" type="button">Search</button>*/}
-            {/*</form>*/}
+
             <Typeahead
-              id="basic-example"
-              onChange={setSelected}
-              options={LOCATIONS_ARR}
+              id="selectLocation"
+              onChange={setLocation}
+              options={Object.entries(LOCATIONS).map(([value, label]) => ({
+                label: label,
+                value: value,
+              }))}
               placeholder="Choose a city..."
-              selected={selected}
+              selected={location}
             />
           </div>
-          {/*</div>*/}
           <div
             className="modal fade"
             id="staticBackdrop"
@@ -154,10 +148,18 @@ const Filter = (props) => {
                 </div>
                 <div className="modal-body text-center">
                   <div>
-                    Start Date: <DatepickerRange />
+                    Start Date:{" "}
+                    <DatepickerRange
+                      date={dateRangeStart}
+                      setDate={setDateRangeStart}
+                    />
                   </div>
                   <div>
-                    End Date: <DatepickerRange />
+                    End Date:{" "}
+                    <DatepickerRange
+                      date={dateRangeEnd}
+                      setDate={setDateRangeEnd}
+                    />
                   </div>
                 </div>
                 <div className="modal-footer">
