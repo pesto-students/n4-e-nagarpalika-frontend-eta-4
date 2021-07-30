@@ -17,7 +17,8 @@ import {
   ProgressHead,
   Image,
 } from "./viewGrievanceStyle";
-import { GRIEVANCE_STATUS } from "../../common/contants";
+import {ACCOUNT_TYPE, GRIEVANCE_STATUS} from "../../common/contants";
+import {useSelector} from "react-redux";
 
 const ViewGrievance = ({ data }) => {
   const textRef = useRef();
@@ -25,6 +26,10 @@ const ViewGrievance = ({ data }) => {
   const [comments, setComments] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [comment, setComment] = useState("");
+  const reduxState = useSelector((state) => state);
+  const { account } = reduxState;
+  const { accountType } = account;
+
   useEffect(() => {
     setComments([
       {
@@ -62,6 +67,9 @@ const ViewGrievance = ({ data }) => {
   //     userId: "60f99c0b997cf701d2b3832e",
   //
   // }
+  const markAsResolved = (e) => {
+    e.preventDefault();
+  }
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -151,15 +159,22 @@ const ViewGrievance = ({ data }) => {
               <Text>{data.description}</Text>
             </Description>
             <ButtonDiv>
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-                type="button"
-                className="btn btn-primary"
+              {accountType !== ACCOUNT_TYPE.user && issueStatus !== GRIEVANCE_STATUS.action ?<button
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                  type="button"
+                  className="btn btn-primary"
               >
                 {" "}
                 Update Issue
-              </button>
+              </button>:null}
+              {accountType === ACCOUNT_TYPE.user && issueStatus === GRIEVANCE_STATUS.action ?<button
+                  onClick={markAsResolved}
+                  type="button"
+                  className="btn btn-primary"
+              >
+                Resolve
+              </button>:null}
             </ButtonDiv>
           </div>
         </div>
