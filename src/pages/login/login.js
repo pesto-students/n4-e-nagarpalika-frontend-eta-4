@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-
+import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
-import { Container } from "./styles";
+import { Container, InnerContainer } from "./styles";
 
 function Login({ logIn: actionLogin }) {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -30,15 +30,18 @@ function Login({ logIn: actionLogin }) {
       setLoading(true);
 
       const appVerifier = window.recaptchaVerifier;
-
-      await firebase
-        .auth()
-        .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
-        .then((confirmResult) => {
-          setConfirmResult(confirmResult);
-        });
-      setMessage("");
-      setIsOtpSent(true);
+      try {
+        await firebase
+          .auth()
+          .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
+          .then((confirmResult) => {
+            setConfirmResult(confirmResult);
+          });
+        setMessage("");
+        setIsOtpSent(true);
+      } catch (e) {
+        setMessage("**Unexpected error occurred. Please try later.");
+      }
     } else {
       setMessage("**Please insert your 10 digit phone number.");
     }
@@ -46,17 +49,22 @@ function Login({ logIn: actionLogin }) {
   };
 
   async function sendOtp(e) {
-    setLoading(true);
-    try {
-      const result = await confirmResult.confirm(otp);
+    if (otp.length === 6) {
+      setMessage("");
+      setLoading(true);
+      try {
+        const result = await confirmResult.confirm(otp);
 
-      const firebaseToken = await result.user.getIdToken();
+        const firebaseToken = await result.user.getIdToken();
 
-      await actionLogin({ firebaseToken });
-    } catch (e) {
-      // console.log(e);
+        await actionLogin({ firebaseToken });
+      } catch (e) {
+        setMessage("**Unexpected error occurred. Please try again later");
+        // console.log(e);
+      }
+    } else {
+      setMessage("**Please insert the 6 digit OTP sent to your mobile number");
     }
-
     // setLoading(false);
   }
 
@@ -79,8 +87,9 @@ function Login({ logIn: actionLogin }) {
   return (
     <Container>
       <div className="card mb-4">
-        <h5 className="card-header text-center bg-info">Log In</h5>
-        <div className="card-body">
+        <LoginSVG />
+        <h2 className="text-center">Log in</h2>
+        <InnerContainer className="card-body">
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
@@ -88,15 +97,17 @@ function Login({ logIn: actionLogin }) {
               <>
                 <div className="mb-4">
                   <p htmlFor="phoneNumber" className="text-center card-text">
-                    Phone Number
+                    Phone number
                   </p>
                   <div className="row">
                     <input
-                      type="text"
-                      className="form-control col"
+                      type="tel"
+                      maxLength="10"
+                      required
+                      className="form-control"
                       id="phoneNumber"
                       aria-describedby="phoneNumberHelp"
-                      placeholder="Phone Number"
+                      placeholder="Phone number"
                       value={phoneNumber}
                       onChange={onChangePhoneNumber}
                       disabled={loading}
@@ -105,7 +116,7 @@ function Login({ logIn: actionLogin }) {
                     <button
                       type="button"
                       // style={{width:"50%"}}
-                      className="btn btn-primary col"
+                      className="btn btn-primary"
                       style={{ alignSelf: "flex-end" }}
                       onClick={getOtp}
                       disabled={loading}
@@ -128,7 +139,9 @@ function Login({ logIn: actionLogin }) {
                   </p>
                   <div className="row">
                     <input
-                      type="text"
+                      type="tel"
+                      maxLength="6"
+                      required
                       className="form-control col"
                       id="otpVerification"
                       value={otp}
@@ -138,7 +151,7 @@ function Login({ logIn: actionLogin }) {
                     <hr />
                     <button
                       type="button"
-                      style={{ margin: "5px" }}
+                      style={{ alignSelf: "flex-end" }}
                       className="btn btn-primary col"
                       onClick={sendOtp}
                       disabled={loading}
@@ -154,7 +167,7 @@ function Login({ logIn: actionLogin }) {
             )}
           </form>
           <p className="form-text text-danger">{message}</p>
-        </div>
+        </InnerContainer>
       </div>
     </Container>
   );

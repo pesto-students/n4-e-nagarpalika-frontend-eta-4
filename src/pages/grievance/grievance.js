@@ -4,9 +4,11 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { connect, useSelector } from "react-redux";
 
+import Loader from "../../common/components/Loaders/loader";
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
-import ViewGrievance from "../../modules/grievances/components/viewGrievance";
+// import ViewGrievance from "./viewGrievance";
+import ViewGrievance from "./viewGrievanceNew";
 
 const Grievance = ({ actionGetIssue }) => {
   const { id } = useParams();
@@ -33,7 +35,11 @@ const Grievance = ({ actionGetIssue }) => {
   }
 
   if (fetchStatus === FETCH_STATUS.loading) {
-    return <div>loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (fetchStatus === FETCH_STATUS.error) {
@@ -49,7 +55,7 @@ const Grievance = ({ actionGetIssue }) => {
 
   return (
     <div>
-      <ViewGrievance grievanceData={issue} />
+      <ViewGrievance data={issue} />
     </div>
   );
 };

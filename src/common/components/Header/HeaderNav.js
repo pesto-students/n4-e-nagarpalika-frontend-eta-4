@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
 import NotificationCard from "../Notifications/Card";
@@ -18,7 +18,7 @@ import { Span, Nav, NotifTime } from "./styles";
 const HeaderNav = ({ actionLogout }) => {
   const account = useSelector((state) => state.account);
   const { accountType } = account;
-
+  const history = useHistory();
   const [hiddenNavs, setHiddenNavs] = useState(false);
   const location = useLocation();
   const { pathname } = location;
@@ -67,9 +67,11 @@ const HeaderNav = ({ actionLogout }) => {
                   data-bs-target="#notificationModal"
                 >
                   <i className="bi bi-bell pos position-relative h3">
-                    <Span className="position-absolute top-0 start-100 p-1 translate-middle badge rounded-circle bg-danger">
-                      <span className="text-white h6">99+</span>
-                    </Span>
+                    {accountType === ACCOUNT_TYPE.admin ? (
+                      <Span className="position-absolute top-0 start-100 p-1 translate-middle badge rounded-circle bg-danger">
+                        <span className="text-white h6">99+</span>
+                      </Span>
+                    ) : null}
                   </i>
                 </div>
                 <div
@@ -86,9 +88,9 @@ const HeaderNav = ({ actionLogout }) => {
                       <div className="modal-header">
                         <h5
                           className="modal-title background-secondary"
-                          id="staticBackdropLabel"
+                          id="notification"
                         >
-                          Notifications Center
+                          Notifications center
                         </h5>
                         <button
                           type="button"
@@ -106,7 +108,8 @@ const HeaderNav = ({ actionLogout }) => {
                             issueId: "60fc7eef126fe5023c98ecfc",
                           }}
                         />
-                        {/* <div>
+                      </div>
+                      {/* <div>
                           <a href="/grievances/60fc7eef126fe5023c98ecfc">
                             <div className="alert alert-secondary">
                               Status changed for your grievance ‘Traffic Light
@@ -116,16 +119,15 @@ const HeaderNav = ({ actionLogout }) => {
                               </NotifTime>
                             </div>
                           </a>
-                        </div>
-                        <div className="modal-footer">
-                          <a
-                            type="button"
-                            className="btn btn-primary"
-                            href="/notifications"
-                          >
-                            See More
-                          </a>
-                        </div> */}
+                        </div>*/}
+                      <div className="modal-footer">
+                        <a
+                          type="button"
+                          className="btn btn-primary"
+                          href="/notifications"
+                        >
+                          See More
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -154,23 +156,24 @@ const HeaderNav = ({ actionLogout }) => {
                   */}
                   <li>
                     <Link className="dropdown-item" to="/account">
-                      Settings
+                      My profile
                     </Link>
                   </li>
                   {accountType === ACCOUNT_TYPE.admin ? (
                     <li>
                       <Link className="dropdown-item" to="/admin-action">
-                        Admin Actions
+                        Admin actions
                       </Link>
                     </li>
                   ) : null}
                   <li>
                     <a
-                      href="/"
+                      href="/#"
                       className="dropdown-item"
-                      onClick={(e) => {
-                        e.preventDefault();
+                      onClick={() => {
+                        // e.preventDefault();
                         actionLogout();
+                        history.push("/");
                       }}
                     >
                       Sign out
