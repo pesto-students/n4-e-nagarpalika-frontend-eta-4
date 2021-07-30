@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
@@ -53,11 +54,7 @@ function Login({ logIn: actionLogin }) {
       setMessage("");
       setLoading(true);
       try {
-        const result = await confirmResult.confirm(otp);
-
-        const firebaseToken = await result.user.getIdToken();
-
-        await actionLogin({ firebaseToken });
+        await confirmResult.confirm(otp);
       } catch (e) {
         setMessage("**Unexpected error occurred. Please try again later");
         // console.log(e);

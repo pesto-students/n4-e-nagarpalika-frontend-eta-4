@@ -2,8 +2,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // import Header from "./Header/Header";
 // import Footer from "./Footer/Footer";
@@ -27,9 +27,10 @@ const BodyContainer = styled.div`
 `;
 
 function AppLayout({ children }) {
+  const account = useSelector(({ account }) => account);
   const location = useLocation();
-
   const { pathname } = location;
+  const { isLoggedIn } = account;
 
   const isLeftNavEnabled = isVisibleByRoute(pathname, [
     "/",
@@ -45,9 +46,9 @@ function AppLayout({ children }) {
 
   return (
     <AppLayoutContainer>
-      {!isHeaderEnabled && <HeaderNav />}
-      {!isLeftNavEnabled && <SidebarNav />}
-      <BodyContainer isLeftNavEnabled={!isLeftNavEnabled}>
+      {!isHeaderEnabled && isLoggedIn && <HeaderNav />}
+      {!isLeftNavEnabled && isLoggedIn && <SidebarNav />}
+      <BodyContainer isLeftNavEnabled={!isLeftNavEnabled && isLoggedIn}>
         {children}
       </BodyContainer>
       {/*{isFooterVisible && <Footer />}*/}
