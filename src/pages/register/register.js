@@ -17,10 +17,12 @@ import {
   DivBody,
   DivHead,
   DivBodyColumn,
-  P,PTag,
+  P,
+  PTag,
   SVG,
   Select,
-  Terms, Div,
+  Terms,
+  Div,
 } from "./styles";
 
 function Register({ actionRegister }) {
@@ -92,10 +94,10 @@ function Register({ actionRegister }) {
   };
 
   return (
-    <Container >
+    <Container>
       <Form onSubmit={onSubmit}>
         <Div>
-          <RegisterSVG/>
+          <RegisterSVG />
         </Div>
         <Div className="row">
           <DivBodyColumn className="col">
@@ -111,11 +113,11 @@ function Register({ actionRegister }) {
           <DivBodyColumn className="col">
             <P>Email*</P>
             <FormInput
-                id="email"
-                type="email"
-                onChange={onChangeEmail}
-                value={email}
-                placeholder="Enter your Email"
+              id="email"
+              type="email"
+              onChange={onChangeEmail}
+              value={email}
+              placeholder="Enter your Email"
             />
           </DivBodyColumn>
         </Div>
@@ -134,12 +136,12 @@ function Register({ actionRegister }) {
           <DivBodyColumn className="col">
             <P>Aadhar Number*</P>
             <FormInput
-                id="aadharNumber"
-                type="number"
-                onChange={onChangeAadhar}
-                value={aadhar}
-                placeholder="Enter the 16 digit Aadhar Number"
-                pattern="[0-9]{16}"
+              id="aadharNumber"
+              type="number"
+              onChange={onChangeAadhar}
+              value={aadhar}
+              placeholder="Enter the 16 digit Aadhar Number"
+              pattern="[0-9]{16}"
             />
           </DivBodyColumn>
         </Div>
@@ -176,40 +178,42 @@ function Register({ actionRegister }) {
               </DivHead>
             </DivBody>
           </DivBodyColumn>
-
         </Div>
         <Div className="row">
-
-            <a href="/#" className="col">
-              <DivBody>
-                <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0V0z" fill="none" />
-                  <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
-                </SVG>
-                <PTag>Upload Profile Picture</PTag>
-              </DivBody>
-            </a>
+          <a href="/#" className="col">
+            <DivBody>
+              <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
+              </SVG>
+              <PTag>Upload Profile Picture</PTag>
+            </DivBody>
+          </a>
           <div className="col">
-          <DivBody>
-            <Checkbox
+            <DivBody>
+              <Checkbox
                 type="checkbox"
                 value={checkbox}
                 disabled={loading}
                 onClick={() => {
                   setCheckbox(!checkbox);
                 }}
-            />
-            <Terms>
-              By Clicking here I accept the Privacy Policy and Terms
-              Conditions of use.
-            </Terms>
-          </DivBody>
+              />
+              <Terms>
+                By Clicking here I accept the Privacy Policy and Terms
+                Conditions of use.
+              </Terms>
+            </DivBody>
           </div>
         </Div>
         <DivHead>
-            <Button className="btn btn-primary" disabled={loading} onClick={onSubmit}>
-              Register
-            </Button>
+          <Button
+            className="btn btn-primary"
+            disabled={loading}
+            onClick={onSubmit}
+          >
+            Register
+          </Button>
           <DivBodyColumn>
             <P style={{ color: textColor }}>{message}</P>
           </DivBodyColumn>

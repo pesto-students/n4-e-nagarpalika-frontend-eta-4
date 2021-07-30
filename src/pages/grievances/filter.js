@@ -26,7 +26,7 @@ const Filter = (props) => {
   };
 
   return (
-    <div className="container-fluid" style={{marginTop:"40px"}}>
+    <div className="container-fluid" style={{ marginTop: "40px" }}>
       <CardHead className="navbar navbar-expand-lg navbar-light shadow bg-light">
         <div className="container-fluid">
           <div className="navbar-brand">Filter By</div>
@@ -67,7 +67,13 @@ const Filter = (props) => {
                       key={index}
                       value={issueStat}
                     >
-                      {issueStat}
+                      {issueStat === GRIEVANCE_STATUS.none
+                        ? "Created"
+                        : issueStat === GRIEVANCE_STATUS.review
+                        ? "Reviewed"
+                        : issueStat === GRIEVANCE_STATUS.action
+                        ? "Action Taken"
+                        : "Resolved"}
                     </option>
                   ))}
                 </Select>
