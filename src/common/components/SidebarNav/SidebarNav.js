@@ -6,11 +6,11 @@ import { useLocation } from "react-router";
 import classnames from "classnames";
 
 import { Container } from "./styles";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const SidebarNav = () => {
   const account = useSelector((state) => state.account);
-  console.log(account)
+  console.log(account);
   const { accountType } = account;
   const location = useLocation();
   const { pathname } = location;

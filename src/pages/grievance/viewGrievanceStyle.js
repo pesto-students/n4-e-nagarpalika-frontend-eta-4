@@ -1,3 +1,5 @@
+/** @format */
+
 import styled from "styled-components";
 
 export const DivHead = styled.div`
@@ -12,7 +14,7 @@ export const Card = styled.div`
   margin: 10px;
   background-color: white;
   padding: 0;
-  @media(max-width: 1200px){
+  @media (max-width: 1200px) {
     height: auto;
   }
 `;
@@ -23,34 +25,34 @@ export const Button = styled.button`
 `;
 
 export const Image = styled.img`
- height: 250px;
-  @media(max-width:1400px){
+  height: 250px;
+  @media (max-width: 1400px) {
     height: auto;
   }
 `;
-export const CardCarousel =styled.div`
-  width:80%;
-  height:250px;
+export const CardCarousel = styled.div`
+  width: 80%;
+  height: 250px;
   margin-bottom: 20px;
-  @media(max-width:1400px){
-   height: auto;
+  @media (max-width: 1400px) {
+    height: auto;
   }
 `;
 
 export const ATag = styled.a`
- margin-bottom: 50px;
+  margin-bottom: 50px;
 `;
 
-export const ActionCorner =styled.div`
+export const ActionCorner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media(max-width: 700px){
+  @media (max-width: 700px) {
     height: auto;
     margin-bottom: 50px;
   }
-  @media(min-width: 990px) and(max-width:1400px){
+  @media (min-width: 990px) and(max-width:1400px) {
     width: 50%;
   }
 `;
@@ -64,25 +66,25 @@ export const Description = styled.div`
   width: 90%;
 `;
 
-export const ButtonDiv=styled.div`
+export const ButtonDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
-  @media(min-width: 900px){
+  @media (min-width: 900px) {
     margin-bottom: 30px;
   }
 `;
 
-export const ProgressHead=styled.div`
+export const ProgressHead = styled.div`
   //margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 30px;
   //width: 80%;
-  @media(min-width: 990px) and(max-width:1400px){
+  @media (min-width: 990px) and(max-width:1400px) {
     width: 50%;
   }
 `;
@@ -95,7 +97,7 @@ export const CardFooter = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  @media(max-width: 1200px){
+  @media (max-width: 1200px) {
     margin: 0;
     width: auto;
   }

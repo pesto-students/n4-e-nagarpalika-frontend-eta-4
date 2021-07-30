@@ -38,7 +38,7 @@ function CreateGrievance({ onSubmit }) {
   const [coords, setCoords] = useState([0, 0]);
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState("");
-  const [coordsSelected, setCoordsSelected] = useState(false)
+  const [coordsSelected, setCoordsSelected] = useState(false);
 
   const getCoords = (e) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ function CreateGrievance({ onSubmit }) {
       const { latitude, longitude } = position.coords;
 
       setCoords([longitude, latitude]);
-      setCoordsSelected(true)
+      setCoordsSelected(true);
     });
   };
 
@@ -128,11 +128,11 @@ function CreateGrievance({ onSubmit }) {
               id="location"
               className="btn overflow-auto"
               type="button"
-              style={{background:coordsSelected? "#bbbaba":null}}
+              style={{ background: coordsSelected ? "#bbbaba" : null }}
               disabled={coordsSelected}
               onClick={getCoords}
             >
-              {!coordsSelected?"Get location":"Location set"}
+              {!coordsSelected ? "Get location" : "Location set"}
             </GrievanceInputData>
           </Divhead>
           <TextInputData

@@ -36,6 +36,7 @@ const ViewGrievance = ({ data }) => {
       },
     ]);
   }, []);
+  console.log(data);
   const updateStatus = (e) => {
     e.preventDefault();
     // console.log(textRef.current.value);
@@ -116,7 +117,7 @@ const ViewGrievance = ({ data }) => {
               </button>
             </CardCarousel>
             <ProgressHead>
-              <ProgressBar />
+              <ProgressBar issueStatus={data.status} />
             </ProgressHead>
             <PGrievance>{data.category}</PGrievance>
           </ActionCorner>
@@ -275,6 +276,8 @@ const ViewGrievance = ({ data }) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={updateStatus}
+                data-bs-dismiss="modal"
+                aria-label="Close"
               >
                 Update
               </button>

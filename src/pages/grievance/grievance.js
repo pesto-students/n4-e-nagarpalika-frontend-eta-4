@@ -35,7 +35,11 @@ const Grievance = ({ actionGetIssue }) => {
   }
 
   if (fetchStatus === FETCH_STATUS.loading) {
-    return <div><Loader/></div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (fetchStatus === FETCH_STATUS.error) {

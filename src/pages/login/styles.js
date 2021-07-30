@@ -11,7 +11,7 @@ export const Container = styled.section`
   height: calc(100vh - 115px);
 `;
 export const InnerContainer = styled.div`
- width: 80%;
+  width: 80%;
   align-self: center;
 `;
 export const Form = styled.form`

@@ -156,7 +156,7 @@ export const Message = styled.div`
   left: -8px;
   top: 0;
   color: #000;
-  @media(max-width: 700px){
+  @media (max-width: 700px) {
     font-size: x-small;
   }
 `;

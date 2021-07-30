@@ -1,17 +1,16 @@
 /** @format */
 
 import React from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { CardHead, Image, P } from "../styles";
 
-
 const Cards = ({ cover, title, content, id }) => {
-  const history = useHistory()
-  const handleClick =(e)=>{
-    e.preventDefault()
-    history.push(`/grievances/${id}`)
-  }
+  const history = useHistory();
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push(`/grievances/${id}`);
+  };
 
   return (
     <div className="col-md-3  float-left">
