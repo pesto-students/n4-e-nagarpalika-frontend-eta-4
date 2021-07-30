@@ -39,6 +39,13 @@ export const validateAadhar = async ({ aadharNumber }) => {
     `${REACT_APP_SERVER_API}/api/users/validateAadhar`,
     {
       aadharNumber,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     }
   );
 

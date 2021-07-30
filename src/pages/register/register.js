@@ -52,6 +52,7 @@ function Register({ actionRegister }) {
   const [message, setMessage] = useState("");
   const [textColor, setTextColor] = useState("#a51212");
   const [checkbox, setCheckbox] = useState(false);
+  const [aadharNumberExist, setAadharNumberExist] = useState(false);
 
   const selectCity = (e) => {
     setCity(e.target.value);
@@ -78,10 +79,11 @@ function Register({ actionRegister }) {
 
     // display error message in UI
     if (aadhar.length === 16) {
-      const { data } = await apiValidateAadhar({ aadharNumber });
+      const { data } = await apiValidateAadhar({ aadharNumber: aadhar });
       // eslint-disable-next-line no-unused-vars
       const { exists } = data;
 
+      setAadharNumberExist(exists);
       // console.log(exists);
     }
   };
