@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
+import { validateAadhar as apiValidateAadhar } from "../../modules/account/api";
 import { register } from "../../modules/account/actionCreators";
 import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
 
@@ -27,11 +28,12 @@ function Register({ actionRegister }) {
   const account = useSelector((state) => state.account);
 
   useEffect(() => {
-    const { fetchtatus, isLoggedIn, isFirstTime } = account;
+    const { fetchStatus, isLoggedIn, isFirstTime } = account;
 
-    if (fetchtatus === "SUCCESS" && isLoggedIn && !isFirstTime) {
+    if (fetchStatus === "SUCCESS" && isLoggedIn && !isFirstTime) {
       history.push("/dashboard");
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
@@ -39,7 +41,7 @@ function Register({ actionRegister }) {
   const [name, setName] = useState("");
   // const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
-  const [aadhar, setAadhar] = useState("");
+  const [aadharNumber, setAadharNumber] = useState("");
   const [phoneNumber] = useState(account.phoneNumber);
   const [city, setCity] = useState("");
   const [gender, setGender] = useState("");
@@ -68,8 +70,18 @@ function Register({ actionRegister }) {
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
-  const onChangeAadhar = (e) => {
-    setAadhar(e.target.value);
+  const onChangeAadhar = async (e) => {
+    const aadhar = e.target.value;
+    setAadharNumber(aadhar);
+
+    // display error message in UI
+    if (aadhar.length === 16) {
+      const { data } = await apiValidateAadhar({ aadharNumber });
+      // eslint-disable-next-line no-unused-vars
+      const { exists } = data;
+
+      // console.log(exists);
+    }
   };
 
   const onSubmit = async (e) => {
@@ -79,7 +91,7 @@ function Register({ actionRegister }) {
     await actionRegister({
       name,
       email,
-      aadhar,
+      aadharNumber,
       phoneNumber,
       city,
       gender,
@@ -165,7 +177,7 @@ function Register({ actionRegister }) {
               id="aadharNumber"
               type="text"
               onChange={onChangeAadhar}
-              value={aadhar}
+              value={aadharNumber}
               placeholder="Enter the 16 digit Aadhar Number"
               pattern="[0-9]{16}"
             />

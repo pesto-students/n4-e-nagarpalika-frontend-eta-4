@@ -46,21 +46,21 @@ function Login({ logIn: actionLogin }) {
   };
 
   async function sendOtp(e) {
-    if(otp.length===6){
-      setMessage("")
+    if (otp.length === 6) {
+      setMessage("");
       setLoading(true);
       try {
         const result = await confirmResult.confirm(otp);
 
         const firebaseToken = await result.user.getIdToken();
 
-        await actionLogin({firebaseToken});
+        await actionLogin({ firebaseToken });
       } catch (e) {
-        setMessage("**Unexpected error occurred. Please try once again")
-        console.log(e);
+        setMessage("**Unexpected error occurred. Please try once again");
+        // console.log(e);
       }
-    }else {
-     setMessage("**Please insert the 6 digit OTP sent to your mobile number")
+    } else {
+      setMessage("**Please insert the 6 digit OTP sent to your mobile number");
     }
     // setLoading(false);
   }
