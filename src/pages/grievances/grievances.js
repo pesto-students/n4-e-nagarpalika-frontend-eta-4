@@ -32,7 +32,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
     fetchStatus === FETCH_STATUS.loading ||
     fetchStatus === FETCH_STATUS.none
   ) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   const filterData = (filterProp) => {
@@ -51,7 +51,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
   }
 
   return (
-    <div id="page-top" >
+    <div id="page-top">
       <div className="container-fluid">
         <Filter filterProps={(data) => filterData(data)} />
         {/*<Carousel issues={list} title={"Pending"} />*/}

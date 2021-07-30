@@ -18,7 +18,7 @@ import { Span, Nav, NotifTime } from "./styles";
 const HeaderNav = ({ actionLogout }) => {
   const account = useSelector((state) => state.account);
   const { accountType } = account;
-  const history=useHistory();
+  const history = useHistory();
   const [hiddenNavs, setHiddenNavs] = useState(false);
   const location = useLocation();
   const { pathname } = location;
@@ -68,9 +68,10 @@ const HeaderNav = ({ actionLogout }) => {
                 >
                   <i className="bi bi-bell pos position-relative h3">
                     {accountType === ACCOUNT_TYPE.admin ? (
-                        <Span className="position-absolute top-0 start-100 p-1 translate-middle badge rounded-circle bg-danger">
-                      <span className="text-white h6">99+</span>
-                    </Span>):null}
+                      <Span className="position-absolute top-0 start-100 p-1 translate-middle badge rounded-circle bg-danger">
+                        <span className="text-white h6">99+</span>
+                      </Span>
+                    ) : null}
                   </i>
                 </div>
                 <div
@@ -108,7 +109,7 @@ const HeaderNav = ({ actionLogout }) => {
                           }}
                         />
                       </div>
-                        {/* <div>
+                      {/* <div>
                           <a href="/grievances/60fc7eef126fe5023c98ecfc">
                             <div className="alert alert-secondary">
                               Status changed for your grievance ‘Traffic Light
@@ -119,16 +120,16 @@ const HeaderNav = ({ actionLogout }) => {
                             </div>
                           </a>
                         </div>*/}
-                        <div className="modal-footer">
-                          <a
-                            type="button"
-                            className="btn btn-primary"
-                            href="/notifications"
-                          >
-                            See More
-                          </a>
-                        </div>
+                      <div className="modal-footer">
+                        <a
+                          type="button"
+                          className="btn btn-primary"
+                          href="/notifications"
+                        >
+                          See More
+                        </a>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -172,7 +173,7 @@ const HeaderNav = ({ actionLogout }) => {
                       onClick={() => {
                         // e.preventDefault();
                         actionLogout();
-                        history.push("/")
+                        history.push("/");
                       }}
                     >
                       Sign out

@@ -156,7 +156,7 @@ export const Message = styled.div`
   left: -8px;
   top: 0;
   color: #000;
-  @media(max-width: 1200px)and(min-width: 995px){
+  @media (max-width: 1200px) and(min-width: 995px) {
     font-size: smaller;
   }
 `;
@@ -179,7 +179,7 @@ export const MessageThree = styled(Message)`
 export const MessageFour = styled(Message)`
   left: 11%;
   color: #000;
-  @media (max-width: 1200px) and (min-width: 995px){
+  @media (max-width: 1200px) and (min-width: 995px) {
     left: 7%;
   }
 `;
@@ -291,7 +291,7 @@ export const Container = styled.section`
   align-items: center;
   //background: linear-gradient(to right, #b48830, #c14949);
   height: calc(100vh - 115px);
-  @media(max-width: 1200px){
+  @media (max-width: 1200px) {
     width: calc(81vw);
     height: calc(100vh - 5%);
     margin-left: 3%;
@@ -399,7 +399,7 @@ export const GrievanceInputData = styled.a`
   &:disabled {
     background: #bbbaba;
   }
-  @media(max-width: 535px){
+  @media (max-width: 535px) {
     font-size: smaller;
   }
 `;

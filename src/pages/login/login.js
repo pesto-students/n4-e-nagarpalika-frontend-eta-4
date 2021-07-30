@@ -5,10 +5,9 @@ import { connect } from "react-redux";
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
-import {Container, InnerContainer} from "./styles";
+import { Container, InnerContainer } from "./styles";
 
 function Login({ logIn: actionLogin }) {
-
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -31,19 +30,18 @@ function Login({ logIn: actionLogin }) {
       setLoading(true);
 
       const appVerifier = window.recaptchaVerifier;
-    try {
-      await firebase
+      try {
+        await firebase
           .auth()
           .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
           .then((confirmResult) => {
             setConfirmResult(confirmResult);
           });
-      setMessage("");
-      setIsOtpSent(true);
-    }catch (e){
-     setMessage("**Unexpected error occurred. Please try later.")
-
-    }
+        setMessage("");
+        setIsOtpSent(true);
+      } catch (e) {
+        setMessage("**Unexpected error occurred. Please try later.");
+      }
     } else {
       setMessage("**Please insert your 10 digit phone number.");
     }
@@ -51,21 +49,21 @@ function Login({ logIn: actionLogin }) {
   };
 
   async function sendOtp(e) {
-    if(otp.length===6){
-      setMessage("")
+    if (otp.length === 6) {
+      setMessage("");
       setLoading(true);
       try {
         const result = await confirmResult.confirm(otp);
 
         const firebaseToken = await result.user.getIdToken();
 
-        await actionLogin({firebaseToken});
+        await actionLogin({ firebaseToken });
       } catch (e) {
-        setMessage("**Unexpected error occurred. Please try again later")
+        setMessage("**Unexpected error occurred. Please try again later");
         // console.log(e);
       }
-    }else {
-     setMessage("**Please insert the 6 digit OTP sent to your mobile number")
+    } else {
+      setMessage("**Please insert the 6 digit OTP sent to your mobile number");
     }
     // setLoading(false);
   }
@@ -89,7 +87,7 @@ function Login({ logIn: actionLogin }) {
   return (
     <Container>
       <div className="card mb-4">
-        <LoginSVG/>
+        <LoginSVG />
         <h2 className="text-center">Log in</h2>
         <InnerContainer className="card-body">
           <form style={{ display: "flex", justifyContent: "center" }}>
@@ -122,7 +120,6 @@ function Login({ logIn: actionLogin }) {
                       style={{ alignSelf: "flex-end" }}
                       onClick={getOtp}
                       disabled={loading}
-
                     >
                       Get OTP
                     </button>

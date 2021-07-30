@@ -3,8 +3,8 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
- width: 100%;
-  @media(max-width: 750px){
+  width: 100%;
+  @media (max-width: 750px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,9 +17,9 @@ export const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin:20px;
+  margin: 20px;
   height: calc(100vh - 110px);
-  @media(max-width: 750px){
+  @media (max-width: 750px) {
     height: auto;
   }
 `;
@@ -37,8 +37,8 @@ export const Form = styled.form`
   border-radius: 18px;
   box-shadow: 0 0 10px rgb(0 0 0 / 80%);
   box-sizing: border-box;
-  @media(max-width: 750px){
-  width: 100%;
+  @media (max-width: 750px) {
+    width: 100%;
   }
 `;
 export const DivHead = styled.div`
@@ -79,7 +79,7 @@ export const Checkbox = styled.input`
   height: 35px;
   width: 35px;
   justify-content: flex-start;
-  @media(max-width: 750px){
+  @media (max-width: 750px) {
     height: 20px;
     width: 20px;
   }
