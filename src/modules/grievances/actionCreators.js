@@ -33,6 +33,7 @@ export function createIssue({
   location,
   category,
   images,
+  coordinates,
 }) {
   return async (dispatch) => {
     dispatch({ type: ISSUE_CREATE_START });
@@ -44,6 +45,7 @@ export function createIssue({
         location,
         category,
         images,
+        coordinates,
       });
 
       if (status === "Success") {
@@ -95,12 +97,28 @@ export function createIssue({
 //   };
 // }
 
-export function getAllUserIssue({ userId }) {
+export function getAllUserIssue({
+  userId,
+  dateRangeStart,
+  dateRangeEnd,
+  sortBy,
+  location,
+  category,
+  status: issueStatus,
+}) {
   return async (dispatch) => {
     dispatch({ type: ISSUES_GET_START });
 
     try {
-      const { status, data, message } = await apiGetAllUserIssues({ userId });
+      const { status, data, message } = await apiGetAllUserIssues({
+        userId,
+        dateRangeStart,
+        dateRangeEnd,
+        sortBy,
+        location,
+        category,
+        status: issueStatus,
+      });
 
       if (status === "Success") {
         const { issues } = data;

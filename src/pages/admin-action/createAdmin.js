@@ -44,7 +44,7 @@ const CreateAdmin = () => {
       setMessage("**User doesn't exist");
       setLoading(false);
     }
-    console.log(res);
+    // console.log(res);
   };
 
   return (

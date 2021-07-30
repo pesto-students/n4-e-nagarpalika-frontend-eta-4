@@ -11,7 +11,7 @@ import { register as apiRegister } from "./api";
 export function register({
   name,
   email,
-  aadhar,
+  aadharNumber,
   phoneNumber,
   city,
   gender,
@@ -24,7 +24,7 @@ export function register({
       const { status, data, message } = await apiRegister({
         name,
         email,
-        aadhar,
+        aadharNumber,
         phoneNumber,
         city,
         gender,

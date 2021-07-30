@@ -54,7 +54,7 @@ function Login({ logIn: actionLogin }) {
 
       await actionLogin({ firebaseToken });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
 
     // setLoading(false);

@@ -1,13 +1,35 @@
 /** @format */
+/* eslint-disable no-unused-vars */
 
 import React from "react";
+
 import Cards from "./cards/cards";
 
-const CardBlock = ({ issues }) => {
+const GrievanceCardGrid = ({
+  category,
+  dateRangeEnd,
+  dateRangeStart,
+  issues,
+  location,
+  sortBy,
+  status,
+}) => {
+  let list = [...issues];
+
+  if (location.length > 0) {
+    list = list.filter((issue) => issue.location === location);
+  }
+  if (category.length > 0) {
+    list = list.filter((issue) => issue.category === category);
+  }
+  if (status.length > 0) {
+    list = list.filter((issue) => issue.status === status);
+  }
+
   return (
     <div className="container-fluid">
       <div className="row row-cols-1 row-cols-md-2 g-4">
-        {issues.map((issue) => (
+        {list.map((issue) => (
           <Cards
             key={issue.id}
             content={issue.description}
@@ -20,4 +42,5 @@ const CardBlock = ({ issues }) => {
     </div>
   );
 };
-export default CardBlock;
+
+export default GrievanceCardGrid;
