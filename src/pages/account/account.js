@@ -120,7 +120,6 @@ const Account = () => {
                   onChange={(e) => setNagarPalika(e.target.value)}
                   data-cy="inputNagarPalika"
                 >
-                  <option>Choose...</option>
                   <option value={LOCATIONS.bangaluru}>Bangalore</option>
                   <option value={LOCATIONS.delhi}>Delhi</option>
                   <option value={LOCATIONS.mumbai}>Mumbai</option>
@@ -136,7 +135,6 @@ const Account = () => {
                   onChange={(e) => setProfession(e.target.value)}
                   data-cy="inputProfession"
                 >
-                  <option>Choose...</option>
                   <option value={PROFESSIONS.engineer}>Engineer</option>
                   <option value={PROFESSIONS.doctor}>Doctor</option>
                   <option value={PROFESSIONS.farmer}>Farmer</option>
@@ -158,7 +156,6 @@ const Account = () => {
                   onChange={(e) => setGender(e.target.value)}
                   data-cy="inputGender"
                 >
-                  <option>Choose...</option>
                   <option value={GENDER.male}>Male</option>
                   <option value={GENDER.female}>Female</option>
                   <option value={GENDER.other}>Other</option>
