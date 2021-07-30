@@ -8,9 +8,10 @@ export const register = async ({
   name,
   email,
   aadharNumber,
-  avatar,
-  city,
+  phoneNumber,
+  location,
   gender,
+  profession,
 }) => {
   const { data } = await axios.put(
     `${REACT_APP_SERVER_API}/api/register`,
@@ -18,9 +19,10 @@ export const register = async ({
       name,
       email,
       aadharNumber,
-      avatar,
-      city,
+      phoneNumber,
+      location,
       gender,
+      profession,
     },
     {
       headers: {
