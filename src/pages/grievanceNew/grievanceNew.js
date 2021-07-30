@@ -32,7 +32,7 @@ function GrievanceNew({ actionCreateIssue, actionResetNewIssue }) {
       category,
       description,
       images,
-      coords,
+      coordinates: coords,
     });
   };
 

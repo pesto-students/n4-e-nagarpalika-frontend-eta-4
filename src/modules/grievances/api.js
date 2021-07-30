@@ -16,10 +16,22 @@ export const getAllAdminIssues = async () => {
   return data;
 };
 
-export const getAllUserIssues = async ({ userId }) => {
+export const getAllUserIssues = async ({
+  userId,
+  sortBy,
+  location,
+  category,
+  status,
+}) => {
   const { data } = await axios.get(
     `${REACT_APP_SERVER_API}/api/users/${userId}/issues`,
     {
+      params: {
+        sortBy,
+        location,
+        category,
+        status,
+      },
       headers: {
         "Content-Type": "application/json",
         accept: "application/json",
@@ -43,6 +55,7 @@ export const createIssue = async ({
   location,
   category,
   images,
+  coordinates,
 }) => {
   const { data } = await axios.post(
     `${REACT_APP_SERVER_API}/api/issues`,
@@ -52,6 +65,7 @@ export const createIssue = async ({
       location,
       category,
       images,
+      coordinates,
     },
     {
       headers: {
