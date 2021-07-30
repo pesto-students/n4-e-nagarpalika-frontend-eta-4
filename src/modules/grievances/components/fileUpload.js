@@ -16,18 +16,18 @@ export default function FileUpload(props) {
     setLoading(true);
     try {
       const ref = storage.ref(`/images/${e.target.files[0].name}`);
-      console.log("upload started");
+      // console.log("upload started");
       const uploadTask = ref.put(e.target.files[0]);
       uploadTask.on("state_changed", console.log, console.error, () => {
         ref.getDownloadURL().then((picUrl) => {
           setURL([...urls, picUrl]);
           props.onUpload(picUrl);
         });
-        console.log("uploaded");
+        // console.log("uploaded");
         setLoading(false);
       });
     } catch (err) {
-      console.log(e.toString());
+      // console.log(e.toString());
     }
   }
 

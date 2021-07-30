@@ -1,4 +1,5 @@
 /** @format */
+/* eslint-disable no-unused-vars */
 
 import React, { useState } from "react";
 
@@ -18,7 +19,7 @@ const CreateIssueTypes = () => {
     setLoading(true);
     const data = await createIssueType({ title, location });
 
-    console.log(data);
+    // console.log(data);
   };
 
   return (
