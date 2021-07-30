@@ -151,7 +151,7 @@ function Dashboard() {
       <div className="row">
         <IssueStatus />
         <div className="row">
-          <div className="col-xl-6 col-md-8 mb-4">
+          <div className="col-xl-6  mb-4">
             {/*<div className="mb-3">*/}
             {/*  /!* <label htmlFor="locationInput" className="form-label">*/}
             {/*    Location**/}
@@ -171,10 +171,10 @@ function Dashboard() {
             {/*</div>*/}
             {/*<IssueStatus />*/}
             {/* Reference https://palerdot.in/react-d3-speedometer/?path=/story/reactspeedometer--default-with-no-config */}
-            <div className="card mb-3 h-100">
+            <div className="card mb-4 h-100">
               <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 className="m-0 font-weight-bold text-dark">
-                  City Happiness Level
+                  City happiness level
                 </h6>
               </div>
               <div className="card-body">
@@ -233,11 +233,11 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="col-xl-6 col-md-8 mb-4">
+          <div className="col-xl-6  mb-4">
             <div className="card text-center" style={{ height: "400px" }}>
               <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 className="m-0 font-weight-bold text-dark">
-                  Monthly Overview
+                  Monthly overview
                 </h6>
               </div>
               <div className="card-body">
@@ -272,11 +272,11 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-sm-12 mb-4">
+        <div className="col-xl-12 mb-4">
           <div className="card" style={{ height: "400px", width: "100%" }}>
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-dark">
-                Annual Comparison of Issues based on Issue Types
+                Annual comparison of issues based on issue types
               </h6>
             </div>
             <div className="card-body">

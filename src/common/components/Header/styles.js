@@ -11,9 +11,8 @@ export const Nav = styled.nav`
 
 export const Span = styled.span`
   text-align: center;
-  font-size: 8px;
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
 `;
 

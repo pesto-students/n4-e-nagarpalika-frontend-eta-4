@@ -9,12 +9,11 @@ export const Image = styled.img`
   height: 200px;
   border-radius: 10px;
   object-fit: cover;
-  border-image: linear-gradient(to right, blue, red, teal, #bb7f52, #6c153d) 5;
 `;
 export const P = styled.p`
   height: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: auto;
+  font-style: italic;
 `;
 
 export const Div = styled.div`

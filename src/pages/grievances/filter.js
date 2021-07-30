@@ -25,7 +25,7 @@ const Filter = ({
   setStatus,
 }) => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{ marginTop: "40px" }}>
       <CardHead className="navbar navbar-expand-lg navbar-light shadow bg-light">
         <div className="container-fluid">
           <div className="navbar-brand">Filter By</div>
@@ -62,7 +62,14 @@ const Filter = ({
                   <option value="">Issue Status</option>
                   {Object.values(GRIEVANCE_STATUS).map((gStatus, index) => (
                     <option className="text-center" key={index} value={gStatus}>
-                      {gStatus}
+                      {gStatus === GRIEVANCE_STATUS.none ? "Created" : null}
+                      {gStatus === GRIEVANCE_STATUS.review ? "Reviewed" : null}
+                      {gStatus === GRIEVANCE_STATUS.action
+                        ? "Action Taken"
+                        : null}
+                      {gStatus === GRIEVANCE_STATUS.resolved
+                        ? "Resolved"
+                        : null}
                     </option>
                   ))}
                 </Select>

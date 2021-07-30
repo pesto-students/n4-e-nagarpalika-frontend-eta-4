@@ -16,7 +16,7 @@ const NotificationCard = ({ id, text, createdAt, issueId }) => {
       </div>
       <div className="toast-body" style={{ color: "black" }}>
         {text}
-        <a href={`/grievances/${issueId}`}>See More..</a>
+        <a href={`/grievances/${issueId}`}>See more..</a>
       </div>
     </div>
   );
