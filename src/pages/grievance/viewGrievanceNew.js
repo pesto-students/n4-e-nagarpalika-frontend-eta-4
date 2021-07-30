@@ -276,6 +276,8 @@ const ViewGrievance = ({ data }) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={updateStatus}
+                data-bs-dismiss="modal"
+                aria-label="Close"
               >
                 Update
               </button>
