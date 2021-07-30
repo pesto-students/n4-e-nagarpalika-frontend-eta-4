@@ -110,7 +110,7 @@ export const updateIssue = async ({
 
 export const createIssueType = async ({ title, location }) => {
   const { data } = await axios.post(
-    `${REACT_APP_SERVER_API}/api/admin/issues/issueType`,
+    `${REACT_APP_SERVER_API}/api/admin/issues/issueTypes`,
     {
       title,
       location,
