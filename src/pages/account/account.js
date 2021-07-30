@@ -5,16 +5,30 @@ import React, { useState } from "react";
 import { Alert } from "../../common/components/Alerts/Alerts";
 
 import { Container, Card, FormRow } from "./styles";
+import {useSelector} from "react-redux";
+import {GENDER, LOCATIONS, PROFESSIONS} from "../../common/contants";
 
 const Account = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [aadharNumber, setAadharNumber] = useState("");
+  const reduxState = useSelector((state) => state);
+  const { account } = reduxState;
+  const {
+    location: userLocation,
+    name: userName,
+    phoneNumber: userPhone,
+    email: userEmail,
+    aadharNumber:userAadharNumber,
+    profession: userProfession,
+    gender:userGender
+  } = account;
+
+  const [name, setName] = useState(userName);
+  const [email, setEmail] = useState(userEmail);
+  const [phoneNumber, setPhoneNumber] = useState(userPhone);
+  const [aadharNumber, setAadharNumber] = useState(userAadharNumber);
   // const [address, setAddress] = useState("");
-  const [nagarPalika, setNagarPalika] = useState("");
-  const [profession, setProfession] = useState("");
-  const [gender, setGender] = useState("");
+  const [nagarPalika, setNagarPalika] = useState(userLocation);
+  const [profession, setProfession] = useState(userProfession);
+  const [gender, setGender] = useState(userGender);
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
 
@@ -59,6 +73,7 @@ const Account = () => {
                   className="form-control"
                   id="inputEmail"
                   placeholder="Email"
+                  disabled
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   data-cy="inputEmail"
@@ -73,6 +88,7 @@ const Account = () => {
                   className="form-control"
                   id="inputMobileNumber"
                   placeholder="Mobile Number"
+                  disabled
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   data-cy="inputMobileNumber"
@@ -86,6 +102,7 @@ const Account = () => {
                   id="inputAadharNumber"
                   placeholder="Aadhar Number"
                   value={aadharNumber}
+                  disabled
                   onChange={(e) => setAadharNumber(e.target.value)}
                   data-cy="inputAadharNumber"
                 />
@@ -104,9 +121,9 @@ const Account = () => {
                   data-cy="inputNagarPalika"
                 >
                   <option>Choose...</option>
-                  <option value="bangaluru">Bangaluru</option>
-                  <option value="delhi">Delhi</option>
-                  <option value="mumbai">Mumbai</option>
+                  <option value={LOCATIONS.bangaluru}>Bangalore</option>
+                  <option value={LOCATIONS.delhi}>Delhi</option>
+                  <option value={LOCATIONS.mumbai}>Mumbai</option>
                 </select>
               </div>
               <div className="form-group col-md-6">
@@ -120,10 +137,11 @@ const Account = () => {
                   data-cy="inputProfession"
                 >
                   <option>Choose...</option>
-                  <option value="it-professional">IT Professional</option>
-                  <option value="government-servent">Government Servent</option>
-                  <option value="self-employed-businessman">
-                    Self Employed / Businessman
+                  <option value={PROFESSIONS.engineer}>Engineer</option>
+                  <option value={PROFESSIONS.doctor}>Doctor</option>
+                  <option value={PROFESSIONS.farmer}>Farmer</option>
+                  <option value={PROFESSIONS.other}>
+                    Other
                   </option>
                 </select>
               </div>
@@ -141,9 +159,9 @@ const Account = () => {
                   data-cy="inputGender"
                 >
                   <option>Choose...</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
+                  <option value={GENDER.male}>Male</option>
+                  <option value={GENDER.female}>Female</option>
+                  <option value={GENDER.other}>Other</option>
                 </select>
               </div>
 

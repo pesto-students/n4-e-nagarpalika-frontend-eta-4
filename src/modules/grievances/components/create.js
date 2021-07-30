@@ -27,8 +27,8 @@ import { GRIEVANCE_CATEGORIES, LOCATIONS } from "../../../common/contants";
 
 function CreateGrievance({ onSubmit }) {
   const reduxState = useSelector((state) => state);
-  const { account, issues } = reduxState;
-  const { city: userLocation } = account;
+  const { account } = reduxState;
+  const { location: userLocation } = account;
 
   // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState("");
@@ -114,7 +114,7 @@ function CreateGrievance({ onSubmit }) {
           </Divhead>
           <Divhead>
             <Select
-              value={location}
+              value={userLocation}
               onChange={(e) => setLocation(e.target.value)}
               disabled
             >
