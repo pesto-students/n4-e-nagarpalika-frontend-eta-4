@@ -210,20 +210,22 @@ function Register({ actionRegister }) {
               </SVG>
               <P>Upload Profile Picture</P>
             </DivBody> */}
-            <DivBody>
-              <Checkbox
-                type="checkbox"
-                value={checkbox}
-                disabled={loading}
-                onClick={() => {
-                  setCheckbox(!checkbox);
-                }}
-              />
-              <Terms>
-                By Clicking here I accept the Privacy Policy and Terms
-                Conditions of use.
-              </Terms>
-            </DivBody>
+            <div className="col">
+              <DivBody>
+                <Checkbox
+                  type="checkbox"
+                  value={checkbox}
+                  disabled={loading}
+                  onClick={() => {
+                    setCheckbox(!checkbox);
+                  }}
+                />
+                <Terms>
+                  By Clicking here I accept the Privacy Policy and Terms
+                  Conditions of use.
+                </Terms>
+              </DivBody>
+            </div>
           </DivBodyColumn>
         </DivHead>
         <DivHead>
