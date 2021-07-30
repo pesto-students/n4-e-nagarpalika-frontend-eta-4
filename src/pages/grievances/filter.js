@@ -2,6 +2,7 @@
 
 import React from "react";
 import {
+  ACCOUNT_TYPE,
   GRIEVANCE_CATEGORIES,
   GRIEVANCE_STATUS,
   LOCATIONS,
@@ -9,6 +10,7 @@ import {
 import { Typeahead } from "react-bootstrap-typeahead";
 import DatepickerRange from "../../common/components/Datepicker/datepicker";
 import { Select, CardHead } from "./styles";
+import {useSelector} from "react-redux";
 
 const Filter = ({
   dateRangeStart,
@@ -24,6 +26,10 @@ const Filter = ({
   status,
   setStatus,
 }) => {
+  const reduxState = useSelector((state) => state);
+  const { account } = reduxState;
+  const { accountType } = account;
+
   return (
     <div className="container-fluid" style={{ marginTop: "40px" }}>
       <CardHead className="navbar navbar-expand-lg navbar-light shadow bg-light">
@@ -100,7 +106,7 @@ const Filter = ({
                   onChange={(e) => setSortBy(e.target.value)}
                   value={sortBy}
                 >
-                  <option className="text-center" value="">
+                  <option className="text-center" value="" disabled>
                     Sort By
                   </option>
                   <option className="text-center" value="createdAt">
@@ -112,7 +118,7 @@ const Filter = ({
                 </Select>
               </li>
             </ul>
-
+            {accountType === ACCOUNT_TYPE.admin?
             <Typeahead
               id="selectLocation"
               onChange={setLocation}
@@ -122,7 +128,7 @@ const Filter = ({
               }))}
               placeholder="Choose a city..."
               selected={location}
-            />
+            />:null}
           </div>
           <div
             className="modal fade"
