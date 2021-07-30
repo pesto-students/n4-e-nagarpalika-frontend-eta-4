@@ -215,7 +215,7 @@ function Register({ actionRegister }) {
                 <Checkbox
                   type="checkbox"
                   value={checkbox}
-                  disabled={loading}
+                  disabled={loading }
                   onClick={() => {
                     setCheckbox(!checkbox);
                   }}
@@ -231,7 +231,7 @@ function Register({ actionRegister }) {
         <DivHead>
           <Button
             className="btn btn-primary"
-            disabled={loading}
+            disabled={!checkbox || loading}
             onClick={onSubmit}
           >
             Register
