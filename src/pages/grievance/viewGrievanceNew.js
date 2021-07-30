@@ -23,6 +23,7 @@ const ViewGrievance = ({ data }) => {
   const textRef = useRef();
   const [issueStatus, setIssueStatus] = useState();
   const [comments, setComments] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [comment, setComment] = useState("");
   useEffect(() => {
     setComments([
