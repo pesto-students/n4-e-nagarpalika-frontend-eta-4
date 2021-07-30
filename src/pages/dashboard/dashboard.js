@@ -29,9 +29,9 @@ import { Container } from "./styles";
 function Dashboard() {
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
-  const { accountType } = account;
+  const { id: userId, accountType, location: userLocation } = account;
 
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(userLocation);
   const history = useHistory();
 
   const dataByDate = [
@@ -131,7 +131,7 @@ function Dashboard() {
     <Container className="container-fluid" style={{ marginTop: "20px" }}>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-        {accountType === ACCOUNT_TYPE.admin ? (
+        {accountType !== ACCOUNT_TYPE.user ? (
           <div className="d-none d-sm-inline-block">
             <select
               className="form-select"
@@ -139,6 +139,7 @@ function Dashboard() {
               aria-label="location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
+              disabled={accountType === ACCOUNT_TYPE.manager}
             >
               <option value="">Select Location</option>
               <option value={LOCATIONS.bangaluru}>Bangaluru</option>
@@ -149,7 +150,12 @@ function Dashboard() {
         ) : null}
       </div>
       <div className="row">
-        <IssueStatus />
+        <IssueStatus
+          {...{
+            location: accountType === ACCOUNT_TYPE.user ? null : location,
+            userId: accountType === ACCOUNT_TYPE.user ? userId : null,
+          }}
+        />
         <div className="row">
           <div className="col-xl-6  mb-4">
             {/*<div className="mb-3">*/}

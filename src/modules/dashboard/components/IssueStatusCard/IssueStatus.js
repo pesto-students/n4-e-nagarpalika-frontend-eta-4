@@ -4,18 +4,26 @@ import React, { useEffect, useState } from "react";
 
 import { getIssueStats } from "../../api";
 
-const IssueStatus = () => {
+const IssueStatus = ({ userId, location }) => {
   const [stats, setStats] = useState({
-    total: 82,
-    resolved: 64,
-    progress: 13,
+    total: 0,
+    resolved: 0,
+    progress: 0,
   });
 
   useEffect(() => {
     const abortController = new AbortController();
 
     async function getStats() {
-      const { status, data } = await getIssueStats();
+      const params = {};
+      if (typeof userId !== "undefined") {
+        params.userId = userId;
+      }
+      if (typeof location !== "undefined") {
+        params.location = location;
+      }
+
+      const { status, data } = await getIssueStats(params);
 
       if (status === "Success") {
         setStats(data);
@@ -27,7 +35,11 @@ const IssueStatus = () => {
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [userId, location]);
+
+  const { total, resolved, progress } = stats;
+  const progressPercent =
+    total !== 0 ? Math.trunc((resolved / total) * 100) : 0;
 
   return (
     <div className="row">
@@ -40,7 +52,7 @@ const IssueStatus = () => {
                   Total Issues Logged
                 </div>
                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                  {stats.total}
+                  {total}
                 </div>
               </div>
               <div className="col-auto">
@@ -59,7 +71,7 @@ const IssueStatus = () => {
                   Pending Requests
                 </div>
                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                  {stats.progress}
+                  {progress}
                 </div>
               </div>
               <div className="col-auto">
@@ -78,7 +90,7 @@ const IssueStatus = () => {
                   Issues Resolved
                 </div>
                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                  {stats.resolved}
+                  {resolved}
                 </div>
               </div>
               <div className="col-auto">
@@ -99,7 +111,7 @@ const IssueStatus = () => {
                 <div className="row no-gutters align-items-center">
                   <div className="col-auto">
                     <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                      {Math.trunc((stats.resolved / stats.total) * 100)}%
+                      {progressPercent}%
                     </div>
                   </div>
                   <div className="col">
@@ -109,9 +121,7 @@ const IssueStatus = () => {
                         className="progress-bar bg-info"
                         role="progressbar"
                         style={{
-                          width: `${Math.trunc(
-                            (stats.resolved / stats.total) * 100
-                          )}%`,
+                          width: `${progressPercent}%`,
                         }}
                         aria-label="Issue Resolution bar"
                       />

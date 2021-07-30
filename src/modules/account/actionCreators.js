@@ -13,7 +13,7 @@ export function register({
   email,
   aadharNumber,
   phoneNumber,
-  city,
+  location,
   gender,
   profession,
 }) {
@@ -26,7 +26,7 @@ export function register({
         email,
         aadharNumber,
         phoneNumber,
-        city,
+        location,
         gender,
         profession,
       });

@@ -32,10 +32,11 @@ function Register({ actionRegister }) {
   const account = useSelector((state) => state.account);
 
   useEffect(() => {
-    // const { fetchStatus, isLoggedIn, isFirstTime } = account;
-    // if (fetchStatus === "SUCCESS" && isLoggedIn && !isFirstTime) {
-    //   history.push("/dashboard");
-    // }
+    const { fetchStatus, isLoggedIn, isFirstTime } = account;
+
+    if (fetchStatus === "SUCCESS" && isLoggedIn && !isFirstTime) {
+      history.push("/dashboard");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
@@ -45,16 +46,17 @@ function Register({ actionRegister }) {
   const [email, setEmail] = useState("");
   const [aadharNumber, setAadharNumber] = useState("");
   const [phoneNumber] = useState(account.phoneNumber);
-  const [city, setCity] = useState("");
+  const [location, setLocation] = useState("");
   const [gender, setGender] = useState("");
   const [profession, setProfession] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [message, setMessage] = useState("");
   const [textColor, setTextColor] = useState("#a51212");
   const [checkbox, setCheckbox] = useState(false);
+  const [aadharNumberExist, setAadharNumberExist] = useState(false);
 
-  const selectCity = (e) => {
-    setCity(e.target.value);
+  const onChangeLocation = (e) => {
+    setLocation(e.target.value);
     setTextColor("#2a2a76");
   };
   const selectGender = (e) => {
@@ -78,10 +80,11 @@ function Register({ actionRegister }) {
 
     // display error message in UI
     if (aadhar.length === 16) {
-      const { data } = await apiValidateAadhar({ aadharNumber });
+      const { data } = await apiValidateAadhar({ aadharNumber: aadhar });
       // eslint-disable-next-line no-unused-vars
       const { exists } = data;
 
+      setAadharNumberExist(exists);
       // console.log(exists);
     }
   };
@@ -95,7 +98,7 @@ function Register({ actionRegister }) {
       email,
       aadharNumber,
       phoneNumber,
-      city,
+      location,
       gender,
       profession,
       // avatar,
@@ -159,7 +162,7 @@ function Register({ actionRegister }) {
         <Div className="row">
           <DivBodyColumn className="col">
             <P>City*</P>
-            <Select onChange={selectCity} value={city}>
+            <Select onChange={onChangeLocation} value={location}>
               <option value="">Select</option>
               <option value={LOCATIONS.bangaluru}>Bengaluru</option>
               <option value={LOCATIONS.delhi}>Delhi</option>
@@ -231,7 +234,7 @@ function Register({ actionRegister }) {
         <DivHead>
           <Button
             className="btn btn-primary"
-            disabled={loading}
+            disabled={loading || !checkbox}
             onClick={onSubmit}
           >
             Register

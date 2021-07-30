@@ -8,9 +8,10 @@ export const register = async ({
   name,
   email,
   aadharNumber,
-  avatar,
-  city,
+  phoneNumber,
+  location,
   gender,
+  profession,
 }) => {
   const { data } = await axios.put(
     `${REACT_APP_SERVER_API}/api/register`,
@@ -18,9 +19,10 @@ export const register = async ({
       name,
       email,
       aadharNumber,
-      avatar,
-      city,
+      phoneNumber,
+      location,
       gender,
+      profession,
     },
     {
       headers: {
@@ -39,6 +41,13 @@ export const validateAadhar = async ({ aadharNumber }) => {
     `${REACT_APP_SERVER_API}/api/users/validateAadhar`,
     {
       aadharNumber,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     }
   );
 
