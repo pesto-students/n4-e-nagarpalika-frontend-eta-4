@@ -24,7 +24,7 @@ import { LOCATIONS } from "../../common/contants";
 
 import IssueStatus from "../../modules/dashboard/components/IssueStatusCard/IssueStatus";
 
-import { Container } from "./styles";
+import {Container, Flex} from "./styles";
 
 function Dashboard() {
   const reduxState = useSelector((state) => state);
@@ -129,10 +129,11 @@ function Dashboard() {
 
   return (
     <Container className="container-fluid" style={{ marginTop: "20px" }}>
-      <div className="d-sm-flex align-items-center justify-content-between mb-4">
+      <Flex className="d-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+        <div style={{ margin: "1rem" }} />
         {accountType !== ACCOUNT_TYPE.user ? (
-          <div className="d-none d-sm-inline-block">
+          <div className="d-sm-inline-block">
             <select
               className="form-select"
               id="locationInput"
@@ -148,7 +149,7 @@ function Dashboard() {
             </select>
           </div>
         ) : null}
-      </div>
+      </Flex>
       <div className="row">
         <IssueStatus
           {...{

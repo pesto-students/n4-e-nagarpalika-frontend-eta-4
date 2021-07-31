@@ -13,7 +13,7 @@ import isVisibleByRoute from "../../../utils/isVisibleByRoute";
 import { logOut } from "../../../modules/auth/actionCreators";
 
 // eslint-disable-next-line no-unused-vars
-import { Span, Nav, NotifTime } from "./styles";
+import {Span, Nav, NotifTime, FLex} from "./styles";
 
 const HeaderNav = ({ actionLogout }) => {
   const account = useSelector((state) => state.account);
@@ -58,7 +58,7 @@ const HeaderNav = ({ actionLogout }) => {
         <div className="collapse navbar-collapse" id="navbarHeader">
           <div className="navbar-nav me-auto mb-2 mb-lg-0" />
           {!hiddenNavs ? (
-            <div className="d-flex">
+            <FLex className="d-flex">
               <div className="nav-item dropdown">
                 <div
                   role="button"
@@ -181,7 +181,7 @@ const HeaderNav = ({ actionLogout }) => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </FLex>
           ) : null}
         </div>
       </div>
