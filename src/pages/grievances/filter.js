@@ -1,16 +1,17 @@
 /** @format */
 
 import React from "react";
+import { useSelector } from "react-redux";
+import { Typeahead } from "react-bootstrap-typeahead";
+
 import {
   ACCOUNT_TYPE,
   GRIEVANCE_CATEGORIES,
   GRIEVANCE_STATUS,
   LOCATIONS,
 } from "../../common/contants";
-import { Typeahead } from "react-bootstrap-typeahead";
 import DatepickerRange from "../../common/components/Datepicker/datepicker";
 import { Select, CardHead } from "./styles";
-import {useSelector} from "react-redux";
 
 const Filter = ({
   dateRangeStart,
@@ -118,17 +119,18 @@ const Filter = ({
                 </Select>
               </li>
             </ul>
-            {accountType === ACCOUNT_TYPE.admin?
-            <Typeahead
-              id="selectLocation"
-              onChange={setLocation}
-              options={Object.entries(LOCATIONS).map(([value, label]) => ({
-                label: label,
-                value: value,
-              }))}
-              placeholder="Choose a city..."
-              selected={location}
-            />:null}
+            {accountType === ACCOUNT_TYPE.admin ? (
+              <Typeahead
+                id="selectLocation"
+                onChange={setLocation}
+                options={Object.entries(LOCATIONS).map(([value, label]) => ({
+                  label: label,
+                  value: value,
+                }))}
+                placeholder="Choose a city..."
+                selected={location}
+              />
+            ) : null}
           </div>
           <div
             className="modal fade"

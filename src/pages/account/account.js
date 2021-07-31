@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import { Alert } from "../../common/components/Alerts/Alerts";
 
 import { Container, Card, FormRow } from "./styles";
-import {useSelector} from "react-redux";
-import {GENDER, LOCATIONS, PROFESSIONS} from "../../common/contants";
+import { useSelector } from "react-redux";
+import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
 
 const Account = () => {
   const reduxState = useSelector((state) => state);
@@ -16,9 +16,9 @@ const Account = () => {
     name: userName,
     phoneNumber: userPhone,
     email: userEmail,
-    aadharNumber:userAadharNumber,
+    aadharNumber: userAadharNumber,
     profession: userProfession,
-    gender:userGender
+    gender: userGender,
   } = account;
 
   const [name, setName] = useState(userName);
@@ -138,9 +138,7 @@ const Account = () => {
                   <option value={PROFESSIONS.engineer}>Engineer</option>
                   <option value={PROFESSIONS.doctor}>Doctor</option>
                   <option value={PROFESSIONS.farmer}>Farmer</option>
-                  <option value={PROFESSIONS.other}>
-                    Other
-                  </option>
+                  <option value={PROFESSIONS.other}>Other</option>
                 </select>
               </div>
             </FormRow>

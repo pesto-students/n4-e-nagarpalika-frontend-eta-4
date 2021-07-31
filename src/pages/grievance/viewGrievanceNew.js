@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 import ProgressBar from "./../../modules/grievances/components/progressBar";
 import { GrievanceTextInput, PGrievance } from "./styles";
@@ -17,8 +18,7 @@ import {
   ProgressHead,
   Image, Comments,
 } from "./viewGrievanceStyle";
-import {ACCOUNT_TYPE, GRIEVANCE_STATUS} from "../../common/contants";
-import {useSelector} from "react-redux";
+import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../common/contants";
 
 const ViewGrievance = ({ data }) => {
   const textRef = useRef();
@@ -62,7 +62,7 @@ const ViewGrievance = ({ data }) => {
       },
     ]);
   }, []);
-  console.log(data);
+  // console.log(data);
   const updateStatus = (e) => {
     e.preventDefault();
     // console.log(textRef.current.value);
@@ -89,7 +89,7 @@ const ViewGrievance = ({ data }) => {
   // }
   const markAsResolved = (e) => {
     e.preventDefault();
-  }
+  };
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -181,22 +181,28 @@ const ViewGrievance = ({ data }) => {
               <Text>{data.description}</Text>
             </Description>
             <ButtonDiv>
-              {accountType !== ACCOUNT_TYPE.user && data.status !== GRIEVANCE_STATUS.action ?<button
+              {accountType !== ACCOUNT_TYPE.user &&
+              issueStatus !== GRIEVANCE_STATUS.action ? (
+                <button
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                   type="button"
                   className="btn btn-primary"
-              >
-                {" "}
-                Update Issue
-              </button>:null}
-              {accountType === ACCOUNT_TYPE.user && issueStatus === GRIEVANCE_STATUS.action ?<button
+                >
+                  {" "}
+                  Update Issue
+                </button>
+              ) : null}
+              {accountType === ACCOUNT_TYPE.user &&
+              issueStatus === GRIEVANCE_STATUS.action ? (
+                <button
                   onClick={markAsResolved}
                   type="button"
                   className="btn btn-primary"
-              >
-                Resolve
-              </button>:null}
+                >
+                  Resolve
+                </button>
+              ) : null}
             </ButtonDiv>
           </div>
         </div>

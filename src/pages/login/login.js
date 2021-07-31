@@ -2,13 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
 import { Container, InnerContainer } from "./styles";
 
-function Login({ logIn: actionLogin }) {
+function Login({ actionLogin }) {
+  const history = useHistory();
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -54,7 +57,12 @@ function Login({ logIn: actionLogin }) {
       setMessage("");
       setLoading(true);
       try {
-        await confirmResult.confirm(otp);
+        const result = await confirmResult.confirm(otp);
+
+        const firebaseToken = await result.user.getIdToken();
+
+        await actionLogin({ firebaseToken });
+        history.push("/dashboard");
       } catch (e) {
         setMessage("**Unexpected error occurred. Please try again later");
         // console.log(e);
@@ -163,7 +171,7 @@ function Login({ logIn: actionLogin }) {
 }
 
 const mapDispatchToProps = {
-  logIn,
+  actionLogin: logIn,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

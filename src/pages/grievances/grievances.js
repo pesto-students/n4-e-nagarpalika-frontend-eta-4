@@ -37,7 +37,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
     };
 
     if (location.length > 0) {
-      const city = location[0].label
+      const city = location[0].label;
       params = { ...params, location: city };
     }
     if (category.length > 0) {
@@ -81,7 +81,7 @@ const Grievances = ({ actionGetAllUserIssue }) => {
             setStatus,
           }}
         />
-        {isLoading ? <div><Loader/></div> : null}
+        {isLoading ? <Loader /> : null}
         {isError ? (
           <div>
             <h1>error</h1>
