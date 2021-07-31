@@ -9,6 +9,7 @@ const CreateAdmin = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [location, setLocation] = useState("");
   const [message, setMessage] = useState("");
+  const [succesMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [accountType, setAccountType] = useState("");
@@ -40,11 +41,14 @@ const CreateAdmin = () => {
     }
 
     const res = await apiCreateAdmin(data);
-    if (res.status === "Error") {
+    if (res[0].status === "Error") {
       setMessage("**User doesn't exist");
       setLoading(false);
     }
-    // console.log(res);
+    if (res[1]===200){
+      setSuccessMessage(`User has been upgraded to ${accountType}`);
+      setLoading(false)
+    }
   };
 
   return (
@@ -112,6 +116,9 @@ const CreateAdmin = () => {
           </div>
           <div id="formHelp" className="form-text text-danger">
             {message}
+          </div>
+          <div id="formHelp" className="form-text text-center text-success">
+            {succesMessage}
           </div>
         </div>
 

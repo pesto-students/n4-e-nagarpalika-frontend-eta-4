@@ -38,7 +38,7 @@ export default function ProgressBar({ issueStatus }) {
       setStatusFour(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [issueStatus]);
 
   return (
     <DivHeadBar>

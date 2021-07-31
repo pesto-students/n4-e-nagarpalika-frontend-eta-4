@@ -128,7 +128,7 @@ const ViewGrievance = ({ data }) => {
             <ProgressHead>
               <ProgressBar issueStatus={data.status} />
             </ProgressHead>
-            <PGrievance>{data.category}</PGrievance>
+            <PGrievance>{`# ${data.category}`}</PGrievance>
           </ActionCorner>
           <div className="card-text col col-xl-6">
             <h4 className="h3">{data.title}</h4>
@@ -159,7 +159,7 @@ const ViewGrievance = ({ data }) => {
               <Text>{data.description}</Text>
             </Description>
             <ButtonDiv>
-              {accountType !== ACCOUNT_TYPE.user && issueStatus !== GRIEVANCE_STATUS.action ?<button
+              {accountType !== ACCOUNT_TYPE.user && data.status !== GRIEVANCE_STATUS.action ?<button
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                   type="button"
