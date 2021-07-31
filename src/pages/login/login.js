@@ -66,19 +66,11 @@ function Login({ logIn: actionLogin }) {
   }
 
   const onChangePhoneNumber = (e) => {
-    // const phoneNumberStr = (parseInt(e.target.value, 10) || 0).toString();
-    // if (phoneNumberStr.length > 0 && phoneNumberStr.length <= 10) {
-    //   setPhoneNumber(phoneNumberStr);
-    // }
-    setPhoneNumber(e.target.value);
+      setPhoneNumber(e.target.value);
   };
 
   const onChangeOTP = (e) => {
-    // const otpStr = parseInt(e.target.value || 0, 10).toString();
-    // if (otpStr.length > 0 && otpStr.length <= 6) {
-    //   setOtp(otpStr);
-    // }
-    setOtp(e.target.value);
+      setOtp(e.target.value);
   };
 
   return (
