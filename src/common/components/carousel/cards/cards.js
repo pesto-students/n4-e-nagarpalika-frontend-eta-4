@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { CardHead, Image, P } from "../styles";
 
-const Cards = ({ cover, title, content, id }) => {
+const Cards = ({ cover, title, content, createdAt, id }) => {
   const history = useHistory();
   const handleClick = (e) => {
     e.preventDefault();
@@ -13,12 +13,15 @@ const Cards = ({ cover, title, content, id }) => {
   };
 
   return (
-    <div className="col-md-3  float-left">
-      <CardHead className="card mb-2 mb-3 h-100">
-        <div className="card-title card-header h4">{title}</div>
+    <div className="col-xl-3  float-left">
+      <CardHead className="card mb-2 h-100">
         <Image className="card-img-top img-thumbnail" src={cover} alt="" />
         <div className="card-body">
+          <div className="card-title overflow-auto h4" style={{height:"70px"}}>{title}</div>
           <P className="card-text fst-italic">{content}</P>
+          <p className="card-text float-end"><i className="far fa-calendar"/>{"  "}{createdAt.slice(0, 10)}{"  "}<i
+    className="far fa-clock"/>{"  "}
+            {createdAt.slice(11, -5)}</p>
         </div>
         <div className="card-footer">
           <button

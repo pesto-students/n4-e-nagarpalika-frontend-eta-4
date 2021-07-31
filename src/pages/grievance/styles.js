@@ -193,12 +193,13 @@ export const GrievanceContainer = styled.section`
 `;
 export const PGrievance = styled.p`
   border: 1px solid greenyellow;
-  //background-color: #fff3cd;
-  background: linear-gradient(to right, #789723, #909e75);
+  background-color: #555;
   color: white;
-  border-radius: 8px;
+  border-radius: 15px;
   font-style: italic;
-  padding: 10px;
+  height: 36px;
+  
+  padding: 5px;
   margin: 10px;
   text-align: center;
   align-self: center;
