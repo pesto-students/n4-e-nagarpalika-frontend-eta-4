@@ -13,7 +13,7 @@ import isVisibleByRoute from "../../../utils/isVisibleByRoute";
 import { logOut } from "../../../modules/auth/actionCreators";
 
 // eslint-disable-next-line no-unused-vars
-import {Span, Nav, NotifTime, FLex} from "./styles";
+import { Span, Nav, NotifTime, FLex } from "./styles";
 
 const HeaderNav = ({ actionLogout }) => {
   const account = useSelector((state) => state.account);

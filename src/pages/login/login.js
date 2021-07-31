@@ -74,11 +74,11 @@ function Login({ actionLogin }) {
   }
 
   const onChangePhoneNumber = (e) => {
-      setPhoneNumber(e.target.value);
+    setPhoneNumber(e.target.value);
   };
 
   const onChangeOTP = (e) => {
-      setOtp(e.target.value);
+    setOtp(e.target.value);
   };
 
   return (

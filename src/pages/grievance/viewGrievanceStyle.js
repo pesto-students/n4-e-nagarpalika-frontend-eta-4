@@ -106,7 +106,7 @@ export const Comments = styled.div`
     width: auto;
     height: 85%;
   }
-  @media(max-width: 550px){
+  @media (max-width: 550px) {
     width: auto;
     height: 87%;
   }

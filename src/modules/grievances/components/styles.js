@@ -86,7 +86,7 @@ export const DivHeadBar = styled.div`
   align-items: center;
   width: 90%;
   height: 50px;
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     width: 75%;
     position: relative;
     left: 1%;
@@ -100,7 +100,7 @@ export const DivBodyBar = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     position: relative;
     left: 2%;
   }
@@ -177,10 +177,10 @@ export const Message = styled.div`
 export const MessageOne = styled(Message)`
   left: -5%;
   color: #000;
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     left: 2%;
   }
-  @media(min-width: 500px){
+  @media (min-width: 500px) {
     left: -8%;
   }
 `;
@@ -188,7 +188,7 @@ export const MessageOne = styled(Message)`
 export const MessageTwo = styled(Message)`
   right: 10%;
   color: #000;
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     left: 1%;
   }
 `;
@@ -196,7 +196,7 @@ export const MessageTwo = styled(Message)`
 export const MessageThree = styled(Message)`
   left: 5%;
   color: #000;
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     left: 0;
   }
 `;
@@ -207,7 +207,7 @@ export const MessageFour = styled(Message)`
   @media (max-width: 1200px) and (min-width: 995px) {
     left: 7%;
   }
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     left: 2%;
   }
 `;

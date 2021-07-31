@@ -198,7 +198,7 @@ export const PGrievance = styled.p`
   border-radius: 15px;
   font-style: italic;
   height: 36px;
-  
+
   padding: 5px;
   margin: 10px;
   text-align: center;

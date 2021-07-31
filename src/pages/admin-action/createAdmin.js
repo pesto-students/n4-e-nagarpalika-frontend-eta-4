@@ -45,9 +45,9 @@ const CreateAdmin = () => {
       setMessage("**User doesn't exist");
       setLoading(false);
     }
-    if (res[1]===200){
+    if (res[1] === 200) {
       setSuccessMessage(`User has been upgraded to ${accountType}`);
-      setLoading(false)
+      setLoading(false);
     }
   };
 

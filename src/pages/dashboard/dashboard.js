@@ -25,7 +25,7 @@ import { LOCATIONS } from "../../common/contants";
 import IssueStatus from "../../modules/dashboard/components/IssueStatusCard/IssueStatus";
 import CityHappinessLevel from "../../modules/dashboard/components/CityHappinessLevel";
 
-import {Container, Flex} from "./styles";
+import { Container, Flex } from "./styles";
 
 function Dashboard() {
   const reduxState = useSelector((state) => state);

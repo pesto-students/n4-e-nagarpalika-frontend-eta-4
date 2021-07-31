@@ -16,7 +16,8 @@ import {
   CardCarousel,
   Description,
   ProgressHead,
-  Image, Comments,
+  Image,
+  Comments,
 } from "./viewGrievanceStyle";
 import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../common/contants";
 
@@ -34,7 +35,8 @@ const ViewGrievance = ({ data }) => {
     setComments([
       {
         from: "user",
-        comment: "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
+        comment:
+          "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
       },
       {
         from: "admin",
@@ -42,7 +44,8 @@ const ViewGrievance = ({ data }) => {
       },
       {
         from: "admin",
-        comment: "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
+        comment:
+          "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
       },
       {
         from: "user",
@@ -50,7 +53,8 @@ const ViewGrievance = ({ data }) => {
       },
       {
         from: "user",
-        comment: "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
+        comment:
+          "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
       },
       {
         from: "admin",
@@ -58,7 +62,8 @@ const ViewGrievance = ({ data }) => {
       },
       {
         from: "admin",
-        comment: "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
+        comment:
+          "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
       },
     ]);
   }, []);
@@ -154,9 +159,12 @@ const ViewGrievance = ({ data }) => {
             <h4 className="h3">{data.title}</h4>
             <hr />
             <p className="h6">
-
-              <i className="far fa-calendar"/>{"  "}{data.createdAt.slice(0, 10)}{"  "}<i
-                className="far fa-clock"/>{"  "}
+              <i className="far fa-calendar" />
+              {"  "}
+              {data.createdAt.slice(0, 10)}
+              {"  "}
+              <i className="far fa-clock" />
+              {"  "}
               {data.createdAt.slice(11, -5)}
             </p>
             <ATag
@@ -210,40 +218,45 @@ const ViewGrievance = ({ data }) => {
       <Card className="card col col-xl-4">
         <p className="h4 card-header text-center">Comments</p>
         <div className="card-body">
-          <Comments className="card-text overflow-auto text-wrap border" style={{height: "50%"}}>
+          <Comments
+            className="card-text overflow-auto text-wrap border"
+            style={{ height: "50%" }}
+          >
             {comments.map((comment) =>
               comment.from === "user" ? (
-                  <div style={{width:"80%", margin:"20px"}}>
-                <div
-                  className="alert alert-primary text-wrap d-flex float-start"
-
-                >
-                  <div className="text-wrap" style={{width:"100%"}}>{comment.comment}</div>
-                </div>
-                <br/>
+                <div style={{ width: "80%", margin: "20px" }}>
+                  <div className="alert alert-primary text-wrap d-flex float-start">
+                    <div className="text-wrap" style={{ width: "100%" }}>
+                      {comment.comment}
+                    </div>
                   </div>
+                  <br />
+                </div>
               ) : (
-                <div style={{width:"80%", margin:"20px"}}
+                <div
+                  style={{ width: "80%", margin: "20px" }}
                   className="alert alert-warning d-flex float-end text-wrap"
                   role="alert"
                 >
-                  <div className="text-wrap" style={{width:"100%"}}>{comment.comment}{" "}</div>
-                  <br/>
+                  <div className="text-wrap" style={{ width: "100%" }}>
+                    {comment.comment}{" "}
+                  </div>
+                  <br />
                 </div>
               )
             )}
           </Comments>
           <CardFooter className="form-control card-footer">
-          <textarea
+            <textarea
               onChange={(e) => setComment(e.target.value)}
               className="form-control col"
               placeholder="Please add your comment..."
-          />
+            />
 
             <Button
-                type="button"
-                className="btn btn-primary row"
-                onClick={postComment}
+              type="button"
+              className="btn btn-primary row"
+              onClick={postComment}
             >
               Post
             </Button>
