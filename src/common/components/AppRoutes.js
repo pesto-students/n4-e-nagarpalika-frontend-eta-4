@@ -55,6 +55,8 @@ const PrivateRoutes = ({ account }) => {
       {/*<Route exact path="/about" component={About} />*/}
       <Route exact path="/contact-us" component={ContactUs} />
 
+      <Redirect from="/login" to="/dashboard" />
+
       <Route exact path="/register" component={Register} />
       <Route exact path="/notifications" component={Notifications} />
       <Route exact path="/dashboard" component={Dashboard} />

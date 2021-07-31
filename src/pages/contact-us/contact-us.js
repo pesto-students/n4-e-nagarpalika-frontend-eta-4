@@ -13,10 +13,11 @@ const ContactUs = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // eslint-disable-next-line no-unused-vars
     const res = await apiContactUs({ email, title, description });
 
     // add response functionality here after successful response
-    console.log(res);
+    // console.log(res);
   };
 
   return (
