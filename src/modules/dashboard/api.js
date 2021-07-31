@@ -11,3 +11,16 @@ export const getIssueStats = async (params) => {
 
   return data;
 };
+
+export const getCityHappinessLevel = async ({ location }) => {
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_API}/api/dashboard/happiness-level`,
+    {
+      params: {
+        location,
+      },
+    }
+  );
+
+  return data;
+};
