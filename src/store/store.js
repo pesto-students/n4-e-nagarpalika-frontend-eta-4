@@ -8,6 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import accountReducer from "../modules/account/reducer";
 import issuesReducer from "../modules/grievances/reducer";
+import notificationsReducer from "../modules/notifications/reducer";
 
 const { NODE_ENV } = process.env;
 
@@ -19,6 +20,7 @@ const composeEnhancers = composeWithDevTools({
 const rootReducer = combineReducers({
   account: accountReducer,
   issues: issuesReducer,
+  notifications: notificationsReducer,
 });
 
 const middlewares = [thunk];
