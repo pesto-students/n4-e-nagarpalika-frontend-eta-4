@@ -57,11 +57,8 @@ function Login({ actionLogin }) {
       setMessage("");
       setLoading(true);
       try {
-        const result = await confirmResult.confirm(otp);
+        await confirmResult.confirm(otp);
 
-        const firebaseToken = await result.user.getIdToken();
-
-        await actionLogin({ firebaseToken });
         history.push("/dashboard");
       } catch (e) {
         setMessage("**Unexpected error occurred. Please try again later");

@@ -13,10 +13,6 @@ export const login = async ({ firebaseToken }) => {
     firebaseToken,
   });
 
-  const { token } = data.data;
-
-  localStorage.setItem("token", token);
-
   return data;
 };
 
