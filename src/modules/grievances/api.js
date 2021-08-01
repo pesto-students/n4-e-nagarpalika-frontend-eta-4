@@ -83,18 +83,18 @@ export const updateIssue = async ({
   userId,
   title,
   description,
-  location,
   category,
   images,
+  status,
 }) => {
   const { data } = await axios.put(
     `${REACT_APP_SERVER_API}/api/users/${userId}/issues`,
     {
       title,
       description,
-      location,
       category,
       images,
+      status,
     },
     {
       headers: {

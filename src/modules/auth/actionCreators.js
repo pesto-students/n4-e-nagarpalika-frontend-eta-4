@@ -27,7 +27,9 @@ export function logIn({ firebaseToken }) {
       const { status, data, message } = await apiLogin({ firebaseToken });
 
       if (status === "Success") {
-        const { user } = data;
+        const { user, token } = data;
+
+        localStorage.setItem("token", token);
 
         dispatch({ type: LOG_IN_SUCCESS, payload: user });
       } else {
