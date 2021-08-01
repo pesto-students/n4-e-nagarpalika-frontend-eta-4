@@ -108,6 +108,7 @@ const ViewGrievance = ({ data }) => {
         <p className="h4 card-header">Issue Id: {data.id}</p>
         <div className="card-body container-fluid row justify-content-md-center">
           <ActionCorner className="col col-xl-6">
+            <div>
             <CardCarousel
               id="carouselExampleIndicators"
               className="container-fluid carousel slide"
@@ -150,6 +151,7 @@ const ViewGrievance = ({ data }) => {
                 <span className="visually-hidden">Next</span>
               </button>
             </CardCarousel>
+            </div>
             <ProgressHead>
               <ProgressBar issueStatus={data.status} />
             </ProgressHead>

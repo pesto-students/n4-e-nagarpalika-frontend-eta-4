@@ -33,6 +33,7 @@ export const Image = styled.img`
 `;
 export const CardCarousel = styled.div`
   height: 250px;
+  width: auto;
   margin-bottom: 20px;
   @media (max-width: 1400px) {
     height: auto;
