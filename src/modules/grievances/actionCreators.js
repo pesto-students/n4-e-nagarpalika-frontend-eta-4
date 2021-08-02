@@ -72,28 +72,62 @@ export function createIssue({
   };
 }
 
-export function updateIssue({ issueId, title, description, location, images }) {
+/**
+ *
+ * @param {Object} params
+ * @param {String} params.issueId
+ * @param {String} params.title
+ * @param {String} params.description
+ * @param {String[]} params.location
+ * @param {String} params.status
+ * @returns
+ */
+export function updateIssue({
+  issueId,
+  title,
+  description,
+  location,
+  images,
+  status,
+}) {
   return async (dispatch) => {
-    dispatch({ type: ISSUE_UPDATE_START });
+    dispatch({
+      type: ISSUE_UPDATE_START,
+      payload: { issueId },
+    });
 
     try {
-      const { status, data, message } = await apiUpdateIssue({
+      const {
+        status: fetchStatus,
+        data,
+        message,
+      } = await apiUpdateIssue({
         issueId,
         title,
         description,
         location,
         images,
+        status,
       });
 
-      if (status === "Success") {
+      if (fetchStatus === "Success") {
         const { issue } = data;
 
-        dispatch({ type: ISSUE_UPDATE_SUCCESS, payload: { issue } });
+        dispatch({
+          type: ISSUE_UPDATE_SUCCESS,
+          payload: { issueId, issue },
+        });
       } else {
-        dispatch({ type: ISSUE_UPDATE_ERROR, payload: message });
+        dispatch({
+          type: ISSUE_UPDATE_ERROR,
+          payload: { issueId, error: message },
+        });
       }
     } catch (error) {
-      dispatch({ type: ISSUE_UPDATE_ERROR, payload: error });
+      dispatch({
+        type: ISSUE_UPDATE_ERROR,
+        payload: { issueId, error },
+      });
     }
   };
 }

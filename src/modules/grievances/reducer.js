@@ -15,9 +15,9 @@ import {
   ISSUE_GET_ERROR,
   ISSUE_GET_START,
   ISSUE_GET_SUCCESS,
-  // ISSUE_UPDATE_ERROR,
-  // ISSUE_UPDATE_START,
-  // ISSUE_UPDATE_SUCCESS,
+  ISSUE_UPDATE_ERROR,
+  ISSUE_UPDATE_START,
+  ISSUE_UPDATE_SUCCESS,
   ISSUES_GET_ERROR,
   ISSUES_GET_START,
   ISSUES_GET_SUCCESS,
@@ -155,6 +155,68 @@ function issuesReducer(state = initialState, action) {
         ],
       };
     }
+
+    case ISSUE_UPDATE_START: {
+      const { id: issueId } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+
+      if (index < 0) return state;
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...state.list[index],
+            fetchStatus: FETCH_STATUS.loading,
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
+      };
+    }
+    case ISSUE_UPDATE_ERROR: {
+      const { issueId, error } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+
+      if (index < 0) return state;
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...state.list[index],
+            fetchStatus: FETCH_STATUS.error,
+            error,
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
+      };
+    }
+    case ISSUE_UPDATE_SUCCESS: {
+      const { issueId, issue } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+
+      if (index < 0) return state;
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...state.list[index],
+            fetchStatus: FETCH_STATUS.success,
+            error: "",
+            ...issue,
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
+      };
+    }
+
     case ISSUES_GET_START: {
       return {
         ...state,
@@ -174,10 +236,18 @@ function issuesReducer(state = initialState, action) {
     case ISSUES_GET_SUCCESS: {
       const { issues } = action.payload;
 
+      const tempIssuesList = issues.map((issue) => ({
+        ...initialStateOfIssue,
+        ...issue,
+      }));
+
       // const list = [...state.list, ...issues];
       const list = [
         ...new Map(
-          [...state.list, ...issues].map((issue) => [issue["id"], issue])
+          [...state.list, ...tempIssuesList].map((issue) => [
+            issue["id"],
+            issue,
+          ])
         ).values(),
       ].sort((issue1, issue2) =>
         isBefore(
