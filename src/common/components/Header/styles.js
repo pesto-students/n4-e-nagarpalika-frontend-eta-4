@@ -16,6 +16,21 @@ export const Span = styled.span`
   border-radius: 50%;
 `;
 
+export const FLex = styled.div`
+  display: flex;
+  flex-direction: row;
+  float: right;
+  @media (max-width: 990px) {
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: #ffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+  }
+`;
+
 export const NotifHeader = styled.p`
   color: #ffffff;
   font-size: larger;

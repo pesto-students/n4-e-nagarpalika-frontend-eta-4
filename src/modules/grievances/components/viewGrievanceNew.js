@@ -3,8 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import ProgressBar from "./../../modules/grievances/components/progressBar";
-import { GrievanceTextInput, PGrievance } from "./styles";
+import ProgressBar from "./progressBar";
+import { GrievanceTextInput, PGrievance } from "../../../pages/grievance/styles";
 import {
   ActionCorner,
   Card,
@@ -17,8 +17,9 @@ import {
   Description,
   ProgressHead,
   Image,
+  Comments,
 } from "./viewGrievanceStyle";
-import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../common/contants";
+import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../../common/contants";
 
 const ViewGrievance = ({ data }) => {
   const textRef = useRef();
@@ -34,11 +35,35 @@ const ViewGrievance = ({ data }) => {
     setComments([
       {
         from: "user",
-        comment: "Comment from User",
+        comment:
+          "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
       },
       {
         from: "admin",
         comment: "Comment from admin",
+      },
+      {
+        from: "admin",
+        comment:
+          "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
+      },
+      {
+        from: "user",
+        comment: "Comment from user",
+      },
+      {
+        from: "user",
+        comment:
+          "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
+      },
+      {
+        from: "admin",
+        comment: "Comment from admin",
+      },
+      {
+        from: "admin",
+        comment:
+          "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
       },
     ]);
   }, []);
@@ -83,6 +108,7 @@ const ViewGrievance = ({ data }) => {
         <p className="h4 card-header">Issue Id: {data.id}</p>
         <div className="card-body container-fluid row justify-content-md-center">
           <ActionCorner className="col col-xl-6">
+            <div>
             <CardCarousel
               id="carouselExampleIndicators"
               className="container-fluid carousel slide"
@@ -108,7 +134,7 @@ const ViewGrievance = ({ data }) => {
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev"
               >
-                <span className="carousel-control-prev-icon" aria-hidden="true">
+                <span aria-hidden="true">
                   <i className="fas fa-arrow-circle-left h2 text-primary" />
                 </span>
                 <span className="visually-hidden">Previous</span>
@@ -119,23 +145,29 @@ const ViewGrievance = ({ data }) => {
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next"
               >
-                <span className="carousel-control-next-icon" aria-hidden="true">
+                <span aria-hidden="true">
                   <i className="fas fa-arrow-circle-right h2 text-primary" />
                 </span>
                 <span className="visually-hidden">Next</span>
               </button>
             </CardCarousel>
+            </div>
             <ProgressHead>
               <ProgressBar issueStatus={data.status} />
             </ProgressHead>
-            <PGrievance>{data.category}</PGrievance>
+            <PGrievance>{`# ${data.category}`}</PGrievance>
           </ActionCorner>
           <div className="card-text col col-xl-6">
             <h4 className="h3">{data.title}</h4>
             <hr />
             <p className="h6">
-              <b>Date of creation: </b>{" "}
-              {`${data.createdAt.slice(0, 10)} ${data.createdAt.slice(11, -5)}`}
+              <i className="far fa-calendar" />
+              {"  "}
+              {data.createdAt.slice(0, 10)}
+              {"  "}
+              <i className="far fa-clock" />
+              {"  "}
+              {data.createdAt.slice(11, -5)}
             </p>
             <ATag
               className="card-text fst-italic"
@@ -188,64 +220,50 @@ const ViewGrievance = ({ data }) => {
       <Card className="card col col-xl-4">
         <p className="h4 card-header text-center">Comments</p>
         <div className="card-body">
-          <div className="card-text overflow-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
-              <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
-              </symbol>
-            </svg>
+          <Comments
+            className="card-text overflow-auto text-wrap border"
+            style={{ height: "50%" }}
+          >
             {comments.map((comment) =>
               comment.from === "user" ? (
-                <div
-                  className="alert alert-primary d-flex align-items-center"
-                  role="alert"
-                >
-                  <svg
-                    className="bi flex-shrink-0 me-2"
-                    width="24"
-                    height="24"
-                    role="img"
-                    aria-label="Info:"
-                  >
-                    <use xlinkHref="#info-fill" />
-                  </svg>
-                  <div>{comment.comment}</div>
+                <div style={{ width: "80%", margin: "20px" }}>
+                  <div className="alert alert-primary text-wrap d-flex float-start">
+                    <div className="text-wrap" style={{ width: "100%" }}>
+                      {comment.comment}
+                    </div>
+                  </div>
+                  <br />
                 </div>
               ) : (
                 <div
-                  className="alert alert-warning d-flex align-items-center"
+                  style={{ width: "80%", margin: "20px" }}
+                  className="alert alert-warning d-flex float-end text-wrap"
                   role="alert"
                 >
-                  <svg
-                    className="bi flex-shrink-0 me-2"
-                    width="24"
-                    height="24"
-                    role="img"
-                    aria-label="Warning:"
-                  >
-                    <use xlinkHref="#info-fill" />
-                  </svg>
-                  <div>{comment.comment}</div>
+                  <div className="text-wrap" style={{ width: "100%" }}>
+                    {comment.comment}{" "}
+                  </div>
+                  <br />
                 </div>
               )
             )}
-          </div>
-        </div>
-        <CardFooter className="form-control float-end">
-          <textarea
-            onChange={(e) => setComment(e.target.value)}
-            className="form-control col"
-            placeholder="Please add your comment..."
-          />
+          </Comments>
+          <CardFooter className="form-control card-footer">
+            <textarea
+              onChange={(e) => setComment(e.target.value)}
+              className="form-control col"
+              placeholder="Please add your comment..."
+            />
 
-          <Button
-            type="button"
-            className="btn btn-primary row"
-            onClick={postComment}
-          >
-            Post
-          </Button>
-        </CardFooter>
+            <Button
+              type="button"
+              className="btn btn-primary row"
+              onClick={postComment}
+            >
+              Post
+            </Button>
+          </CardFooter>
+        </div>
       </Card>
       <div
         className="modal fade"

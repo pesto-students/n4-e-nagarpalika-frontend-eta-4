@@ -15,13 +15,14 @@ export const Card = styled.div`
   background-color: white;
   padding: 0;
   @media (max-width: 1200px) {
-    height: auto;
+    height: 20%;
   }
 `;
 
 export const Button = styled.button`
   margin-top: 10px;
   width: 30%;
+  min-width: 100px;
 `;
 
 export const Image = styled.img`
@@ -31,8 +32,8 @@ export const Image = styled.img`
   }
 `;
 export const CardCarousel = styled.div`
-  width: 80%;
   height: 250px;
+  width: auto;
   margin-bottom: 20px;
   @media (max-width: 1400px) {
     height: auto;
@@ -90,15 +91,24 @@ export const ProgressHead = styled.div`
 `;
 export const CardFooter = styled.div`
   width: 95%;
-  margin: 15px;
   border: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background: transparent;
   @media (max-width: 1200px) {
     margin: 0;
     width: auto;
+  }
+`;
+export const Comments = styled.div`
+  @media (max-width: 1200px), (min-width: 550px) {
+    width: auto;
+    height: 85%;
+  }
+  @media (max-width: 550px) {
+    width: auto;
+    height: 87%;
   }
 `;

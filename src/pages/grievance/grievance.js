@@ -8,7 +8,7 @@ import Loader from "../../common/components/Loaders/loader";
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
 // import ViewGrievance from "./viewGrievance";
-import ViewGrievance from "./viewGrievanceNew";
+import ViewGrievance from "../../modules/grievances/components/viewGrievanceNew";
 
 const Grievance = ({ actionGetIssue }) => {
   const { id } = useParams();

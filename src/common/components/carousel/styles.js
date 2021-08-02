@@ -3,15 +3,15 @@
 import styled from "styled-components";
 
 export const Image = styled.img`
-  align-self: center;
-  margin-top: 20px;
-  max-width: 260px;
+  //align-self: center;
+  //margin-top: 20px;
+  width: auto;
   height: 200px;
-  border-radius: 10px;
+  //border-radius: 10px;
   object-fit: cover;
 `;
 export const P = styled.p`
-  height: 120px;
+  height: 100px;
   overflow: auto;
   font-style: italic;
 `;

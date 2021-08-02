@@ -5,9 +5,9 @@ import React, { useState } from "react";
 import { contactUs as apiContactUs } from "../../common/api";
 
 const ContactUs = () => {
-  const [email, setEmail] = useState("hbarve1592@gmail.com");
-  const [title, setTitle] = useState("title");
-  const [description, setDescription] = useState("description");
+  const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
   const onSubmit = async (e) => {
@@ -42,6 +42,7 @@ const ContactUs = () => {
                       type="email"
                       className="form-control"
                       id="inputEmail"
+                      placeholder="example@gmail.com"
                       aria-describedby="emailHelp"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -58,6 +59,7 @@ const ContactUs = () => {
                       type="text"
                       className="form-control"
                       id="inputTitle"
+                      placeholder="Let us know about the issue you're facing..."
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                     />
@@ -70,6 +72,7 @@ const ContactUs = () => {
                       type="text"
                       className="form-control"
                       id="inputDescription"
+                      placeholder="Write a detailed description..."
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                     />
