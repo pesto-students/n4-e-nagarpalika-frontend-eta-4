@@ -3,8 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import ProgressBar from "./../../modules/grievances/components/progressBar";
-import { GrievanceTextInput, PGrievance } from "./styles";
+import ProgressBar from "./progressBar";
+import { GrievanceTextInput, PGrievance } from "../../../pages/grievance/styles";
 import {
   ActionCorner,
   Card,
@@ -19,7 +19,7 @@ import {
   Image,
   Comments,
 } from "./viewGrievanceStyle";
-import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../common/contants";
+import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../../common/contants";
 
 const ViewGrievance = ({ data }) => {
   const textRef = useRef();
