@@ -23,15 +23,16 @@ import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../../common/contants";
 
 import CreateComments from "./CreateComment";
 import CommentList from "./CommentList";
+import {updateIssue} from "../actionCreators";
 
-const ViewGrievance = ({ data }) => {
+const ViewGrievance = ({ data,updateIssue }) => {
   const textRef = useRef();
   const [issueStatus, setIssueStatus] = useState();
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
   const { accountType } = account;
   const { id: issueId } = data;
-
+  console.log(data)
   // console.log(data);
   const updateStatus = (e) => {
     e.preventDefault();
@@ -46,7 +47,7 @@ const ViewGrievance = ({ data }) => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    const link = `https://maps.google.com/?q=${data.location}`;
+    const link = `https://maps.google.com/?q=${data.geoLocation.coordinates}`;
     const newWindow = window.open(link, "_blank", "noopener,noreferrer");
     if (newWindow) newWindow.opener = null;
   };
