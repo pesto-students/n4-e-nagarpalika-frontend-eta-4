@@ -1,100 +1,48 @@
 /** @format */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import ProgressBar from "./progressBar";
-import { GrievanceTextInput, PGrievance } from "../../../pages/grievance/styles";
+import {
+  GrievanceTextInput,
+  PGrievance,
+} from "../../../pages/grievance/styles";
 import {
   ActionCorner,
   Card,
   ATag,
   ButtonDiv,
   Text,
-  CardFooter,
-  Button,
   CardCarousel,
   Description,
   ProgressHead,
   Image,
-  Comments,
 } from "./viewGrievanceStyle";
 import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../../common/contants";
+
+import CreateComments from "./CreateComment";
+import CommentList from "./CommentList";
 
 const ViewGrievance = ({ data }) => {
   const textRef = useRef();
   const [issueStatus, setIssueStatus] = useState();
-  const [comments, setComments] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [comment, setComment] = useState("");
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
   const { accountType } = account;
+  const { id: issueId } = data;
 
-  useEffect(() => {
-    setComments([
-      {
-        from: "user",
-        comment:
-          "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
-      },
-      {
-        from: "admin",
-        comment: "Comment from admin",
-      },
-      {
-        from: "admin",
-        comment:
-          "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
-      },
-      {
-        from: "user",
-        comment: "Comment from user",
-      },
-      {
-        from: "user",
-        comment:
-          "Comment vcsshiusadfkdafkjahfhafkhafgafafakfafahghgdfhgffgjfjhfjk from User",
-      },
-      {
-        from: "admin",
-        comment: "Comment from admin",
-      },
-      {
-        from: "admin",
-        comment:
-          "Comment vcsshiusadfkdafkjahffwfwfsdfsdfsdfsfsfwfgfgfwfwfw wefwefwefwefwf from admin",
-      },
-    ]);
-  }, []);
   // console.log(data);
   const updateStatus = (e) => {
     e.preventDefault();
     // console.log(textRef.current.value);
     // console.log(issueStatus);
   };
-  const postComment = (e) => {
-    e.preventDefault();
-    // console.log(comment);
-  };
-  // const data={
-  //     category: "Road Safety & Traffic",
-  //     createdAt: "2021-07-24T21:32:06.997Z",
-  //     description: "Hello Sir, therehbdshbfdgbhsfdgbgdhbsghfghnfbnfb bxvcbvzxvbzxfgvzgfdszxgvzdfgbfdvfsgas gfs gfaesr fgsdvfsfadfvrtgvsrtastawrt4wgerytbeyearbhyeratge4awtwe5trvtbftawt has been a problem with the Traffic light near HSR Layout Sector 5. Please find the pictures in the attachment. Would be better if you can look into it in a better way.",
-  //     id: "60fc86d6126fe5023c98ed0a",
-  //     images: ["https://picsum.photos/id/1/400/400",
-  //             "https://picsum.photos/id/2/400/400",
-  //             "https://picsum.photos/id/3/400/400",
-  //             "https://picsum.photos/id/4/400/400"],
-  //     location: "20.29836,85.8629852",
-  //     title: "Broken Traffic Light Near HSR Layout Sector 5",
-  //     updatedAt: "2021-07-24T21:32:06.997Z",
-  //     userId: "60f99c0b997cf701d2b3832e",
-  //
-  // }
+
   const markAsResolved = (e) => {
     e.preventDefault();
   };
+
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -102,6 +50,7 @@ const ViewGrievance = ({ data }) => {
     const newWindow = window.open(link, "_blank", "noopener,noreferrer");
     if (newWindow) newWindow.opener = null;
   };
+
   return (
     <div className="container-fluid row justify-content-md-center">
       <Card className="container card col-xl-7">
@@ -109,48 +58,48 @@ const ViewGrievance = ({ data }) => {
         <div className="card-body container-fluid row justify-content-md-center">
           <ActionCorner className="col col-xl-6">
             <div>
-            <CardCarousel
-              id="carouselExampleIndicators"
-              className="container-fluid carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <Image
-                    src={data.images[0]}
-                    className="d-block w-100"
-                    alt=""
-                  />
-                </div>
-                {data.images.slice(1).map((image) => (
-                  <div className="carousel-item">
-                    <Image src={image} className="d-block w-100" alt="" />
+              <CardCarousel
+                id="carouselExampleIndicators"
+                className="container-fluid carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <Image
+                      src={data.images[0]}
+                      className="d-block w-100"
+                      alt=""
+                    />
                   </div>
-                ))}
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span aria-hidden="true">
-                  <i className="fas fa-arrow-circle-left h2 text-primary" />
-                </span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span aria-hidden="true">
-                  <i className="fas fa-arrow-circle-right h2 text-primary" />
-                </span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </CardCarousel>
+                  {data.images.slice(1).map((image, index) => (
+                    <div className="carousel-item" key={`${image}-${index}`}>
+                      <Image src={image} className="d-block w-100" alt="" />
+                    </div>
+                  ))}
+                </div>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide="prev"
+                >
+                  <span aria-hidden="true">
+                    <i className="fas fa-arrow-circle-left h2 text-primary" />
+                  </span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide="next"
+                >
+                  <span aria-hidden="true">
+                    <i className="fas fa-arrow-circle-right h2 text-primary" />
+                  </span>
+                  <span className="visually-hidden">Next</span>
+                </button>
+              </CardCarousel>
             </div>
             <ProgressHead>
               <ProgressBar issueStatus={data.status} />
@@ -199,7 +148,6 @@ const ViewGrievance = ({ data }) => {
                   type="button"
                   className="btn btn-primary"
                 >
-                  {" "}
                   Update Issue
                 </button>
               ) : null}
@@ -220,49 +168,8 @@ const ViewGrievance = ({ data }) => {
       <Card className="card col col-xl-4">
         <p className="h4 card-header text-center">Comments</p>
         <div className="card-body">
-          <Comments
-            className="card-text overflow-auto text-wrap border"
-            style={{ height: "50%" }}
-          >
-            {comments.map((comment) =>
-              comment.from === "user" ? (
-                <div style={{ width: "80%", margin: "20px" }}>
-                  <div className="alert alert-primary text-wrap d-flex float-start">
-                    <div className="text-wrap" style={{ width: "100%" }}>
-                      {comment.comment}
-                    </div>
-                  </div>
-                  <br />
-                </div>
-              ) : (
-                <div
-                  style={{ width: "80%", margin: "20px" }}
-                  className="alert alert-warning d-flex float-end text-wrap"
-                  role="alert"
-                >
-                  <div className="text-wrap" style={{ width: "100%" }}>
-                    {comment.comment}{" "}
-                  </div>
-                  <br />
-                </div>
-              )
-            )}
-          </Comments>
-          <CardFooter className="form-control card-footer">
-            <textarea
-              onChange={(e) => setComment(e.target.value)}
-              className="form-control col"
-              placeholder="Please add your comment..."
-            />
-
-            <Button
-              type="button"
-              className="btn btn-primary row"
-              onClick={postComment}
-            >
-              Post
-            </Button>
-          </CardFooter>
+          <CommentList issueId={issueId} />
+          <CreateComments issueId={issueId} />
         </div>
       </Card>
       <div

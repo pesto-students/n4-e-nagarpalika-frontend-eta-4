@@ -2,30 +2,48 @@
 import isBefore from "date-fns/isBefore";
 
 import {
+  COMMENTS_GET_ERROR,
+  COMMENTS_GET_START,
+  COMMENTS_GET_SUCCESS,
+  // COMMENT_CREATE_ERROR,
+  // COMMENT_CREATE_START,
+  COMMENT_CREATE_SUCCESS,
+  ISSUE_CREATE_ERROR,
   ISSUE_CREATE_RESET,
   ISSUE_CREATE_START,
   ISSUE_CREATE_SUCCESS,
-  ISSUE_CREATE_ERROR,
+  ISSUE_GET_ERROR,
   ISSUE_GET_START,
   ISSUE_GET_SUCCESS,
-  ISSUE_GET_ERROR,
+  // ISSUE_UPDATE_ERROR,
+  // ISSUE_UPDATE_START,
+  // ISSUE_UPDATE_SUCCESS,
+  ISSUES_GET_ERROR,
   ISSUES_GET_START,
   ISSUES_GET_SUCCESS,
-  ISSUES_GET_ERROR,
 } from "../../store/constants/actionTypes";
 
 import { FETCH_STATUS } from "../../common/contants";
+
+// This is the initial state of an existing comment
+const initialStateOfComments = {
+  fetchStatus: FETCH_STATUS.none,
+  error: "",
+  list: [],
+};
 
 // This is the initial state of an existing issue
 const initialStateOfIssue = {
   fetchStatus: FETCH_STATUS.none,
   error: "",
+  comments: initialStateOfComments,
 };
 
 // This is the initial state of an issue which is going to be created
 const initialStateOfNewIssue = {
   fetchStatus: FETCH_STATUS.none,
   error: "",
+  comments: initialStateOfComments,
 };
 
 // this is the initial state of whole issuesReducer
@@ -172,6 +190,111 @@ function issuesReducer(state = initialState, action) {
         ...state,
         fetchStatus: FETCH_STATUS.success,
         list,
+      };
+    }
+
+    case COMMENTS_GET_START: {
+      const { issueId } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+      const issue = state.list[index];
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...issue,
+            comments: {
+              ...issue.comments,
+              fetchStatus: FETCH_STATUS.loading,
+            },
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
+      };
+    }
+    case COMMENTS_GET_ERROR: {
+      const { issueId, error } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+      const issue = state.list[index];
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...issue,
+            comments: {
+              ...issue.comments,
+              fetchStatus: FETCH_STATUS.error,
+              error,
+            },
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
+      };
+    }
+    case COMMENTS_GET_SUCCESS: {
+      const { issueId, comments } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+
+      // if issue is not found, just return existing state.
+      if (index < 0) {
+        return state;
+      }
+
+      const issue = state.list[index];
+
+      const list = [
+        ...new Map(
+          [...issue.comments.list, ...comments].map((comment) => [
+            comment["id"],
+            comment,
+          ])
+        ).values(),
+      ];
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...issue,
+            comments: {
+              ...issue.comments,
+              list,
+              fetchStatus: FETCH_STATUS.success,
+            },
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
+      };
+    }
+
+    // COMMENT_CREATE_START & COMMENT_CREATE_ERROR is not
+    // implemented here for now.
+    case COMMENT_CREATE_SUCCESS: {
+      const { issueId, comment } = action.payload;
+
+      const index = state.list.findIndex(({ id }) => issueId === id);
+      const issue = state.list[index];
+
+      return {
+        ...state,
+        list: [
+          ...state.list.slice(0, index),
+          {
+            ...issue,
+            comments: {
+              ...issue.comments,
+              list: [...issue.comments.list, comment],
+            },
+          },
+          ...state.list.slice(index + 1, state.list.length),
+        ],
       };
     }
 

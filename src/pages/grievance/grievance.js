@@ -30,18 +30,16 @@ const Grievance = ({ actionGetIssue }) => {
 
   const { fetchStatus } = issue;
 
+  // @daspriyabrata: please make a seperate page for this
   if (fetchStatus === FETCH_STATUS.none) {
     return <div>none</div>;
   }
 
   if (fetchStatus === FETCH_STATUS.loading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
+  // @daspriyabrata: please make a seperate page for this
   if (fetchStatus === FETCH_STATUS.error) {
     const { error } = issue;
 
@@ -53,11 +51,7 @@ const Grievance = ({ actionGetIssue }) => {
     );
   }
 
-  return (
-    <div>
-      <ViewGrievance data={issue} />
-    </div>
-  );
+  return <ViewGrievance data={issue} />;
 };
 
 const mapDispatchToProps = {

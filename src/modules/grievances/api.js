@@ -108,6 +108,69 @@ export const updateIssue = async ({
   return data;
 };
 
+export const createComment = async ({ userId, issueId, title }) => {
+  const { data } = await axios.post(
+    `${REACT_APP_SERVER_API}/api/users/${userId}/issues/${issueId}/comments`,
+    {
+      title,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+export const getComments = async ({ issueId }) => {
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_API}/api/issues/${issueId}/comments`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+export const getCommentsCount = async ({ issueId }) => {
+  const { data } = await axios.get(
+    `${REACT_APP_SERVER_API}/api/issues/${issueId}/commentsCount`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return data;
+};
+
+// export const deleteComments = async ({ issueId, commentId }) => {
+//   const { data } = await axios.delete(
+//     `${REACT_APP_SERVER_API}/api/issues/${issueId}/comments/${commentId}`,
+//     {
+//       headers: {
+//         "Content-Type": "application/json",
+//         accept: "application/json",
+//         authorization: `Bearer ${localStorage.getItem("token")}`,
+//       },
+//     }
+//   );
+
+//   return data;
+// };
+
 export const createIssueType = async ({ title, location }) => {
   const { data } = await axios.post(
     `${REACT_APP_SERVER_API}/api/admin/issues/issueTypes`,
