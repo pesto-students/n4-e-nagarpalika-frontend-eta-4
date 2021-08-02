@@ -80,7 +80,7 @@ export const createIssue = async ({
 };
 
 export const updateIssue = async ({
-  userId,
+  issueId,
   title,
   description,
   category,
@@ -88,7 +88,7 @@ export const updateIssue = async ({
   status,
 }) => {
   const { data } = await axios.put(
-    `${REACT_APP_SERVER_API}/api/users/${userId}/issues`,
+    `${REACT_APP_SERVER_API}/api/issues/${issueId}`,
     {
       title,
       description,
