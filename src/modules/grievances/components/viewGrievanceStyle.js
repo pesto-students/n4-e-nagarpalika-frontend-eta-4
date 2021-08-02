@@ -90,7 +90,7 @@ export const ProgressHead = styled.div`
   }
 `;
 export const CardFooter = styled.div`
-  width: 95%;
+  width: 100%;
   border: 0;
   display: flex;
   flex-direction: column;
@@ -103,11 +103,12 @@ export const CardFooter = styled.div`
   }
 `;
 export const Comments = styled.div`
-  @media (max-width: 1200px), (min-width: 550px) {
+  height: 75%;
+  @media screen and (max-width: 1200px) and (min-width: 550px) {
     width: auto;
     height: 85%;
   }
-  @media (max-width: 550px) {
+  @media screen and (max-width: 550px) {
     width: auto;
     height: 87%;
   }

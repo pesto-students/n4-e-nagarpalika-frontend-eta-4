@@ -10,6 +10,7 @@ import { Comments } from "./viewGrievanceStyle";
 
 import { getComments } from "../actionCreators";
 import { FETCH_STATUS } from "../../../common/contants";
+import Loader from "../../../common/components/Loaders/loader";
 
 const CommentList = ({ issueId, actionGetComments }) => {
   const { account, issue } = useSelector(({ account, issues }) => ({
@@ -30,13 +31,12 @@ const CommentList = ({ issueId, actionGetComments }) => {
   return (
     <Comments
       className="card-text overflow-auto text-wrap border"
-      style={{ height: "50%" }}
     >
       {commentList.map(
         ({ id: commentId, issueId, userId, title, createdAt }) => (
           <div
-            style={{ width: "80%", margin: "20px" }}
-            className="alert alert-warning d-flex float-end text-wrap"
+            style={{ width: "90%", margin: "20px" }}
+            className="alert alert-warning d-flex float-start text-wrap"
             role="alert"
             key={commentId}
           >
@@ -47,7 +47,7 @@ const CommentList = ({ issueId, actionGetComments }) => {
           </div>
         )
       )}
-      {fetchStatus === FETCH_STATUS.loading && <div>Loading...</div>}
+      {fetchStatus === FETCH_STATUS.loading && <div><Loader/></div>}
       {fetchStatus === FETCH_STATUS.error && <div>{error}</div>}
     </Comments>
   );

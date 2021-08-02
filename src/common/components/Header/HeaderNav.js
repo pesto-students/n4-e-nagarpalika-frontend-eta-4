@@ -69,7 +69,7 @@ const HeaderNav = ({ actionLogout }) => {
                   <i className="bi bi-bell pos position-relative h3">
                     {accountType === ACCOUNT_TYPE.admin ? (
                       <Span className="position-absolute top-0 start-100 p-1 translate-middle badge rounded-circle bg-danger">
-                        <span className="text-white h6">99+</span>
+                        <span className="text-white h6">12</span>
                       </Span>
                     ) : null}
                   </i>

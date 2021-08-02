@@ -167,7 +167,7 @@ const ViewGrievance = ({ data }) => {
       </Card>
       <Card className="card col col-xl-4">
         <p className="h4 card-header text-center">Comments</p>
-        <div className="card-body">
+        <div className="card-body"  style={{height:"100%"}}>
           <CommentList issueId={issueId} />
           <CreateComments issueId={issueId} />
         </div>
