@@ -59,6 +59,17 @@ const HeaderNav = ({ actionLogout }) => {
           <div className="navbar-nav me-auto mb-2 mb-lg-0" />
           {!hiddenNavs ? (
             <FLex className="d-flex">
+              {/* NOTE: This (accountType) is for DEMO purpose only. */}
+              <div
+                className="nav-item"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <div className="nav-link">{accountType}</div>
+              </div>
+              <div className="navbar-nav me-auto mb-2 mb-lg-0" />
               <div className="nav-item dropdown">
                 <div
                   role="button"

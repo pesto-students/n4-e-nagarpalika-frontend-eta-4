@@ -1,8 +1,10 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 import { getIssueStats } from "../../api";
+import { LOCATIONS } from "../../../../common/contants";
 
 const IssueStatus = ({ userId, location }) => {
   const [stats, setStats] = useState({
@@ -15,15 +17,7 @@ const IssueStatus = ({ userId, location }) => {
     const abortController = new AbortController();
 
     async function getStats() {
-      const params = {};
-      if (typeof userId !== "undefined") {
-        params.userId = userId;
-      }
-      if (typeof location !== "undefined") {
-        params.location = location;
-      }
-
-      const { status, data } = await getIssueStats(params);
+      const { status, data } = await getIssueStats({ userId, location });
 
       if (status === "Success") {
         setStats(data);
@@ -138,6 +132,11 @@ const IssueStatus = ({ userId, location }) => {
       </div>
     </div>
   );
+};
+
+IssueStatus.propTypes = {
+  userId: PropTypes.string,
+  location: PropTypes.oneOf(Object.values(LOCATIONS)),
 };
 
 export default IssueStatus;

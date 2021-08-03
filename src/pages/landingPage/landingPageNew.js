@@ -2,18 +2,9 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 
 import IssueStatus from "../../modules/dashboard/components/IssueStatusCard/IssueStatus";
+import IssueDistributionGraph from "../../common/components/Charts/IssueDistribution";
 
 import {
   Header,
@@ -30,50 +21,6 @@ import {
 } from "./styles";
 
 const LandingPageNew = () => {
-  const dataByDate = [
-    {
-      date: "Jan 2021",
-      Total: 4000,
-      Progress: 2400,
-      Resolved: 1600,
-    },
-    {
-      date: "Feb 2021",
-      Total: 3000,
-      Progress: 1398,
-      Resolved: 1602,
-    },
-    {
-      date: "Mar 2021",
-      Total: 2000,
-      Progress: 1800,
-      Resolved: 200,
-    },
-    {
-      date: "Apr 2021",
-      Total: 2780,
-      Progress: 1908,
-      Resolved: 872,
-    },
-    {
-      date: "May 2021",
-      Total: 1890,
-      Progress: 400,
-      Resolved: 1490,
-    },
-    {
-      date: "June 2021",
-      Total: 2390,
-      Progress: 1800,
-      Resolved: 590,
-    },
-    {
-      date: "Jul 2021",
-      Total: 3490,
-      Progress: 300,
-      Resolved: 3190,
-    },
-  ];
   return (
     <DivHead className="container-fluid">
       <div className="row">
@@ -124,7 +71,7 @@ const LandingPageNew = () => {
                 fillRule="evenodd"
               ></path>
             </g>
-          </svg>{" "}
+          </svg>
         </div>
         <div className="col" />
         <div className="col">
@@ -317,33 +264,7 @@ const LandingPageNew = () => {
         <hr />
         <div className="card text-center shadow" style={{ height: "600px" }}>
           <div className="card-body text-center">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                width={500}
-                height={300}
-                data={dataByDate}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="Total"
-                  stroke="#607d8b"
-                  activeDot={{ r: 8 }}
-                />
-                <Line type="monotone" dataKey="Progress" stroke="#ff9800" />
-                <Line type="monotone" dataKey="Resolved" stroke="#4caf50" />
-              </LineChart>
-            </ResponsiveContainer>
+            <IssueDistributionGraph />
           </div>
         </div>
       </div>

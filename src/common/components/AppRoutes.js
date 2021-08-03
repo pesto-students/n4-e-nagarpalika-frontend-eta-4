@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { ACCOUNT_TYPE } from "../contants";
+import { ACCOUNT_TYPE, FETCH_STATUS } from "../contants";
 
 import Loader from "./Loaders/loader";
 
@@ -86,7 +86,8 @@ const AdminRoutes = () => (
     <Route exact path="/dashboard" component={Dashboard} />
     <Route exact path="/account" component={Account} />
     <Route exact path="/contact-us" component={ContactUs} />
-    <Route exact path="/grievances/new" component={GrievanceNew} />
+    {/* MANAGER & ADMIN can't create grievance/issue */}
+    {/* <Route exact path="/grievances/new" component={GrievanceNew} /> */}
     <Route exact path="/grievances/:id" component={Grievance} />
     <Route exact path="/grievances" component={Grievances} />
     <Route exact path="/settings" component={Settings} />
@@ -100,9 +101,9 @@ const AdminRoutes = () => (
 function AppRoutes() {
   const account = useSelector((state) => state.account);
 
-  const { isInit, isLoggedIn, accountType } = account;
+  const { isInit, isLoggedIn, accountType, fetchStatus } = account;
 
-  if (!isInit) {
+  if (!isInit || fetchStatus === FETCH_STATUS.loading) {
     return <Loader />;
   }
 
