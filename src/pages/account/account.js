@@ -1,14 +1,17 @@
 /** @format */
 
+/* eslint-disable no-unused-vars */
+
 import React, { useState } from "react";
+import { connect, useSelector } from "react-redux";
 
 import { Alert } from "../../common/components/Alerts/Alerts";
 
 import { Container, Card, FormRow } from "./styles";
-import { useSelector } from "react-redux";
 import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
+import { update } from "../../modules/account/actionCreators";
 
-const Account = () => {
+const Account = ({ actionUpdate }) => {
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
   const {
@@ -32,7 +35,6 @@ const Account = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  // TODO: just add update function here from backend API
   const onSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
@@ -215,4 +217,8 @@ const Account = () => {
   );
 };
 
-export default Account;
+const mapDispatchToProps = {
+  actionUpdate: update,
+};
+
+export default connect(null, mapDispatchToProps)(Account);

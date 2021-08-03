@@ -5,12 +5,15 @@ import {
   LOG_IN_ERROR,
   LOG_IN_START,
   LOG_IN_SUCCESS,
-  LOG_OUT_START,
   LOG_OUT_ERROR,
+  LOG_OUT_START,
   LOG_OUT_SUCCESS,
-  REGISTER_START,
   REGISTER_ERROR,
+  REGISTER_START,
   REGISTER_SUCCESS,
+  // USER_UPDATE_ERROR,
+  // USER_UPDATE_START,
+  USER_UPDATE_SUCCESS,
 } from "../../store/constants/actionTypes";
 
 const initialState = {
@@ -105,6 +108,16 @@ function accountReducer(state = initialState, action) {
         ...state,
         fetchStatus: FETCH_STATUS.success,
         ...payload,
+      };
+    }
+
+    case USER_UPDATE_SUCCESS: {
+      const { user } = action.payload;
+
+      return {
+        ...state,
+        fetchStatus: FETCH_STATUS.success,
+        ...user,
       };
     }
 
