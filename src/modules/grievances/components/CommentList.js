@@ -29,9 +29,7 @@ const CommentList = ({ issueId, actionGetComments }) => {
   }, []);
 
   return (
-    <Comments
-      className="card-text overflow-auto text-wrap border"
-    >
+    <Comments className="card-text overflow-auto text-wrap border">
       {commentList.map(
         ({ id: commentId, issueId, userId, title, createdAt }) => (
           <div
@@ -47,7 +45,11 @@ const CommentList = ({ issueId, actionGetComments }) => {
           </div>
         )
       )}
-      {fetchStatus === FETCH_STATUS.loading && <div><Loader/></div>}
+      {fetchStatus === FETCH_STATUS.loading && (
+        <div>
+          <Loader />
+        </div>
+      )}
       {fetchStatus === FETCH_STATUS.error && <div>{error}</div>}
     </Comments>
   );

@@ -5,14 +5,17 @@ export const Input = styled.input`
   display: none;
 `;
 export const Form = styled.div`
+  height: 100px;
   display: flex;
+  overflow: auto;
   flex-direction: row;
-  float: right;
+  align-items: center;
 `;
 export const Label = styled.label`
   display: flex;
   height: 50px;
   width: 50px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px dashed black;
@@ -388,10 +391,6 @@ export const Error = styled.p`
   font-family: "Roboto", sans-serif;
 `;
 
-export const P = styled.p`
-  color: #6c63ff;
-  font-family: "Roboto", sans-serif;
-`;
 export const Divhead = styled.div`
   width: 85%;
   height: 60px;
@@ -411,16 +410,12 @@ export const Button = styled.button`
   margin: 4px;
   border-radius: 4px;
   min-width: 100px;
-  //background-color: var(--theme-button-primary-background-color);
-  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 40%);
-  border: 1px solid grey;
   align-self: flex-end;
 `;
 export const GrievanceInputData = styled.a`
   width: 50%;
   height: 100%;
   margin: 2px;
-  color: green;
   background-color: transparent;
   border-color: transparent;
   cursor: default;
@@ -437,6 +432,7 @@ export const Select = styled.select`
   border-radius: 3px;
   border: transparent;
   background: transparent;
+  text-align: center;
   width: 50%;
   height: 100%;
 
