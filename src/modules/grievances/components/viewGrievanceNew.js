@@ -23,16 +23,16 @@ import { ACCOUNT_TYPE, GRIEVANCE_STATUS } from "../../../common/contants";
 
 import CreateComments from "./CreateComment";
 import CommentList from "./CommentList";
-import {updateIssue} from "../actionCreators";
+import { updateIssue } from "../actionCreators";
 
-const ViewGrievance = ({ data,updateIssue }) => {
+const ViewGrievance = ({ data, updateIssue }) => {
   const textRef = useRef();
   const [issueStatus, setIssueStatus] = useState();
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
   const { accountType } = account;
   const { id: issueId } = data;
-  console.log(data)
+  console.log(data);
   // console.log(data);
   const updateStatus = (e) => {
     e.preventDefault();
@@ -55,8 +55,11 @@ const ViewGrievance = ({ data,updateIssue }) => {
   return (
     <div className="container-fluid row justify-content-md-center">
       <Card className="container card col-xl-7">
-        <p className="h4 card-header">Issue Id: {data.id}</p>
-        <div className="card-body container-fluid row justify-content-md-center">
+        <p className="card-header text-secondary">Issue Id: {data.id}</p>
+        <div
+          className="card-body row justify-content-md-center"
+          style={{ height: "80%" }}
+        >
           <ActionCorner className="col col-xl-6">
             <div>
               <CardCarousel
@@ -107,7 +110,7 @@ const ViewGrievance = ({ data,updateIssue }) => {
             </ProgressHead>
             <PGrievance>{`# ${data.category}`}</PGrievance>
           </ActionCorner>
-          <div className="card-text col col-xl-6">
+          <div className="card-text col col-xl-6" style={{ height: "80%" }}>
             <h4 className="h3">{data.title}</h4>
             <hr />
             <p className="h6">
@@ -136,13 +139,13 @@ const ViewGrievance = ({ data,updateIssue }) => {
               </svg>
               Location
             </ATag>
-
+            <div style={{ height: "5px" }} />
             <Description className="card-text overflow-auto h6">
               <Text>{data.description}</Text>
             </Description>
             <ButtonDiv>
               {accountType !== ACCOUNT_TYPE.user &&
-              issueStatus !== GRIEVANCE_STATUS.action ? (
+              data.status !== GRIEVANCE_STATUS.action ? (
                 <button
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
@@ -153,7 +156,7 @@ const ViewGrievance = ({ data,updateIssue }) => {
                 </button>
               ) : null}
               {accountType === ACCOUNT_TYPE.user &&
-              issueStatus === GRIEVANCE_STATUS.action ? (
+              data.status === GRIEVANCE_STATUS.action ? (
                 <button
                   onClick={markAsResolved}
                   type="button"
@@ -168,7 +171,7 @@ const ViewGrievance = ({ data,updateIssue }) => {
       </Card>
       <Card className="card col col-xl-4">
         <p className="h4 card-header text-center">Comments</p>
-        <div className="card-body"  style={{height:"100%"}}>
+        <div className="card-body" style={{ height: "100%" }}>
           <CommentList issueId={issueId} />
           <CreateComments issueId={issueId} />
         </div>

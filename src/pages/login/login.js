@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import firebase from "../../common/firebase";
 import { logIn } from "../../modules/auth/actionCreators";
-import { Container, InnerContainer } from "./styles";
+import { Container, InnerContainer, Form } from "./styles";
 
 function Login({ actionLogin }) {
   const history = useHistory();
@@ -82,82 +83,82 @@ function Login({ actionLogin }) {
     <Container>
       <div className="card mb-4">
         <LoginSVG />
-        <h2 className="text-center">Log in</h2>
+        <h2 className="text-center">{!isOtpSent && `Log in`}</h2>
         <InnerContainer className="card-body">
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
             {!isOtpSent && (
-              <>
-                <div className="mb-4">
-                  <p htmlFor="phoneNumber" className="text-center card-text">
-                    Phone number
-                  </p>
-                  <div className="row">
-                    <input
-                      type="tel"
-                      maxLength="10"
-                      required
-                      className="form-control"
-                      id="phoneNumber"
-                      aria-describedby="phoneNumberHelp"
-                      placeholder="Phone number"
-                      value={phoneNumber}
-                      onChange={onChangePhoneNumber}
-                      disabled={loading}
-                    />
-                    <hr />
-                    <button
-                      type="button"
-                      // style={{width:"50%"}}
-                      className="btn btn-primary"
-                      style={{ alignSelf: "flex-end" }}
-                      onClick={getOtp}
-                      disabled={loading}
-                    >
-                      Get OTP
-                    </button>
+              <div
+                className="mb-4 row"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <Form
+                  data-tip="We'll never share your phone number with anyone else."
+                  data-for="toolTip1"
+                  data-place="right"
+                >
+                  <input
+                    type="tel"
+                    maxLength="10"
+                    className="form-control"
+                    id="phoneNumber"
+                    aria-describedby="phoneNumberHelp"
+                    placeholder="Phone number"
+                    value={phoneNumber}
+                    onChange={onChangePhoneNumber}
+                    disabled={loading}
+                  />
+                  <div style={{ width: "50px" }}>
+                    <ReactTooltip backgroundColor="gray" id="toolTip1" />
                   </div>
-                  <div id="phoneNumberHelp" className="form-text">
-                    **We'll never share your phone number with anyone else.
-                  </div>
-                </div>
-              </>
+                </Form>
+                <button
+                  type="button"
+                  style={{ width: "90%" }}
+                  className="btn btn-primary float-end"
+                  onClick={getOtp}
+                  disabled={loading || phoneNumber.length < 10}
+                >
+                  Get OTP
+                </button>
+              </div>
             )}
 
             {isOtpSent && (
-              <>
-                <div className="mb-4">
-                  <p htmlFor="phoneNumber" className="text-center card-text">
-                    Verify OTP
-                  </p>
-                  <div className="row">
-                    <input
-                      type="tel"
-                      maxLength="6"
-                      required
-                      className="form-control col"
-                      id="otpVerification"
-                      value={otp}
-                      onChange={onChangeOTP}
-                      disabled={loading}
-                    />
-                    <hr />
-                    <button
-                      type="button"
-                      style={{ alignSelf: "flex-end" }}
-                      className="btn btn-primary col"
-                      onClick={sendOtp}
-                      disabled={loading}
-                    >
-                      Verify
-                    </button>
+              <div
+                className="mb-4 row"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <Form
+                  data-tip="Please insert the 6 digit OTP sent to your mobile number"
+                  data-for="toolTip1"
+                  data-place="right"
+                >
+                  <input
+                    type="tel"
+                    maxLength="6"
+                    className="form-control col"
+                    id="otpVerification"
+                    value={otp}
+                    placeholder="Verify OTP"
+                    onChange={onChangeOTP}
+                    disabled={loading}
+                  />
+                  <div style={{ width: "50px" }}>
+                    <ReactTooltip backgroundColor="gray" id="toolTip1" />
                   </div>
-                  <div id="phoneNumberHelp" className="form-text">
-                    **Please insert the 6 digit otp sent to your mobile number.
-                  </div>
-                </div>
-              </>
+                </Form>
+                <button
+                  type="button"
+                  style={{ width: "90%" }}
+                  className="btn btn-primary float-end"
+                  onClick={sendOtp}
+                  disabled={loading || otp.length < 5}
+                >
+                  Verify
+                </button>
+              </div>
             )}
           </form>
           <p className="form-text text-danger">{message}</p>

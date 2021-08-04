@@ -17,6 +17,7 @@ const CreateComment = ({ issueId, actionCreateComment }) => {
 
   const onClick = async () => {
     actionCreateComment({ userId, issueId, title });
+    setTitle("");
   };
 
   return (

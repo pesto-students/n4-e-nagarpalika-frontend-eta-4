@@ -6,11 +6,13 @@ import ReactSpeedometer from "react-d3-speedometer";
 
 /* Reference https://palerdot.in/react-d3-speedometer/?path=/story/reactspeedometer--default-with-no-config */
 
-const CityHappinessLevel = ({ value }) => {
+const CityHappinessLevel = ({ value, location }) => {
   return (
     <div className="card mb-4 h-100">
       <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 className="m-0 font-weight-bold text-dark">City happiness level</h6>
+        <h5 className="m-0 font-weight-bold text-gray-800 h5">
+          City happiness level
+        </h5>
       </div>
       <div className="card-body">
         <div className="text-center">
@@ -22,7 +24,7 @@ const CityHappinessLevel = ({ value }) => {
             maxSegmentLabels={5}
             segments={1000}
             needleHeightRatio={0.5}
-            currentValueText="Good"
+            currentValueText={value > 50 ? "Good" : "Average"}
             needleTransitionDuration={3333}
             needleTransition="easeElastic"
             width={240}
@@ -60,9 +62,11 @@ const CityHappinessLevel = ({ value }) => {
             // ]}
           />
         </div>
-        <p>
-          Based on grievances resolved your city is categorized “Good”. We are
-          constantly upgrading our facilities to give you a better experience!
+        <p className="h6">
+          {`Based on grievances resolved ${location} is categorized “${
+            value > 50 ? "Good" : "Average"
+          }”. We are
+          constantly upgrading our facilities to give you a better experience!`}
         </p>
       </div>
     </div>

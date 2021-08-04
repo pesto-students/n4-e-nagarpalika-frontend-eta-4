@@ -63,7 +63,7 @@ export const Text = styled.p`
 `;
 
 export const Description = styled.div`
-  height: 42%;
+  height: 60%;
   width: 90%;
 `;
 
