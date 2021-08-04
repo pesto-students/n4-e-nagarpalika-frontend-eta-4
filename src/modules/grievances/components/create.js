@@ -60,6 +60,11 @@ function CreateGrievance({ onSubmit }) {
     setImages([...images, url]);
   };
   const onChangeDescription = (e) => {
+    if (e.target.value.length > 499) {
+      setMessage("Maximum 500 characters allowed");
+    } else {
+      setMessage("");
+    }
     setDescription(e.target.value);
   };
   const submitGrievance = async (e) => {
@@ -88,9 +93,9 @@ function CreateGrievance({ onSubmit }) {
         </GrievanceForm>
 
         <GrievanceForm>
-          <P className="text-primary">
+          <p className="h5">
             <b>Create a Grievance</b>
-          </P>
+          </p>
           <TextInput
             value={title}
             onChange={onChangeTitle}
@@ -104,7 +109,9 @@ function CreateGrievance({ onSubmit }) {
               value={category}
               onChange={selectCategory}
             >
-              <option value="">Select a category</option>
+              <option value="" disabled>
+                Select a category
+              </option>
               {GRIEVANCE_CATEGORIES.map((category) => (
                 <option value={category} key={category}>
                   {category}
@@ -114,11 +121,11 @@ function CreateGrievance({ onSubmit }) {
           </Divhead>
           <Divhead>
             <Select
+              className="form-select"
               value={userLocation}
               onChange={(e) => setLocation(e.target.value)}
               disabled
             >
-              <option value="">Select</option>
               <option value={LOCATIONS.bangaluru}>Bangaluru</option>
               <option value={LOCATIONS.delhi}>Delhi</option>
               <option value={LOCATIONS.mumbai}>Mumbai</option>
@@ -137,9 +144,10 @@ function CreateGrievance({ onSubmit }) {
           </Divhead>
           <TextInputData
             type="text"
+            maxLength="500"
             onChange={onChangeDescription}
             value={description}
-            placeholder="Please write a comprehensive report..."
+            placeholder="Please write a comprehensive report."
           />
           <div className="float-right">
             <FileUpload onUpload={(url) => handleUpload(url)} />
@@ -147,11 +155,9 @@ function CreateGrievance({ onSubmit }) {
 
           <Error>{message}</Error>
           <div className="col">
-            <Button className="btn btn-outline-secondary float-left">
-              Cancel
-            </Button>
+            <Button className="btn btn-secondary float-left">Cancel</Button>
             <Button
-              className="btn btn-outline-primary float-right"
+              className="btn btn-primary float-right"
               onClick={submitGrievance}
             >
               Submit
