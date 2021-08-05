@@ -7,8 +7,10 @@ import { useHistory } from "react-router-dom";
 import { Heading } from "../../common/components/Typography/Typography";
 import Button from "../../common/components/Buttons/Button";
 import Card from "../../common/components/Cards/Card";
-import Input from "../../common/components/Form/Input";
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
+import Row from "../../common/components/Layout/Row";
+import PhoneNumberInput from "../../common/components/Form/PhoneNumberInput";
+import OTPInput from "../../common/components/Form/OTPInput";
 
 import { logIn } from "../../modules/auth/actionCreators";
 
@@ -51,39 +53,31 @@ function Login() {
         setMessage("");
         setIsOtpSent(true);
       } catch (e) {
-        setMessage("**Unexpected error occurred. Please try later.");
+        setMessage("Unexpected error occurred. Please try later.");
       }
     } else {
-      setMessage("**Please insert your 10 digit phone number.");
+      setMessage("Please insert your 10 digit phone number.");
     }
     setLoading(false);
   };
 
   async function sendOtp(e) {
-    if (otp.length === 6) {
-      setMessage("");
-      setLoading(true);
-      try {
-        await confirmResult.confirm(otp);
-
-        history.push("/dashboard");
-      } catch (e) {
-        setMessage("**Unexpected error occurred. Please try again later");
-        // console.log(e);
-      }
-    } else {
-      setMessage("**Please insert the 6 digit OTP sent to your mobile number");
+    if (otp.length !== 6) {
+      setMessage("*Please insert the 6 digit OTP sent to your mobile number");
+      return;
     }
-    // setLoading(false);
+
+    setMessage("");
+    setLoading(true);
+    try {
+      await confirmResult.confirm(otp);
+
+      history.push("/dashboard");
+    } catch (e) {
+      setMessage("*Unexpected error occurred. Please try again later");
+      // console.log(e);
+    }
   }
-
-  const onChangePhoneNumber = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const onChangeOTP = (e) => {
-    setOtp(e.target.value);
-  };
 
   return (
     <Container>
@@ -99,20 +93,11 @@ function Login() {
             {!isOtpSent && (
               <div className="mb-4">
                 <div className="row justify-content-center">
-                  <Input
-                    type="tel"
-                    maxLength="10"
-                    required
-                    className="form-control mb-3"
-                    id="phoneNumber"
-                    aria-describedby="phoneNumberHelp"
-                    placeholder="Phone number"
-                    value={phoneNumber}
-                    onChange={onChangePhoneNumber}
+                  <PhoneNumberInput
+                    setNumber={(num) => setPhoneNumber(num)}
                     disabled={loading}
-                    // isValid
-                    // isInvalid
                   />
+
                   <Button
                     type="primary"
                     buttonType="button"
@@ -128,24 +113,17 @@ function Login() {
                   </Button>
                 </div>
                 <div id="phoneNumberHelp" className="form-text">
-                  **We'll never share your phone number with anyone else.
+                  *We'll never share your phone number with anyone else.
                 </div>
               </div>
             )}
 
             {isOtpSent && (
               <div className="mb-4">
-                <div className="row justify-content-center">
-                  <Input
-                    className="form-control mb-3"
+                <Row className="justify-content-center">
+                  <OTPInput
+                    setNumber={(num) => setOtp(num)}
                     disabled={loading}
-                    id="otpVerification"
-                    maxLength="6"
-                    onChange={onChangeOTP}
-                    placeholder="Verify OTP"
-                    required
-                    type="text"
-                    value={otp}
                   />
                   <Button
                     buttonType="button"
@@ -157,9 +135,9 @@ function Login() {
                   >
                     Verify
                   </Button>
-                </div>
+                </Row>
                 <div id="phoneNumberHelp" className="form-text">
-                  **Please insert the 6 digit OTP sent to your mobile number.
+                  *Please insert the 6 digit OTP sent to your mobile number.
                 </div>
               </div>
             )}

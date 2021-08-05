@@ -15,7 +15,7 @@ import {
   HeaderMin,
   HeroSection,
   DivHead,
-  A,
+  // A,
 } from "./styles";
 
 const LandingPageNew = () => {

@@ -3,7 +3,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
 const Text = ({ children, id }) => {
   return (
     <div id={id} className="form-text">

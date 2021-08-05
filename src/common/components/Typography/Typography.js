@@ -22,8 +22,11 @@ export const Heading = ({ size, children, className }) => {
 };
 
 Heading.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-    .isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.element,
+  ]).isRequired,
   className: PropTypes.string,
 };
 

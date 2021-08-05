@@ -50,6 +50,7 @@ function CreateGrievance({ onSubmit }) {
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState("");
   const [coordsSelected, setCoordsSelected] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getCoords = (e) => {
     e.preventDefault();
@@ -228,6 +229,17 @@ function CreateGrievance({ onSubmit }) {
                   type="primary"
                   className="mx-2"
                   onClick={submitGrievance}
+                  disabled={
+                    !(
+                      category &&
+                      description &&
+                      images.length > 0 &&
+                      !loading &&
+                      location &&
+                      title &&
+                      coordsSelected
+                    )
+                  }
                 >
                   Submit
                 </Button>

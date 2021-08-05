@@ -4,9 +4,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
+import isEmail from "validator/es/lib/isEmail";
 
 import RegisterSVG from "../../common/components/svg/registerSVG";
-import { validateAadhar as apiValidateAadhar } from "../../modules/account/api";
+// import { validateAadhar as apiValidateAadhar } from "../../modules/account/api";
 import { register } from "../../modules/account/actionCreators";
 import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
 
@@ -21,6 +22,10 @@ import Input from "../../common/components/Form/Input";
 import Option from "../../common/components/Form/Option";
 import Row from "../../common/components/Layout/Row";
 import Select from "../../common/components/Form/Select";
+import AadharInput from "../../common/components/Form/AadharInput";
+import NameInput from "../../common/components/Form/NameInput";
+import EmailInput from "../../common/components/Form/EmailInput";
+// import PhoneNumberInput from "../../common/components/Form/PhoneNumberInput";
 
 function Register({ actionRegister }) {
   const history = useHistory();
@@ -45,10 +50,11 @@ function Register({ actionRegister }) {
   const [gender, setGender] = useState("");
   const [profession, setProfession] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [textColor, setTextColor] = useState("#a51212");
   const [checkbox, setCheckbox] = useState(false);
-  const [aadharNumberExist, setAadharNumberExist] = useState(false);
+  // const [aadharNumberExist, setAadharNumberExist] = useState(false);
+  // const [isFormValid, setIsFormValid] = useState(false);
 
   const onChangeLocation = (e) => {
     setLocation(e.target.value);
@@ -62,27 +68,27 @@ function Register({ actionRegister }) {
     setProfession(e.target.value);
     setTextColor("#a51212");
   };
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
+  // const onChangeName = (e) => {
+  //   setName(e.target.value);
+  // };
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const onChangeAadhar = async (e) => {
-    const aadhar = e.target.value;
-    setAadharNumber(aadhar);
+  // const onChangeEmail = (e) => {
+  //   setEmail(e.target.value);
+  // };
+  // const onChangeAadhar = async (e) => {
+  //   const aadhar = e.target.value;
+  //   setAadharNumber(aadhar);
 
-    // display error message in UI
-    if (aadhar.length === 16) {
-      const { data } = await apiValidateAadhar({ aadharNumber: aadhar });
-      // eslint-disable-next-line no-unused-vars
-      const { exists } = data;
+  //   // display error message in UI
+  //   if (aadhar.length === 16) {
+  //     const { data } = await apiValidateAadhar({ aadharNumber: aadhar });
+  //     // eslint-disable-next-line no-unused-vars
+  //     const { exists } = data;
 
-      setAadharNumberExist(exists);
-      // console.log(exists);
-    }
-  };
+  //     setAadharNumberExist(exists);
+  //     // console.log(exists);
+  //   }
+  // };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -125,24 +131,10 @@ function Register({ actionRegister }) {
           </Row>
           <Row>
             <Col size={6}>
-              <Input
-                id="name"
-                type="text"
-                onChange={onChangeName}
-                value={name}
-                placeholder="Enter your name"
-                className="mb-3"
-              />
+              <NameInput setName={(str) => setName(str)} disabled={loading} />
             </Col>
             <Col size={6}>
-              <Input
-                id="email"
-                type="email"
-                onChange={onChangeEmail}
-                value={email}
-                placeholder="Enter your Email"
-                className="mb-3"
-              />
+              <EmailInput setEmail={(em) => setEmail(em)} disabled={loading} />
             </Col>
           </Row>
           <Row>
@@ -153,20 +145,14 @@ function Register({ actionRegister }) {
                 onChange={() => {}}
                 value={phoneNumber}
                 placeholder="Enter the 10 digit Mobile Number"
-                pattern="[0-9]{10}"
                 disabled
                 className="mb-3"
               />
             </Col>
             <Col size={6}>
-              <Input
-                id="aadharNumber"
-                type="number"
-                onChange={onChangeAadhar}
-                value={aadharNumber}
-                placeholder="Enter the 16 digit Aadhar Number"
-                pattern="[0-9]{16}"
-                className="mb-3"
+              <AadharInput
+                setNumber={(num) => setAadharNumber(num)}
+                disabled={loading}
               />
             </Col>
           </Row>
@@ -199,7 +185,11 @@ function Register({ actionRegister }) {
           </Row>
           <Row>
             <Col size={6}>
-              <Select onChange={selectGender} value={gender}>
+              <Select
+                onChange={selectGender}
+                value={gender}
+                className="my-2 py-3"
+              >
                 <Option value="">Gender</Option>
                 <Option value={GENDER.male}>Male</Option>
                 <Option value={GENDER.female}>Female</Option>
@@ -228,7 +218,16 @@ function Register({ actionRegister }) {
               <Button
                 type="primary"
                 className=""
-                disabled={loading || !checkbox}
+                disabled={
+                  !checkbox ||
+                  !isEmail(email) ||
+                  aadharNumber.length !== 16 ||
+                  gender.length <= 0 ||
+                  loading ||
+                  location.length <= 0 ||
+                  profession.length <= 0 ||
+                  name.length <= 0
+                }
                 onClick={onSubmit}
               >
                 Register
