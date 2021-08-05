@@ -2,12 +2,12 @@
 
 import React from "react";
 
+import Carousel from "../../../../common/components/Carousel/Carousel1";
 import Col from "../../../../common/components/Layout/Col";
 import Container from "../../../../common/components/Layout/Container";
-import Row from "../../../../common/components/Layout/Row";
-import Carousel from "../../../../common/components/Carousel/Carousel1";
-import Introduction from "./Introduction";
 import Discussion from "./Discussion";
+import Introduction from "./Introduction";
+import Row from "../../../../common/components/Layout/Row";
 
 import AppLayoutContainerBackgroundImage from "../../../../assets/svg/AppLayoutContainerBackgroundImage.svg";
 
