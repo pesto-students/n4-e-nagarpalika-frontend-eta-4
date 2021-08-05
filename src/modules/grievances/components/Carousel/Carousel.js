@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import Card from "../Cards/Card";
+import Card from "../../../../common/components/Cards/Card";
 
 const StyledImage = styled.img`
   width: 100%;
