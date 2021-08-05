@@ -70,7 +70,7 @@ let comments = [
 
 const Comment = ({ id, title, createdAt, userId, name }) => {
   return (
-    <div class="d-flex border-bottom pb-4 mb-4">
+    <div className="d-flex border-bottom pb-4 mb-4">
       <StyledAvatar
         src={`https://codescandy.com/geeks-bootstrap-5/assets/images/avatar/avatar-${
           1 + Math.floor(Math.random() * 10)
@@ -82,19 +82,19 @@ const Comment = ({ id, title, createdAt, userId, name }) => {
           height: "50px",
         }}
       />
-      <div class=" ms-3">
-        <h4 class="mb-1">
+      <div className=" ms-3">
+        <h4 className="mb-1">
           {`${name} `}
-          <span class="ms-1 fs-6 text-muted">
+          <span className="ms-1 fs-6 text-muted">
             {timeAgo.format(new Date(createdAt).getTime())}
           </span>
         </h4>
-        <div class="fs-6 mb-2">
-          <i class="mdi mdi-star me-n1 text-warning"></i>
-          <i class="mdi mdi-star me-n1 text-warning"></i>
-          <i class="mdi mdi-star me-n1 text-warning"></i>
-          <i class="mdi mdi-star me-n1 text-warning"></i>
-          <i class="mdi mdi-star me-n1 text-warning"></i>
+        <div className="fs-6 mb-2">
+          <i className="mdi mdi-star me-n1 text-warning"></i>
+          <i className="mdi mdi-star me-n1 text-warning"></i>
+          <i className="mdi mdi-star me-n1 text-warning"></i>
+          <i className="mdi mdi-star me-n1 text-warning"></i>
+          <i className="mdi mdi-star me-n1 text-warning"></i>
         </div>
         <p>{title}</p>
       </div>
@@ -150,8 +150,8 @@ const Discussion = ({ issueId, account }) => {
         </Button>
       </CardBody>
       <CardBody className="">
-        {comments.map((comment) => (
-          <Comment {...comment} />
+        {comments.map((comment, index) => (
+          <Comment key={index} {...comment} />
         ))}
       </CardBody>
     </Card>

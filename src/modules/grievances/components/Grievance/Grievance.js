@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import Carousel from "../../../../common/components/Carousel/Carousel1";
+import Carousel from "../../../../common/components/Carousel/Carousel";
 import Col from "../../../../common/components/Layout/Col";
 import Container from "../../../../common/components/Layout/Container";
 import Discussion from "./Discussion";

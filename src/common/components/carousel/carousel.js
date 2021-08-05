@@ -1,67 +1,121 @@
 /** @format */
 
-import React from "react";
-import { I, ControlNext, ControlPrev } from "./styles";
-import Cards from "./cards/cards";
-import "./styles.css";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-const Carousel = ({ issues, title }) => {
+import Card from "../Cards/Card";
+
+const StyledImage = styled.img`
+  width: 100%;
+`;
+
+const Carousel = ({ id, buttonNext, buttonPrev, items }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((count + 1) % items.length);
+    }, 2500);
+
+    return () => {
+      clearInterval(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  });
+
   return (
-    <div className="container">
-      <div className="container  my-3">
-        <h2 className="font-weight-light">{title} Issues</h2>
-        <div className="row mx-auto my-auto justify-content-center">
-          <div
-            id="issueCarousel"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <ControlPrev
-              className="carousel-control-prev bg-transparent w-aut"
-              href="#issueCarousel"
-              role="button"
-              data-bs-slide="prev"
-            >
-              <I className="fas fa-chevron-circle-left" />
-            </ControlPrev>
-            <ControlNext
-              className="carousel-control-next bg-transparent w-aut"
-              href="#issueCarousel"
-              role="button"
-              data-bs-slide="next"
-            >
-              <I className="fas fa-chevron-circle-right" />
-            </ControlNext>
-            <div className="carousel-inner" role="listbox">
-              <div className="carousel-item active">
-                {issues.slice(0, 4).map((issue) => (
-                  <Cards
-                    key={issue.id}
-                    content={issue.description}
-                    cover={issue.images[0]}
-                    title={issue.title}
-                    id={issue.id}
-                  />
-                ))}
-              </div>
-
-              <div className="carousel-item">
-                {issues.slice(4).map((issue) => (
-                  <Cards
-                    key={issue.id}
-                    content={issue.description}
-                    cover={issue.images[0]}
-                    title={issue.title}
-                    id={issue.id}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+    <Card
+      id={id}
+      className="carousel slide"
+      data-bs-ride="carousel"
+      style={{
+        height: "50vh",
+        overflow: "hidden",
+        padding: "0",
+      }}
+    >
+      <div className="carousel-indicators">
+        {items.map((_item, index) => (
+          <button
+            aria-current={index === 0}
+            aria-label={`Slide ${index + 1}`}
+            className={index === count ? "active" : ""}
+            data-bs-slide-to={index}
+            data-bs-target={`#${id}`}
+            key={`${index}`}
+            type="button"
+            onClick={() => setCount(index)}
+          />
+        ))}
       </div>
-    </div>
+
+      <div className="carousel-inner">
+        {items.map(({ title, description, url }, index) => {
+          return (
+            <div
+              className={`carousel-item ${index === count ? "active" : ""}`}
+              key={`${index}`}
+              data-bs-interval="1000"
+            >
+              <StyledImage src={url} alt={title || url} />
+              {title && description ? (
+                <div className="carousel-caption d-none d-md-block">
+                  {title && <h5>{title}</h5>}
+                  {description && <p>{description}</p>}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+      {buttonPrev && (
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target={`#${id}`}
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+      )}
+      {buttonNext && (
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target={`#${id}`}
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      )}
+    </Card>
   );
+};
+
+Carousel.propTypes = {
+  buttonNext: PropTypes.bool,
+  buttonPrev: PropTypes.bool,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      url: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};
+
+Carousel.defaultProps = {
+  buttonNext: false,
+  buttonPrev: false,
 };
 
 export default Carousel;
