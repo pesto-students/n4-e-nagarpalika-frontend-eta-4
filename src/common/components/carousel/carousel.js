@@ -63,4 +63,5 @@ const Carousel = ({ issues, title }) => {
     </div>
   );
 };
+
 export default Carousel;

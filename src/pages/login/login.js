@@ -4,12 +4,19 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { Heading } from "../../common/components/Typography/Typography";
+import Button from "../../common/components/Buttons/Button";
+import Card from "../../common/components/Cards/Card";
+import Input from "../../common/components/Form/Input";
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
-import firebase from "../../common/firebase";
+
 import { logIn } from "../../modules/auth/actionCreators";
+
 import { Container, InnerContainer } from "./styles";
 
-function Login({ actionLogin }) {
+import firebase from "../../common/firebase";
+
+function Login() {
   const history = useHistory();
 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -80,89 +87,86 @@ function Login({ actionLogin }) {
 
   return (
     <Container>
-      <div className="card mb-4">
+      <Card shadow className="p-4">
         <LoginSVG />
-        <h2 className="text-center">Log in</h2>
+        <Heading size={2} className="text-center">
+          Log in
+        </Heading>
         <InnerContainer className="card-body">
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
             {!isOtpSent && (
-              <>
-                <div className="mb-4">
-                  <p htmlFor="phoneNumber" className="text-center card-text">
-                    Phone number
-                  </p>
-                  <div className="row">
-                    <input
-                      type="tel"
-                      maxLength="10"
-                      required
-                      className="form-control"
-                      id="phoneNumber"
-                      aria-describedby="phoneNumberHelp"
-                      placeholder="Phone number"
-                      value={phoneNumber}
-                      onChange={onChangePhoneNumber}
-                      disabled={loading}
-                    />
-                    <hr />
-                    <button
-                      type="button"
-                      // style={{width:"50%"}}
-                      className="btn btn-primary"
-                      style={{ alignSelf: "flex-end" }}
-                      onClick={getOtp}
-                      disabled={loading}
-                    >
-                      Get OTP
-                    </button>
-                  </div>
-                  <div id="phoneNumberHelp" className="form-text">
-                    **We'll never share your phone number with anyone else.
-                  </div>
+              <div className="mb-4">
+                <div className="row justify-content-center">
+                  <Input
+                    type="tel"
+                    maxLength="10"
+                    required
+                    className="form-control mb-3"
+                    id="phoneNumber"
+                    aria-describedby="phoneNumberHelp"
+                    placeholder="Phone number"
+                    value={phoneNumber}
+                    onChange={onChangePhoneNumber}
+                    disabled={loading}
+                    // isValid
+                    // isInvalid
+                  />
+                  <Button
+                    type="primary"
+                    buttonType="button"
+                    className=""
+                    style={{
+                      alignSelf: "center",
+                      width: "94%",
+                    }}
+                    onClick={getOtp}
+                    disabled={loading || phoneNumber.length !== 10}
+                  >
+                    Get OTP
+                  </Button>
                 </div>
-              </>
+                <div id="phoneNumberHelp" className="form-text">
+                  **We'll never share your phone number with anyone else.
+                </div>
+              </div>
             )}
 
             {isOtpSent && (
-              <>
-                <div className="mb-4">
-                  <p htmlFor="phoneNumber" className="text-center card-text">
-                    Verify OTP
-                  </p>
-                  <div className="row">
-                    <input
-                      type="tel"
-                      maxLength="6"
-                      required
-                      className="form-control col"
-                      id="otpVerification"
-                      value={otp}
-                      onChange={onChangeOTP}
-                      disabled={loading}
-                    />
-                    <hr />
-                    <button
-                      type="button"
-                      style={{ alignSelf: "flex-end" }}
-                      className="btn btn-primary col"
-                      onClick={sendOtp}
-                      disabled={loading}
-                    >
-                      Verify
-                    </button>
-                  </div>
-                  <div id="phoneNumberHelp" className="form-text">
-                    **Please insert the 6 digit otp sent to your mobile number.
-                  </div>
+              <div className="mb-4">
+                <div className="row justify-content-center">
+                  <Input
+                    className="form-control mb-3"
+                    disabled={loading}
+                    id="otpVerification"
+                    maxLength="6"
+                    onChange={onChangeOTP}
+                    placeholder="Verify OTP"
+                    required
+                    type="text"
+                    value={otp}
+                  />
+                  <Button
+                    buttonType="button"
+                    type="primary"
+                    className=""
+                    style={{ width: "94%" }}
+                    onClick={sendOtp}
+                    disabled={loading || otp.length !== 6}
+                  >
+                    Verify
+                  </Button>
                 </div>
-              </>
+                <div id="phoneNumberHelp" className="form-text">
+                  **Please insert the 6 digit OTP sent to your mobile number.
+                </div>
+              </div>
             )}
           </form>
           <p className="form-text text-danger">{message}</p>
         </InnerContainer>
-      </div>
+      </Card>
     </Container>
   );
 }

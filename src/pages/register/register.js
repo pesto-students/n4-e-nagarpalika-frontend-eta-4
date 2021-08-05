@@ -10,22 +10,17 @@ import { validateAadhar as apiValidateAadhar } from "../../modules/account/api";
 import { register } from "../../modules/account/actionCreators";
 import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
 
-import {
-  Container,
-  Button,
-  Checkbox,
-  Form,
-  FormInput,
-  DivBody,
-  DivHead,
-  DivBodyColumn,
-  P,
-  PTag,
-  SVG,
-  Select,
-  Terms,
-  Div,
-} from "./styles";
+import { Heading } from "../../common/components/Typography/Typography";
+import Button from "../../common/components/Buttons/Button";
+import Card from "../../common/components/Cards/Card";
+import Checkbox from "../../common/components/Form/Check";
+import Col from "../../common/components/Layout/Col";
+import Container from "../../common/components/Layout/Container";
+import Form from "../../common/components/Form/Form";
+import Input from "../../common/components/Form/Input";
+import Option from "../../common/components/Form/Option";
+import Row from "../../common/components/Layout/Row";
+import Select from "../../common/components/Form/Select";
 
 function Register({ actionRegister }) {
   const history = useHistory();
@@ -108,142 +103,140 @@ function Register({ actionRegister }) {
   };
 
   return (
-    <Container>
-      <Form onSubmit={onSubmit}>
-        <Div>
-          <RegisterSVG />
-        </Div>
-        <Div className="row">
-          <DivBodyColumn className="col">
-            <P>Name*</P>
-            <FormInput
-              id="name"
-              type="text"
-              onChange={onChangeName}
-              value={name}
-              placeholder="Enter your name"
-            />
-          </DivBodyColumn>
-          <DivBodyColumn className="col">
-            <P>Email*</P>
-            <FormInput
-              id="email"
-              type="email"
-              onChange={onChangeEmail}
-              value={email}
-              placeholder="Enter your Email"
-            />
-          </DivBodyColumn>
-        </Div>
-        <Div className="row">
-          <DivBodyColumn className="col">
-            <P>Mobile Number*</P>
-            <FormInput
-              id="phoneNumber"
-              type="text"
-              value={phoneNumber}
-              placeholder="Enter the 10 digit Mobile Number"
-              pattern="[0-9]{10}"
-              disabled
-            />
-          </DivBodyColumn>
-          <DivBodyColumn className="col">
-            <P>Aadhar Number*</P>
-            <FormInput
-              id="aadharNumber"
-              type="number"
-              onChange={onChangeAadhar}
-              value={aadharNumber}
-              placeholder="Enter the 16 digit Aadhar Number"
-              pattern="[0-9]{16}"
-            />
-          </DivBodyColumn>
-        </Div>
-        <Div className="row">
-          <DivBodyColumn className="col">
-            <P>City*</P>
-            <Select onChange={onChangeLocation} value={location}>
-              <option value="">Select</option>
-              <option value={LOCATIONS.bangaluru}>Bengaluru</option>
-              <option value={LOCATIONS.delhi}>Delhi</option>
-              <option value={LOCATIONS.mumbai}>Mumbai</option>
-            </Select>
-          </DivBodyColumn>
-          <DivBodyColumn className="col">
-            <DivBody>
-              <DivHead>
-                <P>Profession</P>
-                <Select onChange={selectProfession} value={profession}>
-                  <option value="">Select</option>
-                  <option value={PROFESSIONS.doctor}>Doctor</option>
-                  <option value={PROFESSIONS.engineer}>Engineer</option>
-                  <option value={PROFESSIONS.farmer}>Farmer</option>
-                  <option value={PROFESSIONS.other}>Other</option>
-                </Select>
-              </DivHead>
-              <DivHead>
-                <P>Gender</P>
-                <Select onChange={selectGender} value={gender}>
-                  <option value="">Select</option>
-                  <option value={GENDER.male}>Male</option>
-                  <option value={GENDER.female}>Female</option>
-                  <option value={GENDER.other}>Other</option>
-                </Select>
-              </DivHead>
-            </DivBody>
-          </DivBodyColumn>
-        </Div>
-        <Div className="row">
-          {/* <a href="/#" className="col">
-            <DivBody>
-              <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0V0z" fill="none" />
-                <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
-              </SVG>
-              <PTag>Upload Profile Picture</PTag>
-            </DivBody>
-          </a> */}
-        </Div>
-        <DivHead>
-          <DivBodyColumn>
-            {/* <DivBody>
-              <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0V0z" fill="none" />
-                <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm3-10.17L14.17 8H13v6h-2V8H9.83L12 5.83zM5 18h14v2H5z" />
-              </SVG>
-              <P>Upload Profile Picture</P>
-            </DivBody> */}
-            <div className="col">
-              <DivBody>
-                <Checkbox
-                  type="checkbox"
-                  value={checkbox}
-                  disabled={loading}
-                  onClick={() => {
-                    setCheckbox(!checkbox);
-                  }}
-                />
-                <Terms>
-                  By Clicking here I accept the Privacy Policy and Terms
-                  Conditions of use.
-                </Terms>
-              </DivBody>
-            </div>
-          </DivBodyColumn>
-        </DivHead>
-        <DivHead>
-          <Button
-            className="btn btn-primary"
-            disabled={loading || !checkbox}
-            onClick={onSubmit}
-          >
-            Register
-          </Button>
-          <DivBodyColumn>
-            <P style={{ color: textColor }}>{message}</P>
-          </DivBodyColumn>
-        </DivHead>
-      </Form>
+    <Container
+      center
+      className={""}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "calc(100vh)",
+      }}
+    >
+      <Card shadow className="p-4" style={{ width: "70%" }}>
+        <Form onSubmit={onSubmit}>
+          <Row style={{}}>
+            <RegisterSVG height={300} />
+          </Row>
+          <Row>
+            <Heading size={2} className="text-center my-2 py-2">
+              Please fill your details below
+            </Heading>
+          </Row>
+          <Row>
+            <Col size={6}>
+              <Input
+                id="name"
+                type="text"
+                onChange={onChangeName}
+                value={name}
+                placeholder="Enter your name"
+                className="mb-3"
+              />
+            </Col>
+            <Col size={6}>
+              <Input
+                id="email"
+                type="email"
+                onChange={onChangeEmail}
+                value={email}
+                placeholder="Enter your Email"
+                className="mb-3"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col size={6}>
+              <Input
+                id="phoneNumber"
+                type="text"
+                onChange={() => {}}
+                value={phoneNumber}
+                placeholder="Enter the 10 digit Mobile Number"
+                pattern="[0-9]{10}"
+                disabled
+                className="mb-3"
+              />
+            </Col>
+            <Col size={6}>
+              <Input
+                id="aadharNumber"
+                type="number"
+                onChange={onChangeAadhar}
+                value={aadharNumber}
+                placeholder="Enter the 16 digit Aadhar Number"
+                pattern="[0-9]{16}"
+                className="mb-3"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col size={6}>
+              <Select
+                onChange={onChangeLocation}
+                value={location}
+                className="my-2 py-3"
+              >
+                <Option value="">Select Location</Option>
+                <Option value={LOCATIONS.bangaluru}>Bengaluru</Option>
+                <Option value={LOCATIONS.delhi}>Delhi</Option>
+                <Option value={LOCATIONS.mumbai}>Mumbai</Option>
+              </Select>
+            </Col>
+            <Col size={6}>
+              <Select
+                onChange={selectProfession}
+                value={profession}
+                className="my-2 py-3"
+              >
+                <Option value="">Select Profession</Option>
+                <Option value={PROFESSIONS.doctor}>Doctor</Option>
+                <Option value={PROFESSIONS.engineer}>Engineer</Option>
+                <Option value={PROFESSIONS.farmer}>Farmer</Option>
+                <Option value={PROFESSIONS.other}>Other</Option>
+              </Select>
+            </Col>
+          </Row>
+          <Row>
+            <Col size={6}>
+              <Select onChange={selectGender} value={gender}>
+                <Option value="">Gender</Option>
+                <Option value={GENDER.male}>Male</Option>
+                <Option value={GENDER.female}>Female</Option>
+                <Option value={GENDER.other}>Other</Option>
+              </Select>
+            </Col>
+          </Row>
+          <Row>
+            <Col size={12}>
+              <Checkbox
+                id="checkbox"
+                type="checkbox"
+                label={
+                  "By Clicking here I accept the Privacy Policy and Terms Conditions of use."
+                }
+                value={checkbox}
+                disabled={loading}
+                onChange={() => {
+                  setCheckbox(!checkbox);
+                }}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col size={12} className="d-flex justify-content-end">
+              <Button
+                type="primary"
+                className=""
+                disabled={loading || !checkbox}
+                onClick={onSubmit}
+              >
+                Register
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Card>
     </Container>
   );
 }

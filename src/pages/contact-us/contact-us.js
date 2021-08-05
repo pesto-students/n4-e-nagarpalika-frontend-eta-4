@@ -2,6 +2,16 @@
 
 import React, { useState } from "react";
 
+import { Heading } from "../../common/components/Typography/Typography";
+import Button from "../../common/components/Buttons/Button";
+import Card from "../../common/components/Cards/Card";
+import Checkbox from "../../common/components/Form/Check";
+import Col from "../../common/components/Layout/Col";
+import Container from "../../common/components/Layout/Container";
+import Input from "../../common/components/Form/Input";
+import Row from "../../common/components/Layout/Row";
+import Textarea from "../../common/components/Form/Textarea";
+
 import { contactUs as apiContactUs } from "../../common/api";
 
 const ContactUs = () => {
@@ -21,24 +31,29 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-xl-10 col-lg-12 col-md-9">
-          <div className="card shadow-lg mb-3">
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "calc(100vh - 75px)",
+      }}
+    >
+      <Row className="justify-content-center">
+        <Col md={9} lg={8} xl={8} className="">
+          <Card shadow className="shadow-lg mb-3">
             <div className="card-body p-0">
               <div className="p-5">
-                <div className="text-center">
-                  <h1 className="h4 text-gray-900 mb-4">
-                    Please write to us with any issue you’re facing with the app
-                    !!!!
-                  </h1>
-                </div>
+                <Heading size={4} className="text-gray-900 mb-4 text-center">
+                  Please write to us with any issue you’re facing with the app
+                  !!!!
+                </Heading>
                 <form onSubmit={onSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="inputEmail" className="form-label">
+                    {/* <label htmlFor="inputEmail" className="form-label">
                       Email address
-                    </label>
-                    <input
+                    </label> */}
+                    <Input
                       type="email"
                       className="form-control"
                       id="inputEmail"
@@ -47,15 +62,15 @@ const ContactUs = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <div id="emailHelp" className="form-text">
+                    {/* <div id="emailHelp" className="form-text">
                       We'll never share your email with anyone else.
-                    </div>
+                    </div> */}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="inputTitle" className="form-label">
+                    {/* <label htmlFor="inputTitle" className="form-label">
                       Title
-                    </label>
-                    <input
+                    </label> */}
+                    <Input
                       type="text"
                       className="form-control"
                       id="inputTitle"
@@ -65,19 +80,20 @@ const ContactUs = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="inputDescription" className="form-label">
+                    {/* <label htmlFor="inputDescription" className="form-label">
                       Describe your issue
-                    </label>
-                    <textarea
+                    </label> */}
+                    <Textarea
                       type="text"
                       className="form-control"
                       id="inputDescription"
                       placeholder="Write a detailed description..."
                       value={description}
+                      rows={6}
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3 form-check">
+                  {/* <div className="mb-3 form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
@@ -88,21 +104,29 @@ const ContactUs = () => {
                     <label className="form-check-label" htmlFor="checkbox">
                       I agree to all the terms and conditions.
                     </label>
-                  </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary col-12"
+                  </div> */}
+                  <Checkbox
+                    id="checkbox"
+                    label={"I agree to all the terms and conditions."}
+                    value={checkbox}
+                    // disabled={loading}
+                    onChange={() => setCheckbox(!checkbox)}
+                  />
+                  <Button
+                    buttonType="submit"
+                    type="prmary"
+                    className="col-12"
                     disabled={!checkbox}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

@@ -51,7 +51,7 @@ const Account = ({ actionUpdate }) => {
 
   return (
     <Container className="container d-flex flex-column justify-content-center align-items-center">
-      <Card className="card shadow">
+      <Card  className="card shadow">
         <div className="card-body">
           <h5 className="card-title text-center p-2">Profile Update</h5>
           <form onSubmit={onSubmit}>

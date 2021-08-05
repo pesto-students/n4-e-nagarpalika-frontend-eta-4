@@ -6,7 +6,7 @@ export const Nav = styled.nav`
   height: 75px;
 
   width: ${({ hiddenNavs }) => (hiddenNavs ? "calc(100% - 60px)" : "100%")};
-  margin: ${({ hiddenNavs }) => (hiddenNavs ? "0 0 40px 60px" : "0px")};
+  margin: ${({ hiddenNavs }) => (hiddenNavs ? "0 0 0 60px" : "0px")};
 `;
 
 export const Span = styled.span`

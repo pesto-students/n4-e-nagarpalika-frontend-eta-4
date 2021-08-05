@@ -41,7 +41,7 @@ const PublicRoutes = () => (
     <Redirect from="/grievances/:id" to="/" />
     <Redirect from="/grievances" to="/" />
     <Redirect from="/settings" to="/" />
-    <Redirect from="/admin-action" to="/dashboard" />
+    <Redirect from="/admin-action" to="/" />
 
     <Route component={NotFound} />
   </Switch>
@@ -89,7 +89,7 @@ const AdminRoutes = () => (
     <Route exact path="/" component={LandingPageNew} />
 
     <Redirect from="/login" to="/dashboard" />
-    <Redirect from="/register" to="/dashboard" />
+    {/* <Redirect from="/register" to="/dashboard" /> */}
 
     <Route exact path="/about" component={About} />
     <Route exact path="/notifications" component={Notifications} />

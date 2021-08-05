@@ -7,8 +7,7 @@ import { connect, useSelector } from "react-redux";
 import Loader from "../../common/components/Loaders/loader";
 import { getIssue } from "../../modules/grievances/actionCreators";
 import { FETCH_STATUS } from "../../common/contants";
-// import ViewGrievance from "./viewGrievance";
-import ViewGrievance from "../../modules/grievances/components/viewGrievanceNew";
+import GrievanceComponent from "../../modules/grievances/components/Grievance/Grievance";
 
 const Grievance = ({ actionGetIssue }) => {
   const { id } = useParams();
@@ -18,7 +17,10 @@ const Grievance = ({ actionGetIssue }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const list = useSelector(({ issues }) => issues.list);
+  const [account, list] = useSelector(({ issues, account }) => [
+    account,
+    issues.list,
+  ]);
 
   const index = list.findIndex((item) => id === item.id);
 
@@ -30,12 +32,10 @@ const Grievance = ({ actionGetIssue }) => {
 
   const { fetchStatus } = issue;
 
-  // @daspriyabrata: please make a seperate page for this
-  if (fetchStatus === FETCH_STATUS.none) {
-    return <div>none</div>;
-  }
-
-  if (fetchStatus === FETCH_STATUS.loading) {
+  if (
+    fetchStatus === FETCH_STATUS.loading ||
+    fetchStatus === FETCH_STATUS.none
+  ) {
     return <Loader />;
   }
 
@@ -51,7 +51,7 @@ const Grievance = ({ actionGetIssue }) => {
     );
   }
 
-  return <ViewGrievance data={issue} />;
+  return <GrievanceComponent {...{ account, issue }} />;
 };
 
 const mapDispatchToProps = {
