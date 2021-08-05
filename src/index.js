@@ -8,6 +8,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+console.log(process.env.REACT_APP_SERVER_API);
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
