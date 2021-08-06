@@ -1,42 +1,45 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, connect } from "react-redux";
 
 import NotificationCard from "../../common/components/Notifications/Card";
+import { FETCH_STATUS } from "../../common/contants";
+import { getNotifications } from "../../modules/notifications/actionCreators";
+import { getNotificationCount as apiGetNotificationCount } from "../../modules/notifications/api";
 
-const Notifications = () => {
-  const notifications = [
-    {
-      id: "1",
-      createdAt: new Date(2021, 6).toUTCString(),
-      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
-      issueId: "60fc7eef126fe5023c98ecfc",
-    },
-    {
-      id: "2",
-      createdAt: new Date(2021, 6).toUTCString(),
-      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
-      issueId: "60fc7eef126fe5023c98ecfc",
-    },
-    {
-      id: "3",
-      createdAt: new Date(2021, 6).toUTCString(),
-      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
-      issueId: "60fc7eef126fe5023c98ecfc",
-    },
-    {
-      id: "4",
-      createdAt: new Date(2021, 6).toUTCString(),
-      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
-      issueId: "60fc7eef126fe5023c98ecfc",
-    },
-    {
-      id: "5",
-      createdAt: new Date(2021, 6).toUTCString(),
-      text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
-      issueId: "60fc7eef126fe5023c98ecfc",
-    },
-  ];
+const Notifications = ({ actionGetNotifications }) => {
+  const [account, notificationStore] = useSelector(
+    ({ account, notifications }) => [account, notifications]
+  );
+  const { id: userId } = account;
+  const { fetchStatus, error, list: notifications } = notificationStore;
+
+  const [total, setTotal] = useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [page, setPage] = useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [limit, setLimit] = useState(25);
+
+  // This is for fetching notification counts for pagination
+  useEffect(() => {
+    async function get() {
+      const { data } = await apiGetNotificationCount({ userId });
+      const { count: total } = data;
+
+      setTotal(total);
+    }
+
+    get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // this is for fetching first 25 notifications for user.
+  useEffect(() => {
+    actionGetNotifications({ userId, page, limit });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total, page, limit]);
 
   return (
     <div className="container">
@@ -53,9 +56,16 @@ const Notifications = () => {
         {notifications.map((notif) => {
           return <NotificationCard key={notif.id} {...{ ...notif }} />;
         })}
+        {error && <div>{error}</div>}
+        {fetchStatus === FETCH_STATUS.loading && <div>loading...</div>}
       </div>
     </div>
   );
 };
 
-export default Notifications;
+// export default Notifications;
+const mapDispatchToProps = {
+  actionGetNotifications: getNotifications,
+};
+
+export default connect(null, mapDispatchToProps)(Notifications);

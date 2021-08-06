@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { ACCOUNT_TYPE } from "../contants";
+import { ACCOUNT_TYPE, FETCH_STATUS } from "../contants";
 
 import Loader from "./Loaders/loader";
 
@@ -28,10 +28,21 @@ import LandingPageNew from "../../pages/landingPage/landingPageNew";
 const PublicRoutes = () => (
   <Switch>
     {/*<Route exact path="/" component={LandingPage} />*/}
+    <Route exact path="/" component={LandingPageNew} />
     <Route exact path="/about" component={About} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/contact-us" component={ContactUs} />
-    <Route exact path="/" component={LandingPageNew} />
+
+    <Redirect from="/register" to="/" />
+    <Redirect from="/notifications" to="/" />
+    {/* <Redirect from="/dashboard" to="/" /> */}
+    <Redirect from="/account" to="/" />
+    <Redirect from="/grievances/new" to="/" />
+    <Redirect from="/grievances/:id" to="/" />
+    <Redirect from="/grievances" to="/" />
+    <Redirect from="/settings" to="/" />
+    <Redirect from="/admin-action" to="/" />
+
     <Route component={NotFound} />
   </Switch>
 );
@@ -55,6 +66,9 @@ const PrivateRoutes = ({ account }) => {
       {/*<Route exact path="/about" component={About} />*/}
       <Route exact path="/contact-us" component={ContactUs} />
 
+      <Redirect from="/login" to="/dashboard" />
+      <Redirect from="/admin-action" to="/dashboard" />
+
       <Route exact path="/register" component={Register} />
       <Route exact path="/notifications" component={Notifications} />
       <Route exact path="/dashboard" component={Dashboard} />
@@ -64,8 +78,6 @@ const PrivateRoutes = ({ account }) => {
       <Route exact path="/grievances/:id" component={Grievance} />
       <Route exact path="/grievances" component={Grievances} />
       <Route exact path="/settings" component={Settings} />
-
-      <Redirect from="/" to="/dashboard" />
 
       <Route component={NotFound} />
     </Switch>
@@ -77,14 +89,15 @@ const AdminRoutes = () => (
     <Route exact path="/" component={LandingPageNew} />
 
     <Redirect from="/login" to="/dashboard" />
-    <Redirect from="/register" to="/dashboard" />
+    {/* <Redirect from="/register" to="/dashboard" /> */}
 
     <Route exact path="/about" component={About} />
     <Route exact path="/notifications" component={Notifications} />
     <Route exact path="/dashboard" component={Dashboard} />
     <Route exact path="/account" component={Account} />
     <Route exact path="/contact-us" component={ContactUs} />
-    <Route exact path="/grievances/new" component={GrievanceNew} />
+    {/* MANAGER & ADMIN can't create grievance/issue */}
+    {/* <Route exact path="/grievances/new" component={GrievanceNew} /> */}
     <Route exact path="/grievances/:id" component={Grievance} />
     <Route exact path="/grievances" component={Grievances} />
     <Route exact path="/settings" component={Settings} />
@@ -98,9 +111,9 @@ const AdminRoutes = () => (
 function AppRoutes() {
   const account = useSelector((state) => state.account);
 
-  const { isInit, isLoggedIn, accountType } = account;
+  const { isInit, isLoggedIn, accountType, fetchStatus } = account;
 
-  if (!isInit) {
+  if (!isInit || fetchStatus === FETCH_STATUS.loading) {
     return <Loader />;
   }
 

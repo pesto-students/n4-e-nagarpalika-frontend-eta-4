@@ -6,7 +6,7 @@ export const Nav = styled.nav`
   height: 75px;
 
   width: ${({ hiddenNavs }) => (hiddenNavs ? "calc(100% - 60px)" : "100%")};
-  margin: ${({ hiddenNavs }) => (hiddenNavs ? "0 0 40px 60px" : "0px")};
+  margin: ${({ hiddenNavs }) => (hiddenNavs ? "0 0 0 60px" : "0px")};
 `;
 
 export const Span = styled.span`
@@ -14,6 +14,21 @@ export const Span = styled.span`
   height: 35px;
   width: 35px;
   border-radius: 50%;
+`;
+
+export const FLex = styled.div`
+  display: flex;
+  flex-direction: row;
+  float: right;
+  @media (max-width: 990px) {
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: #ffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+  }
 `;
 
 export const NotifHeader = styled.p`

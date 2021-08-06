@@ -72,3 +72,23 @@ export const GRIEVANCE_CATEGORIES = [
   "Public Safety",
   "Healthcare",
 ];
+
+export const BOOTSTRAP_TYPES = {
+  primary: "primary",
+  secondary: "secondary",
+  success: "success",
+  danger: "danger",
+  warning: "warning",
+  info: "info",
+  light: "light",
+  dark: "dark",
+};
+
+export const BOOTSTRAP_BREAKPOINTS = {
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+  xxl: "xxl",
+};

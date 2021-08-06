@@ -5,7 +5,7 @@ import axios from "axios";
 const { REACT_APP_SERVER_API } = process.env;
 
 export const createAdmin = async ({ phoneNumber, accountType, location }) => {
-  const { data } = await axios.put(
+  const { data, status } = await axios.put(
     `${REACT_APP_SERVER_API}/api/admin/users`,
     {
       phoneNumber,
@@ -21,5 +21,5 @@ export const createAdmin = async ({ phoneNumber, accountType, location }) => {
     }
   );
 
-  return data;
+  return [data, status];
 };

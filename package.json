@@ -36,6 +36,7 @@
     "firebase": "8.7.1",
     "firebaseui": "4.8.0",
     "fortawesome": "0.0.1-security",
+    "javascript-time-ago": "2.3.8",
     "prop-types": "15.7.2",
     "react": "^17.0.2",
     "react-bootstrap": "1.6.1",
@@ -54,6 +55,7 @@
     "redux-thunk": "2.3.0",
     "styled-components": "5.3.0",
     "timeago.js": "4.0.2",
+    "validator": "13.6.0",
     "web-vitals": "1.1.2"
   },
   "devDependencies": {

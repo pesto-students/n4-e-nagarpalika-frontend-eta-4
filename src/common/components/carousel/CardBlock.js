@@ -35,6 +35,7 @@ const GrievanceCardGrid = ({
             content={issue.description}
             cover={issue.images[0]}
             title={issue.title}
+            createdAt={issue.createdAt}
             id={issue.id}
           />
         ))}

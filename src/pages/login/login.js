@@ -2,13 +2,25 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { Heading } from "../../common/components/Typography/Typography";
+import Button from "../../common/components/Buttons/Button";
+import Card from "../../common/components/Cards/Card";
 import LoginSVG from "../../common/components/svg/loginSignupSvg";
-import firebase from "../../common/firebase";
+import Row from "../../common/components/Layout/Row";
+import PhoneNumberInput from "../../common/components/Form/PhoneNumberInput";
+import OTPInput from "../../common/components/Form/OTPInput";
+
 import { logIn } from "../../modules/auth/actionCreators";
+
 import { Container, InnerContainer } from "./styles";
 
-function Login({ logIn: actionLogin }) {
+import firebase from "../../common/firebase";
+
+function Login() {
+  const history = useHistory();
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -41,137 +53,104 @@ function Login({ logIn: actionLogin }) {
         setMessage("");
         setIsOtpSent(true);
       } catch (e) {
-        setMessage("**Unexpected error occurred. Please try later.");
+        setMessage("Unexpected error occurred. Please try later.");
       }
     } else {
-      setMessage("**Please insert your 10 digit phone number.");
+      setMessage("Please insert your 10 digit phone number.");
     }
     setLoading(false);
   };
 
   async function sendOtp(e) {
-    if (otp.length === 6) {
-      setMessage("");
-      setLoading(true);
-      try {
-        await confirmResult.confirm(otp);
-      } catch (e) {
-        setMessage("**Unexpected error occurred. Please try again later");
-        // console.log(e);
-      }
-    } else {
-      setMessage("**Please insert the 6 digit OTP sent to your mobile number");
+    if (otp.length !== 6) {
+      setMessage("*Please insert the 6 digit OTP sent to your mobile number");
+      return;
     }
-    // setLoading(false);
+
+    setMessage("");
+    setLoading(true);
+    try {
+      await confirmResult.confirm(otp);
+
+      history.push("/dashboard");
+    } catch (e) {
+      setMessage("*Unexpected error occurred. Please try again later");
+      // console.log(e);
+    }
   }
-
-  const onChangePhoneNumber = (e) => {
-    // const phoneNumberStr = (parseInt(e.target.value, 10) || 0).toString();
-    // if (phoneNumberStr.length > 0 && phoneNumberStr.length <= 10) {
-    //   setPhoneNumber(phoneNumberStr);
-    // }
-    setPhoneNumber(e.target.value);
-  };
-
-  const onChangeOTP = (e) => {
-    // const otpStr = parseInt(e.target.value || 0, 10).toString();
-    // if (otpStr.length > 0 && otpStr.length <= 6) {
-    //   setOtp(otpStr);
-    // }
-    setOtp(e.target.value);
-  };
 
   return (
     <Container>
-      <div className="card mb-4">
+      <Card shadow className="p-4">
         <LoginSVG />
-        <h2 className="text-center">Log in</h2>
+        <Heading size={2} className="text-center">
+          Log in
+        </Heading>
         <InnerContainer className="card-body">
           <form style={{ display: "flex", justifyContent: "center" }}>
             <input id="recaptcha-container" type="hidden" />
 
             {!isOtpSent && (
-              <>
-                <div className="mb-4">
-                  <p htmlFor="phoneNumber" className="text-center card-text">
-                    Phone number
-                  </p>
-                  <div className="row">
-                    <input
-                      type="tel"
-                      maxLength="10"
-                      required
-                      className="form-control"
-                      id="phoneNumber"
-                      aria-describedby="phoneNumberHelp"
-                      placeholder="Phone number"
-                      value={phoneNumber}
-                      onChange={onChangePhoneNumber}
-                      disabled={loading}
-                    />
-                    <hr />
-                    <button
-                      type="button"
-                      // style={{width:"50%"}}
-                      className="btn btn-primary"
-                      style={{ alignSelf: "flex-end" }}
-                      onClick={getOtp}
-                      disabled={loading}
-                    >
-                      Get OTP
-                    </button>
-                  </div>
-                  <div id="phoneNumberHelp" className="form-text">
-                    **We'll never share your phone number with anyone else.
-                  </div>
+              <div className="mb-4">
+                <div className="row justify-content-center">
+                  <PhoneNumberInput
+                    setNumber={(num) => setPhoneNumber(num)}
+                    disabled={loading}
+                  />
+
+                  <Button
+                    type="primary"
+                    buttonType="button"
+                    className=""
+                    style={{
+                      alignSelf: "center",
+                      width: "94%",
+                    }}
+                    onClick={getOtp}
+                    disabled={loading || phoneNumber.length !== 10}
+                  >
+                    Get OTP
+                  </Button>
                 </div>
-              </>
+                <div id="phoneNumberHelp" className="form-text">
+                  *We'll never share your phone number with anyone else.
+                </div>
+              </div>
             )}
 
             {isOtpSent && (
-              <>
-                <div className="mb-4">
-                  <p htmlFor="phoneNumber" className="text-center card-text">
-                    Verify OTP
-                  </p>
-                  <div className="row">
-                    <input
-                      type="tel"
-                      maxLength="6"
-                      required
-                      className="form-control col"
-                      id="otpVerification"
-                      value={otp}
-                      onChange={onChangeOTP}
-                      disabled={loading}
-                    />
-                    <hr />
-                    <button
-                      type="button"
-                      style={{ alignSelf: "flex-end" }}
-                      className="btn btn-primary col"
-                      onClick={sendOtp}
-                      disabled={loading}
-                    >
-                      Verify
-                    </button>
-                  </div>
-                  <div id="phoneNumberHelp" className="form-text">
-                    **Please insert the 6 digit otp sent to your mobile number.
-                  </div>
+              <div className="mb-4">
+                <Row className="justify-content-center">
+                  <OTPInput
+                    setNumber={(num) => setOtp(num)}
+                    disabled={loading}
+                  />
+                  <Button
+                    buttonType="button"
+                    type="primary"
+                    className=""
+                    style={{ width: "94%" }}
+                    onClick={sendOtp}
+                    disabled={loading || otp.length !== 6}
+                  >
+                    Verify
+                  </Button>
+                </Row>
+                <div id="phoneNumberHelp" className="form-text">
+                  *Please insert the 6 digit OTP sent to your mobile number.
                 </div>
-              </>
+              </div>
             )}
           </form>
           <p className="form-text text-danger">{message}</p>
         </InnerContainer>
-      </div>
+      </Card>
     </Container>
   );
 }
 
 const mapDispatchToProps = {
-  logIn,
+  actionLogin: logIn,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

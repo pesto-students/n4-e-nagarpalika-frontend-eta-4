@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 const SidebarNav = () => {
   const account = useSelector((state) => state.account);
   const { accountType } = account;
-
   const location = useLocation();
   const { pathname } = location;
 

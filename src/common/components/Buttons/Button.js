@@ -2,15 +2,32 @@
 
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
-const StyledButton = styled.button``;
+import { BOOTSTRAP_TYPES } from "../../contants";
 
-const Button = ({ buttonType, type, children, onClick }) => {
+const StyledButton = styled.button`
+  border-radius: 8px;
+`;
+
+const Button = ({
+  buttonType,
+  type,
+  children,
+  onClick,
+  className,
+  disabled,
+  style,
+  ...rest
+}) => {
   return (
     <StyledButton
       type={buttonType}
-      className={`btn btn-${type}`}
+      className={classnames(`btn btn-${type}`, className, {})}
       onClick={onClick}
+      disabled={disabled}
+      style={style}
+      {...rest}
     >
       {children}
     </StyledButton>
@@ -19,16 +36,7 @@ const Button = ({ buttonType, type, children, onClick }) => {
 
 Button.propTypes = {
   buttonType: PropTypes.oneOf(["button", "submit", "reset"]).isRequired,
-  type: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "info",
-    "light",
-    "dark",
-  ]).isRequired,
+  type: PropTypes.oneOf(Object.values(BOOTSTRAP_TYPES)).isRequired,
   children: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };

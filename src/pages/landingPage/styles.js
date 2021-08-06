@@ -54,18 +54,19 @@ export const ActionButtonTitle = styled.p`
 `;
 
 export const ActionButton = styled.button`
-  float: right;
-  margin-top: 20px;
-  width: 40%;
-  height: 50px;
-  text-transform: uppercase;
+  background-color: #fff;
   border-radius: 100px;
   border: 0;
-  background-color: #fff;
   box-shadow: 0 0 10px rgb(0 0 0 / 80%);
-  padding: 6px;
-  font-size: 18px;
   color: #6c63ff;
+  float: right;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 20px;
+  padding: 6px 20px;
+  text-transform: uppercase;
+  /* width: 110px; */
+
   @media (max-width: 800px) {
     margin-right: 30%;
     font-size: 14px;
@@ -89,12 +90,12 @@ export const SVGIMAGE = styled.svg`
   padding: 5px;
   @media screen and (max-width: 700px) {
     text-align: center;
-    //font-size: 1.875rem;
+    /* font-size: 1.875rem; */
   }
 `;
 
 export const Header = styled.div`
-  //background-color: #674baf;
+  /* background-color: #674baf; */
 `;
 
 export const HeaderMin = styled.div`
@@ -147,13 +148,14 @@ export const Logo = styled.img`
 export const A = styled.button`
   background: #41226e;
   border-color: #41226e;
-  margin-top: 20px;
+  border-radius: 100px;
   color: white;
   float: right;
+  letter-spacing: 0.1rem;
+  margin-top: 20px;
   padding: 0.5rem 1.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  border-radius: 5px;
+  height: 50px;
   @media screen and (max-width: 750px) {
     font-size: x-small;
   }

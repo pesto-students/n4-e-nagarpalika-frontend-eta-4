@@ -43,9 +43,9 @@ export const Form = styled.form`
 `;
 export const DivHead = styled.div`
   width: 50%;
-  height: 90%;
+  /* height: 90%; */
   display: flex;
-  //margin: 10px;
+  /* margin: 10px; */
   flex-direction: column;
   justify-content: center;
 `;

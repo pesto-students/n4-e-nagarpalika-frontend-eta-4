@@ -1,29 +1,47 @@
 /** @format */
 
+/* eslint-disable no-unused-vars */
+
 import React, { useState } from "react";
+import { connect, useSelector } from "react-redux";
 
 import { Alert } from "../../common/components/Alerts/Alerts";
 
-import { Container, Card, FormRow } from "./styles";
-import {useSelector} from "react-redux";
-import {GENDER, LOCATIONS, PROFESSIONS} from "../../common/contants";
+import { Heading } from "../../common/components/Typography/Typography";
+import Button from "../../common/components/Buttons/Button";
+import Card from "../../common/components/Cards/Card";
+import CardBody from "../../common/components/Cards/CardBody";
+// import CardTitle from "../../common/components/Cards/CardTitle";
+import Col from "../../common/components/Layout/Col";
+import Container from "../../common/components/Layout/Container";
+import EmailInput from "../../common/components/Form/EmailInput";
+import NameInput from "../../common/components/Form/NameInput";
+import PhoneNumberInput from "../../common/components/Form/PhoneNumberInput";
+import AadharInput from "../../common/components/Form/AadharInput";
+import Select from "../../common/components/Form/Select";
+import Option from "../../common/components/Form/Option";
+import Row from "../../common/components/Layout/Row";
 
-const Account = () => {
+// import { Container, Card, FormRow } from "./styles";
+import { GENDER, LOCATIONS, PROFESSIONS } from "../../common/contants";
+import { update } from "../../modules/account/actionCreators";
+
+const Account = ({ actionUpdate }) => {
   const reduxState = useSelector((state) => state);
   const { account } = reduxState;
   const {
     location: userLocation,
     name: userName,
-    phoneNumber: userPhone,
+    phoneNumber: userPhoneNumber,
     email: userEmail,
-    aadharNumber:userAadharNumber,
+    aadharNumber: userAadharNumber,
     profession: userProfession,
-    gender:userGender
+    gender: userGender,
   } = account;
 
   const [name, setName] = useState(userName);
   const [email, setEmail] = useState(userEmail);
-  const [phoneNumber, setPhoneNumber] = useState(userPhone);
+  const [phoneNumber, setPhoneNumber] = useState(userPhoneNumber);
   const [aadharNumber, setAadharNumber] = useState(userAadharNumber);
   // const [address, setAddress] = useState("");
   const [nagarPalika, setNagarPalika] = useState(userLocation);
@@ -32,7 +50,6 @@ const Account = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  // TODO: just add update function here from backend API
   const onSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
@@ -48,154 +65,142 @@ const Account = () => {
   };
 
   return (
-    <Container className="container d-flex flex-column justify-content-center align-items-center">
-      <Card className="card shadow">
-        <div className="card-body">
-          <h5 className="card-title text-center p-2">Profile Update</h5>
-          <form onSubmit={onSubmit}>
-            <FormRow className="form-row row">
-              <div className="form-group col-md-6">
-                <label htmlFor="inputName">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputName"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  data-cy="inputName"
-                />
-              </div>
-              <div className="form-group col-md-6">
-                <label htmlFor="inputEmail">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="inputEmail"
-                  placeholder="Email"
-                  disabled
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  data-cy="inputEmail"
-                />
-              </div>
-            </FormRow>
-            <FormRow className="form-row row">
-              <div className="form-group col-md-6">
-                <label htmlFor="inputMobileNumber">Mobile Number</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputMobileNumber"
-                  placeholder="Mobile Number"
-                  disabled
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  data-cy="inputMobileNumber"
-                />
-              </div>
-              <div className="form-group col-md-6">
-                <label htmlFor="inputAadharNumber">Aadhar Number</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputAadharNumber"
-                  placeholder="Aadhar Number"
-                  value={aadharNumber}
-                  disabled
-                  onChange={(e) => setAadharNumber(e.target.value)}
-                  data-cy="inputAadharNumber"
-                />
-              </div>
-            </FormRow>
+    <Container
+      className=""
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "calc(100vh)",
+      }}
+    >
+      <Card
+        shadow
+        className=""
+        style={{
+          width: "60%",
+          // height: "50%",
+        }}
+      >
+        <CardBody className="">
+          <Heading size={4} className="text-center p-2">
+            Profile Update
+          </Heading>
 
-            <FormRow className="form-row row">
-              <div className="form-group col-md-6">
-                <label htmlFor="inputNagarPalika">Nagar Palika</label>
-                <select
+          <form onSubmit={onSubmit}>
+            <Row className="form-row">
+              <Col md={6} className="form-group">
+                <NameInput
+                  initialValue={userName}
+                  setName={(n) => setName(n)}
+                  disabled={isLoading}
+                />
+              </Col>
+              <Col md={6} className="form-group ">
+                <EmailInput
+                  initialValue={userEmail}
+                  setEmail={(e) => setEmail(e)}
+                  disabled={isLoading}
+                />
+              </Col>
+            </Row>
+            <Row className="form-row row">
+              <Col md={6} className="form-group">
+                <PhoneNumberInput
+                  initialValue={userPhoneNumber}
+                  setNumber={(num) => setPhoneNumber(num)}
+                  disabled
+                />
+              </Col>
+              <Col md={6} className="form-group">
+                <AadharInput
+                  initialValue={userAadharNumber}
+                  setNumber={(num) => setAadharNumber(num)}
+                  disabled
+                />
+              </Col>
+            </Row>
+
+            <Row className="form-row">
+              <Col md={6} className="form-group">
+                <Select
                   id="inputNagarPalika"
-                  className="form-control"
-                  // defaultValue=""
+                  className="form-control my-2 py-3"
                   value={nagarPalika}
                   onChange={(e) => setNagarPalika(e.target.value)}
                   data-cy="inputNagarPalika"
                 >
-                  <option value={LOCATIONS.bangaluru}>Bangalore</option>
-                  <option value={LOCATIONS.delhi}>Delhi</option>
-                  <option value={LOCATIONS.mumbai}>Mumbai</option>
-                </select>
-              </div>
-              <div className="form-group col-md-6">
-                <label htmlFor="inputProfession">Profession</label>
-                <select
+                  <Option value="">Select Location</Option>
+                  <Option value={LOCATIONS.bangaluru}>Bangalore</Option>
+                  <Option value={LOCATIONS.delhi}>Delhi</Option>
+                  <Option value={LOCATIONS.mumbai}>Mumbai</Option>
+                </Select>
+              </Col>
+              <Col md={6} className="form-group">
+                <Select
                   id="inputProfession"
-                  className="form-control"
-                  // defaultValue=""
+                  className="form-control my-2 py-3"
                   value={profession}
                   onChange={(e) => setProfession(e.target.value)}
                   data-cy="inputProfession"
                 >
-                  <option value={PROFESSIONS.engineer}>Engineer</option>
-                  <option value={PROFESSIONS.doctor}>Doctor</option>
-                  <option value={PROFESSIONS.farmer}>Farmer</option>
-                  <option value={PROFESSIONS.other}>
-                    Other
-                  </option>
-                </select>
-              </div>
-            </FormRow>
+                  <Option value="">Select Profession</Option>
+                  <Option value={PROFESSIONS.engineer}>Engineer</Option>
+                  <Option value={PROFESSIONS.doctor}>Doctor</Option>
+                  <Option value={PROFESSIONS.farmer}>Farmer</Option>
+                  <Option value={PROFESSIONS.other}>Other</Option>
+                </Select>
+              </Col>
+            </Row>
 
-            <FormRow className="form-row row">
-              <div className="form-group col-md-6">
-                <label htmlFor="inputGender">Gender</label>
-                <select
+            <Row className="form-row">
+              <Col md={6} className="form-group">
+                <Select
                   id="inputGender"
-                  className="form-control"
-                  // defaultValue=""
+                  className="form-control my-2 py-3"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                   data-cy="inputGender"
                 >
-                  <option value={GENDER.male}>Male</option>
-                  <option value={GENDER.female}>Female</option>
-                  <option value={GENDER.other}>Other</option>
-                </select>
-              </div>
+                  <Option value="">Select Gender</Option>
+                  <Option value={GENDER.male}>Male</Option>
+                  <Option value={GENDER.female}>Female</Option>
+                  <Option value={GENDER.other}>Other</Option>
+                </Select>
+              </Col>
+              <Col
+                md={6}
+                className="form-group"
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "flex-end",
+                }}
+              >
+                <Button
+                  className=""
+                  buttonType="submit"
+                  type="primary"
+                  disabled={isLoading}
+                  data-cy="submit"
+                >
+                  {isLoading && (
+                    <span
+                      className="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  )}
+                  {isLoading ? "Loading..." : "Update"}
+                </Button>
+              </Col>
+            </Row>
 
-              {/* 
-              <div className="form-group col-md-6">
-                <label htmlFor="inputCity">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputCity"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </div> 
-              */}
-            </FormRow>
-            {/* 
-            <FormRow>
-              <div className="form-group">
-                <label htmlFor="inputAddress">Address</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputAddress"
-                  placeholder="1234 Main St"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  data-cy="inputAddress"
-                />
-              </div>
-            </FormRow> 
-            */}
-
-            <FormRow className="d-flex justify-content-end">
-              <button
-                className="btn btn-primary"
-                type="submit"
+            {/* <div className="d-flex justify-content-end">
+              <Button
+                className=""
+                buttonType="submit"
+                type="primary"
                 disabled={isLoading}
                 data-cy="submit"
               >
@@ -207,14 +212,18 @@ const Account = () => {
                   ></span>
                 )}
                 {isLoading ? "Loading..." : "Update"}
-              </button>
-            </FormRow>
+              </Button>
+            </div> */}
             {isUpdated && <Alert content="Updated" type="success" />}
           </form>
-        </div>
+        </CardBody>
       </Card>
     </Container>
   );
 };
 
-export default Account;
+const mapDispatchToProps = {
+  actionUpdate: update,
+};
+
+export default connect(null, mapDispatchToProps)(Account);
