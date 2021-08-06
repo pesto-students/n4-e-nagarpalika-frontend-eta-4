@@ -19,6 +19,7 @@ const Textarea = ({
   rows,
   className,
   style,
+  ...rest
 }) => {
   return (
     <StyledTextarea
@@ -30,6 +31,7 @@ const Textarea = ({
       rows={rows}
       value={value}
       style={style}
+      {...rest}
     />
   );
 };

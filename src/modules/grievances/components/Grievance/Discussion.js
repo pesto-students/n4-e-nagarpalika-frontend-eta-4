@@ -14,6 +14,9 @@ import CardBody from "../../../../common/components/Cards/CardBody";
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo("en-US");
+const avatar = `https://codescandy.com/geeks-bootstrap-5/assets/images/avatar/avatar-${
+  1 + Math.floor(Math.random() * 10)
+}.jpg`;
 
 let comments = [
   {
@@ -72,9 +75,7 @@ const Comment = ({ id, title, createdAt, userId, name }) => {
   return (
     <div className="d-flex border-bottom pb-4 mb-4">
       <StyledAvatar
-        src={`https://codescandy.com/geeks-bootstrap-5/assets/images/avatar/avatar-${
-          1 + Math.floor(Math.random() * 10)
-        }.jpg`}
+        src={avatar}
         className="rounded-circle"
         alt=""
         style={{
@@ -110,9 +111,7 @@ const Discussion = ({ issueId, account }) => {
     <Card shadow className="mb-5">
       <CardBody className="border-bottom" style={{ display: "flex" }}>
         <StyledAvatar
-          src={`https://codescandy.com/geeks-bootstrap-5/assets/images/avatar/avatar-${
-            1 + Math.floor(Math.random() * 10)
-          }.jpg`}
+          src={avatar}
           className="rounded-circle"
           alt=""
           style={{
@@ -125,6 +124,7 @@ const Discussion = ({ issueId, account }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="ms-3"
+          maxLength={250}
         />
         <Button
           type="primary"

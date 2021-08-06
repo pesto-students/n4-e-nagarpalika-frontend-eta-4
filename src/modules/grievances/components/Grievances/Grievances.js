@@ -3,13 +3,14 @@
 
 import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
-import dateFnsFormat from "date-fns/format";
+// import dateFnsFormat from "date-fns/format";
 
 import {
   GRIEVANCE_CATEGORIES,
   GRIEVANCE_STATUS,
   LOCATIONS,
-  FETCH_STATUS,
+  // FETCH_STATUS,
+  ACCOUNT_TYPE,
 } from "../../../../common/contants";
 
 import { getAllUserIssue } from "../../actionCreators";
@@ -29,27 +30,30 @@ import Select from "../../../../common/components/Form/Select";
 const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
   const [radioInput, setRadioInput] = useState(true);
   const account = useSelector(({ account }) => account);
-  const { id: userId, accountType } = account;
+  const { id: userId, accountType, location: userLocation } = account;
 
-  const [dateRangeStart, setDateRangeStart] = useState(
-    dateFnsFormat(new Date("2000"), "yyyy-MM-dd")
-  );
-  const [dateRangeEnd, setDateRangeEnd] = useState(
-    dateFnsFormat(new Date(), "yyyy-MM-dd")
-  );
+  // const [dateRangeStart, setDateRangeStart] = useState(
+  //   dateFnsFormat(new Date("2000"), "yyyy-MM-dd")
+  // );
+  // const [dateRangeEnd, setDateRangeEnd] = useState(
+  //   dateFnsFormat(new Date(), "yyyy-MM-dd")
+  // );
+
   const [sortBy, setSortBy] = useState("createdAt");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(userLocation);
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
 
   useEffect(() => {
     let params = {
-      userId,
-      dateRangeStart,
-      dateRangeEnd,
+      // dateRangeStart,
+      // dateRangeEnd,
       sortBy,
     };
 
+    if (accountType === ACCOUNT_TYPE.user) {
+      params = { ...params, userId };
+    }
     if (location.length > 0) {
       const city = location[0].label;
       params = { ...params, location: city };
@@ -64,17 +68,46 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
     actionGetAllUserIssue(params);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy, location, category, status, dateRangeStart, dateRangeEnd]);
+  }, [sortBy, location, category, status /* dateRangeStart, dateRangeEnd*/]);
 
   const issues = useSelector(({ issues }) => issues);
 
-  const list = issues.list.filter((item) => userId === item.userId);
+  const list = (
+    accountType === ACCOUNT_TYPE.user
+      ? issues.list.filter((item) => userId === item.userId)
+      : issues.list
+  )
+    .sort((issue1, issue2) => {
+      const time1 = new Date(issue1.createdAt).getTime();
+      const time2 = new Date(issue2.createdAt).getTime();
 
-  const { fetchStatus } = issues;
+      return sortBy === "createdAt" ? time2 - time1 : time1 - time2;
+    })
+    .filter((item) => {
+      if (location.length > 0) {
+        return item.location === location;
+      }
 
-  const isLoading =
-    fetchStatus === FETCH_STATUS.loading || fetchStatus === FETCH_STATUS.none;
-  const isError = fetchStatus === FETCH_STATUS.error;
+      return true;
+    })
+    .filter((item) => {
+      if (category.length > 0) {
+        return item.category === category;
+      }
+      return true;
+    })
+    .filter((item) => {
+      if (status.length > 0) {
+        return item.status === status;
+      }
+      return true;
+    });
+
+  // const { fetchStatus } = issues;
+
+  // const isLoading =
+  //   fetchStatus === FETCH_STATUS.loading || fetchStatus === FETCH_STATUS.none;
+  // const isError = fetchStatus === FETCH_STATUS.error;
 
   return (
     <Container className={"flex-column"}>
@@ -98,7 +131,7 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
           }}
         >
           <Heading>
-            Displaying {10} out of {totalIssues} courses
+            Displaying {48} out of {totalIssues} courses
           </Heading>
         </Col>
         <Col
@@ -124,15 +157,12 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
               className="btn-check"
               name="btnradio"
               id="btnradio1"
-              autocomplete="off"
+              autoComplete="off"
               checked={radioInput}
-              onChange={() => {
-                console.log("hi grid");
-                setRadioInput(true);
-              }}
+              onChange={() => setRadioInput(true)}
             />
 
-            <label className="btn btn-outline-primary" for="btnradio1">
+            <label className="btn btn-outline-primary" htmlFor="btnradio1">
               <i className="bi bi-grid"></i>
             </label>
 
@@ -141,20 +171,17 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
               className="btn-check"
               name="btnradio"
               id="btnradio2"
-              autocomplete="off"
+              autoComplete="off"
               checked={!radioInput}
-              onChange={() => {
-                console.log("hi list");
-                setRadioInput(false);
-              }}
+              onChange={() => setRadioInput(false)}
             />
-            <label className="btn btn-outline-primary" for="btnradio2">
+            <label className="btn btn-outline-primary" htmlFor="btnradio2">
               <i className="bi bi-list-ul"></i>
             </label>
           </div>
           <Select
-            onChange={() => {}}
-            value={location}
+            onChange={(e) => setSortBy(e.target.value)}
+            value={sortBy}
             className="m-1 p-2"
             style={{ width: "150px" }}
           >
@@ -175,20 +202,22 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
               <p className="fw-bolder text-secondary text-uppercase">
                 Category
               </p>
-              {Object.values(GRIEVANCE_CATEGORIES).map((category) => {
+              {["", ...Object.values(GRIEVANCE_CATEGORIES)].map((c) => {
                 return (
-                  <div className="form-check" key={category}>
+                  <div className="form-check" key={c}>
                     <input
                       className="form-check-input"
                       type="radio"
                       name="radioCategory"
                       id="radioCategoryId"
+                      checked={category === c}
+                      onChange={() => setCategory(c)}
                     />
                     <label
                       className="form-check-label"
                       htmlFor="radioCategoryId"
                     >
-                      {category}
+                      {c.length === 0 ? "Reset" : c}
                     </label>
                   </div>
                 );
@@ -197,7 +226,7 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
             <hr style={{ margin: 0 }} />
             <CardBody>
               <p className="fw-bolder text-secondary text-uppercase">Status</p>
-              {Object.values(GRIEVANCE_STATUS).map((gStatus) => {
+              {["", ...Object.values(GRIEVANCE_STATUS)].map((gStatus) => {
                 return (
                   <div className="form-check" key={gStatus}>
                     <input
@@ -205,9 +234,11 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
                       type="radio"
                       name="radioStatus"
                       id="radioStatusId"
-                      value={gStatus}
+                      checked={status === gStatus}
+                      onChange={() => setStatus(gStatus)}
                     />
                     <label className="form-check-label" htmlFor="radioStatusId">
+                      {gStatus.length === 0 ? "Reset" : null}
                       {gStatus === GRIEVANCE_STATUS.none ? "Created" : null}
                       {gStatus === GRIEVANCE_STATUS.review ? "Reviewed" : null}
                       {gStatus === GRIEVANCE_STATUS.action
@@ -226,21 +257,25 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
               <p className="fw-bolder text-secondary text-uppercase">
                 Location
               </p>
-              {Object.values(LOCATIONS).map((location) => {
+              {["", ...Object.values(LOCATIONS)].map((l) => {
                 return (
-                  <div className="form-check" key={location}>
+                  <div className="form-check" key={l}>
                     <input
                       className="form-check-input"
                       id="radioLocationId"
                       name="radioLocation"
                       type="radio"
-                      value={location}
+                      checked={l === location}
+                      onChange={() => setLocation(l)}
+                      disabled={accountType === ACCOUNT_TYPE.user}
                     />
                     <label
                       className="form-check-label"
                       htmlFor="radioLocationId"
                     >
-                      {`${location[0]}${location.slice(1).toLowerCase()}`}
+                      {l.length === 0
+                        ? "Reset"
+                        : `${l[0]}${l.slice(1).toLowerCase()}`}
                     </label>
                   </div>
                 );

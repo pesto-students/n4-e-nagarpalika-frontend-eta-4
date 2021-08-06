@@ -5,14 +5,6 @@ import React from "react";
 
 import GrievancesComponent from "../../modules/grievances/components/Grievances/Grievances";
 
-const Grievances = () => {
-  return (
-    // <div id="page-top">
-    // <div className="container-fluid">
-    <GrievancesComponent {...{ totalIssues: 200 }} />
-    // </div>
-    // </div>
-  );
-};
+const Grievances = () => <GrievancesComponent {...{ totalIssues: 480 }} />;
 
 export default Grievances;
