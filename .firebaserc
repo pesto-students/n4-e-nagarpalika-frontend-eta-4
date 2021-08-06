@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "e-nagar-palika"
+  },
+  "targets": {
+    "e-nagar-palika": {
+      "hosting": {
+        "production": [
+          "e-nagar-palika"
+        ],
+        "development": [
+          "enp-development"
+        ]
+      }
+    }
+  }
+}

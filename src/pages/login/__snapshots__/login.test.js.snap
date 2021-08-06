@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a message 1`] = `
+<div>
+  <section
+    class="sc-bdnxRM emIdNA"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body "
+      >
+        <h5
+          class="card-title"
+        >
+          Log In
+        </h5>
+        <form
+          style="display: flex; justify-content: center;"
+        >
+          <input
+            id="recaptcha-container"
+            type="hidden"
+          />
+          <div
+            class="mb-3 "
+          >
+            <label
+              class="form-label"
+              for="phoneNumber"
+            >
+              Phone Number
+            </label>
+            <input
+              aria-describedby="phoneNumberHelp"
+              class="form-control"
+              id="phoneNumber"
+              placeholder="Phone Number"
+              type="text"
+              value=""
+            />
+            <div
+              class="form-text"
+              id="phoneNumberHelp"
+            >
+              We'll never share your phone number with anyone else.
+            </div>
+          </div>
+          <button
+            class="btn btn-primary"
+            style="align-self: flex-end;"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+`;

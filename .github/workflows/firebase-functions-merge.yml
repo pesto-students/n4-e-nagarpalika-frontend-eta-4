@@ -1,0 +1,19 @@
+# @format
+
+name: Deploy to Firebase Functions on merge
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Deploy to Firebase Functions
+        uses: hbarve1/github-action-firebase-functions@main
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
