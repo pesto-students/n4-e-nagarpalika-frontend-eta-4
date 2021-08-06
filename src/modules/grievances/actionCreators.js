@@ -134,8 +134,7 @@ export function updateIssue({
 
 export function getAllUserIssue({
   userId,
-  dateRangeStart,
-  dateRangeEnd,
+  accountType,
   sortBy,
   location,
   category,
@@ -147,8 +146,7 @@ export function getAllUserIssue({
     try {
       const { status, data, message } = await apiGetAllUserIssues({
         userId,
-        dateRangeStart,
-        dateRangeEnd,
+        accountType,
         sortBy,
         location,
         category,

@@ -16,8 +16,25 @@ export const getAllAdminIssues = async () => {
   return data;
 };
 
+export const getIssuesCount = async ({ userId, location }) => {
+  const { data } = await axios.get(`${REACT_APP_SERVER_API}/api/issues/count`, {
+    params: {
+      userId,
+      location,
+    },
+    headers: {
+      "Content-Type": "application/json",
+      accept: "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  return data;
+};
+
 export const getAllUserIssues = async ({
   userId,
+  accountType,
   sortBy,
   location,
   category,
@@ -28,6 +45,7 @@ export const getAllUserIssues = async ({
     {
       params: {
         sortBy,
+        accountType,
         location,
         category,
         status,

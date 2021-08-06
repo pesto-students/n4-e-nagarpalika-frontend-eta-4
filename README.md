@@ -131,6 +131,7 @@ We are using the below tech stack.
 - [ ] Grievance status update by MANAGER/ADMIN is not done.
 - [ ] Graph of grievance by category is not implemented with backend.
 - [ ] Caching with redis is not implemented in backend.
+- [ ] Error handling in frontend components is not implemented.
 
 ## Out of Scope
 

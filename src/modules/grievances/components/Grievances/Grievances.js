@@ -28,17 +28,10 @@ import Row from "../../../../common/components/Layout/Row";
 import Select from "../../../../common/components/Form/Select";
 
 const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
-  const [radioInput, setRadioInput] = useState(true);
   const account = useSelector(({ account }) => account);
   const { id: userId, accountType, location: userLocation } = account;
 
-  // const [dateRangeStart, setDateRangeStart] = useState(
-  //   dateFnsFormat(new Date("2000"), "yyyy-MM-dd")
-  // );
-  // const [dateRangeEnd, setDateRangeEnd] = useState(
-  //   dateFnsFormat(new Date(), "yyyy-MM-dd")
-  // );
-
+  const [radioInput, setRadioInput] = useState(true);
   const [sortBy, setSortBy] = useState("createdAt");
   const [location, setLocation] = useState(userLocation);
   const [category, setCategory] = useState("");
@@ -46,17 +39,15 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
 
   useEffect(() => {
     let params = {
-      // dateRangeStart,
-      // dateRangeEnd,
+      userId,
       sortBy,
     };
 
     if (accountType === ACCOUNT_TYPE.user) {
-      params = { ...params, userId };
+      params = { ...params, accountType };
     }
     if (location.length > 0) {
-      const city = location[0].label;
-      params = { ...params, location: city };
+      params = { ...params, location };
     }
     if (category.length > 0) {
       params = { ...params, category };
@@ -65,18 +56,21 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
       params = { ...params, status };
     }
 
+    console.log(params);
+
     actionGetAllUserIssue(params);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy, location, category, status /* dateRangeStart, dateRangeEnd*/]);
+  }, [sortBy, location, category, status]);
 
   const issues = useSelector(({ issues }) => issues);
 
-  const list = (
+  const arr =
     accountType === ACCOUNT_TYPE.user
       ? issues.list.filter((item) => userId === item.userId)
-      : issues.list
-  )
+      : issues.list;
+
+  const list = (arr.length > 50 ? arr.slice(0, 50) : arr)
     .sort((issue1, issue2) => {
       const time1 = new Date(issue1.createdAt).getTime();
       const time2 = new Date(issue2.createdAt).getTime();
@@ -122,16 +116,16 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
           size={4}
           sm={6}
           md={6}
-          lg={3}
-          xl={3}
-          xxl={3}
+          lg={6}
+          xl={6}
+          xxl={6}
           style={{
             display: "flex",
             alignItems: "center",
           }}
         >
           <Heading>
-            Displaying {48} out of {totalIssues} courses
+            Displaying {list.length} out of {totalIssues} grievances
           </Heading>
         </Col>
         <Col
