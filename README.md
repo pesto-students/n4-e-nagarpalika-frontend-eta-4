@@ -16,6 +16,12 @@
 
 ## Setup
 
+### Install
+
+    $ git clone https://github.com/pesto-students/n4-e-nagarpalika-frontend-eta-4
+    $ cd n4-e-nagarpalika-frontend
+    $ npm install
+
 ### Environment variable setup
 
 Make a copy of `.env.sample` file and name it as `.env`, required values values for `.env` files are
@@ -43,8 +49,6 @@ Install Dependencies
 ### `npm run start`
 
 Start dev server
-
-### Testing
 
 #### `npm run test`
 
@@ -92,6 +96,8 @@ We are using **Google Cloud Run** integration with github to build **docker** im
 | 7008608810   | 310596 | MANAGER      | DELHI    | Delhi manager  |
 | 9668264016   | 310596 | MANAGER      | MUMBAI   | Mumbai manager |
 | 1122334455   | 123456 | USER         | DELHI    | Delhi user     |
+
+---
 
 # Tech Stack
 
