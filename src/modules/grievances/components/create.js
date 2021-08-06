@@ -122,6 +122,7 @@ function CreateGrievance({ onSubmit }) {
                 value={title}
                 onChange={onChangeTitle}
                 placeholder="Title"
+                maxLength={150}
               />
             </Row>
             <Row className="m-0 mt-1">
@@ -210,6 +211,7 @@ function CreateGrievance({ onSubmit }) {
                   }
                 }
                 rows={5}
+                maxLength={500}
               />
             </Row>
             <Row>

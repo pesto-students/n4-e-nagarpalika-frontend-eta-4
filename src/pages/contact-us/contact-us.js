@@ -114,7 +114,7 @@ const ContactUs = () => {
                   />
                   <Button
                     buttonType="submit"
-                    type="prmary"
+                    type="primary"
                     className="col-12"
                     disabled={!checkbox}
                   >

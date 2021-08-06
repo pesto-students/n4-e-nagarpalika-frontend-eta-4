@@ -35,7 +35,7 @@ const PublicRoutes = () => (
 
     <Redirect from="/register" to="/" />
     <Redirect from="/notifications" to="/" />
-    <Redirect from="/dashboard" to="/" />
+    {/* <Redirect from="/dashboard" to="/" /> */}
     <Redirect from="/account" to="/" />
     <Redirect from="/grievances/new" to="/" />
     <Redirect from="/grievances/:id" to="/" />
