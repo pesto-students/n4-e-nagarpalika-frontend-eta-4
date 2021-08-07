@@ -4,8 +4,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
+import { useSelector } from "react-redux";
 
-import { BOOTSTRAP_TYPES } from "../../../../common/contants";
+import { BOOTSTRAP_TYPES, ACCOUNT_TYPE } from "../../../../common/contants";
 
 import Badge from "../../../../common/components/Badge/Badge";
 import getRandomValueFromArray from "../../../../utils/getRandomValueFromArray";
@@ -14,6 +15,7 @@ import Button from "../../../../common/components/Buttons/Button";
 import Card from "../../../../common/components/Cards/Card";
 import StyledAvatar from "../../../../common/components/Avatar/StyledAvatar";
 import CardBody from "../../../../common/components/Cards/CardBody";
+import IssueUpdate from "./IssueUpdate";
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo("en-US");
@@ -30,6 +32,10 @@ const Introduction = ({
   status,
   createdAt,
 }) => {
+  const account = useSelector(({ account }) => account);
+
+  const { accountType } = account;
+
   return (
     <Card shadow className="card mb-5">
       <div className="card-body">
@@ -47,43 +53,48 @@ const Introduction = ({
           </Link>
         </div>
         <div className="d-flex mb-5">
-          <span className="d-none d-md-block">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="3"
-                y="8"
-                width="2"
-                height="6"
-                rx="1"
-                fill="#754FFE"
-              ></rect>
-              <rect
-                x="7"
-                y="5"
-                width="2"
-                height="9"
-                rx="1"
-                fill="#754FFE"
-              ></rect>
-              <rect
-                x="11"
-                y="2"
-                width="2"
-                height="12"
-                rx="1"
-                fill="#DBD8E9"
-              ></rect>
-            </svg>
-            <span>
-              {`${status.slice(0, 1)}${status.slice(1).toLowerCase()}`}
+          {accountType === ACCOUNT_TYPE.admin ||
+          accountType === ACCOUNT_TYPE.manager ? (
+            <IssueUpdate {...{ issueId: id, status }} />
+          ) : (
+            <span className="d-none d-md-block">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="3"
+                  y="8"
+                  width="2"
+                  height="6"
+                  rx="1"
+                  fill="#754FFE"
+                ></rect>
+                <rect
+                  x="7"
+                  y="5"
+                  width="2"
+                  height="9"
+                  rx="1"
+                  fill="#754FFE"
+                ></rect>
+                <rect
+                  x="11"
+                  y="2"
+                  width="2"
+                  height="12"
+                  rx="1"
+                  fill="#DBD8E9"
+                ></rect>
+              </svg>
+              <span>
+                {`${status.slice(0, 1)}${status.slice(1).toLowerCase()}`}
+              </span>
             </span>
-          </span>
+          )}
           <span className="ms-4 d-none d-md-block">
             <i className="far fa-clock me-1"></i>
             {timeAgo.format(new Date(createdAt).getTime())}
