@@ -12,6 +12,13 @@ import { Heading } from "../../../../common/components/Typography/Typography";
 /* Reference https://palerdot.in/react-d3-speedometer/?path=/story/reactspeedometer--default-with-no-config */
 
 const CityHappinessLevel = ({ value }) => {
+  let currentValueText = "Very Poor";
+
+  if (value > 20) currentValueText = "Below Average";
+  if (value > 40) currentValueText = "Average";
+  if (value > 60) currentValueText = "Above Average";
+  if (value > 80) currentValueText = "Excellent";
+
   return (
     <Card shadow className="mb-4 h-100">
       <CardHeader className="py-3 d-flex flex-row align-items-center justify-content-between">
@@ -29,7 +36,7 @@ const CityHappinessLevel = ({ value }) => {
             maxSegmentLabels={5}
             segments={1000}
             needleHeightRatio={0.5}
-            currentValueText="Good"
+            currentValueText={currentValueText}
             needleTransitionDuration={3333}
             needleTransition="easeElastic"
             width={240}
@@ -68,7 +75,8 @@ const CityHappinessLevel = ({ value }) => {
           />
         </div>
         <p>
-          Based on grievances resolved your city is categorized “Good”. We are
+          Based on grievances resolved your city is categorized{" "}
+          <bold style={{ fontWeight: "bold" }}>{currentValueText}</bold>. We are
           constantly upgrading our facilities to give you a better experience!
         </p>
       </CardBody>

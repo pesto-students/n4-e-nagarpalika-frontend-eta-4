@@ -55,7 +55,7 @@ const IssueDistributionGraph = ({ userId, location }) => {
 
     get();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
