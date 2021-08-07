@@ -23,7 +23,16 @@ const IssueStatus = ({ userId, location }) => {
     const abortController = new AbortController();
 
     async function getStats() {
-      const { status, data } = await getIssueStats({ userId, location });
+      let params = {};
+      if (typeof userId !== "undefined") {
+        params = { ...params, userId };
+      }
+
+      if (location.length > 0) {
+        params = { ...params, location };
+      }
+
+      const { status, data } = await getIssueStats(params);
 
       if (status === "Success") {
         setStats(data);
