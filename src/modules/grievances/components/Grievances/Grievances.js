@@ -261,7 +261,7 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
                       type="radio"
                       checked={l === location}
                       onChange={() => setLocation(l)}
-                      disabled={accountType === ACCOUNT_TYPE.user}
+                      disabled={accountType !== ACCOUNT_TYPE.admin}
                     />
                     <label
                       className="form-check-label"
