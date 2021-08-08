@@ -28,7 +28,7 @@ const IssueStatus = ({ userId, location }) => {
         params = { ...params, userId };
       }
 
-      if (location.length > 0) {
+      if (typeof location !== "undefined" && location.length > 0) {
         params = { ...params, location };
       }
 

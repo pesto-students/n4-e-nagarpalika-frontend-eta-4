@@ -56,7 +56,7 @@ const GrievancesComponent = ({ actionGetAllUserIssue, totalIssues = 100 }) => {
       params = { ...params, status };
     }
 
-    console.log(params);
+    // console.log(params);
 
     actionGetAllUserIssue(params);
 
