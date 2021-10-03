@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import classnames from "classnames";
 
 import { Heading } from "../../common/components/Typography/Typography";
 import Button from "../../common/components/Buttons/Button";
@@ -18,9 +19,20 @@ import { Container, InnerContainer } from "./styles";
 
 import firebase from "../../common/firebase";
 
+import countriesList from "../../utils/countriesList";
+
+countriesList.sort(
+  (val1, val2) => Object.values(val1)[0][2] - Object.values(val2)[0][2]
+);
+
 function Login() {
   const history = useHistory();
-
+  const [dropdown, setDropdown] = useState(false);
+  const [country, setCountry] = useState({
+    name: "India",
+    isoCode: "IN",
+    code: "91",
+  });
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -46,7 +58,7 @@ function Login() {
       try {
         await firebase
           .auth()
-          .signInWithPhoneNumber(`+91${phoneNumber}`, appVerifier)
+          .signInWithPhoneNumber(`+${country.code}${phoneNumber}`, appVerifier)
           .then((confirmResult) => {
             setConfirmResult(confirmResult);
           });
@@ -93,10 +105,87 @@ function Login() {
             {!isOtpSent && (
               <div className="mb-4">
                 <div className="row justify-content-center">
-                  <PhoneNumberInput
-                    setNumber={(num) => setPhoneNumber(num)}
-                    disabled={loading}
-                  />
+                  <div className="input-group mb-3">
+                    <div
+                      className={classnames("input-group-prepend", {
+                        show: dropdown,
+                      })}
+                    >
+                      <button
+                        className="btn btn-outline-secondary dropdown-toggle"
+                        type="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        onClick={() => setDropdown(!dropdown)}
+                        style={{
+                          height: "55px",
+                          borderRadius: "12px 0 0 12px",
+                          borderColor: "#ced4da",
+                        }}
+                      >
+                        <img
+                          src={`/flags/svg/${country.isoCode}.svg`}
+                          alt={country.name}
+                          style={{
+                            width: "25px",
+                            height: "auto",
+                          }}
+                        />
+                        {"   "}
+                        {`+${country.code}`}
+                      </button>
+                      {dropdown && (
+                        <ul
+                          className={classnames("dropdown-menu", {
+                            show: dropdown,
+                          })}
+                          style={{
+                            height: "150px",
+                            width: "200px",
+                            overflowY: "scroll",
+                          }}
+                        >
+                          {countriesList.map((code) => {
+                            const [isoCode, , phoneCode, name] =
+                              Object.values(code)[0];
+
+                            return (
+                              <li
+                                className="dropdown-item"
+                                key={isoCode}
+                                onClick={() => {
+                                  setCountry({
+                                    name,
+                                    isoCode,
+                                    code: phoneCode,
+                                  });
+
+                                  setDropdown(false);
+                                }}
+                              >
+                                <img
+                                  src={`/flags/svg/${isoCode}.svg`}
+                                  alt={name}
+                                  style={{
+                                    width: "25px",
+                                    height: "auto",
+                                  }}
+                                />
+                                {"   "}
+                                {`+${phoneCode}`}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
+                    </div>
+                    <PhoneNumberInput
+                      initialValue=""
+                      setNumber={(num) => setPhoneNumber(num)}
+                      disabled={loading}
+                    />
+                  </div>
 
                   <Button
                     type="primary"
@@ -113,7 +202,7 @@ function Login() {
                   </Button>
                 </div>
                 <div id="phoneNumberHelp" className="form-text">
-                  *We'll never share your phone number with anyone else.
+                  * We'll never share your phone number with anyone else.
                 </div>
               </div>
             )}
@@ -137,7 +226,7 @@ function Login() {
                   </Button>
                 </Row>
                 <div id="phoneNumberHelp" className="form-text">
-                  *Please insert the 6 digit OTP sent to your mobile number.
+                  * Please insert the 6 digit OTP sent to your mobile number.
                 </div>
               </div>
             )}

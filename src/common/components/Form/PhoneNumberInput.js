@@ -2,8 +2,15 @@
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import classnames from "classnames";
 
-import Input from "./Input";
+// import Input from "./Input";
+
+const StyledInput = styled.input`
+  border-radius: 12px;
+  height: 55px;
+`;
 
 function PhoneNumberInput({ initialValue, setNumber, disabled }) {
   const [phoneNumber, setPhoneNumber] = useState(initialValue || "");
@@ -18,6 +25,7 @@ function PhoneNumberInput({ initialValue, setNumber, disabled }) {
       setIsInvalid(true);
       return;
     }
+
     setIsValid(true);
     setIsInvalid(false);
     setPhoneNumber(value);
@@ -25,18 +33,23 @@ function PhoneNumberInput({ initialValue, setNumber, disabled }) {
   };
 
   return (
-    <Input
-      type="tel"
+    <StyledInput
+      type="text"
       maxLength="10"
       required
-      className="mb-3"
+      className={classnames(
+        "form-control mb-3",
+        {
+          "is-invalid": isInvalid,
+          "is-valid": isValid,
+        }
+        // className
+      )}
       id="phoneNumber"
       placeholder="Phone number"
       value={phoneNumber}
       onChange={onChange}
       disabled={disabled}
-      isValid={isValid}
-      isInvalid={isInvalid}
     />
   );
 }
