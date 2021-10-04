@@ -134,7 +134,7 @@ function Login() {
                         }}
                       >
                         <Flag
-                          src={`/flags/svg/${country.isoCode}.svg`}
+                          src={`/flags/svg/${country.isoCode.toLowerCase()}.svg`}
                           alt={country.name}
                         />
                         {` +${country.code}`}
