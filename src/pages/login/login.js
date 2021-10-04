@@ -20,7 +20,7 @@ import { logIn } from "../../modules/auth/actionCreators";
 import {
   Container,
   InnerContainer,
-  Flag,
+  // Flag,
   CountryListContainer,
   CountryListSearchInput,
 } from "./styles";
