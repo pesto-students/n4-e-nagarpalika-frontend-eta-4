@@ -9,6 +9,10 @@
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
+          "source": "/flags/**",
+          "destination": "/flags"
+        },
+        {
           "source": "**",
           "destination": "/index.html"
         }
@@ -19,6 +23,10 @@
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
+        {
+          "source": "/flags/**",
+          "destination": "/flags"
+        },
         {
           "source": "**",
           "destination": "/index.html"
