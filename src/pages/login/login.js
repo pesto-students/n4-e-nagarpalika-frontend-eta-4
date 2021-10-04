@@ -33,11 +33,11 @@ function Login() {
   const history = useHistory();
   const [dropdown, setDropdown] = useState(true);
   const [country, setCountry] = useState({
-    name: "United State",
-    isoCode: "US",
-    code: "1",
+    name: "India",
+    isoCode: "IN",
+    code: "91",
   });
-  const [searchValue, setSearchValue] = useState("indi");
+  const [searchValue, setSearchValue] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -133,10 +133,10 @@ function Login() {
                           borderColor: "#ced4da",
                         }}
                       >
-                        <Flag
+                        {/* <Flag
                           src={`/flags/svg/${country.isoCode}.svg`}
                           alt={country.name}
-                        />
+                        /> */}
                         {"   "}
                         {`+${country.code}`}
                       </button>
