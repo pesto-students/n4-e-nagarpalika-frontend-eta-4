@@ -45,3 +45,24 @@ export const Button = styled.button`
   border: 1px solid grey;
   align-self: flex-end; */
 `;
+
+export const Flag = styled.img`
+  width: 25px;
+  height: auto;
+`;
+
+export const CountryListContainer = styled.ul`
+  height: 150px;
+  width: 150px;
+  overflow-x: scroll;
+  padding-top: 0;
+`;
+
+export const CountryListSearchInput = styled.input`
+  width: calc(100% - 4px);
+  position: sticky;
+  top: 0;
+  border-radius: 5px;
+  margin: 2px;
+  border-color: #bfbebe;
+`;

@@ -12,27 +12,32 @@ import LoginSVG from "../../common/components/svg/loginSignupSvg";
 import Row from "../../common/components/Layout/Row";
 import PhoneNumberInput from "../../common/components/Form/PhoneNumberInput";
 import OTPInput from "../../common/components/Form/OTPInput";
+import DemoDetails from "./demoDetails";
+import CountryListItem from "./CountryListItem";
 
 import { logIn } from "../../modules/auth/actionCreators";
 
-import { Container, InnerContainer } from "./styles";
+import {
+  Container,
+  InnerContainer,
+  Flag,
+  CountryListContainer,
+  CountryListSearchInput,
+} from "./styles";
 
 import firebase from "../../common/firebase";
 
 import countriesList from "../../utils/countriesList";
 
-countriesList.sort(
-  (val1, val2) => Object.values(val1)[0][2] - Object.values(val2)[0][2]
-);
-
 function Login() {
   const history = useHistory();
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState(true);
   const [country, setCountry] = useState({
-    name: "India",
-    isoCode: "IN",
-    code: "91",
+    name: "United State",
+    isoCode: "US",
+    code: "1",
   });
+  const [searchValue, setSearchValue] = useState("indi");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -103,13 +108,17 @@ function Login() {
             <input id="recaptcha-container" type="hidden" />
 
             {!isOtpSent && (
-              <div className="mb-4">
+              <div
+                className="mb-4"
+                // onBlur={() => console.log("blur") || setDropdown(false)}
+              >
                 <div className="row justify-content-center">
                   <div className="input-group mb-3">
                     <div
                       className={classnames("input-group-prepend", {
                         show: dropdown,
                       })}
+                      style={{ position: "relative" }}
                     >
                       <button
                         className="btn btn-outline-secondary dropdown-toggle"
@@ -124,60 +133,60 @@ function Login() {
                           borderColor: "#ced4da",
                         }}
                       >
-                        <img
+                        <Flag
                           src={`/flags/svg/${country.isoCode}.svg`}
                           alt={country.name}
-                          style={{
-                            width: "25px",
-                            height: "auto",
-                          }}
                         />
                         {"   "}
                         {`+${country.code}`}
                       </button>
                       {dropdown && (
-                        <ul
+                        <CountryListContainer
                           className={classnames("dropdown-menu", {
                             show: dropdown,
                           })}
-                          style={{
-                            height: "150px",
-                            width: "200px",
-                            overflowY: "scroll",
-                          }}
                         >
-                          {countriesList.map((code) => {
-                            const [isoCode, , phoneCode, name] =
-                              Object.values(code)[0];
+                          <CountryListSearchInput
+                            placeholder="Search..."
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                          />
+                          {countriesList
+                            .filter((value) => {
+                              const [isoCode, , phoneCode, name] = value;
 
-                            return (
-                              <li
-                                className="dropdown-item"
-                                key={isoCode}
-                                onClick={() => {
-                                  setCountry({
-                                    name,
+                              return (
+                                isoCode.toLowerCase().search(searchValue) >
+                                  -1 ||
+                                `${phoneCode}`.search(searchValue) > -1 ||
+                                name.toLowerCase().search(searchValue) > -1
+                              );
+                            })
+                            .map((value) => {
+                              const [isoCode, , phoneCode, name] = value;
+
+                              const handleClick = () => {
+                                setCountry({
+                                  name,
+                                  isoCode,
+                                  code: phoneCode,
+                                });
+
+                                setDropdown(false);
+                              };
+
+                              return (
+                                <CountryListItem
+                                  {...{
+                                    handleClick,
                                     isoCode,
-                                    code: phoneCode,
-                                  });
-
-                                  setDropdown(false);
-                                }}
-                              >
-                                <img
-                                  src={`/flags/svg/${isoCode}.svg`}
-                                  alt={name}
-                                  style={{
-                                    width: "25px",
-                                    height: "auto",
+                                    phoneCode,
+                                    name,
                                   }}
                                 />
-                                {"   "}
-                                {`+${phoneCode}`}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                              );
+                            })}
+                        </CountryListContainer>
                       )}
                     </div>
                     <PhoneNumberInput
@@ -234,6 +243,7 @@ function Login() {
           <p className="form-text text-danger">{message}</p>
         </InnerContainer>
       </Card>
+      <DemoDetails />
     </Container>
   );
 }
