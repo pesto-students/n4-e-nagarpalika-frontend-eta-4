@@ -20,7 +20,7 @@ import { logIn } from "../../modules/auth/actionCreators";
 import {
   Container,
   InnerContainer,
-  // Flag,
+  Flag,
   CountryListContainer,
   CountryListSearchInput,
 } from "./styles";
@@ -31,7 +31,7 @@ import countriesList from "../../utils/countriesList";
 
 function Login() {
   const history = useHistory();
-  const [dropdown, setDropdown] = useState(true);
+  const [dropdown, setDropdown] = useState(false);
   const [country, setCountry] = useState({
     name: "India",
     isoCode: "IN",
@@ -133,12 +133,11 @@ function Login() {
                           borderColor: "#ced4da",
                         }}
                       >
-                        {/* <Flag
+                        <Flag
                           src={`/flags/svg/${country.isoCode}.svg`}
                           alt={country.name}
-                        /> */}
-                        {"   "}
-                        {`+${country.code}`}
+                        />
+                        {` +${country.code}`}
                       </button>
                       {dropdown && (
                         <CountryListContainer

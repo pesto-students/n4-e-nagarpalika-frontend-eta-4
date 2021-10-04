@@ -1,12 +1,19 @@
 {
   "functions": {
-    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint"]
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
+    ],
+    "source": "functions"
   },
   "hosting": [
     {
       "target": "production",
       "public": "build",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
       "rewrites": [
         {
           "source": "/flags/**",
@@ -21,7 +28,11 @@
     {
       "target": "development",
       "public": "build",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
       "rewrites": [
         {
           "source": "/flags/**",
