@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
-import NotificationCard from "../Notifications/Card";
+// import NotificationCard from "../Notifications/Card";
 
 import { ACCOUNT_TYPE } from "../../contants";
 import isVisibleByRoute from "../../../utils/isVisibleByRoute";
