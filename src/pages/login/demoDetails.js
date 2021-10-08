@@ -1,7 +1,8 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import classnames from "classnames";
 import { Modal, Button, Table } from "react-bootstrap";
 
 const Container = styled.div`
@@ -20,7 +21,65 @@ const StyledButton = styled(Button)`
   justify-items: center;
 `;
 
+const StyledCell = styled.td`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CustomCell = ({ value, isPhoneNumber = false }) => {
+  const [bool, setBool] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const show = () => {
+    setBool(true);
+  };
+
+  const hide = () => {
+    setBool(false);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsClicked(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isClicked]);
+
+  return (
+    <StyledCell
+      onClick={() => {
+        navigator.clipboard.writeText(value);
+        setIsClicked(true);
+      }}
+      onFocus={show}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onBlur={hide}
+    >
+      {isPhoneNumber ? `+91 ${value} ` : `${value} `}
+      <i
+        className={classnames("bi", `bi-clipboard${isClicked ? "-check" : ""}`)}
+        style={{
+          visibility: bool ? "" : "hidden",
+          color: isClicked ? "green" : "",
+          fontSize: "20px",
+        }}
+      ></i>
+    </StyledCell>
+  );
+};
+
 function MyVerticallyCenteredModal(props) {
+  const list = [
+    { type: "ADMIN", phoneNumber: "9876543210", otp: "112233" },
+    { type: "MANAGER DELHI", phoneNumber: "7008608810", otp: "310596" },
+    { type: "MANAGER MUMBAI", phoneNumber: "9668264016", otp: "310596" },
+    { type: "USER DELHI", phoneNumber: "1122334455", otp: "123456" },
+  ];
+
   return (
     <Modal
       {...props}
@@ -44,30 +103,16 @@ function MyVerticallyCenteredModal(props) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>+91 98765 43210</td>
-              <td>ADMIN</td>
-              <td>112233</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>+91 70086 08810</td>
-              <td>MANAGER DELHI</td>
-              <td>310596</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>+91 96682 64016</td>
-              <td>MANAGER MUMBAI</td>
-              <td>310596</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>+91 11 2233 4455</td>
-              <td>USER DELHI</td>
-              <td>123456</td>
-            </tr>
+            {list.map(({ type, phoneNumber, otp }, index) => {
+              return (
+                <tr key={phoneNumber}>
+                  <td>{index + 1}</td>
+                  <CustomCell value={phoneNumber} isPhoneNumber />
+                  <td>{type}</td>
+                  <CustomCell value={otp} />
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </Modal.Body>
@@ -76,7 +121,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const DemoDetails = () => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <Container>
