@@ -111,14 +111,21 @@ const HeaderNav = ({ actionLogout }) => {
                         />
                       </div>
                       <div className="modal-body">
-                        <NotificationCard
+                        <div
+                          className="alert alert-light"
+                          role="alert"
+                          style={{ border: "1px solid grey" }}
+                        >
+                          No notification found
+                        </div>
+                        {/* <NotificationCard
                           {...{
                             id: "2",
                             text: "Status changed for your grievance ‘Traffic Light not working Near HSR Layout’.",
                             createdAt: new Date(2021, 1).toUTCString(),
                             issueId: "60fc7eef126fe5023c98ecfc",
                           }}
-                        />
+                        /> */}
                       </div>
                       {/* <div>
                           <a href="/grievances/60fc7eef126fe5023c98ecfc">
