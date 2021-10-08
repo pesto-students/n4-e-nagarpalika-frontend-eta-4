@@ -32,6 +32,7 @@ function NameInput({ initialValue, setName, disabled }) {
       id="nameInput"
       isInvalid={isInvalid}
       isValid={isValid}
+      minLength="4"
       maxLength="25"
       onChange={onChange}
       placeholder="Enter your name"
