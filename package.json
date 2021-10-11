@@ -34,7 +34,7 @@
     "date-fns": "2.23.0",
     "dotenv": "10.0.0",
     "firebase": "8.7.1",
-    "firebaseui": "4.8.0",
+    "firebaseui": "4.8.1",
     "fortawesome": "0.0.1-security",
     "javascript-time-ago": "2.3.8",
     "prop-types": "15.7.2",
