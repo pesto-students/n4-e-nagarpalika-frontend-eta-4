@@ -33,7 +33,7 @@
     "classnames": "2.3.1",
     "date-fns": "2.23.0",
     "dotenv": "10.0.0",
-    "firebase": "8.7.1",
+    "firebase": "8.10.1",
     "firebaseui": "4.8.0",
     "fortawesome": "0.0.1-security",
     "javascript-time-ago": "2.3.8",
