@@ -64,7 +64,7 @@
     "eslint-plugin-cypress": "2.11.3",
     "husky": "7.0.1",
     "lint-staged": "11.0.0",
-    "prettier": "2.3.2",
+    "prettier": "2.8.8",
     "react-test-renderer": "17.0.2"
   },
   "browserslist": {
